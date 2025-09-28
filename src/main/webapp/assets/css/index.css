@@ -1,0 +1,131 @@
+/* home.css - Styles for the index.jsp landing page */
+
+/* Main container for the home page */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: var(--bg-primary);
+    padding: 20px;
+}
+
+/* Header section */
+.home-header {
+    text-align: center;
+    margin-bottom: 60px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.home-header h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--accent-primary);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
+}
+
+.home-header .tagline {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+}
+
+/* Navigation links section */
+.home-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 400px;
+    animation: slideUp 0.8s ease-out;
+}
+
+.home-nav a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 24px;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.home-nav a:hover {
+    background-color: var(--bg-tertiary);
+    border-color: var(--accent-primary);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Icon placeholders */
+.home-nav-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 1rem;
+}
+
+/* Footer section */
+.home-footer {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .home-header h1 {
+        font-size: 2.8rem;
+    }
+    
+    .home-nav {
+        max-width: 100%;
+    }
+    
+    .home-nav a {
+        padding: 15px 20px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-header h1 {
+        font-size: 2.2rem;
+    }
+    
+    .home-header .tagline {
+        font-size: 1rem;
+    }
+    
+    .home-nav a {
+        padding: 12px 16px;
+    }
+}

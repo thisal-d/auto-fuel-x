@@ -1,0 +1,79 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: KHThi
+  Date: 9/18/2025
+  Time: 5:35 PM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.example.autofuelx.model.Customer" %>
+<%
+    Customer customer = (Customer) session.getAttribute("customer");
+    if (customer == null) {
+        response.sendRedirect("login.jsp"); // redirect if not logged in
+        return;
+    }
+
+    // Get initials for avatar
+    String initials = "";
+    if (customer.getFirstName() != null && !customer.getFirstName().isEmpty() &&
+            customer.getLastName() != null && !customer.getLastName().isEmpty()) {
+        initials = customer.getFirstName().charAt(0) + "" + customer.getLastName().charAt(0);
+    }
+%>
+<html>
+<head>
+    <title>My Profile - Auto Fuel X</title>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/base.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/customer/profile.css">
+</head>
+<body>
+
+<jsp:include page="header.jsp"/>
+
+<div class="profile-container">
+
+    <div class="profile-content">
+        <div class="profile-header">
+            <h2>My Profile</h2>
+        </div>
+
+        <div class="profile-card">
+            <div class="profile-info">
+                <div class="profile-avatar">
+                    <%= initials %>
+                </div>
+
+                <div class="profile-details">
+                    <div class="profile-name">
+                        <%= customer.getFirstName() %> <%= customer.getLastName() %>
+                    </div>
+
+                    <div class="profile-fields">
+                        <div class="profile-field">
+                            <div class="profile-field-label">Email Address</div>
+                            <div class="profile-field-value"><%= customer.getEmail() %></div>
+                        </div>
+                    </div>
+
+                    <div class="address-section">
+                        <div class="address-title">Address</div>
+                        <div class="address-value">
+                            <%= customer.getAddressNo() %>, <%= customer.getAddressLane() %>, <%= customer.getAddressArea() %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-actions">
+                <div class="action-buttons">
+                    <a href="<%=request.getContextPath()%>/views/customer/update.jsp" class="btn btn-primary">Edit Profile</a>
+                </div>
+
+                <a href="<%=request.getContextPath()%>/logout" class="logout-link">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

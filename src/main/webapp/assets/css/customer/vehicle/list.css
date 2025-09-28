@@ -1,0 +1,223 @@
+/* vehicles.css - Styles for the customer vehicle listing page */
+
+/* Vehicles container */
+.vehicles-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--bg-primary);
+}
+
+/* Vehicles content */
+.vehicles-content {
+    flex: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+/* Page header */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.page-title {
+    color: var(--text-primary);
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.page-title::before {
+    content: "";
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    margin-right: 12px;
+    background-image: url("..."); /* Vehicle icon */
+    background-size: contain;
+}
+
+/* Add vehicle button */
+.add-vehicle-btn {
+    background-color: var(--btn-primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+.add-vehicle-btn:hover {
+    background-color: var(--accent-hover);
+}
+
+.add-vehicle-btn::before {
+    content: "+";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+}
+
+/* Empty state */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-secondary);
+}
+
+.empty-state-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.empty-state h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--text-primary);
+}
+
+.empty-state p {
+    margin-bottom: 25px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Vehicles table */
+.vehicles-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-primary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.vehicles-table th {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    font-weight: 600;
+    text-align: left;
+    padding: 15px;
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.vehicles-table td {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-secondary);
+    color: var(--text-secondary);
+}
+
+.vehicles-table tr:last-child td {
+    border-bottom: none;
+}
+
+.vehicles-table tr:hover {
+    background-color: rgba(33, 38, 45, 0.5);
+}
+
+/* Action buttons */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.action-form {
+    margin: 0;
+}
+
+.action-btn {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+    font-size: 0.85rem;
+}
+
+.edit-btn {
+    background-color: var(--btn-secondary);
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #343a40;
+}
+
+.delete-btn {
+    background-color: var(--btn-danger);
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #8b1530;
+}
+
+/* Vehicle type badge */
+.vehicle-type {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .vehicles-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .vehicles-content {
+        padding: 20px 15px;
+    }
+
+    .page-title {
+        font-size: 1.5rem;
+    }
+
+    .vehicles-table th,
+    .vehicles-table td {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+}

@@ -1,0 +1,169 @@
+/* success.css - Styles for the registration success page */
+
+/* Success container */
+.success-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--bg-primary);
+    padding: 20px;
+    text-align: center;
+}
+
+/* Success card */
+.success-card {
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+    border: 1px solid var(--border-primary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
+    padding: 40px 30px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Success icon */
+.success-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 25px;
+    background-color: rgba(40, 167, 69, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--btn-success);
+    font-size: 2.5rem;
+    animation: scaleIn 0.5s ease-out;
+}
+
+/* Success message */
+.success-message {
+    margin-bottom: 30px;
+}
+
+.success-message h2 {
+    color: var(--text-primary);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.success-message p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Success details */
+.success-details {
+    background-color: var(--bg-tertiary);
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.success-details h3 {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-secondary);
+}
+
+.success-details ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.success-details li {
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.success-details li::before {
+    content: "✓";
+    color: var(--btn-success);
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* Action buttons */
+.success-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn-primary {
+    background-color: var(--btn-primary);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-primary);
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-secondary:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .success-card {
+        padding: 30px 20px;
+    }
+
+    .success-message h2 {
+        font-size: 1.5rem;
+    }
+
+    .success-message p {
+        font-size: 1rem;
+    }
+}

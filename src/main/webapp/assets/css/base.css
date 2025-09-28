@@ -1,0 +1,318 @@
+:root {
+    /* Primary Colors */
+    --bg-primary: #0d1117;          /* Main background */
+    --bg-secondary: #161b22;        /* Card backgrounds */
+    --bg-tertiary: #21262d;         /* Hover states */
+
+    /* Text Colors */
+    --text-primary: #f0f6fc;        /* Main text */
+    --text-secondary: #8b949e;      /* Secondary text */
+    --text-muted: #656d76;          /* Muted text */
+
+    /* Accent Colors */
+    --accent-primary: #dc3545;      /* Main red for actions */
+    --accent-hover: #c82333;       /* Hover state */
+    --accent-light: #f8d7da;        /* Light red for highlights */
+
+    /* Button Variants */
+    --btn-primary: #dc3545;         /* Submit, Add, Update */
+    --btn-danger: #a71d2a;         /* Delete */
+    --btn-secondary: #495057;       /* Cancel */
+    --btn-success: #28a745;         /* Assign */
+
+    /* Input Elements */
+    --input-bg: #161b22;            /* Input background */
+    --input-border: #30363d;        /* Input border */
+    --input-focus: #dc3545;         /* Focus border */
+
+    /* Navigation */
+    --nav-bg: #161b22;              /* Nav background */
+    --nav-hover: #21262d;           /* Nav hover */
+    --nav-active: #30363d;          /* Nav active */
+
+    /* Dropdowns */
+    --dropdown-bg: #161b22;         /* Dropdown background */
+    --dropdown-hover: #21262d;      /* Dropdown hover */
+
+    /* Borders */
+    --border-primary: #30363d;      /* Main borders */
+    --border-secondary: #21262d;    /* Secondary borders */
+}
+
+/* Base Styles */
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+}
+
+p, span, label {
+    color: var(--text-secondary);
+}
+
+a {
+    color: var(--accent-primary);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--accent-hover);
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: var(--nav-bg);
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.navbar a {
+    color: var(--text-secondary);
+}
+
+.navbar a:hover {
+    color: var(--text-primary);
+    background-color: var(--nav-hover);
+}
+
+.navbar .active {
+    color: var(--text-primary);
+    background-color: var(--nav-active);
+}
+
+/* Sub Navigation Bar */
+.sub-navbar {
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-secondary);
+}
+
+.sub-navbar a {
+    color: var(--text-muted);
+}
+
+.sub-navbar a:hover {
+    color: var(--text-primary);
+    background-color: var(--nav-hover);
+}
+
+/* Buttons */
+.btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--btn-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+}
+
+.btn-danger {
+    background-color: var(--btn-danger);
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #8b1530;
+}
+
+.btn-secondary {
+    background-color: var(--btn-secondary);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #343a40;
+}
+
+.btn-success {
+    background-color: var(--btn-success);
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+/* Forms */
+.form-container {
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid var(--border-primary);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    color: var(--text-primary);
+    padding: 8px 12px;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.form-control:focus {
+    border-color: var(--input-focus);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25);
+}
+
+/* Input Types */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
+textarea,
+select {
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    color: var(--text-primary);
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    accent-color: var(--accent-primary);
+}
+
+/* Dropdowns */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    background-color: var(--dropdown-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 4px;
+    min-width: 200px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item {
+    color: var(--text-secondary);
+    padding: 8px 16px;
+    display: block;
+}
+
+.dropdown-item:hover {
+    background-color: var(--dropdown-hover);
+    color: var(--text-primary);
+}
+
+/* Tables */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-secondary);
+}
+
+.table th {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.table tr:hover {
+    background-color: var(--bg-tertiary);
+}
+
+/* Cards */
+.card {
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+    border: 1px solid var(--border-primary);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: var(--bg-tertiary);
+    padding: 15px;
+    border-bottom: 1px solid var(--border-primary);
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Alerts */
+.alert {
+    padding: 12px 20px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.alert-success {
+    background-color: rgba(40, 167, 69, 0.2);
+    border: 1px solid rgba(40, 167, 69, 0.3);
+    color: #28a745;
+}
+
+.alert-danger {
+    background-color: rgba(220, 53, 69, 0.2);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    color: #dc3545;
+}
+
+.alert-warning {
+    background-color: rgba(255, 193, 7, 0.2);
+    border: 1px solid rgba(255, 193, 7, 0.3);
+    color: #ffc107;
+}
+
+/* Utility Classes */
+.text-primary {
+    color: var(--text-primary);
+}
+
+.text-secondary {
+    color: var(--text-secondary);
+}
+
+.text-muted {
+    color: var(--text-muted);
+}
+
+.bg-primary {
+    background-color: var(--bg-primary);
+}
+
+.bg-secondary {
+    background-color: var(--bg-secondary);
+}
+
+.border-primary {
+    border: 1px solid var(--border-primary);
+}
+
+.rounded {
+    border-radius: 4px;
+}
+
+.shadow {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

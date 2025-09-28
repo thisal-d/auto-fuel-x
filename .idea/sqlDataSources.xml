@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="d8600271-acdc-4158-ae6f-1188dfab9922" name="auto-fuel-x@localhost Mapping">
+      <data-sources db="7e279263-ed84-472f-802b-24c6e1c78f1a" />
+      <scope>
+        <node kind="database" qname="AutoFuelX" />
+      </scope>
+    </mapping>
+  </component>
+</project>
