@@ -31,4 +31,8 @@ public class ServiceManager {
     public boolean deleteService(int serviceID) {
         return serviceDAO.deleteService(serviceID);
     }
+
+    public List<Service> getFilteredServices(Double minCost, Double maxCost, String keyword) {
+        return serviceDAO.getFilteredServices(minCost, maxCost, keyword);
+    }
 }

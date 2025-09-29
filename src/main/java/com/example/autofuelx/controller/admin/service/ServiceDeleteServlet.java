@@ -1,27 +1,29 @@
-package com.example.autofuelx.controller.admin.employee;
+package com.example.autofuelx.controller.admin.service;
 
 import com.example.autofuelx.service.EmployeeService;
+import com.example.autofuelx.service.ServiceManager;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 
-@WebServlet("/admin/employee/delete")
-public class EmployeeDeleteServlet extends HttpServlet {
-    private EmployeeService employeeService;
+@WebServlet("/admin/service/delete")
+public class ServiceDeleteServlet extends HttpServlet {
+    private ServiceManager serviceManager;
 
     @Override
     public void init() {
-        employeeService = new EmployeeService();
+        serviceManager = new ServiceManager();
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        employeeService.deleteEmployee(id);
-        response.sendRedirect(request.getContextPath() + "/employee/list");
+        serviceManager.deleteService(id);
+        response.sendRedirect(request.getContextPath() + "/admin/service/list");
     }
 }

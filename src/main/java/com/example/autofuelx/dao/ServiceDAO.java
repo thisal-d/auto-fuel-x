@@ -12,12 +12,13 @@ public class ServiceDAO {
 
     // Insert new Service
     public boolean insertService(Service service) {
-        String sql = "INSERT INTO Service (Type, Cost) VALUES (?, ?)";
+        String sql = "INSERT INTO Service (Type, Description, Cost) VALUES (?, ?, ?)";
         try (Connection con = DatabaseConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, service.getType());
-            ps.setDouble(2, service.getCost());
+            ps.setString(2, service.getDescription());
+            ps.setDouble(3, service.getCost());
 
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -28,12 +29,13 @@ public class ServiceDAO {
 
     // Update Service by ID
     public boolean updateService(Service service) {
-        String sql = "UPDATE Service SET Type = ?, Cost = ? WHERE ServiceID = ?";
+        String sql = "UPDATE Service SET Type = ?, Cost = ?, Description = ? WHERE ServiceID = ?";
         try (Connection con = DatabaseConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, service.getType());
             ps.setDouble(2, service.getCost());
+            ps.setString(3, service.getDescription());
             ps.setInt(3, service.getServiceID());
 
             return ps.executeUpdate() > 0;
@@ -96,10 +98,54 @@ public class ServiceDAO {
         return services;
     }
 
+    public List<Service> getFilteredServices(Double minCost, Double maxCost, String keyword) {
+        List<Service> services = new ArrayList<>();
+        StringBuilder sql = new StringBuilder("SELECT * FROM Service WHERE 1=1");
+        List<Object> parameters = new ArrayList<>();
+
+        // Add cost filters
+        if (minCost != null) {
+            sql.append(" AND Cost >= ?");
+            parameters.add(minCost);
+        }
+        if (maxCost != null) {
+            sql.append(" AND Cost <= ?");
+            parameters.add(maxCost);
+        }
+
+        // Add keyword filter (search in Type and Description)
+        if (keyword != null && !keyword.isEmpty()) {
+            sql.append(" AND (Type LIKE ? OR Description LIKE ?)");
+            String keywordPattern = "%" + keyword + "%";
+            parameters.add(keywordPattern);
+            parameters.add(keywordPattern);
+        }
+
+        try (Connection con = DatabaseConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql.toString())) {
+
+            // Set parameters
+            for (int i = 0; i < parameters.size(); i++) {
+                ps.setObject(i + 1, parameters.get(i));
+            }
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                services.add(extractServiceFromResultSet(rs));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return services;
+    }
+
     // Helper method to map ResultSet -> Service object
     private Service extractServiceFromResultSet(ResultSet rs) throws SQLException {
         Service service = new Service();
         service.setServiceID(rs.getInt("ServiceID"));
+        service.setDescription(rs.getString("Description"));
         service.setType(rs.getString("Type"));
         service.setCost(rs.getDouble("Cost"));
         return service;
