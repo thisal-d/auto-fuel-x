@@ -3,33 +3,41 @@ package com.example.autofuelx.model;
 import java.sql.Date;
 import java.sql.Time;
 
-public class Complaint {
+public class ReplyComplaint {
 
+    private int replyComplaintID;
+    private int staffID;
     private int complaintID;
-    private int customerID;
     private String title;
     private String description;
-    private String status;
     private Date createdDate;
     private Time createdTime;
     private Date updatedDate;
     private Time updateTime;
 
     // Getters and Setters
+    public int getReplyComplaintID() {
+        return replyComplaintID;
+    }
+
+    public void setReplyComplaintID(int replyComplaintID) {
+        this.replyComplaintID = replyComplaintID;
+    }
+
+    public int getStaffID() {
+        return staffID;
+    }
+
+    public void setStaffID(int staffID) {
+        this.staffID = staffID;
+    }
+
     public int getComplaintID() {
         return complaintID;
     }
 
     public void setComplaintID(int complaintID) {
         this.complaintID = complaintID;
-    }
-
-    public int getCustomerID() {
-        return customerID;
-    }
-
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
     }
 
     public String getTitle() {
@@ -46,14 +54,6 @@ public class Complaint {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public Date getCreatedDate() {

@@ -6,14 +6,24 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.example.autofuelx.model.Complaint" %>
+<%@ page import="com.example.autofuelx.model.Customer" %>
 <html>
-<head><title>Submit Complaint</title></head>
+<head>
+    <title>Submit Complaint</title>
+</head>
 <body>
 
 <jsp:include page="/views/customer/header.jsp" />
 
 <h2>Submit a Complaint</h2>
+
+<%
+    Customer customer = (Customer) session.getAttribute("customer");
+%>
+
 <form action="<%=request.getContextPath()%>/customer/complaint/create" method="post">
+
     <label>Title:</label><br>
     <input type="text" name="title" required><br><br>
 
@@ -22,5 +32,6 @@
 
     <input type="submit" value="Submit Complaint">
 </form>
+
 </body>
 </html>

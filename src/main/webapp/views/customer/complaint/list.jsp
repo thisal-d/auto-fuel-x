@@ -18,14 +18,17 @@
         for (Complaint complaint : complaints) {
 %>
 
-<a href="<%=request.getContextPath()%>/customer/complaint/view?id=<%=complaint.getComplaintID()%>">
+<a href="<%=request.getContextPath()%>/customer/complaint/view?complaintID=<%=complaint.getComplaintID()%>">
     <div>
-        <h3>Rating: <%= complaint.getTitle() %> / 5</h3>
-        <p><strong>Message:</strong> <%= complaint.getDescription() %></p>
-        <p><em>Created At:</em> <%= complaint.getCreatedAt() %></p>
-        <p><em>Customer ID:</em> <%= complaint.getStatus() %></p>
+        <h3>Title: <%= complaint.getTitle() %> </h3>
+        <p><strong>Description:</strong> <%= complaint.getDescription() %></p>
+        <p><em>Created Date:</em> <%= complaint.getCreatedDate() %></p>
+        <p><em>Created Time :</em> <%= complaint.getCreatedTime() %></p>
+        <p><em>Status :</em> <%= complaint.getStatus() %></p>
     </div>
+    <a href="<%=request.getContextPath()%>/customer/complaint/update-form?complaintID=<%=complaint.getComplaintID()%>">Edit Complaint</a>
 </a>
+
 <%
     }
 } else {

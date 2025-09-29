@@ -31,11 +31,11 @@ public class EmployeeDAO {
         String query = "SELECT * FROM Employee WHERE EmployeeID = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+             PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            pstmt.setInt(1, id);
+            stmt.setInt(1, id);
 
-            try (ResultSet rs = pstmt.executeQuery()) {
+            try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     return extractEmployeeFromResultSet(rs);
                 }
@@ -53,24 +53,24 @@ public class EmployeeDAO {
                 "Role, Shift, Type, Password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'default123')";
 
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+             PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            pstmt.setString(1, employee.getFirstName());
-            pstmt.setString(2, employee.getLastName());
-            pstmt.setDate(3, employee.getDateOfBirth());
-            pstmt.setDouble(4, employee.getSalary());
-            pstmt.setString(5, employee.getStatus());
-            pstmt.setDate(6, employee.getHireDate());
-            pstmt.setString(7, employee.getAddressNo());
-            pstmt.setString(8, employee.getAddressLane());
-            pstmt.setString(9, employee.getAddressArea());
-            pstmt.setString(10, employee.getEmail());
-            pstmt.setString(11, employee.getSkillSet());
-            pstmt.setString(12, employee.getRole());
-            pstmt.setString(13, employee.getShift());
-            pstmt.setString(14, employee.getType());
+            stmt.setString(1, employee.getFirstName());
+            stmt.setString(2, employee.getLastName());
+            stmt.setDate(3, employee.getDateOfBirth());
+            stmt.setDouble(4, employee.getSalary());
+            stmt.setString(5, employee.getStatus());
+            stmt.setDate(6, employee.getHireDate());
+            stmt.setString(7, employee.getAddressNo());
+            stmt.setString(8, employee.getAddressLane());
+            stmt.setString(9, employee.getAddressArea());
+            stmt.setString(10, employee.getEmail());
+            stmt.setString(11, employee.getSkillSet());
+            stmt.setString(12, employee.getRole());
+            stmt.setString(13, employee.getShift());
+            stmt.setString(14, employee.getType());
 
-            int rowsAffected = pstmt.executeUpdate();
+            int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -85,25 +85,25 @@ public class EmployeeDAO {
                 "WHERE EmployeeID = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+             PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            pstmt.setString(1, employee.getFirstName());
-            pstmt.setString(2, employee.getLastName());
-            pstmt.setDate(3, employee.getDateOfBirth());
-            pstmt.setDouble(4, employee.getSalary());
-            pstmt.setString(5, employee.getStatus());
-            pstmt.setDate(6, employee.getHireDate());
-            pstmt.setString(7, employee.getAddressNo());
-            pstmt.setString(8, employee.getAddressLane());
-            pstmt.setString(9, employee.getAddressArea());
-            pstmt.setString(10, employee.getEmail());
-            pstmt.setString(11, employee.getSkillSet());
-            pstmt.setString(12, employee.getRole());
-            pstmt.setString(13, employee.getShift());
-            pstmt.setString(14, employee.getType());
-            pstmt.setInt(15, employee.getEmployeeID());
+            stmt.setString(1, employee.getFirstName());
+            stmt.setString(2, employee.getLastName());
+            stmt.setDate(3, employee.getDateOfBirth());
+            stmt.setDouble(4, employee.getSalary());
+            stmt.setString(5, employee.getStatus());
+            stmt.setDate(6, employee.getHireDate());
+            stmt.setString(7, employee.getAddressNo());
+            stmt.setString(8, employee.getAddressLane());
+            stmt.setString(9, employee.getAddressArea());
+            stmt.setString(10, employee.getEmail());
+            stmt.setString(11, employee.getSkillSet());
+            stmt.setString(12, employee.getRole());
+            stmt.setString(13, employee.getShift());
+            stmt.setString(14, employee.getType());
+            stmt.setInt(15, employee.getEmployeeID());
 
-            int rowsAffected = pstmt.executeUpdate();
+            int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -115,11 +115,11 @@ public class EmployeeDAO {
         String query = "DELETE FROM Employee WHERE EmployeeID = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+             PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            pstmt.setInt(1, id);
+            stmt.setInt(1, id);
 
-            int rowsAffected = pstmt.executeUpdate();
+            int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -133,11 +133,11 @@ public class EmployeeDAO {
         String query = "SELECT * FROM Employee WHERE Type = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+             PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            pstmt.setString(1, type);
+            stmt.setString(1, type);
 
-            try (ResultSet rs = pstmt.executeQuery()) {
+            try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     Employee employee = extractEmployeeFromResultSet(rs);
                     employees.add(employee);
@@ -150,16 +150,109 @@ public class EmployeeDAO {
         return employees;
     }
 
+    public List<Employee> getFilteredEmployees(String type, String status,
+                                               Date hireDateFrom, Date hireDateTo,
+                                               Double minSalary, Double maxSalary,
+                                               String name, String ageGroup) {
+        List<Employee> employees = new ArrayList<>();
+        String sql = "SELECT * FROM Employee WHERE 1=1";
+        List<Object> params = new ArrayList<>();
+
+        // Add type filter
+        if (type != null && !type.isEmpty()) {
+            sql += " AND Type = ?";
+            params.add(type);
+        }
+
+        // Add status filter
+        if (status != null && !status.isEmpty()) {
+            sql += " AND Status = ?";
+            params.add(status);
+        }
+
+        // Add hire date range filter
+        if (hireDateFrom != null) {
+            sql += " AND HireDate >= ?";
+            params.add(hireDateFrom);
+        }
+        if (hireDateTo != null) {
+            sql += " AND HireDate <= ?";
+            params.add(hireDateTo);
+        }
+
+        // Add salary range filter
+        if (minSalary != null) {
+            sql += " AND Salary >= ?";
+            params.add(minSalary);
+        }
+        if (maxSalary != null) {
+            sql += " AND Salary <= ?";
+            params.add(maxSalary);
+        }
+
+        // Add name search filter (first or last name)
+        if (name != null && !name.isEmpty()) {
+            sql += " AND (FirstName LIKE ? OR LastName LIKE ?)";
+            String namePattern = "%" + name + "%";
+            params.add(namePattern);
+            params.add(namePattern);
+        }
+
+        // Add age group filter
+        if (ageGroup != null && !ageGroup.isEmpty()) {
+            switch (ageGroup) {
+                case "<30":
+                    sql += " AND DATEDIFF(YEAR, DateOfBirth, GETDATE()) < 30";
+                    break;
+                case "30-50":
+                    sql += " AND DATEDIFF(YEAR, DateOfBirth, GETDATE()) BETWEEN 30 AND 50";
+                    break;
+                case ">50":
+                    sql += " AND DATEDIFF(YEAR, DateOfBirth, GETDATE()) > 50";
+                    break;
+            }
+        }
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // Set parameters
+            int i = 1;
+            for (Object param : params) {
+                if (param instanceof String) {
+                    stmt.setString(i++, (String) param);
+                } else if (param instanceof Date) {
+                    stmt.setDate(i++, (Date) param);
+                } else if (param instanceof Double) {
+                    stmt.setDouble(i++, (Double) param);
+                }
+            }
+
+            // Execute query
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    employees.add(extractEmployeeFromResultSet(rs));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return employees;
+    }
+
+    // ... existing methods ...
+
     public Employee validateAdmin(String email, String password) {
         Employee admin = null;
         String query = "SELECT * FROM Employee WHERE Email = ? AND Password = ? AND Type = 'Admin'";
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+             PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            pstmt.setString(1, email);
-            pstmt.setString(2, password);
+            stmt.setString(1, email);
+            stmt.setString(2, password);
 
-            ResultSet rs = pstmt.executeQuery();
+            ResultSet rs = stmt.executeQuery();
             if (rs.next()){
                 admin = extractEmployeeFromResultSet(rs);
             }

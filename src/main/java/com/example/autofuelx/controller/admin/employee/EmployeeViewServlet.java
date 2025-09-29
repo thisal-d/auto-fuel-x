@@ -24,7 +24,7 @@ public class EmployeeViewServlet extends HttpServlet {
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Employee employee = employeeService.getEmployeeById(id);
-        request.setAttribute("employee-view", employee);
+        request.setAttribute("employee", employee);
         request.getRequestDispatcher("/views/admin/employee/view.jsp").forward(request, response);
     }
 }

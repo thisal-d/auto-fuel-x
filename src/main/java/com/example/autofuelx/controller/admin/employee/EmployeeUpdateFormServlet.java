@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/admin/employee/update-form")
+@WebServlet("/admin/employee/edit-form")
 public class EmployeeUpdateFormServlet extends HttpServlet {
     private EmployeeService employeeService;
 
@@ -23,7 +23,7 @@ public class EmployeeUpdateFormServlet extends HttpServlet {
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Employee employee = employeeService.getEmployeeById(id);
-        request.setAttribute("employee-update", employee);
+        request.setAttribute("employee", employee);
         request.getRequestDispatcher("/views/admin/employee/update.jsp").forward(request, response);
     }
 }

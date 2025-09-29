@@ -21,7 +21,7 @@
 
     // Check if vehicle belongs to this customer
     if (vehicle == null || vehicle.getCustomerID() != customer.getCustomerID()) {
-        response.sendRedirect(request.getContextPath() + "/views/user/vehicles/list.jsp");
+        response.sendRedirect(request.getContextPath() + "/views/user/vehicles/list-all.jsp");
         return;
     }
 %>

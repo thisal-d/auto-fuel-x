@@ -31,7 +31,6 @@ public class ComplaintListServlet extends HttpServlet {
 
         List<Complaint> complaints = complaintService.getComplaintsByCustomerID(customer.getCustomerID());
 
-        System.out.println();
         request.setAttribute("complaints", complaints);
         request.getRequestDispatcher("/views/customer/complaint/list.jsp").forward(request, response);
     }

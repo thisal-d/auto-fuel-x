@@ -30,14 +30,22 @@
 
 <jsp:include page="header.jsp"/>
 
-<h1>Refuel Cashier List</h1>
+<h1>Employee List</h1>
 
 <h2>Filter Employees</h2>
-<form action="<%=request.getContextPath()%>/admin/employee/list-by-type" method="get">
+<form action="<%=request.getContextPath()%>/admin/employee/list" method="get">
     <table border="1" cellpadding="5">
-
-        <input type="hidden" name="type" value="refuel-cashier">
-
+        <tr>
+            <td>Employee Type:</td>
+            <td>
+                <select name="type">
+                    <option value="">All Types</option>
+                    <option value="Service Center Staff" <% if ("Service Center Staff".equals(type)) { %>selected<% } %>>Service Center Staff</option>
+                    <option value="Refuel Cashier" <% if ("Refuel Cashier".equals(type)) { %>selected<% } %>>Refuel Cashier</option>
+                    <option value="Admin" <% if ("Admin".equals(type)) { %>selected<% } %>>Admin</option>
+                </select>
+            </td>
+        </tr>
         <tr>
             <td>Status:</td>
             <td>

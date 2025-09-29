@@ -26,6 +26,6 @@ public class CustomerListServlet extends HttpServlet {
         List<Customer> customers = customerService.getCustomers();
         request.setAttribute("customers", customers);
 
-        request.getRequestDispatcher("/views/admin/customer/list.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/admin/customer/list-all.jsp").forward(request, response);
     }
 }

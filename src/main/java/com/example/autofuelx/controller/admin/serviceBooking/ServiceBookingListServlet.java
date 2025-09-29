@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/admin/service-booking/view")
-public class ServiceBookingsViewServlet extends HttpServlet {
+public class ServiceBookingListServlet extends HttpServlet {
     private ServiceBookingService serviceBookingService;
     private EmployeeService employeeService;
 

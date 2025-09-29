@@ -5,6 +5,7 @@ import com.example.autofuelx.model.Employee;
 import com.example.autofuelx.util.DatabaseConnection;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.List;
 
 public class EmployeeService {
@@ -20,6 +21,14 @@ public class EmployeeService {
 
     public Employee getEmployeeById(int id) {
         return employeeDAO.getEmployeeById(id);
+    }
+
+    public List<Employee> getFilteredEmployees(String type, String status,
+                                               Date hireDateFrom, Date hireDateTo,
+                                               Double minSalary, Double maxSalary,
+                                               String name, String ageGroup) {
+        return employeeDAO.getFilteredEmployees(type, status, hireDateFrom, hireDateTo,
+                minSalary, maxSalary, name, ageGroup);
     }
 
     public boolean addEmployee(Employee employee) {

@@ -1,7 +1,6 @@
 package com.example.autofuelx.controller.customer.complaint;
 
 import com.example.autofuelx.model.Complaint;
-import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.service.ComplaintService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,8 +10,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/customer/complaint/update")
-public class ComplaintUpdateServlet extends HttpServlet {
+@WebServlet("/customer/complaint/update-form")
+public class ComplaintUpdateFormServlet extends HttpServlet {
     private ComplaintService complaintService;
 
     @Override
@@ -24,24 +23,10 @@ public class ComplaintUpdateServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Catch data
-        Customer customer = (Customer) request.getSession().getAttribute("customer");
-
         int complaintID = Integer.parseInt(request.getParameter("complaintID"));
-        String title = request.getParameter("title");
-        String description = request.getParameter("description");
+        Complaint complaint = complaintService.getComplaintByComplaintID(complaintID);
+        request.setAttribute("complaint", complaint);
 
-
-        Complaint complaint = new Complaint();
-
-        complaint.setCustomerID(customer.getCustomerID());
-        complaint.setComplaintID(complaintID);
-        complaint.setTitle(title);
-        complaint.setDescription(description);
-        complaint.setStatus("Delivered");
-
-        complaintService.updateComplaint(complaint);
-
-        response.sendRedirect(request.getContextPath() + "/customer/complaint/list");
+        request.getRequestDispatcher("/views/customer/complaint/update.jsp").forward(request, response);
     }
 }

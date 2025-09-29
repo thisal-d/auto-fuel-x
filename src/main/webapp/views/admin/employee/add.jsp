@@ -43,7 +43,6 @@
                 <select name="status">
                     <option value="Active">Active</option>
                     <option value="Inactive">Inactive</option>
-                    <option value="On Leave">On Leave</option>
                 </select>
             </td>
         </tr>

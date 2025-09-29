@@ -56,6 +56,6 @@ public class EmployeeUpdateServlet extends HttpServlet {
         employee.setType(type);
 
         employeeService.updateEmployee(employee);
-        response.sendRedirect(request.getContextPath() + "/employee/list");
+        response.sendRedirect(request.getContextPath() + "/admin/employee/list");
     }
 }

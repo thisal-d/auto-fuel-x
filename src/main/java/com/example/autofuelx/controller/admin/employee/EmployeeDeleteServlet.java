@@ -22,6 +22,6 @@ public class EmployeeDeleteServlet extends HttpServlet {
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         employeeService.deleteEmployee(id);
-        response.sendRedirect(request.getContextPath() + "/employee/list");
+        response.sendRedirect(request.getContextPath() + "/admin/employee/list");
     }
 }

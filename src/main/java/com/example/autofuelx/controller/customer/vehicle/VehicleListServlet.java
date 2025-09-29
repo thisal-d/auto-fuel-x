@@ -40,6 +40,6 @@ public class VehicleListServlet extends HttpServlet {
         for (Vehicle vehicle : vehicles) {
             System.out.println(vehicle.getType());
         }
-        request.getRequestDispatcher("/views/customer/vehicle/list.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/customer/vehicle/list-all.jsp").forward(request, response);
     }
 }

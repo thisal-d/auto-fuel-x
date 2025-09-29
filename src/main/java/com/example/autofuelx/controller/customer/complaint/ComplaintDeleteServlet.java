@@ -30,6 +30,6 @@ public class ComplaintDeleteServlet extends HttpServlet {
 
         complaintService.deleteComplaint(complaintID);
 
-        response.sendRedirect("customer/complaint/list");
+        response.sendRedirect(request.getContextPath() + "/customer/complaint/list");
     }
 }

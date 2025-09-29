@@ -16,7 +16,7 @@ public class ComplaintService {
     }
 
     public void submitComplaint(Complaint complaint) {
-        complaintDAO.saveComplaint(complaint);
+        complaintDAO.addComplaint(complaint);
     }
 
     public void updateComplaint(Complaint complaint) {
@@ -28,10 +28,10 @@ public class ComplaintService {
     }
 
     public List<Complaint> getComplaintsByCustomerID(int customerID) {
-        return complaintDAO.getComplaintsByCustomerID(customerID);
+        return complaintDAO.getComplaintsByCustomerId(customerID);
     }
 
-    public Complaint getComplaintByID(int complaintID) {
-        return complaintDAO.getComplaintByID(complaintID);
+    public Complaint getComplaintByComplaintID(int complaintID) {
+        return complaintDAO.getComplaintById(complaintID);
     }
 }

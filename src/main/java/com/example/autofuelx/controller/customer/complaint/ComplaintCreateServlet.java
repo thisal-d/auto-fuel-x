@@ -25,16 +25,16 @@ public class ComplaintCreateServlet extends HttpServlet {
         // Catch data
         String title = request.getParameter("title");
         String description = request.getParameter("description");
-        String status = request.getParameter("status");
+        // Get logged user
         HttpSession session = request.getSession();
         Customer customer = (Customer) session.getAttribute("customer");
 
-        // CREATE
+        // Create complaint Object
         Complaint complaint = new Complaint();
 
         complaint.setTitle(title);
         complaint.setDescription(description);
-        complaint.setStatus(status);
+        complaint.setStatus("Delivered");
         complaint.setCustomerID(customer.getCustomerID());
 
         complaintService.submitComplaint(complaint);

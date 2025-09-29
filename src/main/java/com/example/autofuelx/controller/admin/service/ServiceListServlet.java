@@ -46,6 +46,6 @@ public class ServiceListServlet extends HttpServlet {
         request.setAttribute("services", services);
 
         // Forward to JSP
-        request.getRequestDispatcher("/views/admin/service/list.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/admin/service/list-all.jsp").forward(request, response);
     }
 }

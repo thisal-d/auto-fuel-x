@@ -14,6 +14,11 @@
     <title>Employee Details</title>
 </head>
 <body>
+
+<%
+
+%>
+
 <h1>Employee Details</h1>
 
 <p>
@@ -22,13 +27,9 @@
 
 <table border="1">
     <%
-        Employee employee = (Employee) request.getAttribute("employee-view");
+        Employee employee = (Employee) request.getAttribute("employee");
         if(employee != null) {
     %>
-    <tr>
-        <td>Employee ID</td>
-        <td><%= employee.getEmployeeID() %></td>
-    </tr>
     <tr>
         <td>First Name</td>
         <td><%= employee.getFirstName() %></td>
@@ -95,9 +96,12 @@
 </table>
 
 <p>
-    <a href="<%= request.getContextPath() %>/employees/edit-form?id=<%= employee.getEmployeeID() %>">Edit</a>
-    <a href="<%= request.getContextPath() %>/employees/delete?id=<%= employee.getEmployeeID() %>"
-       onclick="return confirm('Are you sure you want to delete this employee?')">Delete</a>
+    <a href="<%= request.getContextPath() %>/admin/employee/edit-form?id=<%= employee.getEmployeeID() %>">Edit</a>
+    <form action="<%= request.getContextPath() %>/admin/employee/delete" method="post">
+        input type="hidden" name="id" value="<%=employee.getEmployeeID()%>">
+       <input type="submit" onclick="return confirm('Are you sure you want to delete this employee?')" value="Delete">
+    </form>
 </p>
+
 </body>
 </html>

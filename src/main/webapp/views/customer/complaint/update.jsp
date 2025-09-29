@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.example.autofuelx.model.Complaint" %><%--
   Created by IntelliJ IDEA.
   User: KHThi
   Date: 9/23/2025
@@ -10,15 +10,21 @@
 <head><title>Submit Complaint</title></head>
 <body>
 
+<%
+    Complaint complaint = (Complaint) request.getAttribute("complaint");
+%>
+
 <jsp:include page="/views/customer/header.jsp" />
 
 <h2>Submit a Complaint</h2>
 <form action="<%=request.getContextPath()%>/customer/complaint/update" method="post">
+
+    <input type="hidden" name="complaintID" value="<%=complaint.getComplaintID()%>" />
     <label>Title:</label><br>
-    <input type="text" name="title" required><br><br>
+    <input type="text" name="title" value="<%=complaint.getTitle()%>" required><br><br>
 
     <label>Description:</label><br>
-    <textarea name="description" rows="5" cols="40" required></textarea><br><br>
+    <textarea name="description" rows="5" cols="40"  value="<%=complaint.getDescription()%>" required></textarea><br><br>
 
     <input type="submit" value="Update Complaint">
 </form>
