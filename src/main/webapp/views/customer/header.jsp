@@ -32,9 +32,8 @@
             <div class="nav-section">
                 <div class="nav-section-title">Vehicle Service</div>
                 <div class="nav-links">
-                    <a href="book-service.jsp">Book Service</a>
-                    <a href="active-bookings.jsp">Active Bookings</a>
-                    <a href="service-history.jsp">Service History</a>
+                    <a href="<%=request.getContextPath()%>/customer/service-booking/form">Book Service</a>
+                    <a href="<%=request.getContextPath()%>/customer/service-booking/list?status=active">Active Bookings</a>
                 </div>
             </div>
 
@@ -49,7 +48,7 @@
             <div class="nav-section">
                 <div class="nav-section-title">Usage History</div>
                 <div class="nav-links">
-                    <a href="service-payments.jsp">Service Booking</a>
+                    <a href="<%=request.getContextPath()%>/customer/service-booking/history">Service Booking</a>
                     <a href="<%=request.getContextPath()%>/customer/fuel/history">Fuel Usage</a>
                 </div>
             </div>

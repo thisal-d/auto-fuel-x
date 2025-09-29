@@ -13,6 +13,9 @@
     <title>Service Booking Form</title>
 </head>
 <body>
+<jsp:include page="/views/customer/header.jsp"/>
+<jsp:include page="header.jsp"/>
+
 <h1>Book a Service</h1>
 
 <%
@@ -20,10 +23,10 @@
     List<Service> services = (List<Service>) request.getAttribute("services");
 %>
 
-<form action="<%= request.getContextPath() %>/customer/service/booking" method="post">
+<form action="<%= request.getContextPath() %>/customer/service-booking/create" method="post">
     <div>
         <label for="vehicle">Select Vehicle:</label>
-        <select id="vehicle" name="vehicleId" required>
+        <select id="vehicle" name="vehicle-id" required>
             <option value="">-- Select Vehicle --</option>
             <% for (Vehicle vehicle : vehicles) { %>
             <option value="<%= vehicle.getVehicleID() %>">
@@ -35,7 +38,7 @@
 
     <div>
         <label for="service">Select Service:</label>
-        <select id="service" name="serviceId" required>
+        <select id="service" name="service-id" required>
             <option value="">-- Select Service --</option>
             <% for (Service service : services) { %>
             <option value="<%= service.getServiceID() %>">
@@ -46,13 +49,13 @@
     </div>
 
     <div>
-        <label for="date">Date:</label>
-        <input type="date" id="date" name="date" required>
+        <label for="booking-date">Date:</label>
+        <input type="date" id="booking-date" name="booking-date" required>
     </div>
 
     <div>
-        <label for="time">Time:</label>
-        <input type="time" id="time" name="time" required>
+        <label for="booking-time">Time:</label>
+        <input type="time" id="booking-time" name="booking-time" required>
     </div>
 
     <div>

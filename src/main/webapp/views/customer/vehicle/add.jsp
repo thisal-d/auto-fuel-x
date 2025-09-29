@@ -16,6 +16,8 @@
 <body>
 
 <jsp:include page="/views/customer/header.jsp" />
+<jsp:include page="header.jsp" />
+
 
 <div class="add-vehicle-container">
     <!-- Include customer header -->

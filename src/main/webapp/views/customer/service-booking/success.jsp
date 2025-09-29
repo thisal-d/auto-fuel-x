@@ -11,6 +11,9 @@
     <title>Booking Confirmation</title>
 </head>
 <body>
+
+<jsp:include page="/views/customer/header.jsp"/>
+
 <h1>Service Booked Successfully!</h1>
 <p>Your service has been scheduled. Thank you for your booking.</p>
 <a href="<%= request.getContextPath() %>/customer/service/history">View Booking History</a>

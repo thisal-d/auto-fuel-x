@@ -17,6 +17,9 @@
     <title>Fuel Payment History</title>
 </head>
 <body>
+
+<jsp:include page="/views/customer/header.jsp"/>
+
 <h1>Fuel Payment History</h1>
 
 <%

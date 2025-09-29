@@ -10,11 +10,12 @@
 <head><title>Submit Complaint</title></head>
 <body>
 
+<jsp:include page="/views/customer/header.jsp" />
+
 <%
     Complaint complaint = (Complaint) request.getAttribute("complaint");
 %>
 
-<jsp:include page="/views/customer/header.jsp" />
 
 <h2>Submit a Complaint</h2>
 <form action="<%=request.getContextPath()%>/customer/complaint/update" method="post">

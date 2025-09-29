@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/customer/service/booking-form")
+@WebServlet("/customer/service-booking/form")
 public class ServiceBookingFormServlet extends HttpServlet {
     private VehicleService vehicleService;
     private ServiceManager serviceManager;
@@ -42,6 +42,6 @@ public class ServiceBookingFormServlet extends HttpServlet {
         request.setAttribute("vehicles", vehicles);
         request.setAttribute("services", services);
 
-        request.getRequestDispatcher("/views/customer/service/booking-form.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/customer/service-booking/form.jsp").forward(request, response);
     }
 }

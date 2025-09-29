@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@WebServlet("/customer/service/booking")
+@WebServlet("/customer/service-booking/create")
 public class ServiceBookingServlet extends HttpServlet {
     private ServiceBookingService serviceBookingService;
 
@@ -28,10 +28,10 @@ public class ServiceBookingServlet extends HttpServlet {
             throws ServletException, IOException {
 
         // Get form parameters
-        int vehicleId = Integer.parseInt(request.getParameter("vehicleId"));
-        int serviceId = Integer.parseInt(request.getParameter("serviceId"));
-        String date = request.getParameter("date");
-        String time = request.getParameter("time");
+        int vehicleId = Integer.parseInt(request.getParameter("vehicle-id"));
+        int serviceId = Integer.parseInt(request.getParameter("service-id"));
+        String date = request.getParameter("booking-date");
+        String time = request.getParameter("booking-time");
 
         // Get logged-in customer from session
         HttpSession session = request.getSession();
@@ -50,6 +50,6 @@ public class ServiceBookingServlet extends HttpServlet {
         serviceBookingService.bookService(booking);
 
         // Redirect to confirmation page
-        response.sendRedirect(request.getContextPath() + "/views/customer/service/booking-success.jsp");
+        response.sendRedirect(request.getContextPath() + "/views/customer/service-booking/success.jsp");
     }
 }

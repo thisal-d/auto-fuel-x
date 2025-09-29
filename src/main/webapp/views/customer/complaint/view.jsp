@@ -13,6 +13,7 @@
 --%>
 <%@ page import="com.example.autofuelx.model.Complaint" %>
 <%@ page import="com.example.autofuelx.model.ReplyComplaint" %>
+<%@ page import="com.example.autofuelx.model.Employee" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -25,7 +26,8 @@
 <h2>Complaint Details</h2>
 <%
     Complaint complaint = (Complaint) request.getAttribute("complaint");
-    ReplyComplaint replyComplaint = (ReplyComplaint) request.getAttribute("replyComplaint");
+    ReplyComplaint replyComplaint = (ReplyComplaint) request.getAttribute("reply-complaint");
+    Employee repliedEmployee = (Employee) request.getAttribute("replied-employee");
 
     if (complaint != null) {
 %>
@@ -114,6 +116,11 @@
         <th>Updated Time</th>
         <td><%= replyComplaint.getUpdateTime() != null ? replyComplaint.getUpdateTime() : "N/A" %></td>
     </tr>
+
+    <tr>
+        <th>Author</th>
+        <td><%= repliedEmployee.getFirstName() + " " + repliedEmployee.getLastName()%></td>
+    </tr>
 </table>
 <%
 } else {
@@ -122,6 +129,5 @@
 <%
     }
 %>
-
 </body>
 </html>

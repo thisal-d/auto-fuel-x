@@ -1,8 +1,10 @@
 package com.example.autofuelx.controller.customer.complaint;
 
 import com.example.autofuelx.model.Complaint;
+import com.example.autofuelx.model.Employee;
 import com.example.autofuelx.model.ReplyComplaint;
 import com.example.autofuelx.service.ComplaintService;
+import com.example.autofuelx.service.EmployeeService;
 import com.example.autofuelx.service.ReplyComplaintService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,11 +18,13 @@ import java.io.IOException;
 public class ComplaintViewServlet extends HttpServlet {
     private ComplaintService complaintService;
     private ReplyComplaintService replyComplaintService;
+    private EmployeeService employeeService;
 
     @Override
     public void init() throws ServletException {
         complaintService = new ComplaintService();
         replyComplaintService =  new ReplyComplaintService();
+        employeeService =  new EmployeeService();
     }
 
     @Override
@@ -33,8 +37,13 @@ public class ComplaintViewServlet extends HttpServlet {
         Complaint complaint = complaintService.getComplaintByComplaintID(complaintID);
         ReplyComplaint replyComplaint = replyComplaintService.getReplyComplaintByComplaintID(complaintID);
 
+        Employee employee = null;
+        if (replyComplaint != null)
+            employee = employeeService.getEmployeeById(replyComplaint.getStaffID());
+
         request.setAttribute("complaint", complaint);
         request.setAttribute("reply-complaint", replyComplaint);
+        request.setAttribute("replied-employee", employee);
 
         request.getRequestDispatcher( "/views/customer/complaint/view.jsp").forward(request, response);
     }

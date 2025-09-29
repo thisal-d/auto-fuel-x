@@ -34,4 +34,9 @@ public class ComplaintService {
     public Complaint getComplaintByComplaintID(int complaintID) {
         return complaintDAO.getComplaintById(complaintID);
     }
+
+    /*
+    public ComplaintDTO getComplaintDTOByCustomerID(int complaintID) {
+        return  complaintDAO.getComplaintDTOByCustomerID(complaintID);
+    }*/
 }

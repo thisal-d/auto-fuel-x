@@ -1,5 +1,4 @@
-package com.example.autofuelx.controller.admin.serviceBooking;
-
+package com.example.autofuelx.controller.customer.serviceBooking;
 
 import com.example.autofuelx.model.ServiceBooking;
 import com.example.autofuelx.service.ServiceBookingService;
@@ -11,8 +10,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/admin/service-booking/update-status")
-public class ServiceBookingStatusUpdateServlet extends HttpServlet {
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+@WebServlet("/user/service-booking/reschedule")
+public class ServiceBookingRescheduleServlet extends HttpServlet {
     private ServiceBookingService serviceBookingService;
 
     @Override
@@ -25,24 +27,24 @@ public class ServiceBookingStatusUpdateServlet extends HttpServlet {
             throws ServletException, IOException {
 
         // Get parameters
-        int bookingId = Integer.parseInt(request.getParameter("bookingId"));
-        String status = request.getParameter("status");
+        int bookingId = Integer.parseInt(request.getParameter("booking-ID"));
+        String newDateStr = request.getParameter("new-date");
+        String newTimeStr = request.getParameter("new-time");
         String redirectUrl = request.getParameter("redirect-url");
 
         ServiceBooking booking = serviceBookingService.getBookingByID(bookingId);
 
-        if (status.equals("Confirmed")) {
-            int staffId = Integer.parseInt(request.getParameter("staffId"));
-            booking.setServiceID(staffId);
-        } else if (status.equals("Awaiting Pickup")) {
-            double totalCost = Double.parseDouble(request.getParameter("total-cost"));
-            booking.setTotalCost(totalCost);
-        }
+        booking.setStatus("Awaiting Confirmation");
+        LocalDate newDate = LocalDate.parse(newDateStr);
+        LocalTime newTime = LocalTime.parse(newTimeStr);
 
-        booking.setStatus(status);
+        booking.setBookingDate(newDate);
+        booking.setBookingTime(newTime);
+
+
         serviceBookingService.updateBooking(booking);
 
-        // Redirect back to  bookings page
+        // Redirect back to bookings page
         response.sendRedirect(request.getContextPath() + redirectUrl);
     }
 }

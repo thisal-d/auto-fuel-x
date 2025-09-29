@@ -32,6 +32,10 @@ public class ServiceBookingService {
         return serviceBookingDAO.getBookingsByCustomer(customerID);
     }
 
+    public List<ServiceBookingDTO> getActiveBookingsByCustomerID(int customerID) {
+        return serviceBookingDAO.getActiveBookingsByCustomerID(customerID);
+    }
+
     public ServiceBooking getBookingByID(int bookingID) {
         return serviceBookingDAO.getBookingByID(bookingID);
     }
@@ -39,5 +43,24 @@ public class ServiceBookingService {
     public ServiceBookingDTO getBookingDTOByID(int bookingID) {
         return serviceBookingDAO.getBookingDTOByID(bookingID);
     }
+
+    public List<ServiceBookingDTO> getBookingsByCustomerIDAndStatus(int customerID, String status) {
+        return serviceBookingDAO.getBookingsByCustomerIDAndStatus(customerID, status);
+    }
+
+    public List<ServiceBookingDTO> getBookingsByCustomerWithFilters(
+            int customerID,
+            String startDate,
+            String endDate,
+            String vehicleType,
+            String vehicle,
+            String status,
+            String minCost,
+            String maxCost,
+            String keyword) {
+        return serviceBookingDAO.getBookingsByCustomerWithFilters(
+                customerID, startDate, endDate, vehicleType, vehicle, status, minCost, maxCost, keyword);
+    }
+
 
 }

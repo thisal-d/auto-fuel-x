@@ -72,6 +72,56 @@ public class ComplaintDAO {
         return null;
     }
 
+    /*
+    public ComplaintDTO getComplaintDTOByCustomerID(int customerId) {
+        String sql = "SELECT c.title AS complaintTitle, c.description AS complaintDescription, c.status, " +
+                "c.createdDate, c.createdTime, c.updatedDate, c.updateTime, " +
+                "e.FirstName + ' ' + e.LastName AS repliedEmployeeName, e.Type AS repliedEmployeeType, " +
+                "rc.title AS replyTitle, rc.description AS replyDescription, " +
+                "rc.createdDate AS replyCreatedDate, rc.createdTime AS replyCreatedTime, " +
+                "rc.updatedDate AS replyUpdatedDate, rc.updateTime AS replyUpdateTime " +
+                "FROM Complaint c " +
+                "LEFT JOIN ReplyComplaint rc ON c.complaintID = rc.complaintID " +
+                "LEFT JOIN Employee e ON rc.staffID = e.EmployeeID " +
+                "WHERE c.customerID = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, customerId);
+            
+            ComplaintDTO complaintDTO = new ComplaintDTO();
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+
+                    // Complaint details
+                    complaintDTO.setTitle(rs.getString("complaintTitle"));
+                    complaintDTO.setDescription(rs.getString("complaintDescription"));
+                    complaintDTO.setStatus(rs.getString("status"));
+                    complaintDTO.setCreatedDate(rs.getDate("createdDate"));
+                    complaintDTO.setCreatedTime(rs.getTime("createdTime"));
+                    complaintDTO.setUpdatedDate(rs.getDate("updatedDate"));
+                    complaintDTO.setUpdateTime(rs.getTime("updateTime"));
+
+                    // Reply details
+                    complaintDTO.setRepliedEmployeeName(rs.getString("repliedEmployeeName"));
+                    complaintDTO.setRepliedEmployeeType(rs.getString("repliedEmployeeType"));
+                    complaintDTO.setReplyTitle(rs.getString("replyTitle"));
+                    complaintDTO.setReplyDescription(rs.getString("replyDescription"));
+                    complaintDTO.setReplyCreatedDate(rs.getDate("replyCreatedDate"));
+                    complaintDTO.setReplyCreatedTime(rs.getTime("replyCreatedTime"));
+                    complaintDTO.setReplyUpdatedDate(rs.getDate("replyUpdatedDate"));
+                    complaintDTO.setReplyUpdateTime(rs.getTime("replyUpdateTime"));
+                }
+                return complaintDTO;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    */
+
     // Update complaint
     public boolean updateComplaint(Complaint complaint) {
         String sql = "UPDATE Complaint SET customerID = ?, title = ?, description = ?, status = ?, " +

@@ -4,41 +4,34 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class ServiceBookingDTO {
-
-    // Booking Info
     private int bookingID;
     private LocalDate bookingDate;
     private LocalTime bookingTime;
-
     private String status;
     private double totalCost;
 
-    // Customer Info
-    private int customerID;
+    // Customer info
     private String customerFirstName;
     private String customerLastName;
     private String customerEmail;
 
-    // Vehicle Info
+    // Vehicle info
     private int vehicleID;
     private String vehiclePlate;
     private String vehicleModel;
     private String vehicleType;
 
-    // Service Info
+    // Service info
     private int serviceID;
     private String serviceType;
+    private String serviceDescription;
     private double serviceCost;
 
-    // Staff Info
-    private Integer staffID; // nullable
+    // Staff info (nullable)
+    private Integer staffID;
     private String staffFirstName;
     private String staffLastName;
     private String staffRole;
-
-    // Constructors
-    public ServiceBookingDTO() {
-    }
 
     // Getters and Setters
     public int getBookingID() {
@@ -73,12 +66,12 @@ public class ServiceBookingDTO {
         this.status = status;
     }
 
-    public int getCustomerID() {
-        return customerID;
+    public double getTotalCost() {
+        return totalCost;
     }
 
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
+    public void setTotalCost(double totalCost) {
+        this.totalCost = totalCost;
     }
 
     public String getCustomerFirstName() {
@@ -153,6 +146,14 @@ public class ServiceBookingDTO {
         this.serviceType = serviceType;
     }
 
+    public String getServiceDescription() {
+        return serviceDescription;
+    }
+
+    public void setServiceDescription(String serviceDescription) {
+        this.serviceDescription = serviceDescription;
+    }
+
     public double getServiceCost() {
         return serviceCost;
     }
@@ -191,38 +192,5 @@ public class ServiceBookingDTO {
 
     public void setStaffRole(String staffRole) {
         this.staffRole = staffRole;
-    }
-
-    public double getTotalCost() {
-        return totalCost;
-    }
-
-    public void setTotalCost(double totalCost) {
-        this.totalCost = totalCost;
-    }
-
-    @Override
-    public String toString() {
-        return "ServiceBookingDTO{" +
-                "bookingID=" + bookingID +
-                ", bookingDate=" + bookingDate +
-                ", bookingTime=" + bookingTime +
-                ", status='" + status + '\'' +
-                ", customerID=" + customerID +
-                ", customerFirstName='" + customerFirstName + '\'' +
-                ", customerLastName='" + customerLastName + '\'' +
-                ", customerEmail='" + customerEmail + '\'' +
-                ", vehicleID=" + vehicleID +
-                ", vehiclePlate='" + vehiclePlate + '\'' +
-                ", vehicleModel='" + vehicleModel + '\'' +
-                ", vehicleType='" + vehicleType + '\'' +
-                ", serviceID=" + serviceID +
-                ", serviceType='" + serviceType + '\'' +
-                ", serviceCost=" + serviceCost +
-                ", staffID=" + staffID +
-                ", staffFirstName='" + staffFirstName + '\'' +
-                ", staffLastName='" + staffLastName + '\'' +
-                ", staffRole='" + staffRole + '\'' +
-                '}';
     }
 }

@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/admin/service-booking/view")
-public class ServiceBookingListServlet extends HttpServlet {
+public class ServiceBookingListAdminServlet extends HttpServlet {
     private ServiceBookingService serviceBookingService;
     private EmployeeService employeeService;
 
@@ -55,6 +55,9 @@ public class ServiceBookingListServlet extends HttpServlet {
         else if (viewStatus.equals("reschedule-required")) {
             redirectUrl = "/views/admin/service-booking/reschedule-required.jsp";
             status = "Reschedule Required";
+        }else if (viewStatus.equals("canceled")) {
+                redirectUrl = "/views/admin/service-booking/canceled.jsp";
+                status = "Canceled";
         } else {
             redirectUrl = "/views/admin/service-booking/all.jsp";
             status = "All";

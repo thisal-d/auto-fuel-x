@@ -14,6 +14,9 @@
     <title>Edit Customer</title>
 </head>
 <body>
+
+<jsp:include page="/views/customer/header.jsp" />
+
 <h1>Edit Customer</h1>
 
 <form action="<%= request.getContextPath() %>/customer/customer/update" method="post">
