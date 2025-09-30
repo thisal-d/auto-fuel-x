@@ -73,6 +73,137 @@ public class ComplaintDAO {
         return null;
     }
 
+    public List<ComplaintReplyDTO> getComplaintReplyDTOsByStatus(String Status) {
+        String sql = "SELECT c.title AS complaintTitle, c.description AS complaintDescription, c.status, " +
+                "c.createdDate, c.createdTime, c.updatedDate, c.updateTime, c.ComplaintID, " +
+                "e.FirstName + ' ' + e.LastName AS repliedEmployeeName, e.Type AS repliedEmployeeType, " +
+                "rc.ReplyComplaintID , rc.Status AS replyStatus ,rc.title AS replyTitle,  rc.description AS replyDescription, " +
+                "rc.createdDate AS replyCreatedDate, rc.createdTime AS replyCreatedTime, " +
+                "rc.updatedDate AS replyUpdatedDate, rc.updateTime AS replyUpdateTime " +
+                "FROM Complaint c " +
+                "LEFT JOIN ReplyComplaint rc ON c.complaintID = rc.complaintID " +
+                "LEFT JOIN Employee e ON rc.staffID = e.EmployeeID " +
+                "WHERE c.Status = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, Status);
+
+            List<ComplaintReplyDTO> complaintReplyDTOs = new ArrayList<>();
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    ComplaintReplyDTO complaintReplyDTO = new ComplaintReplyDTO();
+
+                    complaintReplyDTO = extractComplaintDetailsFromResultSet(rs);
+
+                    complaintReplyDTOs.add(complaintReplyDTO);
+                }
+                return complaintReplyDTOs;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null; // Return empty list instead of null
+    }
+
+
+    public List<ComplaintReplyDTO> getComplaintReplyDTOsFiltered(String keyword,
+                                                                 String lastUpdateDate,
+                                                                 String customerEmail,
+                                                                 String status) {
+        List<ComplaintReplyDTO> complaintReplyDTOs = new ArrayList<>();
+        List<Object> parameters = new ArrayList<>();
+
+        String sql = """
+            SELECT c.title AS complaintTitle, 
+                   c.description AS complaintDescription, 
+                   c.status, 
+                   c.createdDate, 
+                   c.createdTime, 
+                   c.updatedDate, 
+                   c.updateTime, 
+                   c.ComplaintID, 
+                   cust.Email AS customerEmail,
+                   e.FirstName + ' ' + e.LastName AS repliedEmployeeName, 
+                   e.Type AS repliedEmployeeType, 
+                   rc.ReplyComplaintID, 
+                   rc.Status AS replyStatus, 
+                   rc.title AS replyTitle,  
+                   rc.description AS replyDescription, 
+                   rc.createdDate AS replyCreatedDate, 
+                   rc.createdTime AS replyCreatedTime, 
+                   rc.updatedDate AS replyUpdatedDate, 
+                   rc.updateTime AS replyUpdateTime 
+            FROM Complaint c
+            JOIN Customer cust ON c.CustomerID = cust.CustomerID
+            LEFT JOIN ReplyComplaint rc ON c.complaintID = rc.complaintID 
+            LEFT JOIN Employee e ON rc.staffID = e.EmployeeID 
+            WHERE 1=1
+            """;
+
+        // --- Keyword search in Complaint Title + Description ---
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            sql += " AND (c.title LIKE ? OR c.description LIKE ?)";
+            String likeKeyword = "%" + keyword.trim() + "%";
+            parameters.add(likeKeyword);
+            parameters.add(likeKeyword);
+        }
+
+        // --- Last Update Date filter (complaint only) ---
+        if (lastUpdateDate != null && !lastUpdateDate.isEmpty()) {
+            sql += " AND c.updatedDate >= ?";
+            parameters.add(Date.valueOf(lastUpdateDate));
+        }
+
+        // --- Customer Email filter ---
+        if (customerEmail != null && !customerEmail.trim().isEmpty()) {
+            sql += " AND cust.Email = ?";
+            parameters.add(customerEmail.trim());
+        }
+
+        // --- Complaint Status filter ---
+        if (status != null && !status.trim().isEmpty() && !"all".equalsIgnoreCase(status)) {
+            sql += " AND c.Status = ?";
+            parameters.add(status.trim());
+        }
+
+        sql += " ORDER BY c.updatedDate DESC, c.updateTime DESC";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // Set all dynamic parameters
+            for (int i = 0; i < parameters.size(); i++) {
+                Object param = parameters.get(i);
+                if (param instanceof String) {
+                    stmt.setString(i + 1, (String) param);
+                } else if (param instanceof Integer) {
+                    stmt.setInt(i + 1, (Integer) param);
+                } else if (param instanceof Date) {
+                    stmt.setDate(i + 1, (Date) param);
+                }
+            }
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    ComplaintReplyDTO complaintReplyDTO = new ComplaintReplyDTO();
+
+                    // Complaint details
+                    complaintReplyDTO = extractComplaintDetailsFromResultSet(rs);
+
+                    complaintReplyDTOs.add(complaintReplyDTO);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return complaintReplyDTOs;
+    }
+
+
     public ComplaintReplyDTO getComplaintReplyDTOByComplaintID(int ComplaintID) {
         String sql = "SELECT c.title AS complaintTitle, c.description AS complaintDescription, c.status, " +
                 "c.createdDate, c.createdTime, c.updatedDate, c.updateTime, c.ComplaintID, " +
@@ -94,26 +225,7 @@ public class ComplaintDAO {
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     // Complaint details
-                    complaintReplyDTO.setComplaintID(rs.getInt("ComplaintID"));
-                    complaintReplyDTO.setTitle(rs.getString("complaintTitle"));
-                    complaintReplyDTO.setDescription(rs.getString("complaintDescription"));
-                    complaintReplyDTO.setStatus(rs.getString("status"));
-                    complaintReplyDTO.setCreatedDate(rs.getDate("createdDate"));
-                    complaintReplyDTO.setCreatedTime(rs.getTime("createdTime"));
-                    complaintReplyDTO.setUpdatedDate(rs.getDate("updatedDate"));
-                    complaintReplyDTO.setUpdateTime(rs.getTime("updateTime"));
-
-                    // Reply details
-                    complaintReplyDTO.setReplyComplaintID((Integer) rs.getObject("ReplyComplaintID"));
-                    complaintReplyDTO.setRepliedEmployeeName(rs.getString("repliedEmployeeName"));
-                    complaintReplyDTO.setRepliedEmployeeType(rs.getString("repliedEmployeeType"));
-                    complaintReplyDTO.setReplyTitle(rs.getString("replyTitle"));
-                    complaintReplyDTO.setReplyDescription(rs.getString("replyDescription"));
-                    complaintReplyDTO.setReplyStatus(rs.getString("replyStatus"));
-                    complaintReplyDTO.setReplyCreatedDate(rs.getDate("replyCreatedDate"));
-                    complaintReplyDTO.setReplyCreatedTime(rs.getTime("replyCreatedTime"));
-                    complaintReplyDTO.setReplyUpdatedDate(rs.getDate("replyUpdatedDate"));
-                    complaintReplyDTO.setReplyUpdateTime(rs.getTime("replyUpdateTime"));
+                    complaintReplyDTO = extractComplaintDetailsFromResultSet(rs);
                 }
                 return complaintReplyDTO;
             }
@@ -145,27 +257,8 @@ public class ComplaintDAO {
                 while (rs.next()) {
                     ComplaintReplyDTO complaintReplyDTO = new ComplaintReplyDTO();
 
-                    // Complaint details
-                    complaintReplyDTO.setComplaintID(rs.getInt("ComplaintID"));
-                    complaintReplyDTO.setTitle(rs.getString("complaintTitle"));
-                    complaintReplyDTO.setDescription(rs.getString("complaintDescription"));
-                    complaintReplyDTO.setStatus(rs.getString("status"));
-                    complaintReplyDTO.setCreatedDate(rs.getDate("createdDate"));
-                    complaintReplyDTO.setCreatedTime(rs.getTime("createdTime"));
-                    complaintReplyDTO.setUpdatedDate(rs.getDate("updatedDate"));
-                    complaintReplyDTO.setUpdateTime(rs.getTime("updateTime"));
+                    complaintReplyDTO = extractComplaintDetailsFromResultSet(rs);
 
-                    // Reply details
-                    complaintReplyDTO.setReplyComplaintID((Integer) rs.getObject("ReplyComplaintID"));
-                    complaintReplyDTO.setRepliedEmployeeName(rs.getString("repliedEmployeeName"));
-                    complaintReplyDTO.setRepliedEmployeeType(rs.getString("repliedEmployeeType"));
-                    complaintReplyDTO.setReplyTitle(rs.getString("replyTitle"));
-                    complaintReplyDTO.setReplyDescription(rs.getString("replyDescription"));
-                    complaintReplyDTO.setReplyStatus(rs.getString("replyStatus"));
-                    complaintReplyDTO.setReplyCreatedDate(rs.getDate("replyCreatedDate"));
-                    complaintReplyDTO.setReplyCreatedTime(rs.getTime("replyCreatedTime"));
-                    complaintReplyDTO.setReplyUpdatedDate(rs.getDate("replyUpdatedDate"));
-                    complaintReplyDTO.setReplyUpdateTime(rs.getTime("replyUpdateTime"));
 
                     complaintReplyDTOs.add(complaintReplyDTO);
                 }
@@ -241,6 +334,39 @@ public class ComplaintDAO {
         return null;
     }
 
+    private ComplaintReplyDTO extractComplaintDetailsFromResultSet(ResultSet rs){
+        ComplaintReplyDTO complaintReplyDTO;
+        try{
+            complaintReplyDTO = new ComplaintReplyDTO();
+
+            // Complaint details
+            complaintReplyDTO.setComplaintID(rs.getInt("ComplaintID"));
+            complaintReplyDTO.setTitle(rs.getString("complaintTitle"));
+            complaintReplyDTO.setDescription(rs.getString("complaintDescription"));
+            complaintReplyDTO.setStatus(rs.getString("status"));
+            complaintReplyDTO.setCreatedDate(rs.getDate("createdDate"));
+            complaintReplyDTO.setCreatedTime(rs.getTime("createdTime"));
+            complaintReplyDTO.setUpdatedDate(rs.getDate("updatedDate"));
+            complaintReplyDTO.setUpdateTime(rs.getTime("updateTime"));
+
+            // Reply details
+            complaintReplyDTO.setReplyComplaintID((Integer) rs.getObject("ReplyComplaintID"));
+            complaintReplyDTO.setRepliedEmployeeName(rs.getString("repliedEmployeeName"));
+            complaintReplyDTO.setRepliedEmployeeType(rs.getString("repliedEmployeeType"));
+            complaintReplyDTO.setReplyTitle(rs.getString("replyTitle"));
+            complaintReplyDTO.setReplyDescription(rs.getString("replyDescription"));
+            complaintReplyDTO.setReplyStatus(rs.getString("replyStatus"));
+            complaintReplyDTO.setReplyCreatedDate(rs.getDate("replyCreatedDate"));
+            complaintReplyDTO.setReplyCreatedTime(rs.getTime("replyCreatedTime"));
+            complaintReplyDTO.setReplyUpdatedDate(rs.getDate("replyUpdatedDate"));
+            complaintReplyDTO.setReplyUpdateTime(rs.getTime("replyUpdateTime"));
+            return complaintReplyDTO;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     // Helper method to extract complaint from ResultSet
     private Complaint extractComplaintFromResultSet(ResultSet rs) {
         try{
@@ -254,7 +380,8 @@ public class ComplaintDAO {
             complaint.setCreatedTime(rs.getTime("createdTime"));
             complaint.setUpdatedDate(rs.getDate("updatedDate"));
             complaint.setUpdateTime(rs.getTime("updateTime"));
-        return complaint;}
+            return complaint;
+        }
         catch (Exception e){
             e.printStackTrace();
             return null;

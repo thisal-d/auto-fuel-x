@@ -87,7 +87,7 @@ public class FuelPurchaseDAO {
 
         List<FuelPurchaseDetailDTO> purchases = new ArrayList<>();
         List<Object> parameters = new ArrayList<>();
-        StringBuilder sql = new StringBuilder("""
+        String sql = """
                 SELECT fp.FuelPurchaseID, 
                        c.FirstName + ' ' + c.LastName AS CustomerName,
                        c.Email,
@@ -103,25 +103,25 @@ public class FuelPurchaseDAO {
                 JOIN Vehicle v ON fp.VehicleID = v.VehicleID
                 JOIN Fuel f ON fp.FuelID = f.FuelID
                 WHERE fp.CustomerID = ?
-                """);
+                """;
 
         parameters.add(customerID);
 
         // Add date range filter - simplified for date only
         if (durationFilterDateStart != null && !durationFilterDateStart.isEmpty()) {
-            sql.append(" AND fp.PurchaseDate >= ?");
+            sql += " AND fp.PurchaseDate >= ?";
             LocalDate startDate = LocalDate.parse(durationFilterDateStart);
             parameters.add(startDate);
         }
         if (durationFilterDateEnd != null && !durationFilterDateEnd.isEmpty()) {
-            sql.append(" AND fp.PurchaseDate <= ?");
+            sql += " AND fp.PurchaseDate <= ?";
             LocalDate endDate = LocalDate.parse(durationFilterDateEnd);
             parameters.add(endDate);
         }
 
         // Add vehicle type filter
         if (vehicleTypeFilter != null && !vehicleTypeFilter.isEmpty() && !vehicleTypeFilter.equals("all")) {
-            sql.append(" AND v.Type = ?");
+            sql += " AND v.Type = ?";
             parameters.add(vehicleTypeFilter);
         }
 
@@ -129,20 +129,20 @@ public class FuelPurchaseDAO {
 
         // Add vehicle filter
         if (vehicleFilter != null && !vehicleFilter.isEmpty() && !vehicleFilter.equals("all")) {
-            sql.append(" AND v.VehicleID = ?");
+            sql += " AND v.VehicleID = ?";
             parameters.add(Integer.parseInt(vehicleFilter));
         }
 
         // Add fuel type filter
         if (fuelTypeFilter != null && !fuelTypeFilter.isEmpty() && !fuelTypeFilter.equals("all")) {
-            sql.append(" AND f.FuelID = ?");
+            sql += " AND f.FuelID = ?";
             parameters.add(Integer.parseInt(fuelTypeFilter));
         }
 
-        sql.append(" ORDER BY fp.PurchaseDate DESC, fp.PurchaseTime DESC");
+        sql += " ORDER BY fp.PurchaseDate DESC, fp.PurchaseTime DESC";
 
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql.toString())) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             // Set all parameters dynamically
             for (int i = 0; i < parameters.size(); i++) {

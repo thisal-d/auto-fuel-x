@@ -50,7 +50,7 @@ public class EmployeeDAO {
     public boolean addEmployee(Employee employee) {
         String query = "INSERT INTO Employee (FirstName, LastName, DateOfBirth, Salary, Status, " +
                 "HireDate, AddressNo, AddressLane, AddressArea, Email, SkillSet, " +
-                "Role, Shift, Type, Password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'default123')";
+                "Role, Shift, Type, Password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -69,6 +69,7 @@ public class EmployeeDAO {
             stmt.setString(12, employee.getRole());
             stmt.setString(13, employee.getShift());
             stmt.setString(14, employee.getType());
+            stmt.setString(15, employee.getPassword());
 
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0;
@@ -81,7 +82,7 @@ public class EmployeeDAO {
     public boolean updateEmployee(Employee employee) {
         String query = "UPDATE Employee SET FirstName = ?, LastName = ?, DateOfBirth = ?, " +
                 "Salary = ?, Status = ?, HireDate = ?, AddressNo = ?, AddressLane = ?, " +
-                "AddressArea = ?, Email = ?, SkillSet = ?, Role = ?, Shift = ?, Type = ? " +
+                "AddressArea = ?, Email = ?, Password = ?, SkillSet = ?, Role = ?, Shift = ?, Type = ? " +
                 "WHERE EmployeeID = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
@@ -97,11 +98,12 @@ public class EmployeeDAO {
             stmt.setString(8, employee.getAddressLane());
             stmt.setString(9, employee.getAddressArea());
             stmt.setString(10, employee.getEmail());
-            stmt.setString(11, employee.getSkillSet());
-            stmt.setString(12, employee.getRole());
-            stmt.setString(13, employee.getShift());
-            stmt.setString(14, employee.getType());
-            stmt.setInt(15, employee.getEmployeeID());
+            stmt.setString(11, employee.getPassword());
+            stmt.setString(12, employee.getSkillSet());
+            stmt.setString(13, employee.getRole());
+            stmt.setString(14, employee.getShift());
+            stmt.setString(15, employee.getType());
+            stmt.setInt(16, employee.getEmployeeID());
 
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0;
@@ -266,14 +268,15 @@ public class EmployeeDAO {
 
     // ... existing methods ...
 
-    public Employee validateAdmin(String email, String password) {
+    public Employee validateEmployee(String email, String password, String role) {
         Employee admin = null;
-        String query = "SELECT * FROM Employee WHERE Email = ? AND Password = ? AND Type = 'Admin'";
+        String query = "SELECT * FROM Employee WHERE Email = ? AND Password = ? AND Type = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, email);
             stmt.setString(2, password);
+            stmt.setString(3, role);
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()){
@@ -298,6 +301,7 @@ public class EmployeeDAO {
         employee.setAddressNo(rs.getString("AddressNo"));
         employee.setAddressLane(rs.getString("AddressLane"));
         employee.setAddressArea(rs.getString("AddressArea"));
+        employee.setPassword(rs.getString("Password"));
         employee.setEmail(rs.getString("Email"));
         employee.setSkillSet(rs.getString("SkillSet"));
         employee.setRole(rs.getString("Role"));

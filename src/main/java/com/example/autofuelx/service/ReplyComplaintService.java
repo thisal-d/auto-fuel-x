@@ -13,13 +13,13 @@ public class ReplyComplaintService {
         this.replyComplaintDAO = new ReplyComplaintDAO();
     }
 
-    public boolean addReply(ReplyComplaint replyComplaint) {
+    public boolean submitReplyComplaint(ReplyComplaint replyComplaint) {
         return replyComplaintDAO.addReplyComplaint(replyComplaint);
 
     }
 
     // Update reply
-    public boolean updateReply(ReplyComplaint replyComplaint) {
+    public boolean updateReplyComplaint(ReplyComplaint replyComplaint) {
         return replyComplaintDAO.updateReplyComplaint(replyComplaint);
     }
 

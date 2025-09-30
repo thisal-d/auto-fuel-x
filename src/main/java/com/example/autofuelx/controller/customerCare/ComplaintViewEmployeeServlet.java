@@ -1,9 +1,6 @@
-package com.example.autofuelx.controller.customer.complaint;
+package com.example.autofuelx.controller.customerCare;
 
 import com.example.autofuelx.dto.ComplaintReplyDTO;
-import com.example.autofuelx.model.Complaint;
-import com.example.autofuelx.model.Employee;
-import com.example.autofuelx.model.ReplyComplaint;
 import com.example.autofuelx.service.ComplaintService;
 import com.example.autofuelx.service.EmployeeService;
 import com.example.autofuelx.service.ReplyComplaintService;
@@ -15,8 +12,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/customer/complaint/view")
-public class ComplaintViewServlet extends HttpServlet {
+@WebServlet("/customer-care/complaint/view")
+public class ComplaintViewEmployeeServlet extends HttpServlet {
     private ComplaintService complaintService;
 
     @Override
@@ -31,10 +28,11 @@ public class ComplaintViewServlet extends HttpServlet {
         // Catch data
         int complaintID = Integer.parseInt(request.getParameter("complaintID"));
 
+
         ComplaintReplyDTO complaintDTO = complaintService.getComplaintReplyDTOByComplaintID(complaintID);
 
         request.setAttribute("complaintReplyDTO", complaintDTO);
 
-        request.getRequestDispatcher( "/views/customer/complaint/view.jsp").forward(request, response);
+        request.getRequestDispatcher( "/views/customer-care/complaint/view.jsp").forward(request, response);
     }
 }

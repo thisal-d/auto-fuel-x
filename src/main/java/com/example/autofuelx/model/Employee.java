@@ -15,6 +15,7 @@ public class Employee {
     private String addressLane;
     private String addressArea;
     private String email;
+    private String password;
     private String skillSet;
     private String role;
     private String shift;
@@ -25,7 +26,7 @@ public class Employee {
 
     public Employee(int employeeID, String firstName, String lastName, Date dateOfBirth,
                     double salary, String status, Date hireDate, String addressNo,
-                    String addressLane, String addressArea, String email, String skillSet,
+                    String addressLane, String addressArea, String email, String password, String skillSet,
                     String role, String shift, String type) {
         this.employeeID = employeeID;
         this.firstName = firstName;
@@ -42,6 +43,7 @@ public class Employee {
         this.role = role;
         this.shift = shift;
         this.type = type;
+        this.password = password;
     }
 
     // Getters and Setters
@@ -131,6 +133,14 @@ public class Employee {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getSkillSet() {

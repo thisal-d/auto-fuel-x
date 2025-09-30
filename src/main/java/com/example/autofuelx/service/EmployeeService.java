@@ -51,7 +51,7 @@ public class EmployeeService {
         return employeeDAO.getEmployeesByType(type);
     }
 
-    public Employee validateAdmin(String email, String password) {
-        return employeeDAO.validateAdmin(email, password);
+    public Employee validateEmployee(String email, String password, String role) {
+        return employeeDAO.validateEmployee(email, password, role);
     }
 }

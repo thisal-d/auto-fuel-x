@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/customer/complaint/delete")
-public class ComplaintDeleteServlet extends HttpServlet {
+public class CustomerComplaintDeleteServlet extends HttpServlet {
     private ComplaintService complaintService;
 
     @Override

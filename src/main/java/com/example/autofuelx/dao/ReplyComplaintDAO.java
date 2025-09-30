@@ -5,27 +5,34 @@ import com.example.autofuelx.util.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 public class ReplyComplaintDAO {
 
     // Add a new reply complaint
     public boolean addReplyComplaint(ReplyComplaint replyComplaint) {
-        String sql = "INSERT INTO ReplyComplaint (staffID, complaintID, title, description, createdDate, createdTime) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO ReplyComplaint (staffID, complaintID, title, description, createdDate, createdTime, UpdatedDate, UpdateTime, Status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // Get current date and time
+            // Get current date and time
+            long now = System.currentTimeMillis();
+            Date currentDate = new Date(now);  // java.sql.Date for date column
+            Time currentTime = new Time(now);  // java.sql.Time for time column
 
             stmt.setInt(1, replyComplaint.getStaffID());
             stmt.setInt(2, replyComplaint.getComplaintID());
             stmt.setString(3, replyComplaint.getTitle());
             stmt.setString(4, replyComplaint.getDescription());
-
-            // Set current date and time
-            java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis());
-            java.sql.Time currentTime = new java.sql.Time(System.currentTimeMillis());
             stmt.setDate(5, currentDate);
             stmt.setTime(6, currentTime);
+            stmt.setDate(7, currentDate);
+            stmt.setTime(8, currentTime);
+            stmt.setString(9, replyComplaint.getStatus());
 
             stmt.executeUpdate();
 
@@ -87,8 +94,8 @@ public class ReplyComplaintDAO {
             stmt.setString(3, replyComplaint.getTitle());
             stmt.setString(4, replyComplaint.getDescription());
 
-            java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis());
-            java.sql.Time currentTime = new java.sql.Time(System.currentTimeMillis());
+            Date currentDate = new Date(System.currentTimeMillis());
+            Time currentTime = new Time(System.currentTimeMillis());
 
             stmt.setDate(5, currentDate);
             stmt.setTime(6, currentTime);

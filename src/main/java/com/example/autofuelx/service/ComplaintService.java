@@ -40,7 +40,18 @@ public class ComplaintService {
         return complaintDAO.getComplaintReplyDTOsByCustomerID(customerID);
     }
 
+    public List<ComplaintReplyDTO> getComplaintsWithReplyByStatus(String status) {
+        return complaintDAO.getComplaintReplyDTOsByStatus(status);
+    }
+
     public ComplaintReplyDTO getComplaintReplyDTOByComplaintID(int complaintID) {
         return complaintDAO.getComplaintReplyDTOByComplaintID(complaintID);
+    }
+
+    public List<ComplaintReplyDTO> getComplaintReplyDTOsFiltered(String keyword,
+                                                                String lastUpdateDate,
+                                                                String customerEmail,
+                                                                String status) {
+        return complaintDAO.getComplaintReplyDTOsFiltered(keyword, lastUpdateDate, customerEmail, status);
     }
 }

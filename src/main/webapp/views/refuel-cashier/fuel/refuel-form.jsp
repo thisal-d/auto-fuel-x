@@ -1,62 +1,110 @@
 <%@ page import="com.example.autofuelx.model.Fuel" %>
-<%@ page import="java.util.List" %><%--
-  Created by IntelliJ IDEA.
-  User: KHThi
-  Date: 9/19/2025
-  Time: 9:21 AM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page import="com.example.autofuelx.model.Fuel" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
-<head><title>Refuel Form</title></head>
+<head>
+    <title>Refuel Form</title>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/base.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/refuel-cashier/fuel/refuel-form.css">
+</head>
 <body>
-<h2>Refuel Vehicle</h2>
-
-<%
-    List<Fuel> fuelTypes = (List<Fuel>) request.getAttribute("fuel-types");
-%>
-
-<form action="<%=request.getContextPath()%>/refuel-cashier/fuel/purchase" method="post">
-    <label>Plate Number:</label>
-    <input type="text" name="plateNumber" required><br><br>
-
-    <label>Fuel Type (with available stock):</label><br>
+<div class="container refuel-container">
     <%
-        if (fuelTypes != null) {
-            for (Fuel fuel : fuelTypes) {
+        String fuelPurchaseStatus = (String) request.getParameter("purchase-status");
+        if ("success".equals(fuelPurchaseStatus) || "failed".equals(fuelPurchaseStatus)) {
     %>
-    <input type="radio" name="fuelID" value="<%=fuel.getFuelID()%>" required>
-    <%=fuel.getType()%>
-    <%
-        }
-    } else {
-    %>
-    <p>No fuel types available.</p>
+    <div class="status-message <%= "success".equals(fuelPurchaseStatus) ? "status-success" : "status-error" %>">
+        <%= "success".equals(fuelPurchaseStatus) ? "Refuel Successful." : "Refuel Failed." %>
+    </div>
     <%
         }
     %>
 
-    <br>
-    <label>Quantity (Liters):</label>
-    <input type="number" step="0.01" name="quantity" required><br><br>
+    <div class="dashboard">
+        <div class="refuel-form">
+            <h2 class="form-title">
+                <div class="form-icon">R</div>
+                Refuel Vehicle
+            </h2>
 
-    <input type="submit" value="Submit">
-</form>
+            <%
+                List<Fuel> fuelTypes = (List<Fuel>) request.getAttribute("fuel-types");
+            %>
 
-<%
-    String fuelPurchaseStatus = (String) request.getParameter("purchase-status");
-    if ("success".equals(fuelPurchaseStatus)) {
-%>
-<p style="color:green;">Refuel Successful.</p>
-<%
-} else if ("failed".equals(fuelPurchaseStatus)) {
-%>
-<p style="color:red;">Refuel Failed.</p>
-<%
-    }
-%>
+            <form action="<%=request.getContextPath()%>/refuel-cashier/fuel/purchase" method="post">
+                <div class="form-group">
+                    <label for="plateNumber">Plate Number:</label>
+                    <input type="text" id="plateNumber" name="plateNumber" required>
+                </div>
 
+                <div class="form-group">
+                    <label>Fuel Type (with available stock):</label>
+                    <div class="fuel-options">
+                        <%
+                            if (fuelTypes != null) {
+                                for (Fuel fuel : fuelTypes) {
+                        %>
+                        <div class="fuel-option">
+                            <input type="radio" id="fuel<%=fuel.getFuelID()%>" name="fuelID" value="<%=fuel.getFuelID()%>" required>
+                            <div class="fuel-info">
+                                <div class="fuel-name"><%=fuel.getType()%></div>
+                                <div class="fuel-stock"><%=fuel.getQuantity()%> Liters available</div>
+                            </div>
+                        </div>
+                        <%
+                            }
+                        } else {
+                        %>
+                        <p>No fuel types available.</p>
+                        <%
+                            }
+                        %>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="quantity">Quantity (Liters):</label>
+                    <input type="number" id="quantity" step="0.01" name="quantity" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary submit-btn">Submit Refuel Request</button>
+            </form>
+        </div>
+
+        <div class="fuel-details">
+            <h3 class="details-title">
+                <div class="details-icon">F</div>
+                Fuel Details
+            </h3>
+            <div class="fuel-list">
+                <%
+                    if (fuelTypes != null) {
+                        for (Fuel fuel : fuelTypes) {
+                            // Calculate fuel level percentage (assuming max 10000 liters for visualization)
+                            int fuelLevel = (int) (fuel.getQuantity() / 10000.0 * 100);
+                            if (fuelLevel > 100) fuelLevel = 100;
+                %>
+                <div class="fuel-item">
+                    <div class="fuel-icon">F</div>
+                    <div class="fuel-info">
+                        <div class="fuel-name"><%=fuel.getType()%></div>
+                        <div class="fuel-quantity"><%=fuel.getQuantity()%> Liters</div>
+                        <div class="fuel-bar">
+                            <div class="fuel-level" style="width: <%=fuelLevel%>%"></div>
+                        </div>
+                    </div>
+                </div>
+                <%
+                    }
+                } else {
+                %>
+                <p>No fuel details available.</p>
+                <%
+                    }
+                %>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

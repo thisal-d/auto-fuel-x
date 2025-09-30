@@ -1,0 +1,66 @@
+/* ===== header-style2.css ===== */
+
+/* Subheader Container */
+.subheader-container {
+    margin-bottom: var(--spacing-lg);
+}
+
+.subheader-nav {
+    display: flex;
+    border-bottom: 2px solid var(--border-color);
+    position: relative;
+}
+
+.subheader-link {
+    padding: var(--spacing-md) var(--spacing-lg);
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    margin-right: var(--spacing-md);
+    border-bottom: 3px solid transparent;
+}
+
+.subheader-link:hover {
+    color: var(--text-primary);
+}
+
+.subheader-link.active {
+    color: var(--accent-red);
+    font-weight: 600;
+    border-bottom: 3px solid var(--accent-red);
+}
+
+.subheader-link .nav-icon {
+    margin-right: var(--spacing-sm);
+    font-size: 1.2rem;
+}
+
+/* Active Tab Indicator */
+.active-indicator {
+    position: absolute;
+    bottom: -2px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-red), var(--accent-red-light));
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .subheader-nav {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .subheader-nav::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Edge */
+    }
+
+    .subheader-link {
+        white-space: nowrap;
+        margin-right: var(--spacing-md);
+    }
+}
