@@ -21,7 +21,7 @@ public class ComplaintUpdateServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         // Catch data
@@ -38,7 +38,7 @@ public class ComplaintUpdateServlet extends HttpServlet {
         complaint.setComplaintID(complaintID);
         complaint.setTitle(title);
         complaint.setDescription(description);
-        complaint.setStatus("Delivered");
+        complaint.setStatus("Open");
 
         complaintService.updateComplaint(complaint);
 

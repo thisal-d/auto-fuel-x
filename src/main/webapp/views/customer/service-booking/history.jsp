@@ -13,7 +13,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Service Booking History</title>
+    <title>Service Booking History - Vehicle Service & Refuel Center</title>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/base.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/customer/service-booking/history.css">
 </head>
 <body>
 <jsp:include page="/views/customer/header.jsp"/>
@@ -28,84 +30,115 @@
     String selectedStartDate = (String) request.getAttribute("start-date");
     String selectedVehicleStr = (String) request.getAttribute("vehicle");
     int selectedVehicle = 0;
-    if (selectedVehicleStr != null) selectedVehicle = Integer.parseInt(selectedVehicleStr);
+    if (selectedVehicleStr != null && !"All".equals(selectedVehicleStr)) selectedVehicle = Integer.parseInt(selectedVehicleStr);
     String selectedStatus = (String) request.getAttribute("status");
     String selectedMinCost =  (String) request.getAttribute("min-cost");
     String selectedMaxCost = (String) request.getAttribute("max-cost");
     String selectedKeyWord = (String) request.getAttribute("keyword");
 
 %>
-<h1>Service Booking History</h1>
+<div class="container">
+    <div class="page-header">
+        <h1>Service Booking History</h1>
+    </div>
 
-<form method="get" action="<%= request.getContextPath() %>/customer/service-booking/history">
-    <label for="start-date">From:</label>
-    <input type="date" id="start-date" name="start-date" value="<%= selectedStartDate != null ? selectedStartDate : "" %>">
+    <div class="filter-section">
+        <form method="get" action="<%= request.getContextPath() %>/customer/service-booking/history" class="filter-form">
+            <div class="filter-group">
+                <label for="start-date">From:</label>
+                <input type="date" id="start-date" name="start-date" value="<%= selectedStartDate != null ? selectedStartDate : "" %>">
+            </div>
 
-    <label for="end-date">To:</label>
-    <input type="date" id="end-date" name="end-date" value="<%= selectedEndDate != null ? selectedEndDate : "" %>">
+            <div class="filter-group">
+                <label for="end-date">To:</label>
+                <input type="date" id="end-date" name="end-date" value="<%= selectedEndDate != null ? selectedEndDate : "" %>">
+            </div>
 
-    <label for="vehicle-type">Vehicle Type:</label>
-    <select name="vehicle-type" id="vehicle-type">
-        <option value="All">All</option>
-        <% for (String type : vehicleTypes) { %>
-        <option value="<%= type %>" <%= type.equals(selectedVehicleType) ? "selected" : "" %>><%= type %></option>
-        <% } %>
-    </select>
+            <div class="filter-group">
+                <label for="vehicle-type">Vehicle Type:</label>
+                <select name="vehicle-type" id="vehicle-type">
+                    <option value="All">All</option>
+                    <% for (String type : vehicleTypes) { %>
+                    <option value="<%= type %>" <%= type.equals(selectedVehicleType) ? "selected" : "" %>><%= type %></option>
+                    <% } %>
+                </select>
+            </div>
 
-    <label for="vehicle">Vehicle:</label>
-    <select name="vehicle" id="vehicle">
-        <option value="All">All</option>
-        <% for (Vehicle vehicle : vehicles) { %>
-        <option value="<%= vehicle.getVehicleID() %>" <%= (vehicle.getVehicleID()==selectedVehicle) ? "selected" : "" %>><%= vehicle.getModel() %> - <%= vehicle.getPlateNumber() %></option>
-        <% } %>
-    </select>
+            <div class="filter-group">
+                <label for="vehicle">Vehicle:</label>
+                <select name="vehicle" id="vehicle">
+                    <option value="All">All</option>
+                    <% for (Vehicle vehicle : vehicles) { %>
+                    <option value="<%= vehicle.getVehicleID() %>" <%= (vehicle.getVehicleID()==selectedVehicle) ? "selected" : "" %>><%= vehicle.getModel() %> - <%= vehicle.getPlateNumber() %></option>
+                    <% } %>
+                </select>
+            </div>
 
-    <label for="status">Status:</label>
-    <select name="status" id="status">
-        <% for (String status : statuses) { %>
-        <option value="<%=status %>" <%= status.equals(selectedStatus) ? "selected" : "" %>><%= status %></option>
-        <% } %>
-    </select>
+            <div class="filter-group">
+                <label for="status">Status:</label>
+                <select name="status" id="status">
+                    <% for (String status : statuses) { %>
+                    <option value="<%=status %>" <%= status.equals(selectedStatus) ? "selected" : "" %>><%= status %></option>
+                    <% } %>
+                </select>
+            </div>
 
-    <label for="min-cost">Min Cost:</label>
-    <input type="number" id="min-cost" name="min-cost" step="0.01" value="<%= selectedMinCost != null ? selectedMinCost : "" %>">
+            <div class="filter-group">
+                <label for="min-cost">Min Cost:</label>
+                <input type="number" id="min-cost" name="min-cost" step="0.01" value="<%= selectedMinCost != null ? selectedMinCost : "" %>">
+            </div>
 
-    <label for="max-cost">Max Cost:</label>
-    <input type="number" id="max-cost" name="max-cost" step="0.01" value="<%= selectedMaxCost != null ? selectedMaxCost : "" %>">
+            <div class="filter-group">
+                <label for="max-cost">Max Cost:</label>
+                <input type="number" id="max-cost" name="max-cost" step="0.01" value="<%= selectedMaxCost != null ? selectedMaxCost : "" %>">
+            </div>
 
-    <label for="keyword">Keyword:</label>
-    <input type="text" id="keyword" name="keyword" value="<%= selectedKeyWord != null ? selectedKeyWord : "" %>">
+            <div class="filter-group">
+                <label for="keyword">Keyword:</label>
+                <input type="text" id="keyword" name="keyword" value="<%= selectedKeyWord != null ? selectedKeyWord : "" %>">
+            </div>
 
-    <button type="submit">Apply Filters</button>
-</form>
+            <div class="filter-actions">
+                <button type="submit" class="btn-filter">Apply</button>
+                <button type="reset" class="btn-clear">Clear</button>
+            </div>
+        </form>
+    </div>
 
-<% if (ServiceBookings != null && !ServiceBookings.isEmpty()) { %>
-<table border="1">
-    <tr>
-        <th>Booking ID</th>
-        <th>Date</th>
-        <th>Time</th>
-        <th>Vehicle</th>
-        <th>Service Type</th>
-        <th>Description</th>
-        <th>Status</th>
-        <th>Total Cost</th>
-    </tr>
-    <% for (ServiceBookingDTO booking : ServiceBookings) { %>
-    <tr>
-        <td><%= booking.getBookingID() %></td>
-        <td><%= booking.getBookingDate() %></td>
-        <td><%= booking.getBookingTime() %></td>
-        <td><%= booking.getVehiclePlate() %> - <%= booking.getVehicleModel() %></td>
-        <td><%= booking.getServiceType() %></td>
-        <td><%= booking.getServiceDescription() %></td>
-        <td><%= booking.getStatus() %></td>
-        <td>Rs. <%= booking.getTotalCost() %></td>
-    </tr>
+    <% if (ServiceBookings != null && !ServiceBookings.isEmpty()) { %>
+    <div class="table-container">
+        <table class="booking-table">
+            <thead>
+            <tr>
+                <th>Date & Time</th>
+                <th>Vehicle</th>
+                <th>Service Type</th>
+                <th>Status</th>
+                <th>Total Cost</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for (ServiceBookingDTO booking : ServiceBookings) { %>
+            <tr>
+                <td><%= booking.getBookingDate() + " " +booking.getBookingTime()%></td>
+                <td><%= booking.getVehiclePlate() %> - <%= booking.getVehicleModel() %></td>
+                <td><%= booking.getServiceType() + " (" + booking.getServiceCost() + ") "%></td>
+                <td>
+                        <span class="status-badge status-<%= booking.getStatus().toLowerCase().replace(" ", "-") %>">
+                            <%= booking.getStatus() %>
+                        </span>
+                </td>
+                <td class="cost-display">Rs. <%= booking.getTotalCost() %></td>
+            </tr>
+            <% } %>
+            </tbody>
+        </table>
+    </div>
+    <% } else { %>
+    <div class="empty-state">
+        <p>No booking records found.</p>
+    </div>
     <% } %>
-</table>
-<% } else { %>
-<p>No booking records found.</p>
-<% } %>
+</div>
 </body>
 </html>

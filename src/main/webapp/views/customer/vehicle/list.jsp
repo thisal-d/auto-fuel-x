@@ -21,11 +21,8 @@
 <body>
 
 <jsp:include page="/views/customer/header.jsp" />
-<jsp:include page="header.jsp" />
 
 <div class="vehicles-container">
-    <!-- Include customer header -->
-
     <div class="vehicles-content">
         <div class="page-header">
             <h2 class="page-title">My Vehicles</h2>
@@ -40,45 +37,44 @@
             <a href="<%=request.getContextPath()%>/views/customer/vehicle/add.jsp" class="add-vehicle-btn">Add Your First Vehicle</a>
         </div>
         <% } else { %>
-        <table class="vehicles-table">
-            <thead>
-            <tr>
-                <th>Plate Number</th>
-                <th>Type</th>
-                <th>Model</th>
-                <th>Color</th>
-                <th>Registration Date</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
+        <div class="vehicles-grid">
             <%
                 for (Vehicle v : vehicles) {
             %>
-            <tr>
-                <td><strong><%=v.getPlateNumber()%></strong></td>
-                <td><span class="vehicle-type"><%=v.getType()%></span></td>
-                <td><%=v.getModel()%></td>
-                <td><%=v.getColor()%></td>
-                <td><%=v.getRegistrationDate()%></td>
-                <td>
-                    <div class="action-buttons">
-                        <form action="<%=request.getContextPath()%>/customer/vehicle/update-form" method="post" class="action-form">
-                            <input type="hidden" name="vehicleID" value="<%=v.getVehicleID()%>">
-                            <button type="submit" class="action-btn edit-btn">Edit</button>
-                        </form>
-                        <form action="<%=request.getContextPath()%>/customer/vehicle/delete" method="post" class="action-form">
-                            <input type="hidden" name="vehicleID" value="<%=v.getVehicleID()%>">
-                            <button type="submit" class="action-btn delete-btn">Remove</button>
-                        </form>
+            <div class="vehicle-card">
+                <div class="vehicle-header">
+                    <div class="plate-number"><%=v.getPlateNumber()%></div>
+                    <span class="vehicle-type"><%=v.getType()%></span>
+                </div>
+                <div class="vehicle-details">
+                    <div class="vehicle-detail-row">
+                        <div class="vehicle-detail-label">Model:</div>
+                        <div class="vehicle-detail-value"><%=v.getModel()%></div>
                     </div>
-                </td>
-            </tr>
+                    <div class="vehicle-detail-row">
+                        <div class="vehicle-detail-label">Color:</div>
+                        <div class="vehicle-detail-value"><%=v.getColor()%></div>
+                    </div>
+                    <div class="vehicle-detail-row">
+                        <div class="vehicle-detail-label">Reg. Date:</div>
+                        <div class="vehicle-detail-value"><%=v.getRegistrationDate()%></div>
+                    </div>
+                </div>
+                <div class="vehicle-actions">
+                    <form action="<%=request.getContextPath()%>/customer/vehicle/update-form" method="post" class="action-form">
+                        <input type="hidden" name="vehicleID" value="<%=v.getVehicleID()%>">
+                        <button type="submit" class="action-btn edit-btn">Edit</button>
+                    </form>
+                    <form action="<%=request.getContextPath()%>/customer/vehicle/delete" method="post" class="action-form">
+                        <input type="hidden" name="vehicleID" value="<%=v.getVehicleID()%>">
+                        <button type="submit" class="action-btn delete-btn">Remove</button>
+                    </form>
+                </div>
+            </div>
             <%
                 }
             %>
-            </tbody>
-        </table>
+        </div>
         <% } %>
     </div>
 </div>

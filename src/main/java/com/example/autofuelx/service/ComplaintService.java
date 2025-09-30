@@ -3,6 +3,7 @@ package com.example.autofuelx.service;
 
 
 import com.example.autofuelx.dao.ComplaintDAO;
+import com.example.autofuelx.dto.ComplaintReplyDTO;
 import com.example.autofuelx.model.Complaint;
 
 import java.util.List;
@@ -35,8 +36,11 @@ public class ComplaintService {
         return complaintDAO.getComplaintById(complaintID);
     }
 
-    /*
-    public ComplaintDTO getComplaintDTOByCustomerID(int complaintID) {
-        return  complaintDAO.getComplaintDTOByCustomerID(complaintID);
-    }*/
+    public List<ComplaintReplyDTO> getComplaintsWithReplyByCustomerId(int customerID) {
+        return complaintDAO.getComplaintReplyDTOsByCustomerID(customerID);
+    }
+
+    public ComplaintReplyDTO getComplaintReplyDTOByComplaintID(int complaintID) {
+        return complaintDAO.getComplaintReplyDTOByComplaintID(complaintID);
+    }
 }

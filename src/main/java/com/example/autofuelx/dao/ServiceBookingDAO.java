@@ -72,6 +72,7 @@ public class ServiceBookingDAO {
                v.Type AS VehicleType,
                s.ServiceID,
                s.Type AS ServiceType,
+               s.Description AS ServiceDescription,
                s.Cost AS ServiceCost,
                e.EmployeeID AS StaffID,
                e.FirstName AS StaffFirstName,
@@ -82,7 +83,7 @@ public class ServiceBookingDAO {
         JOIN Vehicle v ON sb.VehicleID = v.VehicleID
         JOIN Service s ON sb.ServiceID = s.ServiceID
         LEFT JOIN Employee e ON sb.StaffID = e.EmployeeID
-        WHERE (sb.Status = ? OR sb.Status = ? OR sb.Status = ? OR sb.Status = ? OR sb.Status = ?) AND c.CustomerID = ?
+        WHERE (sb.Status = ? OR sb.Status = ? OR sb.Status = ? OR sb.Status = ? OR sb.Status = ? ) AND c.CustomerID = ?
         ORDER BY sb.BookingDate DESC, sb.BookingTime DESC
         """;
 
@@ -91,7 +92,7 @@ public class ServiceBookingDAO {
             stmt.setString(1, "Awaiting Confirmation");
             stmt.setString(2, "Confirmed");
             stmt.setString(3, "In Progress");
-            stmt.setString(4, "Missed Appointment");
+            stmt.setString(4, "Reschedule Required");
             stmt.setString(5, "Awaiting Pickup");
             stmt.setInt(6, customerID);
 
@@ -124,6 +125,7 @@ public class ServiceBookingDAO {
                    v.Type AS VehicleType,
                    s.ServiceID,
                    s.Type AS ServiceType,
+                   s.Description AS ServiceDescription,
                    s.Cost AS ServiceCost,
                    e.EmployeeID AS StaffID,
                    e.FirstName AS StaffFirstName,
@@ -202,6 +204,7 @@ public class ServiceBookingDAO {
                    v.Type AS VehicleType,
                    s.ServiceID,
                    s.Type AS ServiceType,
+                   s.Description AS ServiceDescription,
                    s.Cost AS ServiceCost,
                    e.EmployeeID AS StaffID,
                    e.FirstName AS StaffFirstName,
@@ -248,6 +251,7 @@ public class ServiceBookingDAO {
                s.ServiceID,
                s.Type AS ServiceType,
                s.Cost AS ServiceCost,
+                s.Description AS ServiceDescription,
                e.EmployeeID AS StaffID,
                e.FirstName AS StaffFirstName,
                e.LastName AS StaffLastName,
@@ -294,6 +298,7 @@ public class ServiceBookingDAO {
                    v.Type AS VehicleType,
                    s.ServiceID,
                    s.Type AS ServiceType,
+                   s.Description AS ServiceDescription,
                    s.Cost AS ServiceCost,
                    e.EmployeeID AS StaffID,
                    e.FirstName AS StaffFirstName,
@@ -342,6 +347,7 @@ public class ServiceBookingDAO {
                    v.Type AS VehicleType,
                    s.ServiceID,
                    s.Type AS ServiceType,
+                   s.Description AS ServiceDescription,
                    s.Cost AS ServiceCost,
                    e.EmployeeID AS StaffID,
                    e.FirstName AS StaffFirstName,
@@ -390,6 +396,7 @@ public class ServiceBookingDAO {
                    v.Type AS VehicleType,
                    s.ServiceID,
                    s.Type AS ServiceType,
+                   s.Description AS ServiceDescription,
                    s.Cost AS ServiceCost,
                    e.EmployeeID AS StaffID,
                    e.FirstName AS StaffFirstName,
@@ -448,6 +455,7 @@ public class ServiceBookingDAO {
                    v.Type AS VehicleType,
                    s.ServiceID,
                    s.Type AS ServiceType,
+                   s.Description AS ServiceDescription,
                    s.Cost AS ServiceCost,
                    e.EmployeeID AS StaffID,
                    e.FirstName AS StaffFirstName,

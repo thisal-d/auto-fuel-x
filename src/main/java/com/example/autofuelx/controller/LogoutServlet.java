@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet("/logout")
+@WebServlet("/user/logout")
 public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -20,6 +20,6 @@ public class LogoutServlet extends HttpServlet {
         if (session != null) {
             session.invalidate(); // Destroy session
         }
-        response.sendRedirect("index.jsp");
+        response.sendRedirect(request.getContextPath()+"/index.jsp");
     }
 }

@@ -10,6 +10,7 @@ public class ReplyComplaint {
     private int complaintID;
     private String title;
     private String description;
+    private String status;
     private Date createdDate;
     private Time createdTime;
     private Date updatedDate;
@@ -86,5 +87,13 @@ public class ReplyComplaint {
 
     public void setUpdateTime(Time updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

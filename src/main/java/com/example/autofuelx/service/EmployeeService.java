@@ -47,6 +47,10 @@ public class EmployeeService {
         return employeeDAO.getEmployeesByType(type);
     }
 
+    public List<Employee> getEmployeesByTypeStatus(String type, String status) {
+        return employeeDAO.getEmployeesByType(type);
+    }
+
     public Employee validateAdmin(String email, String password) {
         return employeeDAO.validateAdmin(email, password);
     }

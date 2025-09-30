@@ -17,9 +17,9 @@
 
 <jsp:include page="header.jsp"/>
 
-<h1>Canceled Bookings</h1>
+<h1>Cancelled Bookings</h1>
 
-<p>Canceled bookings that have been Canceled and closed.</p>
+<p>Cancelled bookings that have been Cancelled and closed.</p>
 
 <p><a href="<%= request.getContextPath() %>/admin/dashboard">Back to Dashboard</a></p>
 

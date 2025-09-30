@@ -60,7 +60,7 @@ public class HistoryBookingHistoryServlet extends HttpServlet {
         List<String> vehicleTypes = vehicleService.getVehicleTypesByCustomerID(loggedCustomer.getCustomerID());
         List<Vehicle> vehicles = vehicleService.getVehiclesByCustomerID(loggedCustomer.getCustomerID());
         List<String> statuses = Arrays.asList("All", "Awaiting Confirmation", "Confirmed", "In Progress",
-                "Completed", "Missed Appointment", "Awaiting Pickup", "Canceled");
+                "Completed", "Missed Appointment", "Awaiting Pickup", "Cancelled", "Reschedule Required");
 
         // Get filtered bookings
         List<ServiceBookingDTO> bookings = serviceBookingService.getBookingsByCustomerWithFilters(

@@ -13,7 +13,7 @@ import com.example.autofuelx.service.CustomerService;
 
 
 @WebServlet("/customer/register")
-public class RegisterServlet extends HttpServlet {
+public class CustomerRegisterServlet extends HttpServlet {
 
     private CustomerService customerService;
 

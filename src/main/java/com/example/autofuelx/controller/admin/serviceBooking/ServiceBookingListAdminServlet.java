@@ -55,9 +55,9 @@ public class ServiceBookingListAdminServlet extends HttpServlet {
         else if (viewStatus.equals("reschedule-required")) {
             redirectUrl = "/views/admin/service-booking/reschedule-required.jsp";
             status = "Reschedule Required";
-        }else if (viewStatus.equals("canceled")) {
-                redirectUrl = "/views/admin/service-booking/canceled.jsp";
-                status = "Canceled";
+        }else if (viewStatus.equals("cancelled")) {
+                redirectUrl = "/views/admin/service-booking/cancelled.jsp";
+                status = "Cancelled";
         } else {
             redirectUrl = "/views/admin/service-booking/all.jsp";
             status = "All";
@@ -67,7 +67,7 @@ public class ServiceBookingListAdminServlet extends HttpServlet {
         if(!status.equals("All")) bookings = serviceBookingService.getAllBookings(status);
         else bookings = serviceBookingService.getAllBookings();
 
-        List<Employee> employees = employeeService.getEmployeesByType("Service Center Staff");
+        List<Employee> employees = employeeService.getEmployeesByTypeStatus("Service Center Staff", "Active");
         request.setAttribute("bookings", bookings);
         request.setAttribute("employees", employees);
 

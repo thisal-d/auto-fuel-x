@@ -1,257 +1,200 @@
-/* edit-vehicle.css - Styles for the vehicle edit form page */
-
-/* Edit vehicle container */
+/* ===== vehicle-update-style2.css ===== */
+/* Edit Vehicle Container */
 .edit-vehicle-container {
+    max-width: 1000px;
+    margin: var(--spacing-xl) auto;
+    padding: 0 var(--spacing-md);
+}
+
+/* Edit Vehicle Content */
+.edit-vehicle-content {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    background-color: var(--bg-primary);
-}
-
-/* Edit vehicle content */
-.edit-vehicle-content {
-    flex: 1;
-    max-width: 800px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 30px 20px;
-}
-
-/* Page header */
-.page-header {
-    margin-bottom: 30px;
-}
-
-.page-title {
-    color: var(--text-primary);
-    font-size: 2rem;
-    font-weight: 600;
-    margin: 0;
-    display: flex;
-    align-items: center;
-}
-
-.page-title::before {
-    content: "";
-    display: inline-block;
-    width: 28px;
-    height: 28px;
-    margin-right: 12px;
-    background-image: url("..."); /* Edit vehicle icon */
-    background-size: contain;
-}
-
-/* Breadcrumb */
-.breadcrumb {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    font-size: 0.9rem;
-}
-
-.breadcrumb-item {
-    color: var(--text-secondary);
-}
-
-.breadcrumb-item:not(:last-child)::after {
-    content: "›";
-    margin: 0 10px;
-    color: var(--text-muted);
-}
-
-.breadcrumb-item a {
-    color: var(--accent-primary);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.breadcrumb-item a:hover {
-    color: var(--accent-hover);
-    text-decoration: underline;
-}
-
-.breadcrumb-item:last-child {
-    color: var(--text-primary);
-    font-weight: 500;
-}
-
-/* Form card */
-.form-card {
-    background-color: var(--bg-secondary);
-    border-radius: 8px;
-    border: 1px solid var(--border-primary);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-tertiary));
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border-color);
     overflow: hidden;
 }
 
-/* Form header */
-.form-header {
-    background-color: var(--bg-tertiary);
-    padding: 20px;
-    border-bottom: 1px solid var(--border-primary);
+/* Page Header */
+.page-header {
+    padding: var(--spacing-xl);
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+    border-bottom: 1px solid var(--border-color);
 }
 
-.form-header h3 {
-    color: var(--text-primary);
-    font-size: 1.2rem;
+.page-title {
+    font-size: 1.75rem;
     font-weight: 600;
+    color: var(--text-primary);
     margin: 0;
     display: flex;
     align-items: center;
+    gap: var(--spacing-md);
+}
+
+.page-title::before {
+    content: "🚗";
+    font-size: 1.5rem;
+}
+
+/* Form Card */
+.form-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-header {
+    padding: var(--spacing-lg) var(--spacing-xl);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.form-header h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
 }
 
 .form-header h3::before {
-    content: "";
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
-    background-image: url("..."); /* Vehicle icon */
-    background-size: contain;
+    content: "✏️";
+    font-size: 1.2rem;
 }
 
-/* Form body */
+/* Form Body */
 .form-body {
-    padding: 30px;
+    flex: 1;
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-/* Form groups */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+}
+
 .form-group {
-    margin-bottom: 20px;
-}
-
-.form-group:last-child {
-    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .form-label {
-    display: block;
-    color: var(--text-secondary);
-    font-weight: 500;
-    margin-bottom: 8px;
-    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .form-input {
-    background-color: var(--input-bg);
-    border: 1px solid var(--input-border);
+    padding: var(--spacing-md);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
     color: var(--text-primary);
-    padding: 12px 15px;
-    border-radius: 4px;
     font-size: 1rem;
-    width: 100%;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 .form-input:focus {
-    border-color: var(--input-focus);
     outline: none;
-    box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25);
+    border-color: var(--accent-red);
+    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.3);
+    background-color: var(--bg-tertiary);
 }
 
-/* Form actions */
+/* Form Actions */
 .form-actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border-secondary);
+    padding: var(--spacing-lg) var(--spacing-xl) 0;
+}
+
+.cancel-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    transition: all 0.3s ease;
+}
+
+.cancel-link:hover {
+    color: var(--accent-red);
+    background-color: rgba(231, 76, 60, 0.1);
 }
 
 .action-buttons {
     display: flex;
-    gap: 15px;
+    gap: var(--spacing-md);
 }
 
 .btn {
-    padding: 10px 20px;
-    border-radius: 4px;
-    font-weight: 500;
-    cursor: pointer;
+    padding: var(--spacing-md) var(--spacing-xl);
     border: none;
-    transition: all 0.2s ease;
-    font-size: 0.95rem;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
 }
 
 .btn-primary {
-    background-color: var(--btn-primary);
+    background: linear-gradient(135deg, var(--accent-red), var(--accent-red-hover));
     color: white;
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
 }
 
 .btn-primary:hover {
-    background-color: var(--accent-hover);
+    background: linear-gradient(135deg, var(--accent-red-hover), #a93226);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(231, 76, 60, 0.4);
 }
 
-.btn-secondary {
-    background-color: transparent;
-    color: var(--text-secondary);
-    border: 1px solid var(--border-primary);
-}
-
-.btn-secondary:hover {
-    background-color: var(--bg-tertiary);
-    color: var(--text-primary);
-}
-
-/* Cancel link */
-.cancel-link {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-    transition: color 0.2s ease;
-}
-
-.cancel-link:hover {
-    color: var(--text-secondary);
-}
-
-.cancel-link::before {
-    content: "";
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-right: 5px;
-    background-image: url("..."); /* Back/Cancel icon */
-    background-size: contain;
-}
-
-/* Form grid */
-.form-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-/* Responsive adjustments */
+/* Responsive Styles */
 @media (max-width: 768px) {
+    .edit-vehicle-container {
+        padding: 0 var(--spacing-sm);
+    }
+
+    .edit-vehicle-content {
+        border-radius: var(--radius-md);
+    }
+
+    .page-header {
+        padding: var(--spacing-lg);
+    }
+
+    .form-body {
+        padding: var(--spacing-lg);
+    }
+
     .form-grid {
         grid-template-columns: 1fr;
+        gap: var(--spacing-md);
     }
 
     .form-actions {
         flex-direction: column;
-        gap: 15px;
+        gap: var(--spacing-md);
+        padding: var(--spacing-lg) 0 0;
     }
 
     .action-buttons {
         width: 100%;
-        justify-content: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .edit-vehicle-content {
-        padding: 20px 15px;
     }
 
-    .page-title {
-        font-size: 1.5rem;
-    }
-
-    .form-body {
-        padding: 20px;
+    .btn {
+        width: 100%;
     }
 }

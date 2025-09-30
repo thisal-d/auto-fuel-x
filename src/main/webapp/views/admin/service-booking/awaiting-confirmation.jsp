@@ -8,6 +8,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.autofuelx.dto.ServiceBookingDTO" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="com.example.autofuelx.model.Employee" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -25,17 +26,16 @@
 
 <table border="1">
     <tr>
-        <th>Booking ID</th>
         <th>Customer</th>
         <th>Vehicle</th>
         <th>Service</th>
-        <th>Date</th>
-        <th>Time</th>
-        <th>Status</th>
+        <th>Date & Time</th>
+        <th>Action</th>
     </tr>
 
     <%
         List<ServiceBookingDTO> bookings = (List<ServiceBookingDTO>) request.getAttribute("bookings");
+        List<Employee> employees = (List<Employee>) request.getAttribute("employees");
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
@@ -47,13 +47,34 @@
                 String formattedTime = booking.getBookingTime().format(timeFormatter);
     %>
     <tr>
-        <td><%= booking.getBookingID() %></td>
         <td><%= customerName %></td>
         <td><%= vehicleInfo %></td>
         <td><%= booking.getServiceType() %></td>
-        <td><%= formattedDate %></td>
-        <td><%= formattedTime %></td>
-        <td><%= booking.getStatus() %></td>
+        <td><%= formattedDate %> - <%= formattedTime %></td>
+        <td>
+            <!-- Approve Form -->
+            <form action="<%= request.getContextPath() %>/admin/service-booking/update-status" method="post" style="display:inline;">
+                <input type="hidden" name="bookingId" value="<%= booking.getBookingID() %>">
+                <input type="hidden" name="status" value="Confirmed">
+                <select name="employeeId">
+                    <%for (Employee e: employees) {
+                        String employeeDetails = e.getFirstName() + " " + e.getLastName() + " - " + e.getSkillSet();
+                    %>
+                        <option value="<%=e.getEmployeeID()%>"><%=employeeDetails%></option>
+                    <%}%>
+                </select>
+                <input type="hidden" name="redirect-url" value="/admin/service-booking/view?status=awaiting-pickup">
+                <button type="submit">Aprove</button>
+            </form>
+
+            <!-- Approve Form -->
+            <form action="<%= request.getContextPath() %>/admin/service-booking/update-status" method="post" style="display:inline;">
+                <input type="hidden" name="bookingId" value="<%= booking.getBookingID() %>">
+                <input type="hidden" name="status" value="Reschedule Required">
+                <input type="hidden" name="redirect-url" value="/admin/service-booking/view?status=awaiting-pickup">
+                <button type="submit">Request Reschedule</button>
+            </form>
+        </td>
     </tr>
     <%
         }

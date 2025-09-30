@@ -16,39 +16,48 @@
 <body>
 
 <div class="login-container">
-    <div class="login-card">
-        <div class="login-header">
+    <div class="login-left">
+        <div class="branding">
             <div class="logo">AFX</div>
-            <h2>Customer Login</h2>
+            <h1>Auto Fuel X</h1>
+            <p>Premium Vehicle Service & Refueling Experience</p>
         </div>
+    </div>
 
-        <form action="<%=request.getContextPath()%>/customer/login" method="post" class="login-form">
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required placeholder="Enter your email">
+    <div class="login-right">
+        <div class="login-card">
+            <div class="login-header">
+                <h2>Customer Login</h2>
             </div>
 
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required placeholder="Enter your password">
+            <form action="<%=request.getContextPath()%>/customer/login" method="post" class="login-form">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required placeholder="Enter your password">
+                </div>
+
+                <button type="submit" class="login-button">Login</button>
+            </form>
+
+            <div class="login-links">
+                <a href="<%=request.getContextPath()%>/index.jsp">Back to Home</a>
+                <a href="<%=request.getContextPath()%>/views/customer/register.jsp">Create Account</a>
             </div>
 
-            <button type="submit" class="login-button">Login</button>
-        </form>
-
-        <div class="login-links">
-            <a href="<%=request.getContextPath()%>/index.jsp">Back to Home</a>
-            <a href="<%=request.getContextPath()%>/views/customer/register.jsp">Create Account</a>
+            <%
+                String error = (String) request.getAttribute("login-error-message");
+                if (error != null) {
+            %>
+            <div class="error-message">
+                <%= error %>
+            </div>
+            <% } %>
         </div>
-
-        <%
-            String error = (String) request.getAttribute("login-error-message");
-            if (error != null) {
-        %>
-        <div class="error-message">
-            <%= error %>
-        </div>
-        <% } %>
     </div>
 </div>
 </body>

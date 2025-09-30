@@ -1,5 +1,6 @@
 package com.example.autofuelx.dao;
 
+import com.example.autofuelx.dto.ComplaintReplyDTO;
 import com.example.autofuelx.model.Complaint;
 import com.example.autofuelx.util.DatabaseConnection;
 
@@ -72,12 +73,61 @@ public class ComplaintDAO {
         return null;
     }
 
-    /*
-    public ComplaintDTO getComplaintDTOByCustomerID(int customerId) {
+    public ComplaintReplyDTO getComplaintReplyDTOByComplaintID(int ComplaintID) {
         String sql = "SELECT c.title AS complaintTitle, c.description AS complaintDescription, c.status, " +
-                "c.createdDate, c.createdTime, c.updatedDate, c.updateTime, " +
+                "c.createdDate, c.createdTime, c.updatedDate, c.updateTime, c.ComplaintID, " +
                 "e.FirstName + ' ' + e.LastName AS repliedEmployeeName, e.Type AS repliedEmployeeType, " +
-                "rc.title AS replyTitle, rc.description AS replyDescription, " +
+                "rc.ReplyComplaintID , rc.Status AS replyStatus ,rc.title AS replyTitle,  rc.description AS replyDescription, " +
+                "rc.createdDate AS replyCreatedDate, rc.createdTime AS replyCreatedTime, " +
+                "rc.updatedDate AS replyUpdatedDate, rc.updateTime AS replyUpdateTime " +
+                "FROM Complaint c " +
+                "LEFT JOIN ReplyComplaint rc ON c.complaintID = rc.complaintID " +
+                "LEFT JOIN Employee e ON rc.staffID = e.EmployeeID " +
+                "WHERE c.ComplaintID = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, ComplaintID);
+
+            ComplaintReplyDTO complaintReplyDTO = new ComplaintReplyDTO();
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    // Complaint details
+                    complaintReplyDTO.setComplaintID(rs.getInt("ComplaintID"));
+                    complaintReplyDTO.setTitle(rs.getString("complaintTitle"));
+                    complaintReplyDTO.setDescription(rs.getString("complaintDescription"));
+                    complaintReplyDTO.setStatus(rs.getString("status"));
+                    complaintReplyDTO.setCreatedDate(rs.getDate("createdDate"));
+                    complaintReplyDTO.setCreatedTime(rs.getTime("createdTime"));
+                    complaintReplyDTO.setUpdatedDate(rs.getDate("updatedDate"));
+                    complaintReplyDTO.setUpdateTime(rs.getTime("updateTime"));
+
+                    // Reply details
+                    complaintReplyDTO.setReplyComplaintID((Integer) rs.getObject("ReplyComplaintID"));
+                    complaintReplyDTO.setRepliedEmployeeName(rs.getString("repliedEmployeeName"));
+                    complaintReplyDTO.setRepliedEmployeeType(rs.getString("repliedEmployeeType"));
+                    complaintReplyDTO.setReplyTitle(rs.getString("replyTitle"));
+                    complaintReplyDTO.setReplyDescription(rs.getString("replyDescription"));
+                    complaintReplyDTO.setReplyStatus(rs.getString("replyStatus"));
+                    complaintReplyDTO.setReplyCreatedDate(rs.getDate("replyCreatedDate"));
+                    complaintReplyDTO.setReplyCreatedTime(rs.getTime("replyCreatedTime"));
+                    complaintReplyDTO.setReplyUpdatedDate(rs.getDate("replyUpdatedDate"));
+                    complaintReplyDTO.setReplyUpdateTime(rs.getTime("replyUpdateTime"));
+                }
+                return complaintReplyDTO;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<ComplaintReplyDTO> getComplaintReplyDTOsByCustomerID(int customerId) {
+        String sql = "SELECT c.title AS complaintTitle, c.description AS complaintDescription, c.status, " +
+                "c.createdDate, c.createdTime, c.updatedDate, c.updateTime, c.ComplaintID, " +
+                "e.FirstName + ' ' + e.LastName AS repliedEmployeeName, e.Type AS repliedEmployeeType, " +
+                "rc.ReplyComplaintID , rc.Status AS replyStatus ,rc.title AS replyTitle,  rc.description AS replyDescription, " +
                 "rc.createdDate AS replyCreatedDate, rc.createdTime AS replyCreatedTime, " +
                 "rc.updatedDate AS replyUpdatedDate, rc.updateTime AS replyUpdateTime " +
                 "FROM Complaint c " +
@@ -89,38 +139,43 @@ public class ComplaintDAO {
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, customerId);
-            
-            ComplaintDTO complaintDTO = new ComplaintDTO();
+
+            List<ComplaintReplyDTO> complaintReplyDTOs = new ArrayList<>();
             try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
+                while (rs.next()) {
+                    ComplaintReplyDTO complaintReplyDTO = new ComplaintReplyDTO();
 
                     // Complaint details
-                    complaintDTO.setTitle(rs.getString("complaintTitle"));
-                    complaintDTO.setDescription(rs.getString("complaintDescription"));
-                    complaintDTO.setStatus(rs.getString("status"));
-                    complaintDTO.setCreatedDate(rs.getDate("createdDate"));
-                    complaintDTO.setCreatedTime(rs.getTime("createdTime"));
-                    complaintDTO.setUpdatedDate(rs.getDate("updatedDate"));
-                    complaintDTO.setUpdateTime(rs.getTime("updateTime"));
+                    complaintReplyDTO.setComplaintID(rs.getInt("ComplaintID"));
+                    complaintReplyDTO.setTitle(rs.getString("complaintTitle"));
+                    complaintReplyDTO.setDescription(rs.getString("complaintDescription"));
+                    complaintReplyDTO.setStatus(rs.getString("status"));
+                    complaintReplyDTO.setCreatedDate(rs.getDate("createdDate"));
+                    complaintReplyDTO.setCreatedTime(rs.getTime("createdTime"));
+                    complaintReplyDTO.setUpdatedDate(rs.getDate("updatedDate"));
+                    complaintReplyDTO.setUpdateTime(rs.getTime("updateTime"));
 
                     // Reply details
-                    complaintDTO.setRepliedEmployeeName(rs.getString("repliedEmployeeName"));
-                    complaintDTO.setRepliedEmployeeType(rs.getString("repliedEmployeeType"));
-                    complaintDTO.setReplyTitle(rs.getString("replyTitle"));
-                    complaintDTO.setReplyDescription(rs.getString("replyDescription"));
-                    complaintDTO.setReplyCreatedDate(rs.getDate("replyCreatedDate"));
-                    complaintDTO.setReplyCreatedTime(rs.getTime("replyCreatedTime"));
-                    complaintDTO.setReplyUpdatedDate(rs.getDate("replyUpdatedDate"));
-                    complaintDTO.setReplyUpdateTime(rs.getTime("replyUpdateTime"));
+                    complaintReplyDTO.setReplyComplaintID((Integer) rs.getObject("ReplyComplaintID"));
+                    complaintReplyDTO.setRepliedEmployeeName(rs.getString("repliedEmployeeName"));
+                    complaintReplyDTO.setRepliedEmployeeType(rs.getString("repliedEmployeeType"));
+                    complaintReplyDTO.setReplyTitle(rs.getString("replyTitle"));
+                    complaintReplyDTO.setReplyDescription(rs.getString("replyDescription"));
+                    complaintReplyDTO.setReplyStatus(rs.getString("replyStatus"));
+                    complaintReplyDTO.setReplyCreatedDate(rs.getDate("replyCreatedDate"));
+                    complaintReplyDTO.setReplyCreatedTime(rs.getTime("replyCreatedTime"));
+                    complaintReplyDTO.setReplyUpdatedDate(rs.getDate("replyUpdatedDate"));
+                    complaintReplyDTO.setReplyUpdateTime(rs.getTime("replyUpdateTime"));
+
+                    complaintReplyDTOs.add(complaintReplyDTO);
                 }
-                return complaintDTO;
+                return complaintReplyDTOs;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return null; // Return empty list instead of null
     }
-    */
 
     // Update complaint
     public boolean updateComplaint(Complaint complaint) {

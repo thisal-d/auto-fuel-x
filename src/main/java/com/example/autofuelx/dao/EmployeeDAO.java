@@ -150,6 +150,29 @@ public class EmployeeDAO {
         return employees;
     }
 
+    public List<Employee> getEmployeesByTypeStatus(String type, String status) {
+        List<Employee> employees = new ArrayList<>();
+        String query = "SELECT * FROM Employee WHERE Type = ? AND Status = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, type);
+            stmt.setString(2, status);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Employee employee = extractEmployeeFromResultSet(rs);
+                    employees.add(employee);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return employees;
+    }
+
     public List<Employee> getFilteredEmployees(String type, String status,
                                                Date hireDateFrom, Date hireDateTo,
                                                Double minSalary, Double maxSalary,

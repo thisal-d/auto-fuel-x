@@ -1,0 +1,99 @@
+/* ===== bookingConfirmation-minimalist.css ===== */
+
+/* Main Container */
+.confirmation-container {
+    max-width: 700px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+}
+
+/* Confirmation Card */
+.confirmation-card {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    padding: 2.5rem;
+    border: 1px solid var(--border-color);
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Success Icon */
+.success-icon {
+    font-size: 4rem;
+    color: var(--success);
+    margin-bottom: 1.5rem;
+}
+
+/* Confirmation Header */
+.confirmation-header {
+    margin-bottom: 2rem;
+}
+
+.confirmation-header h1 {
+    color: var(--accent-red);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    position: relative;
+    display: inline-block;
+}
+
+.confirmation-header h1::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background: var(--accent-red);
+}
+
+/* Confirmation Message */
+.confirmation-message {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+}
+
+/* Confirmation Actions */
+.confirmation-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* Confirmation Button */
+.btn-confirmation {
+    background: var(--bg-primary);
+    color: var(--accent-red);
+    border: 2px solid var(--accent-red);
+    padding: 0.75rem 2rem;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-confirmation:hover {
+    background: var(--accent-red);
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .confirmation-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .confirmation-header h1 {
+        font-size: 1.7rem;
+    }
+}

@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
-    <title>Customer Registration - Auto Fuel X</title>
+    <title>Customer Header - Auto Fuel X</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/base.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/customer/header.css">
 </head>
@@ -56,7 +56,7 @@
             <div class="nav-section">
                 <div class="nav-section-title">Complaints</div>
                 <div class="nav-links">
-                    <a href="<%=request.getContextPath()%>/views/customer/complaint/create.jsp">Create Complaint</a>
+                    <a href="<%=request.getContextPath()%>/views/customer/complaint/form.jsp">Create Complaint</a>
                     <a href="<%=request.getContextPath()%>/customer/complaint/list">My Complaints</a>
                 </div>
             </div>
@@ -64,13 +64,16 @@
             <div class="nav-section">
                 <div class="nav-section-title">Feedbacks</div>
                 <div class="nav-links">
-                    <a href="<%=request.getContextPath()%>/views/customer/complaint/create.jsp">Give Feedbacks</a>
+                    <a href="<%=request.getContextPath()%>/views/customer/complaint/form.jsp">Give Feedbacks</a>
                     <a href="<%=request.getContextPath()%>/customer/complaint/list">My Feedbacks</a>
                 </div>
             </div>
 
-            <div class="nav-section">
-                <a href="<%=request.getContextPath()%>/customer/logout" class="logout-link">Logout</a>
+            <div class="nav-section nav-section-logout">
+                <div class="nav-section-title">Account</div>
+                <div class="nav-links">
+                    <a href="<%=request.getContextPath()%>/customer/logout" class="logout-link">Logout</a>
+                </div>
             </div>
         </nav>
     </div>

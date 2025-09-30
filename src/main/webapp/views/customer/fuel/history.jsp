@@ -14,13 +14,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Fuel Payment History</title>
+    <title>Fuel Payment History - Vehicle Service & Refuel Center</title>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/base.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/customer/fuel/history.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/customer/fuel/fuelPaymentHistory-simple-style.css">
 </head>
 <body>
 
 <jsp:include page="/views/customer/header.jsp"/>
-
-<h1>Fuel Payment History</h1>
 
 <%
     List<FuelPurchaseDetailDTO> fuelUsageDetails = (List<FuelPurchaseDetailDTO>) request.getAttribute("fuel-usage-details");
@@ -40,78 +41,125 @@
     if (!(fuelTypeFilterSelectedStr == null || "all".equals(fuelTypeFilterSelectedStr))) fuelTypeFilterSelected = Integer.parseInt(fuelTypeFilterSelectedStr);
     else fuelTypeFilterSelected = 0;
 %>
+<div class="history-container">
+    <div class="page-header">
+        <h1 class="page-title">Fuel Payment History</h1>
+    </div>
 
+    <div class="filter-section">
+        <form method="get" action="<%= request.getContextPath() %>/customer/fuel/history" class="filter-form">
+            <div class="filter-group">
+                <label for="duration-date-start-filter">From Date:</label>
+                <input type="date" id="duration-date-start-filter" name="duration-date-start-filter" value="<%= request.getParameter("duration-date-start-filter") != null ? request.getParameter("duration-date-start-filter") : "" %>">
+            </div>
 
-<form method="get" action="<%= request.getContextPath() %>/customer/fuel/history">
-    <label for="duration-date-start-filter">From:</label>
-    <input type="date" id="duration-date-start-filter" name="duration-date-start-filter" value="<%=durationDateStartFilterSelected%>">
-    <label for="duration-date-end-filter">To:</label>
-    <input type="date" id="duration-date-end-filter" name="duration-date-end-filter" value="<%=durationDateEndFilterSelected%>">
+            <div class="filter-group">
+                <label for="duration-date-end-filter">To Date:</label>
+                <input type="date" id="duration-date-end-filter" name="duration-date-end-filter" value="<%= request.getParameter("duration-date-end-filter") != null ? request.getParameter("duration-date-end-filter") : "" %>">
+            </div>
 
-    <label for="vehicle-type-filter">Vehicle Type:</label>
-    <select name="vehicle-type-filter" id="vehicle-type-filter">
-        <option value="all" <%=("all".equals(vehicleTypeFilterSelected))? "selected" : ""%>>All</option>
-        <%for (String vehicleType: vehicleTypes){%>
-            <option value="<%= vehicleType %>" <%=(vehicleType.equals(vehicleTypeFilterSelected))? "selected" : ""%> > <%= vehicleType %></option>
-        <%}%>
-    </select>
+            <div class="filter-group">
+                <label for="vehicle-type-filter">Vehicle Type:</label>
+                <select name="vehicle-type-filter" id="vehicle-type-filter">
+                    <option value="all">All</option>
+                    <%for (String vehicleType: vehicleTypes){%>
+                    <option value="<%= vehicleType %>" <%= vehicleType.equals(request.getParameter("vehicle-type-filter")) ? "selected" : "" %>><%= vehicleType %></option>
+                    <%}%>
+                </select>
+            </div>
 
-    <label for="vehicle-filter">Vehicle :</label>
-    <select name="vehicle-filter" id="vehicle-filter">
-        <option value="all" <%=("all".equals(vehicleFilterSelectedStr))? "selected" : ""%>>All</option>
-        <%for (Vehicle vehicle: vehicles){%>
-            <option value="<%= vehicle.getVehicleID()%>" <%=(vehicle.getVehicleID() == vehicleFilterSelected)? "selected" : ""%> ><%= vehicle.getModel() %> - <%= vehicle.getPlateNumber() %></option>
-        <%}%>
-    </select>
+            <div class="filter-group">
+                <label for="vehicle-filter">Vehicle:</label>
+                <select name="vehicle-filter" id="vehicle-filter">
+                    <option value="all">All</option>
+                    <%for (Vehicle vehicle: vehicles){%>
+                    <option value="<%= vehicle.getVehicleID()%>" <%= String.valueOf(vehicle.getVehicleID()).equals(request.getParameter("vehicle-filter")) ? "selected" : "" %>><%= vehicle.getModel() %> - <%= vehicle.getPlateNumber() %></option>
+                    <%}%>
+                </select>
+            </div>
 
-    <label for="fuel-type-filter">Fuel Type :</label>
-    <select name="fuel-type-filter" id="fuel-type-filter">
-        <option value="all" <%=("all".equals(fuelTypeFilterSelectedStr))? "selected" : ""%>>All</option>
-        <%for (Fuel fuel: fuels){%>
-        <option value="<%= fuel.getFuelID() %>" <%=(fuel.getFuelID() == fuelTypeFilterSelected)? "selected" : ""%> ><%= fuel.getType() %></option>
-        <%}%>
-    </select>
+            <div class="filter-group">
+                <label for="fuel-type-filter">Fuel Type:</label>
+                <select name="fuel-type-filter" id="fuel-type-filter">
+                    <option value="all">All</option>
+                    <%for (Fuel fuel: fuels){%>
+                    <option value="<%= fuel.getFuelID() %>" <%= String.valueOf(fuel.getFuelID()).equals(request.getParameter("fuel-type-filter")) ? "selected" : "" %>><%= fuel.getType() %></option>
+                    <%}%>
+                </select>
+            </div>
 
-    <button type="submit">Apply</button>
-</form>
+            <div class="filter-actions">
+                <button type="submit" class="btn-filter">Apply</button>
+                <button type="reset" class="btn-clear">Clear</button>
+            </div>
+        </form>
+    </div>
 
+    <div class="results-section">
+        <div class="results-header">
+            <h2 class="results-title">Fuel Purchase Records</h2>
+            <div class="results-count">
+                <% if (fuelUsageDetails != null && !fuelUsageDetails.isEmpty()) { %>
+                <%= fuelUsageDetails.size() %> records found
+                <% } %>
+            </div>
+        </div>
 
-<%
-    if (fuelUsageDetails != null && !fuelUsageDetails.isEmpty()) {
-%>
-<table border="1">
-    <tr>
-        <th>Transaction ID</th>
-        <th>Date & Time</th>
-        <th>Vehicle</th>
-        <th>Fuel Type</th>
-        <th>Quantity (Liters)</th>
-        <th>Total Cost ($)</th>
-    </tr>
-    <%
-        for (FuelPurchaseDetailDTO detail : fuelUsageDetails) {
-            // Check if purchaseDateTime is null before formatting
+        <% if (fuelUsageDetails != null && !fuelUsageDetails.isEmpty()) { %>
+        <div class="table-container">
+            <table class="history-table">
+                <thead>
+                <tr>
+                    <th>Transaction ID</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Vehicle</th>
+                    <th>Fuel Type</th>
+                    <th>Quantity (L)</th>
+                    <th>Total Cost</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%
+                    for (FuelPurchaseDetailDTO detail : fuelUsageDetails) {
+                %>
+                <tr>
+                    <td><%= detail.getFuelPurchaseID() %></td>
+                    <td><%= detail.getPurchaseDate() %></td>
+                    <td><%= detail.getPurchaseTime() %></td>
+                    <td><%= detail.getVehiclePlate() != null ? detail.getVehiclePlate() : "" %> - <%= detail.getVehicleModel() != null ? detail.getVehicleModel() : "" %></td>
+                    <td><%= detail.getFuelType() != null ? detail.getFuelType() : "" %></td>
+                    <td><%= detail.getQuantity() %></td>
+                    <td class="cost-display">Rs. <%= detail.getTotalCost() %></td>
+                </tr>
+                <%
+                    }
+                %>
+                </tbody>
+            </table>
+        </div>
+        <% } else { %>
+        <div class="no-results">
+            <div class="no-results-icon">⛽</div>
+            <p>No fuel purchase records found.</p>
+        </div>
+        <% } %>
+    </div>
+</div>
 
-    %>
-    <tr>
-        <td><%= detail.getFuelPurchaseID() %></td>
-        <td><%= detail.getPurchaseDate() %></td>
-        <td><%= detail.getPurchaseTime() %></td>
-        <td><%= detail.getVehiclePlate() != null ? detail.getVehiclePlate() : "" %> - <%= detail.getVehicleModel() != null ? detail.getVehicleModel() : "" %></td>
-        <td><%= detail.getFuelType() != null ? detail.getFuelType() : "" %></td>
-        <td><%= detail.getQuantity() %> L</td>
-        <td>Rs. <%= detail.getTotalCost() %></td>
-    </tr>
-    <%
-        }
-    %>
-</table>
-<%
-} else {
-%>
-<p>No fuel purchase records found.</p>
-<%
-    }
-%>
+<script>
+    // Clear button functionality
+    document.querySelector('.btn-clear').addEventListener('click', function() {
+        // Reset all form fields
+        document.getElementById('duration-date-start-filter').value = '';
+        document.getElementById('duration-date-end-filter').value = '';
+        document.getElementById('vehicle-type-filter').value = 'all';
+        document.getElementById('vehicle-filter').value = 'all';
+        document.getElementById('fuel-type-filter').value = 'all';
+
+        // Submit the form to reset the filters
+        document.querySelector('.filter-form').submit();
+    });
+</script>
 </body>
 </html>

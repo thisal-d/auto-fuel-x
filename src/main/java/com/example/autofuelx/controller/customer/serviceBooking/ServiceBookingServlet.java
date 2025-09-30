@@ -1,5 +1,6 @@
 package com.example.autofuelx.controller.customer.serviceBooking;
 
+import com.example.autofuelx.dto.ServiceBookingDTO;
 import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.model.ServiceBooking;
 import com.example.autofuelx.service.ServiceBookingService;

@@ -1,0 +1,218 @@
+.edit-customer-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.edit-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.edit-header h1 {
+    font-size: 2rem;
+    color: var(--accent-red);
+    margin-bottom: 0.5rem;
+}
+
+.edit-form-card {
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-tertiary));
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.edit-form-header {
+    background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-card));
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.edit-form-header h3 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin: 0;
+    text-align: center;
+}
+
+.edit-form-body {
+    padding: 2rem;
+}
+
+.edit-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 2rem;
+}
+
+.edit-table tr {
+    background-color: transparent;
+}
+
+.edit-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.edit-table td:first-child {
+    font-weight: 600;
+    color: var(--text-primary);
+    width: 30%;
+}
+
+.edit-table td:last-child {
+    width: 70%;
+}
+
+.edit-input {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.edit-input:focus {
+    outline: none;
+    border-color: var(--accent-red);
+    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.3);
+    background-color: var(--bg-tertiary);
+}
+
+.edit-form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.edit-cancel-link {
+    color: var(--text-secondary);
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-md);
+    transition: all 0.3s ease;
+}
+
+.edit-cancel-link:hover {
+    color: var(--accent-red);
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
+.edit-action-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.phone-numbers-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.phone-numbers-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.phone-numbers-title::before {
+    content: '📱';
+    margin-right: 0.5rem;
+}
+
+.phone-form {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.phone-input {
+    flex: 1;
+    padding: 0.75rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.phone-input:focus {
+    outline: none;
+    border-color: var(--accent-red);
+    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.3);
+    background-color: var(--bg-tertiary);
+}
+
+.phone-input[readonly] {
+    background-color: var(--bg-tertiary);
+    color: var(--text-dim);
+}
+
+.add-phone-form {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .edit-table {
+        display: block;
+    }
+
+    .edit-table tr {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 1rem;
+    }
+
+    .edit-table td {
+        border: none;
+        padding: 0.5rem 0;
+    }
+
+    .edit-table td:first-child {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .edit-table td:last-child {
+        width: 100%;
+    }
+
+    .edit-form-actions {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .edit-action-buttons {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .phone-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .add-phone-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

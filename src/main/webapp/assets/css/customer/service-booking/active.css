@@ -1,0 +1,208 @@
+/* ===== active.css fixed ===== */
+
+/* Page Header */
+.page-header {
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.page-header h1 {
+    font-size: 2rem;
+    color: var(--accent-red);
+    text-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
+}
+
+/* Card Container */
+.booking-cards-container {
+    display: grid;
+    gap: var(--spacing-lg);
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    align-items: stretch; /* Fix stretching bug */
+}
+
+/* Booking Card */
+.booking-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    min-height: 0; /* Fix overflow bug */
+}
+
+.booking-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+.booking-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.booking-id {
+    font-weight: 600;
+    color: var(--accent-red);
+}
+
+/* Card Content */
+.booking-card-content {
+    margin-bottom: var(--spacing-md);
+    flex-grow: 1; /* push actions to bottom */
+    display: flex;
+    flex-direction: column;
+}
+
+.booking-detail {
+    margin-bottom: var(--spacing-sm);
+}
+
+.booking-detail-label {
+    font-weight: 600;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+}
+
+.booking-detail-value {
+    color: var(--text-primary);
+}
+
+/* Status Badge */
+.status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Status colors unchanged */
+.status-pending,
+.status-awaiting-confirmation {
+    background: var(--pending);
+    color: white;
+}
+
+.status-confirmed {
+    background: var(--success);
+    color: white;
+}
+
+.status-reschedule-required {
+    background: var(--warning);
+    color: #000;
+}
+
+.status-completed {
+    background: var(--success);
+    color: white;
+}
+
+.status-in-progress {
+    background: var(--accent-blue);
+    color: white;
+}
+
+.status-cancelled,
+.status-missed-appointment {
+    background: var(--danger);
+    color: white;
+}
+
+/* Cost Display */
+.cost-display {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--accent-red);
+    margin-top: var(--spacing-sm);
+    text-align: right;
+}
+
+.cost-display.empty {
+    color: var(--text-dim);
+    font-weight: normal;
+}
+
+/* Card Actions */
+.booking-card-actions {
+    margin-top: auto;
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.action-form {
+    margin-bottom: var(--spacing-sm);
+}
+
+.action-form:last-child {
+    margin-bottom: 0;
+}
+
+.action-form-row {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.action-form-row input[type="date"],
+.action-form-row input[type="time"] {
+    flex: 1;
+    padding: 0.5rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+}
+
+.action-form input[type="submit"] {
+    width: 100%;
+    padding: 0.5rem;
+    background: var(--accent-red);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.action-form input[type="submit"]:hover {
+    background-color: var(--accent-red-hover);
+}
+
+.cancel-btn {
+    background: var(--danger) !important;
+}
+
+.cancel-btn:hover {
+    background-color: #c0392b !important;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-xl);
+    color: var(--text-secondary);
+    font-style: italic;
+    grid-column: 1 / -1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .booking-cards-container {
+        grid-template-columns: 1fr;
+    }
+}

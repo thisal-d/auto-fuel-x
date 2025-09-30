@@ -1,235 +1,103 @@
-/* add-vehicle.css - Styles for the vehicle add form page */
+/* ===== add-vehicle-style1.css ===== */
+/* Classic Form Layout with Card Design */
 
-/* Add vehicle container */
 .add-vehicle-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background-color: var(--bg-primary);
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
 }
 
-/* Add vehicle content */
-.add-vehicle-content {
-    flex: 1;
-    max-width: 800px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 30px 20px;
-}
-
-/* Page header */
-.page-header {
-    margin-bottom: 30px;
-}
-
-.page-title {
-    color: var(--text-primary);
-    font-size: 2rem;
-    font-weight: 600;
-    margin: 0;
-    display: flex;
-    align-items: center;
-}
-
-.page-title::before {
-    content: "";
-    display: inline-block;
-    width: 28px;
-    height: 28px;
-    margin-right: 12px;
-    background-image: url("..."); /* Add vehicle icon */
-    background-size: contain;
-}
-
-/* Breadcrumb */
-.breadcrumb {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    font-size: 0.9rem;
-}
-
-.breadcrumb-item {
-    color: var(--text-secondary);
-}
-
-.breadcrumb-item:not(:last-child)::after {
-    content: "›";
-    margin: 0 10px;
-    color: var(--text-muted);
-}
-
-.breadcrumb-item a {
-    color: var(--accent-primary);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.breadcrumb-item a:hover {
-    color: var(--accent-hover);
-    text-decoration: underline;
-}
-
-.breadcrumb-item:last-child {
-    color: var(--text-primary);
-    font-weight: 500;
-}
-
-/* Form card */
 .form-card {
-    background-color: var(--bg-secondary);
-    border-radius: 8px;
-    border: 1px solid var(--border-primary);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-tertiary));
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--border-color);
     overflow: hidden;
 }
 
-/* Form header */
 .form-header {
-    background-color: var(--bg-tertiary);
-    padding: 20px;
-    border-bottom: 1px solid var(--border-primary);
+    background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-card));
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .form-header h3 {
-    color: var(--text-primary);
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--accent-red);
     margin: 0;
-    display: flex;
-    align-items: center;
+    text-align: center;
 }
 
-.form-header h3::before {
-    content: "";
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
-    background-image: url("..."); /* Vehicle icon */
-    background-size: contain;
-}
-
-/* Form body */
 .form-body {
-    padding: 30px;
+    padding: 2rem;
 }
 
-/* Form groups */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
 .form-group {
-    margin-bottom: 20px;
-}
-
-.form-group:last-child {
-    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .form-label {
-    display: block;
-    color: var(--text-secondary);
-    font-weight: 500;
-    margin-bottom: 8px;
-    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
 }
 
 .form-input {
-    background-color: var(--input-bg);
-    border: 1px solid var(--input-border);
+    padding: 0.75rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
     color: var(--text-primary);
-    padding: 12px 15px;
-    border-radius: 4px;
     font-size: 1rem;
-    width: 100%;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 .form-input:focus {
-    border-color: var(--input-focus);
     outline: none;
-    box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25);
+    border-color: var(--accent-red);
+    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.3);
+    background-color: var(--bg-tertiary);
 }
 
-/* Form actions */
+.help-text {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-top: 0.25rem;
+}
+
 .form-actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border-secondary);
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.cancel-link {
+    color: var(--text-secondary);
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-md);
+    transition: all 0.3s ease;
+}
+
+.cancel-link:hover {
+    color: var(--accent-red);
+    background-color: rgba(231, 76, 60, 0.1);
 }
 
 .action-buttons {
     display: flex;
-    gap: 15px;
-}
-
-.btn {
-    padding: 10px 20px;
-    border-radius: 4px;
-    font-weight: 500;
-    cursor: pointer;
-    border: none;
-    transition: all 0.2s ease;
-    font-size: 0.95rem;
-}
-
-.btn-primary {
-    background-color: var(--btn-primary);
-    color: white;
-}
-
-.btn-primary:hover {
-    background-color: var(--accent-hover);
-}
-
-.btn-secondary {
-    background-color: transparent;
-    color: var(--text-secondary);
-    border: 1px solid var(--border-primary);
-}
-
-.btn-secondary:hover {
-    background-color: var(--bg-tertiary);
-    color: var(--text-primary);
-}
-
-/* Cancel link */
-.cancel-link {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-    transition: color 0.2s ease;
-}
-
-.cancel-link:hover {
-    color: var(--text-secondary);
-}
-
-.cancel-link::before {
-    content: "";
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-right: 5px;
-    background-image: url("..."); /* Back/Cancel icon */
-    background-size: contain;
-}
-
-/* Form grid */
-.form-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-/* Help text */
-.help-text {
-    color: var(--text-muted);
-    font-size: 0.85rem;
-    margin-top: 5px;
+    gap: 1rem;
 }
 
 /* Responsive adjustments */
@@ -240,25 +108,11 @@
 
     .form-actions {
         flex-direction: column;
-        gap: 15px;
+        gap: 1rem;
     }
 
     .action-buttons {
         width: 100%;
         justify-content: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .add-vehicle-content {
-        padding: 20px 15px;
-    }
-
-    .page-title {
-        font-size: 1.5rem;
-    }
-
-    .form-body {
-        padding: 20px;
     }
 }

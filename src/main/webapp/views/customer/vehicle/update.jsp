@@ -30,15 +30,13 @@
 <head>
     <title>Edit Vehicle - Auto Fuel X</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/base.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/customer/vehicles/update.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/customer/vehicle/update.css">
 </head>
 <body>
 
 <jsp:include page="/views/customer/header.jsp" />
 
 <div class="edit-vehicle-container">
-    <!-- Include customer header -->
-
     <div class="edit-vehicle-content">
         <div class="page-header">
             <h2 class="page-title">Edit Vehicle</h2>

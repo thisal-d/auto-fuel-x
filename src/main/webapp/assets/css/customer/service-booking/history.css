@@ -1,0 +1,253 @@
+/* ===== bookingHistory-simple-style.css ===== */
+
+/* Page Header */
+.page-header {
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.page-header h1 {
+    font-size: 2rem;
+    color: var(--accent-red);
+    text-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
+}
+
+/* Filter Section */
+.filter-section {
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border-color);
+}
+
+.filter-form {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--spacing-md);
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-group label {
+    font-weight: 600;
+    color: var(--text-dim);
+    margin-bottom: var(--spacing-xs);
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.filter-group input,
+.filter-group select {
+    padding: var(--spacing-sm);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    width: 100%;
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+    outline: none;
+    border-color: var(--accent-red);
+    background-color: var(--bg-tertiary);
+}
+
+.filter-button {
+    grid-column: 3 / 5; /* Center the button */
+    justify-self: center;
+    margin-top: var(--spacing-md);
+}
+
+.filter-button button {
+    width: 100%;
+    padding: var(--spacing-sm);
+    background: var(--accent-red);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.filter-button button:hover {
+    background-color: var(--accent-red-hover);
+}
+
+/* Table Styles */
+.table-container {
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border-color);
+}
+
+.booking-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.booking-table th {
+    background: var(--bg-secondary);
+    padding: var(--spacing-md);
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.booking-table td {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.booking-table tr:last-child td {
+    border-bottom: none;
+}
+
+.booking-table tr:hover td {
+    background-color: rgba(231, 76, 60, 0.05);
+}
+
+.filter-actions {
+    grid-column: 2 / 4; /* Center the buttons */
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.filter-actions button {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.btn-clear {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-clear:hover {
+    background: var(--bg-secondary);
+}
+
+.btn-filter {
+    background: var(--accent-red);
+    color: white;
+}
+
+.btn-filter:hover {
+    background-color: var(--accent-red-hover);
+}
+
+/* Status Badge */
+.status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.btn-clear {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+
+.status-awaiting-confirmation {
+    background: var(--pending);
+    color: white;
+}
+
+.status-confirmed {
+    background: var(--success);
+    color: white;
+}
+
+.status-reschedule-required {
+    background: var(--warning);
+    color: #000000;
+}
+
+.status-completed {
+    background: var(--success);
+    color: white;
+}
+
+.status-in-progress {
+    background: var(--accent-blue);
+    color: white;
+}
+
+.status-cancelled {
+    background: var(--danger);
+    color: white;
+}
+
+.status-missed-appointment {
+    background: var(--danger);
+    color: white;
+}
+
+/* Cost Display */
+.cost-display {
+    font-weight: 600;
+    color: var(--accent-red);
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-xl);
+    color: var(--text-secondary);
+    font-style: italic;
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border-color);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .filter-form {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .filter-button {
+        grid-column: 2 / 4; /* Center the button */
+    }
+}
+
+@media (max-width: 768px) {
+    .filter-form {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .filter-button {
+        grid-column: 1 / 3; /* Full width button */
+    }
+
+    .table-container {
+        overflow-x: auto;
+    }
+}

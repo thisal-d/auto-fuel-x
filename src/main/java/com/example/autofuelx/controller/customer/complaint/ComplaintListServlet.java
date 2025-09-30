@@ -1,5 +1,6 @@
 package com.example.autofuelx.controller.customer.complaint;
 
+import com.example.autofuelx.dto.ComplaintReplyDTO;
 import com.example.autofuelx.model.Complaint;
 import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.service.ComplaintService;
@@ -29,7 +30,7 @@ public class ComplaintListServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Customer customer = (Customer) session.getAttribute("customer");
 
-        List<Complaint> complaints = complaintService.getComplaintsByCustomerID(customer.getCustomerID());
+        List<ComplaintReplyDTO> complaints = complaintService.getComplaintsWithReplyByCustomerId(customer.getCustomerID());
 
         request.setAttribute("complaints", complaints);
         request.getRequestDispatcher("/views/customer/complaint/list.jsp").forward(request, response);

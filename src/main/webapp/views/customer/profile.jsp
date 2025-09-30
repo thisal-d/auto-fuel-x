@@ -3,18 +3,20 @@
   User: KHThi
   Date: 9/18/2025
   Time: 5:35 PM
-  To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.autofuelx.model.Customer" %>
+<%@ page import="java.util.List" %>
 <%
     Customer customer = (Customer) session.getAttribute("customer");
     if (customer == null) {
-        response.sendRedirect("login.jsp"); // redirect if not logged in
+        response.sendRedirect("login.jsp");
         return;
     }
 
-    // Get initials for avatar
+    List<String> phoneNumbers = (List<String>) session.getAttribute("phone-numbers");
+
+    // initials for avatar
     String initials = "";
     if (customer.getFirstName() != null && !customer.getFirstName().isEmpty() &&
             customer.getLastName() != null && !customer.getLastName().isEmpty()) {
@@ -61,6 +63,28 @@
                         <div class="address-value">
                             <%= customer.getAddressNo() %>, <%= customer.getAddressLane() %>, <%= customer.getAddressArea() %>
                         </div>
+                    </div>
+
+                    <!-- Phone Numbers Section -->
+                    <div class="phone-section">
+                        <div class="phone-title">Phone Numbers</div>
+                        <ul>
+                            <%
+                                if (phoneNumbers != null && !phoneNumbers.isEmpty()) {
+                                    for (String num : phoneNumbers) {
+                            %>
+                            <li>
+                                <%= num %>
+                            </li>
+                            <%
+                                }
+                            } else {
+                            %>
+                            <li>No phone numbers added.</li>
+                            <%
+                                }
+                            %>
+                        </ul>
                     </div>
                 </div>
             </div>
