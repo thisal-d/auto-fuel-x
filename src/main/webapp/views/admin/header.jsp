@@ -28,7 +28,7 @@
                 <div class="nav-section-title">Services 🔧</div>
                 <div class="nav-links">
                     <a href="<%= request.getContextPath() %>/admin/service-booking/dashboard">Service Booking Dashboard</a>
-                    <a href="<%= request.getContextPath() %>/admin/service-booking/view/awaiting-confirmation">Manage Requests</a>
+                    <a href="<%= request.getContextPath() %>/admin/service-booking/view?status=awaiting-confirmation">Manage Requests</a>
                 </div>
             </div>
 

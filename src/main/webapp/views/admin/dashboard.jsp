@@ -10,6 +10,8 @@
 <html>
 <head>
     <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/base.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/admin/service-booking/dashboard.css">
 </head>
 <body>
 

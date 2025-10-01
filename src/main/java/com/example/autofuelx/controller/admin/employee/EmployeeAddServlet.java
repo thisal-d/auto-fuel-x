@@ -38,6 +38,7 @@ public class EmployeeAddServlet extends HttpServlet {
         String role = request.getParameter("role");
         String shift = request.getParameter("shift");
         String type = request.getParameter("type");
+        String password = request.getParameter("password");
 
         Employee employee = new Employee();
         employee.setFirstName(firstName);
@@ -51,6 +52,7 @@ public class EmployeeAddServlet extends HttpServlet {
         employee.setAddressArea(addressArea);
         employee.setType(type);
         employee.setEmail(email);
+        employee.setPassword(password);
 
         if (type.equals("Refuel Cashier")){
             employee.setShift(shift);
