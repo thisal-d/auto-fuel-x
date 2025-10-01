@@ -159,7 +159,7 @@ public class ServiceBookingDAO {
 
     // Update existing booking
     public boolean updateBooking(ServiceBooking booking) {
-        String sql = "UPDATE ServiceBooking SET VehicleID = ?, ServiceID = ?, BookingDate = ?, BookingTime = ?, Status = ?, StaffID = ? WHERE BookingID = ?";
+        String sql = "UPDATE ServiceBooking SET VehicleID = ?, ServiceID = ?, BookingDate = ?, BookingTime = ?, Status = ?, StaffID = ?, TotalCost = ? WHERE BookingID = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -170,7 +170,8 @@ public class ServiceBookingDAO {
             stmt.setTime(4, Time.valueOf(booking.getBookingTime()));
             stmt.setString(5, booking.getStatus());
             stmt.setInt(6, booking.getStaffID());
-            stmt.setInt(7, booking.getBookingID());
+            stmt.setDouble(7, booking.getTotalCost());
+            stmt.setInt(8, booking.getBookingID());
 
             return stmt.executeUpdate() > 0;
 
@@ -531,16 +532,10 @@ public class ServiceBookingDAO {
             booking.setBookingID(rs.getInt("BookingID"));
             booking.setCustomerID(rs.getInt("CustomerID"));
             booking.setVehicleID(rs.getInt("VehicleID"));
-            booking.setStatus(rs.getString("Status"));
             booking.setServiceID(rs.getInt("ServiceID"));
-
-            // Handle nullable StaffID
-            Object staffIDObj = rs.getObject("StaffID");
-            if (staffIDObj != null) {
-                booking.setStaffID((Integer) staffIDObj);
-            } else {
-                booking.setStaffID(null);
-            }
+            booking.setServiceID(rs.getInt("StaffID"));
+            booking.setStatus(rs.getString("Status"));
+            booking.setTotalCost(rs.getDouble("TotalCost"));
 
             // Handle booking date and time
             java.sql.Date bookingDate = rs.getDate("BookingDate");
