@@ -37,17 +37,17 @@ public class ServiceBookingDAO {
         String sql = "INSERT INTO ServiceBooking (CustomerID, VehicleID, ServiceID, BookingDate, BookingTime, Status) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            ps.setInt(1, booking.getCustomerID());
-            ps.setInt(2, booking.getVehicleID());
-            ps.setInt(3, booking.getServiceID());
+            stmt.setInt(1, booking.getCustomerID());
+            stmt.setInt(2, booking.getVehicleID());
+            stmt.setInt(3, booking.getServiceID());
 
-            ps.setDate(4, Date.valueOf(booking.getBookingDate()));
-            ps.setTime(5, Time.valueOf(booking.getBookingTime()));
-            ps.setString(6, booking.getStatus());
+            stmt.setDate(4, Date.valueOf(booking.getBookingDate()));
+            stmt.setTime(5, Time.valueOf(booking.getBookingTime()));
+            stmt.setString(6, booking.getStatus());
 
-            return ps.executeUpdate() > 0;
+            return stmt.executeUpdate() > 0;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -162,24 +162,17 @@ public class ServiceBookingDAO {
         String sql = "UPDATE ServiceBooking SET VehicleID = ?, ServiceID = ?, BookingDate = ?, BookingTime = ?, Status = ?, StaffID = ? WHERE BookingID = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            ps.setInt(1, booking.getVehicleID());
-            ps.setInt(2, booking.getServiceID());
-            ps.setDate(3, Date.valueOf(booking.getBookingDate()));
-            ps.setTime(4, Time.valueOf(booking.getBookingTime()));
-            ps.setString(5, booking.getStatus());
+            stmt.setInt(1, booking.getVehicleID());
+            stmt.setInt(2, booking.getServiceID());
+            stmt.setDate(3, Date.valueOf(booking.getBookingDate()));
+            stmt.setTime(4, Time.valueOf(booking.getBookingTime()));
+            stmt.setString(5, booking.getStatus());
+            stmt.setInt(6, booking.getStaffID());
+            stmt.setInt(7, booking.getBookingID());
 
-            // assuming you have StaffID in your model (nullable)
-            if (booking.getStaffID() != null) {
-                ps.setInt(6, booking.getStaffID());
-            } else {
-                ps.setNull(6, java.sql.Types.INTEGER);
-            }
-
-            ps.setInt(7, booking.getBookingID());
-
-            return ps.executeUpdate() > 0;
+            return stmt.executeUpdate() > 0;
 
         } catch (SQLException e) {
             e.printStackTrace();

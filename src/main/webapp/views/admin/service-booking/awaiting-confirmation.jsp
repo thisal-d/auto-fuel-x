@@ -56,15 +56,17 @@
             <form action="<%= request.getContextPath() %>/admin/service-booking/update-status" method="post" style="display:inline;">
                 <input type="hidden" name="bookingId" value="<%= booking.getBookingID() %>">
                 <input type="hidden" name="status" value="Confirmed">
-                <select name="employeeId">
-                    <%for (Employee e: employees) {
-                        String employeeDetails = e.getFirstName() + " " + e.getLastName() + " - " + e.getSkillSet();
-                    %>
-                        <option value="<%=e.getEmployeeID()%>"><%=employeeDetails%></option>
-                    <%}%>
-                </select>
+                <label>
+                    <select name="employeeId">
+                        <%for (Employee e: employees) {
+                            String employeeDetails = e.getFirstName() + " " + e.getLastName() + " - " + e.getSkillSet();
+                        %>
+                            <option value="<%=e.getEmployeeID()%>"><%=employeeDetails%></option>
+                        <%}%>
+                    </select>
+                </label>
                 <input type="hidden" name="redirect-url" value="/admin/service-booking/view?status=awaiting-pickup">
-                <button type="submit">Aprove</button>
+                <button type="submit">Approve</button>
             </form>
 
             <!-- Approve Form -->

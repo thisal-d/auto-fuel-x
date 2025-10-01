@@ -5,12 +5,13 @@
   Time: 10:51 PM
   To change this template use File | Settings | File Templates.
 --%>
+<jsp:include page="/views/admin/header.jsp"/>
+
 <head>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/base.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/admin/employee/header.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/admin/sub-header.css">
     <title>Dashboard</title>
 </head>
-
 
 <nav class="nav-horizontal">
     <a href="<%= request.getContextPath() %>/views/admin/employee/add.jsp">Add New Employee</a>

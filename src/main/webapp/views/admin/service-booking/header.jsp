@@ -5,10 +5,15 @@
   Time: 10:51 PM
   To change this template use File | Settings | File Templates.
 --%>
-
 <jsp:include page="/views/admin/header.jsp"/>
 
-<nav>
+<head>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/base.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/admin/sub-header.css">
+    <title>Dashboard</title>
+</head>
+
+<nav class="nav-horizontal">
     <a href="<%= request.getContextPath() %>/admin/service-booking/dashboard">Service Booking Dashboard</a> |
     <a href="<%= request.getContextPath() %>/admin/service-booking/view?status=all">All Bookings</a> |
     <a href="<%= request.getContextPath() %>/admin/service-booking/view?status=awaiting-confirmation">Pending Approval</a> |

@@ -1,0 +1,231 @@
+/* ===== customer-header-style1.css ===== */
+/* Enhanced Original Design */
+
+.customer-header {
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+    border-bottom: 1px solid var(--border-color);
+    padding: 0 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Header content */
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Logo/Title */
+.header-logo {
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.header-logo h1 {
+    color: var(--accent-red);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+}
+
+.header-logo h1::before {
+    content: "AFX";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    margin-right: 12px;
+    background: linear-gradient(135deg, var(--accent-red), var(--accent-red-hover));
+    color: white;
+    border-radius: var(--radius-md);
+    font-weight: 800;
+    font-size: 0.9rem;
+}
+
+/* Main navigation */
+.header-nav {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px 0;
+    gap: 20px;
+}
+
+/* Navigation sections */
+.nav-section {
+    position: relative;
+}
+
+/* Section titles */
+.nav-section-title {
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.nav-section-title::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-red);
+    border-radius: 50%;
+}
+
+/* Navigation links */
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: var(--text-primary);
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
+.nav-links a.active {
+    color: var(--accent-red);
+    font-weight: 500;
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
+.nav-links a.active::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-red);
+}
+
+/* Logout section */
+.nav-section-logout {
+    margin-left: auto;
+}
+
+.logout-link {
+    display: flex;
+    align-items: center;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+}
+
+.logout-link:hover {
+    color: var(--accent-red);
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
+.logout-link::before {
+    content: "↪";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    color: var(--text-dim);
+    font-size: 1rem;
+    transition: color 0.2s ease;
+}
+
+.logout-link:hover::before {
+    color: var(--accent-red);
+}
+
+/* Mobile menu toggle */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 10px 0;
+    align-self: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .header-logo {
+        border-bottom: none;
+        padding: 15px 0;
+    }
+
+    .header-logo h1 {
+        font-size: 1.5rem;
+    }
+
+    .header-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+        border-top: 1px solid var(--border-color);
+        flex-direction: column;
+        padding: 15px 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        gap: 15px;
+    }
+
+    .header-nav.active {
+        display: flex;
+    }
+
+    .nav-section {
+        width: 100%;
+    }
+
+    .nav-section-logout {
+        margin-left: 0;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 8px;
+        padding-left: 15px;
+    }
+
+    .mobile-menu-toggle {
+        display: block;
+    }
+}

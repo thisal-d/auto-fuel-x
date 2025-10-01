@@ -31,15 +31,15 @@ public class ServiceBookingStatusUpdateAdminServlet extends HttpServlet {
 
         ServiceBooking booking = serviceBookingService.getBookingByID(bookingId);
 
+        booking.setStatus(status);
         if (status.equals("Confirmed")) {
             int staffId = Integer.parseInt(request.getParameter("employeeId"));
-            booking.setServiceID(staffId);
+            booking.setStaffID(staffId);
         } else if (status.equals("Awaiting Pickup")) {
             double totalCost = Double.parseDouble(request.getParameter("total-cost"));
             booking.setTotalCost(totalCost);
         }
 
-        booking.setStatus(status);
         serviceBookingService.updateBooking(booking);
 
         // Redirect back to  bookings page

@@ -25,13 +25,11 @@
 
 <table border="1">
     <tr>
-        <th>Booking ID</th>
         <th>Customer</th>
         <th>Vehicle</th>
         <th>Service</th>
         <th>Date</th>
         <th>Time</th>
-        <th>Actions</th>
     </tr>
 
     <%
@@ -47,7 +45,6 @@
                 String formattedTime = booking.getBookingTime().format(timeFormatter);
     %>
     <tr>
-        <td><%= booking.getBookingID() %></td>
         <td><%= customerName %></td>
         <td><%= vehicleInfo %></td>
         <td><%= booking.getServiceType() %></td>
