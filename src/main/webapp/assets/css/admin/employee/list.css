@@ -1,0 +1,198 @@
+/* ===== employee-common.css - Extends base.css for Employee Pages ===== */
+
+/* ===== Layout Structure ===== */
+.employee-container {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: var(--spacing-md);
+}
+
+.employee-header {
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+    padding: var(--spacing-lg) 0;
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border-color);
+}
+
+.employee-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent-red);
+    text-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
+    margin: 0;
+    padding: 0 var(--spacing-lg);
+}
+
+/* ===== Filter Section ===== */
+.filter-section {
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-tertiary));
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--border-color);
+}
+
+.filter-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* ===== Horizontal Filter Layout ===== */
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    align-items: flex-end;
+}
+
+.filter-group {
+    flex: 0 0 auto;
+    width: 180px; /* Fixed width for consistent alignment */
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.filter-label {
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.filter-actions {
+    flex: 0 0 auto;
+    margin-left: auto; /* Push to the right */
+    display: flex;
+    align-items: flex-end;
+}
+
+/* ===== Employee Table ===== */
+.table-section {
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-tertiary));
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--border-color);
+}
+
+.table-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.employee-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: var(--spacing-md);
+}
+
+.employee-table th {
+    background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-card));
+    color: var(--text-primary);
+    font-weight: 600;
+    text-align: left;
+    padding: var(--spacing-md);
+    border-bottom: 2px solid var(--accent-red);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.employee-table td {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.employee-table tr:hover {
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
+/* ===== Status Indicators ===== */
+.status-active {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--success), #1e7e34);
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.status-inactive {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--danger), #c0392b);
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== Action Buttons ===== */
+.action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+}
+
+.action-form {
+    display: inline;
+}
+
+/* ===== No Results Message ===== */
+.no-results {
+    text-align: center;
+    padding: var(--spacing-xl);
+    color: var(--text-secondary);
+    font-style: italic;
+    background-color: rgba(231, 76, 60, 0.05);
+    border-radius: var(--radius-md);
+    margin: var(--spacing-lg) 0;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+    /* Make filters stack vertically on small screens */
+    .filter-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-group {
+        width: 100%;
+    }
+
+    .filter-actions {
+        margin-left: 0;
+        margin-top: var(--spacing-md);
+        justify-content: flex-end;
+    }
+
+    .employee-table {
+        font-size: 0.9rem;
+    }
+
+    .employee-table th,
+    .employee-table td {
+        padding: var(--spacing-sm);
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+}

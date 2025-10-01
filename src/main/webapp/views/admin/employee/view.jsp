@@ -16,9 +16,6 @@
 <body>
 
 <jsp:include page="header.jsp"/>
-<%
-
-%>
 
 <h1>Employee Details</h1>
 

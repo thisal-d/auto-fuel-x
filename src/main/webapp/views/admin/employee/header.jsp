@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/admin/employee/header.css">
     <title>Dashboard</title>
 </head>
+
+
 <nav class="nav-horizontal">
     <a href="<%= request.getContextPath() %>/views/admin/employee/add.jsp">Add New Employee</a>
     <a href="<%= request.getContextPath() %>/admin/employee/list">All employees</a>

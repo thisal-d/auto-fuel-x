@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 
-@WebServlet("/admin/employee/status/update/")
+@WebServlet("/admin/employee/status/update")
 public class EmployeeStatusUpdateServlet extends HttpServlet {
     private EmployeeService employeeService;
 

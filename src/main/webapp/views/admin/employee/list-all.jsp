@@ -25,155 +25,176 @@
 <html>
 <head>
     <title>Employee List</title>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/base.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/admin/employee/list.css">
 </head>
 <body>
 
 <jsp:include page="header.jsp"/>
 
-<h1>Employee List</h1>
+<div class="employee-container">
+    <div class="employee-header">
+        <h1 class="employee-title">Employee List</h1>
+    </div>
 
-<h2>Filter Employees</h2>
-<form action="<%=request.getContextPath()%>/admin/employee/list" method="get">
-    <table border="1" cellpadding="5">
-        <tr>
-            <td>Employee Type:</td>
-            <td>
-                <select name="type">
+    <div class="filter-section">
+        <h2 class="filter-title">Filter Employees</h2>
+        <form action="<%=request.getContextPath()%>/admin/employee/list" method="get" class="filter-form">
+            <div class="filter-group">
+                <label class="filter-label">Employee Type:</label>
+                <select name="type" class="form-control">
                     <option value="">All Types</option>
                     <option value="Service Center Staff" <% if ("Service Center Staff".equals(type)) { %>selected<% } %>>Service Center Staff</option>
                     <option value="Refuel Cashier" <% if ("Refuel Cashier".equals(type)) { %>selected<% } %>>Refuel Cashier</option>
                     <option value="Admin" <% if ("Admin".equals(type)) { %>selected<% } %>>Admin</option>
                 </select>
-            </td>
-        </tr>
-        <tr>
-            <td>Status:</td>
-            <td>
-                <select name="status">
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Status:</label>
+                <select name="status" class="form-control">
                     <option value="">All Statuses</option>
                     <option value="Active" <% if ("Active".equals(status)) { %>selected<% } %>>Active</option>
                     <option value="Inactive" <% if ("Inactive".equals(status)) { %>selected<% } %>>Inactive</option>
                 </select>
-            </td>
-        </tr>
-        <tr>
-            <td>Age Group:</td>
-            <td>
-                <select name="ageGroup">
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Age Group:</label>
+                <select name="ageGroup" class="form-control">
                     <option value="">All Ages</option>
                     <option value="<30" <% if ("<30".equals(ageGroup)) { %>selected<% } %>>Under 30</option>
                     <option value="30-50" <% if ("30-50".equals(ageGroup)) { %>selected<% } %>>30-50</option>
                     <option value=">50" <% if (">50".equals(ageGroup)) { %>selected<% } %>>Over 50</option>
                 </select>
-            </td>
-        </tr>
-        <tr>
-            <td>Hire Date From:</td>
-            <td><input type="date" name="hireDateFrom" value="<%= hireDateFrom != null ? hireDateFrom : "" %>"></td>
-        </tr>
-        <tr>
-            <td>Hire Date To:</td>
-            <td><input type="date" name="hireDateTo" value="<%= hireDateTo != null ? hireDateTo : "" %>"></td>
-        </tr>
-        <tr>
-            <td>Min Salary:</td>
-            <td><input type="number" name="minSalary" step="0.01" value="<%= minSalary != null ? minSalary : "" %>"></td>
-        </tr>
-        <tr>
-            <td>Max Salary:</td>
-            <td><input type="number" name="maxSalary" step="0.01" value="<%= maxSalary != null ? maxSalary : "" %>"></td>
-        </tr>
-        <tr>
-            <td>Name:</td>
-            <td><input type="text" name="name" placeholder="Search by name" value="<%= name != null ? name : "" %>"></td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="submit" value="Apply Filters"></td>
-        </tr>
-    </table>
-</form>
+            </div>
 
-<h2>Employee List</h2>
-<table border="1" cellpadding="5">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Type</th>
-        <th>Status</th>
-        <th>Age</th>
-        <th>Salary</th>
-        <th>Hire Date</th>
-        <th>Address</th>
-        <th>Skill</th>
-        <th>Shift</th>
-        <th>Role</th>
-        <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% if (employees != null && !employees.isEmpty()) {
-        for (Employee emp : employees) { %>
-    <tr>
-    <tr>
-        <td><%= emp.getFirstName() + " " + emp.getLastName() %></td>
-        <td><%= emp.getEmail() %></td>
-        <td><%= emp.getType() %></td>
-        <td><%= emp.getStatus() %></td>
-        <td><%= calculateAge(emp.getDateOfBirth()) %></td>
-        <td><%= emp.getSalary() %></td>
-        <td><%= dateFormat.format(emp.getHireDate()) %></td>
-        <td><%= emp.getFullyAddress()%></td>
+            <div class="filter-group">
+                <label class="filter-label">Hire Date From:</label>
+                <input type="date" name="hireDateFrom" value="<%= hireDateFrom != null ? hireDateFrom : "" %>" class="form-control">
+            </div>
 
-        <%if (emp.getType().equals("Service Center Staff")) {%>
-            <td> <%=emp.getSkillSet()%> </td>
-        <%} else {%>
-            <td> - </td>
-        <%}%>
+            <div class="filter-group">
+                <label class="filter-label">Hire Date To:</label>
+                <input type="date" name="hireDateTo" value="<%= hireDateTo != null ? hireDateTo : "" %>" class="form-control">
+            </div>
 
-        <%if (emp.getType().equals("Refuel Cashier")) {%>
-        <td> <%=emp.getShift()%> </td>
-        <%} else {%>
-        <td> - </td>
-        <%}%>
+            <div class="filter-group">
+                <label class="filter-label">Min Salary:</label>
+                <input type="number" name="minSalary" step="0.01" value="<%= minSalary != null ? minSalary : "" %>" class="form-control">
+            </div>
 
-        <%if (emp.getType().equals("Admin")) {%>
-        <td> <%=emp.getRole()%> </td>
-        <%} else {%>
-        <td> - </td>
-        <%}%>
+            <div class="filter-group">
+                <label class="filter-label">Max Salary:</label>
+                <input type="number" name="maxSalary" step="0.01" value="<%= maxSalary != null ? maxSalary : "" %>" class="form-control">
+            </div>
 
-        <td>
-            <form action="<%=request.getContextPath()%>/admin/employee/status/update/" method="post">
-                <input type="hidden" name="redirect-url" value="/admin/employee/list">
-                <input type="hidden" name="employee-ID" value="<%= emp.getEmployeeID() %>">
-                <input type="hidden" name="status" value="<%=emp.getStatus().equals("Active")? "Inactive": "Active"%>">>
-                <input type="submit" name="" value="<%=emp.getStatus().equals("Active")? "Set Inactive": "Set Active"%>">
-            </form>
+            <div class="filter-group">
+                <label class="filter-label">Name:</label>
+                <input type="text" name="name" placeholder="Search by name" value="<%= name != null ? name : "" %>" class="form-control">
+            </div>
 
-            <form action="<%=request.getContextPath()%>/admin/employee/edit-form/" method="get">
-                <input type="hidden" name="redirect-url" value="/admin/employee/list">
-                <input type="hidden" name="employee-ID" value="<%= emp.getEmployeeID() %>">
-                <input type="submit" value="Edit">
-            </form>
+            <div class="filter-actions">
+                <button type="submit" class="btn btn-primary">Apply Filters</button>
+            </div>
+        </form>
+    </div>
 
-            <form action="<%=request.getContextPath()%>/admin/employee/delete/" method="post">
-                <input type="hidden" name="redirect-url" value="/admin/employee/list">
-                <input type="hidden" name="employee-ID" value="<%= emp.getEmployeeID() %>">
-                <input type="submit" value="Delete">
-            </form>
+    <div class="table-section">
+        <h2 class="table-title">Employee List</h2>
+        <div class="table-container">
+            <table class="employee-table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Age</th>
+                    <th>Salary</th>
+                    <th>Hire Date</th>
+                    <th>Address</th>
+                    <th>Skill</th>
+                    <th>Shift</th>
+                    <th>Role</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% if (employees != null && !employees.isEmpty()) {
+                    for (Employee emp : employees) { %>
+                <tr>
+                    <td><%= emp.getFirstName() + " " + emp.getLastName() %></td>
+                    <td><%= emp.getEmail() %></td>
+                    <td><%= emp.getType() %></td>
+                    <td>
+                        <% if ("Active".equals(emp.getStatus())) { %>
+                        <span class="status-active">Active</span>
+                        <% } else { %>
+                        <span class="status-inactive">Inactive</span>
+                        <% } %>
+                    </td>
+                    <td><%= calculateAge(emp.getDateOfBirth()) %></td>
+                    <td><%= emp.getSalary() %></td>
+                    <td><%= dateFormat.format(emp.getHireDate()) %></td>
+                    <td><%= emp.getFullyAddress()%></td>
+                    <td>
+                        <%if (emp.getType().equals("Service Center Staff")) {%>
+                        <%=emp.getSkillSet()%>
+                        <%} else {%>
+                        -
+                        <%}%>
+                    </td>
+                    <td>
+                        <%if (emp.getType().equals("Refuel Cashier")) {%>
+                        <%=emp.getShift()%>
+                        <%} else {%>
+                        -
+                        <%}%>
+                    </td>
+                    <td>
+                        <%if (emp.getType().equals("Admin")) {%>
+                        <%=emp.getRole()%>
+                        <%} else {%>
+                        -
+                        <%}%>
+                    </td>
+                    <td>
+                        <div class="action-buttons">
+                            <form action="<%=request.getContextPath()%>/admin/employee/status/update" method="post" class="action-form">
+                                <input type="hidden" name="redirect-url" value="/admin/employee/list">
+                                <input type="hidden" name="employee-ID" value="<%= emp.getEmployeeID() %>">
+                                <input type="hidden" name="status" value="<%=emp.getStatus().equals("Active")? "Inactive": "Active"%>">
+                                <button type="submit" class="btn <% if ("Active".equals(emp.getStatus())) { %>btn-warning<% } else { %>btn-success<% } %>">
+                                    <%=emp.getStatus().equals("Active")? "Set Inactive": "Set Active"%>
+                                </button>
+                            </form>
 
-        </td>
-    </tr>
-    </tr>
-    <%   }
-    } else { %>
-    <tr>
-        <td colspan="8">No employees found with the selected filters.</td>
-    </tr>
-    <% } %>
-    </tbody>
-</table>
+                            <form action="<%=request.getContextPath()%>/admin/employee/edit-form" method="get" class="action-form">
+                                <input type="hidden" name="redirect-url" value="/admin/employee/list">
+                                <input type="hidden" name="employee-ID" value="<%= emp.getEmployeeID() %>">
+                                <button type="submit" class="btn btn-info">Edit</button>
+                            </form>
+
+                            <form action="<%=request.getContextPath()%>/admin/employee/delete" method="post" class="action-form">
+                                <input type="hidden" name="redirect-url" value="/admin/employee/list">
+                                <input type="hidden" name="employee-ID" value="<%= emp.getEmployeeID() %>">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                <%   }
+                } else { %>
+                <tr>
+                    <td colspan="13" class="no-results">No employees found with the selected filters.</td>
+                </tr>
+                <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 <%!
     private int calculateAge(java.sql.Date dob) {
