@@ -49,11 +49,18 @@ public class EmployeeAddServlet extends HttpServlet {
         employee.setAddressNo(addressNo);
         employee.setAddressLane(addressLane);
         employee.setAddressArea(addressArea);
-        employee.setEmail(email);
-        employee.setSkillSet(skillSet);
-        employee.setRole(role);
-        employee.setShift(shift);
         employee.setType(type);
+        employee.setEmail(email);
+
+        if (type.equals("Refuel Cashier")){
+            employee.setShift(shift);
+        }
+        else if (type.equals("Admin")){
+            employee.setRole(role);
+        }
+        else if (type.equals("Service Center Staff")){
+            employee.setSkillSet(skillSet);
+        }
 
         employeeService.addEmployee(employee);
         response.sendRedirect(request.getContextPath() + "/admin/employee/list");

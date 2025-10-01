@@ -1,131 +1,111 @@
-/* home.css - Styles for the index.jsp landing page */
-
-/* Main container for the home page */
+/* ===== Light Modern Gradient Design ===== */
 .home-container {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: var(--bg-primary);
-    padding: 20px;
+    justify-content: space-between;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    color: var(--text-primary);
+    padding: var(--spacing-lg);
 }
 
-/* Header section */
 .home-header {
     text-align: center;
-    margin-bottom: 60px;
-    animation: fadeIn 1s ease-in-out;
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
 }
 
 .home-header h1 {
     font-size: 3.5rem;
     font-weight: 700;
-    margin-bottom: 15px;
-    color: var(--accent-primary);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    color: var(--accent-red);
+    margin-bottom: var(--spacing-md);
     letter-spacing: 1px;
+    text-shadow: none;
 }
 
-.home-header .tagline {
-    font-size: 1.2rem;
+.tagline {
+    font-size: 1.5rem;
     color: var(--text-secondary);
-    margin-bottom: 10px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
 }
 
-/* Navigation links section */
 .home-nav {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    max-width: 400px;
-    animation: slideUp 0.8s ease-out;
+    align-items: center;
+    gap: var(--spacing-lg);
+    margin: var(--spacing-xl) 0;
 }
 
 .home-nav a {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 18px 24px;
-    background-color: var(--bg-secondary);
-    color: var(--text-primary);
-    border: 1px solid var(--border-primary);
-    border-radius: 8px;
-    font-size: 1.1rem;
-    font-weight: 500;
+    width: 300px;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
     text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+    background: white;
+    color: var(--text-primary);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.home-nav a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-red), var(--accent-red-light));
+    transition: width 0.3s ease;
+    z-index: -1;
+}
+
+.home-nav a:hover::before {
+    width: 100%;
 }
 
 .home-nav a:hover {
-    background-color: var(--bg-tertiary);
-    border-color: var(--accent-primary);
+    color: white;
     transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 20px rgba(231, 76, 60, 0.2);
 }
 
-/* Icon placeholders */
 .home-nav-icon {
     width: 30px;
     height: 30px;
-    margin-right: 1rem;
+    margin-right: var(--spacing-md);
 }
 
-/* Footer section */
+/* Admin login is less prominent */
+.home-nav a:last-child {
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    color: var(--text-dim);
+    font-size: 1rem;
+    width: 250px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.home-nav a:last-child:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--text-secondary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
 .home-footer {
-    position: absolute;
-    bottom: 20px;
-    width: 100%;
     text-align: center;
-    color: var(--text-muted);
+    padding: var(--spacing-lg) 0;
+    color: var(--text-dim);
     font-size: 0.9rem;
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes slideUp {
-    from { 
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to { 
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .home-header h1 {
-        font-size: 2.8rem;
-    }
-    
-    .home-nav {
-        max-width: 100%;
-    }
-    
-    .home-nav a {
-        padding: 15px 20px;
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .home-header h1 {
-        font-size: 2.2rem;
-    }
-    
-    .home-header .tagline {
-        font-size: 1rem;
-    }
-    
-    .home-nav a {
-        padding: 12px 16px;
-    }
 }

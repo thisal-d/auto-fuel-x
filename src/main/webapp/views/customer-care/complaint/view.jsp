@@ -30,7 +30,7 @@
     boolean hasReply = complaintDTO.getReplyComplaintID() != null;
 %>
 
-<form action="<%=request.getContextPath()%>/customer-care/complaint/create-update" method="post">
+<form action="<%=request.getContextPath()%>/customer-care/complaint/<%=hasReply ? "update" : "create"%>" method="post">
     <input type="hidden" name="complaintID" value="<%= complaintDTO.getComplaintID() %>"/>
     <input type="hidden" name="replyComplaintID" value="<%= complaintDTO.getReplyComplaintID() %>"/>
 

@@ -18,10 +18,12 @@ import java.io.IOException;
 @WebServlet("/customer/complaint/view")
 public class ComplaintViewServlet extends HttpServlet {
     private ComplaintService complaintService;
+    private ReplyComplaintService replyComplaintService;
 
     @Override
     public void init() throws ServletException {
         complaintService = new ComplaintService();
+        replyComplaintService = new ReplyComplaintService();
     }
 
     @Override
@@ -32,6 +34,13 @@ public class ComplaintViewServlet extends HttpServlet {
         int complaintID = Integer.parseInt(request.getParameter("complaintID"));
 
         ComplaintReplyDTO complaintDTO = complaintService.getComplaintReplyDTOByComplaintID(complaintID);
+
+        // Get reply complaint
+        ReplyComplaint replyComplaint = replyComplaintService.getReplyComplaintByReplyComplaintID(complaintID);
+        if (replyComplaint != null) {
+            // User saw the customer care reply
+            replyComplaintService.updateReplyComplaintStatus(replyComplaint.getComplaintID(), "Closed");
+        }
 
         request.setAttribute("complaintReplyDTO", complaintDTO);
 

@@ -44,13 +44,13 @@ public class ReplyComplaintDAO {
     }
 
     // Get reply complaint by ID
-    public ReplyComplaint getReplyComplaintByComplaintID(int replyComplaintID) {
-        String sql = "SELECT * FROM ReplyComplaint WHERE replyComplaintID = ?";
+    public ReplyComplaint getReplyComplaintByComplaintID(int ComplaintID) {
+        String sql = "SELECT * FROM ReplyComplaint WHERE ComplaintID = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, replyComplaintID);
+            stmt.setInt(1, ComplaintID);
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next())
@@ -101,6 +101,21 @@ public class ReplyComplaintDAO {
             stmt.setTime(6, currentTime);
 
             stmt.setInt(7, replyComplaint.getReplyComplaintID());
+
+            return stmt.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean updateReplyComplaintStatus(int replyComplaintID, String status) {
+        String sql = "UPDATE ReplyComplaint SET Status = ? WHERE replyComplaintID = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, status);
+            stmt.setInt(2, replyComplaintID);
 
             return stmt.executeUpdate() > 0;
         } catch (Exception e) {

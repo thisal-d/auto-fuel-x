@@ -26,7 +26,7 @@
   int missedAppointmentCount = statusCounts.get("missedAppointmentCount");
 %>
 
-<jsp:include page="header.jsp"/>
+<jsp:include page="/views/admin/header.jsp"/>
 
 <h1>Service Booking Dashboard</h1>
 

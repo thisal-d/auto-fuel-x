@@ -87,28 +87,52 @@
 <table border="1" cellpadding="5">
   <thead>
   <tr>
-    <th>ID</th>
     <th>Name</th>
+    <th>Email</th>
     <th>Type</th>
     <th>Status</th>
     <th>Age</th>
     <th>Salary</th>
     <th>Hire Date</th>
-    <th>Email</th>
+    <th>Address</th>
+    <th>Skill</th>
+    <th>Action</th>
   </tr>
   </thead>
   <tbody>
   <% if (employees != null && !employees.isEmpty()) {
     for (Employee emp : employees) { %>
   <tr>
-    <td><%= emp.getEmployeeID() %></td>
     <td><%= emp.getFirstName() + " " + emp.getLastName() %></td>
+    <td><%= emp.getEmail() %></td>
     <td><%= emp.getType() %></td>
     <td><%= emp.getStatus() %></td>
     <td><%= calculateAge(emp.getDateOfBirth()) %></td>
     <td><%= emp.getSalary() %></td>
     <td><%= dateFormat.format(emp.getHireDate()) %></td>
-    <td><%= emp.getEmail() %></td>
+    <td><%= emp.getFullyAddress()%></td>
+    <td><%= emp.getSkillSet()%></td>
+    <td>
+      <form action="<%=request.getContextPath()%>/admin/employee/status/update/" method="post">
+        <input type="hidden" name="redirect-url" value="/admin/employee/list-by-type?type=service-center-staff">
+        <input type="hidden" name="employee-ID" value="<%= emp.getEmployeeID() %>">
+        <input type="hidden" name="status" value="<%=emp.getStatus().equals("Active")? "Inactive": "Active"%>">>
+        <input type="submit" name="" value="<%=emp.getStatus().equals("Active")? "Set Inactive": "Set Active"%>">
+      </form>
+    </td>
+
+    <form action="<%=request.getContextPath()%>/admin/employee/edit-form/" method="get">
+      <input type="hidden" name="redirect-url" value="/admin/employee/list-by-type?type=service-center-staff">
+      <input type="hidden" name="employee-ID" value="<%= emp.getEmployeeID() %>">
+      <input type="submit" value="Edit">
+    </form>
+
+    <form action="<%=request.getContextPath()%>/admin/employee/delete/" method="post">
+      <input type="hidden" name="redirect-url" value="/admin/employee/list-by-type?type=service-center-staff">
+      <input type="hidden" name="employee-ID" value="<%= emp.getEmployeeID() %>">
+      <input type="submit" value="Delete">
+    </form>
+
   </tr>
   <%   }
   } else { %>

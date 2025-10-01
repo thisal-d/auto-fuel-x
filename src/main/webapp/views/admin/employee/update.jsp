@@ -1,122 +1,73 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: KHThi
-  Date: 9/19/2025
-  Time: 4:25 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.autofuelx.model.Employee" %>
-<!DOCTYPE html>
+<%@ page import="java.util.List" %>
+
+<%
+    Employee employee = (Employee) request.getAttribute("employee");
+    List<String> phoneNumbers = (List<String>) request.getAttribute("employee-phone-numbers");
+%>
+
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Edit Employee</title>
+    <title>Update Employee</title>
 </head>
 <body>
-<h1>Edit Employee</h1>
 
-<p>
-    <a href="<%= request.getContextPath() %>/employees/list">Back to List</a>
-</p>
+<jsp:include page="header.jsp"/>
 
-<form action="<%= request.getContextPath() %>/employees/update" method="post">
-    <%
-        Employee employee = (Employee) request.getAttribute("employee-update");
-        if(employee != null) {
-    %>
+<h2>Update Employee</h2>
+
+<form action="<%=request.getContextPath()%>/admin/employee/update" method="post">
     <input type="hidden" name="employeeID" value="<%= employee.getEmployeeID() %>">
 
-    <table border="1">
-        <tr>
-            <td>First Name</td>
-            <td><input type="text" name="firstName" value="<%= employee.getFirstName() %>" required></td>
-        </tr>
-        <tr>
-            <td>Last Name</td>
-            <td><input type="text" name="lastName" value="<%= employee.getLastName() %>" required></td>
-        </tr>
-        <tr>
-            <td>Date of Birth</td>
-            <td><input type="date" name="dateOfBirth" value="<%= employee.getDateOfBirth() %>" required></td>
-        </tr>
-        <tr>
-            <td>Salary</td>
-            <td><input type="number" step="0.01" name="salary" value="<%= employee.getSalary() %>" required></td>
-        </tr>
-        <tr>
-            <td>Status</td>
-            <td>
-                <select name="status">
-                    <option value="Active" <%= "Active".equals(employee.getStatus()) ? "selected" : "" %>>Active</option>
-                    <option value="Inactive" <%= "Inactive".equals(employee.getStatus()) ? "selected" : "" %>>Inactive</option>
-                    <option value="On Leave" <%= "On Leave".equals(employee.getStatus()) ? "selected" : "" %>>On Leave</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>Hire Date</td>
-            <td><input type="date" name="hireDate" value="<%= employee.getHireDate() %>" required></td>
-        </tr>
-        <tr>
-            <td>Address No</td>
-            <td><input type="text" name="addressNo" value="<%= employee.getAddressNo() %>"></td>
-        </tr>
-        <tr>
-            <td>Address Lane</td>
-            <td><input type="text" name="addressLane" value="<%= employee.getAddressLane() %>"></td>
-        </tr>
-        <tr>
-            <td>Address Area</td>
-            <td><input type="text" name="addressArea" value="<%= employee.getAddressArea() %>"></td>
-        </tr>
-        <tr>
-            <td>Email</td>
-            <td><input type="email" name="email" value="<%= employee.getEmail() %>" required></td>
-        </tr>
-        <tr>
-            <td>Type</td>
-            <td>
-                <select name="type" id="employeeType" onchange="toggleFields()" required>
-                    <option value="">Select Type</option>
-                    <option value="Admin" <%= "Admin".equals(employee.getType()) ? "selected" : "" %>>Admin</option>
-                    <option value="Refuel Cashier" <%= "Refuel Cashier".equals(employee.getType()) ? "selected" : "" %>>Refuel Cashier</option>
-                    <option value="Service Center Staff" <%= "Service Center Staff".equals(employee.getType()) ? "selected" : "" %>>Service Center Staff</option>
-                    <option value="Customer Care Officer" <%= "Customer Care Officer".equals(employee.getType()) ? "selected" : "" %>>Customer Care Officer</option>
-                </select>
-            </td>
-        </tr>
-        <tr id="skillSetRow" style="<%= "Service Center Staff".equals(employee.getType()) ? "" : "display:none;" %>">
-            <td>Skill Set</td>
-            <td><input type="text" name="skillSet" value="<%= employee.getSkillSet() %>"></td>
-        </tr>
-        <tr id="roleRow" style="<%= "Admin".equals(employee.getType()) ? "" : "display:none;" %>">
-            <td>Role</td>
-            <td><input type="text" name="role" value="<%= employee.getRole() %>"></td>
-        </tr>
-        <tr id="shiftRow" style="<%= "Refuel Cashier".equals(employee.getType()) ? "" : "display:none;" %>">
-            <td>Shift</td>
-            <td>
-                <select name="shift">
-                    <option value="Morning" <%= "Morning".equals(employee.getShift()) ? "selected" : "" %>>Morning</option>
-                    <option value="Afternoon" <%= "Afternoon".equals(employee.getShift()) ? "selected" : "" %>>Afternoon</option>
-                    <option value="Night" <%= "Night".equals(employee.getShift()) ? "selected" : "" %>>Night</option>
-                </select>
-            </td>
-        </tr>
-    </table>
+    First Name: <input type="text" name="firstName" value="<%= employee.getFirstName() %>"><br>
+    Last Name: <input type="text" name="lastName" value="<%= employee.getLastName() %>"><br>
+    Date of Birth: <input type="date" name="dateOfBirth" value="<%= employee.getDateOfBirth() %>"><br>
+    Salary: <input type="text" name="salary" value="<%= employee.getSalary() %>"><br>
+    Status: <input type="text" name="status" value="<%= employee.getStatus() %>"><br>
+    Hire Date: <input type="date" name="hireDate" value="<%= employee.getHireDate() %>"><br>
+    Address No: <input type="text" name="addressNo" value="<%= employee.getAddressNo() %>"><br>
+    Address Lane: <input type="text" name="addressLane" value="<%= employee.getAddressLane() %>"><br>
+    Address Area: <input type="text" name="addressArea" value="<%= employee.getAddressArea() %>"><br>
+    Email: <input type="text" name="email" value="<%= employee.getEmail() %>"><br>
+    Type: <input type="text" name="type" readonly value="<%= employee.getType() %>"><br>
+
+    <% if ("Refuel Cashier".equals(employee.getType())) { %>
+    Shift: <input type="text" name="shift" value="<%= employee.getShift() != null ? employee.getShift() : "" %>"><br>
+    <% } else if ("Admin".equals(employee.getType())) { %>
+    Role: <input type="text" name="role" value="<%= employee.getRole() != null ? employee.getRole() : "" %>"><br>
+    <% } else if ("Service Center Staff".equals(employee.getType())) { %>
+    Skill Set: <input type="text" name="skillSet" value="<%= employee.getSkillSet() != null ? employee.getSkillSet() : "" %>"><br>
+    <% } %>
 
     <input type="submit" value="Update Employee">
-    <% } %>
 </form>
 
-<script>
-    function toggleFields() {
-        var type = document.getElementById("employeeType").value;
-        document.getElementById("skillSetRow").style.display = type === "Service Center Staff" ? "" : "none";
-        document.getElementById("roleRow").style.display = type === "Admin" ? "" : "none";
-        document.getElementById("shiftRow").style.display = type === "Refuel Cashier" ? "" : "none";
-    }
-</script>
+<hr>
+
+<h3>Manage Phone Numbers</h3>
+
+<ul>
+    <% for (String phone : phoneNumbers) { %>
+    <li>
+        <%= phone %>
+        <form action="<%=request.getContextPath()%>/admin/employee/phone-number/delete" method="post" style="display:inline;">
+            <input type="hidden" name="employee-ID" value="<%= employee.getEmployeeID() %>">
+            <input type="hidden" name="phone-number" value="<%= phone %>">
+            <input type="submit" value="Delete">
+        </form>
+    </li>
+    <% } %>
+</ul>
+
+<form action="<%=request.getContextPath()%>/admin/employee/phone-number/add" method="post">
+    <input type="hidden" name="employee-ID" value="<%= employee.getEmployeeID() %>">
+    <input type="text" name="phone-number" placeholder="New Phone Number">
+    <input type="submit" value="Add Phone Number">
+</form>
+
+<br>
+<a href="<%=request.getContextPath()%>/admin/employee/list">Back to Employee List</a>
+
 </body>
 </html>

@@ -13,6 +13,9 @@
     <title>Add New Employee</title>
 </head>
 <body>
+
+<jsp:include page="header.jsp"/>
+
 <h1>Add New Employee</h1>
 
 <p>

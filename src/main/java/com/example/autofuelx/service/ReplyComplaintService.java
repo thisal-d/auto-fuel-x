@@ -23,14 +23,22 @@ public class ReplyComplaintService {
         return replyComplaintDAO.updateReplyComplaint(replyComplaint);
     }
 
+    public boolean updateReplyComplaintStatus(int replyComplaintID, String status) {
+        return replyComplaintDAO.updateReplyComplaintStatus(replyComplaintID, status);
+    }
+
     // Delete reply
     public boolean deleteReply(int replyComplaintID) {
         return replyComplaintDAO.deleteReplyComplaint(replyComplaintID);
     }
 
     // Get reply by ID
-    public ReplyComplaint getReplyComplaintByComplaintID(int replyComplaintID) {
+    public ReplyComplaint getReplyComplaintByReplyComplaintID(int replyComplaintID) {
         return replyComplaintDAO.getReplyComplaintByComplaintID(replyComplaintID);
+    }
+
+    public ReplyComplaint getReplyComplaintByComplaintID(int ComplaintID) {
+        return replyComplaintDAO.getReplyComplaintByComplaintID(ComplaintID);
     }
 
     // Get all replies

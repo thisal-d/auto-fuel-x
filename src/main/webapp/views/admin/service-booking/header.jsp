@@ -5,6 +5,9 @@
   Time: 10:51 PM
   To change this template use File | Settings | File Templates.
 --%>
+
+<jsp:include page="/views/admin/header.jsp"/>
+
 <nav>
     <a href="<%= request.getContextPath() %>/admin/service-booking/dashboard">Service Booking Dashboard</a> |
     <a href="<%= request.getContextPath() %>/admin/service-booking/view?status=all">All Bookings</a> |

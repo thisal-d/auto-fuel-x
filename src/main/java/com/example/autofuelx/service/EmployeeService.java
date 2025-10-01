@@ -47,6 +47,10 @@ public class EmployeeService {
         return employeeDAO.getEmployeesByType(type);
     }
 
+    public boolean updateEmployeeStatus(int employeeID, String status) {
+        return employeeDAO.updateEmployeeStatus(employeeID, status);
+    }
+
     public List<Employee> getEmployeesByTypeStatus(String type, String status) {
         return employeeDAO.getEmployeesByType(type);
     }

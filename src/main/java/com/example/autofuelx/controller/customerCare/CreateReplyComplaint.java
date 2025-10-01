@@ -28,7 +28,7 @@ public class CreateReplyComplaint extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         HttpSession session = request.getSession();
         Employee employee = (Employee) session.getAttribute("employee");
 
@@ -46,10 +46,8 @@ public class CreateReplyComplaint extends HttpServlet {
 
         replyComplaintService.submitReplyComplaint(replyComplaint);
 
-        // set user complaint as viewed
-        Complaint complaint = complaintService.getComplaintByComplaintID(complaintID);
-        complaint.setStatus("Closed");
-        complaintService.updateComplaint(complaint);
+        // set user complaint as viewed by customer care
+        complaintService.updateComplaintStatus(complaintID, "Closed");
 
         response.sendRedirect(request.getContextPath() + "/customer-care/complaint/view?complaintID=" + complaintID);
     }

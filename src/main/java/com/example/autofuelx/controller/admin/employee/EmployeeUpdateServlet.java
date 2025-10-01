@@ -50,12 +50,19 @@ public class EmployeeUpdateServlet extends HttpServlet {
         employee.setAddressLane(addressLane);
         employee.setAddressArea(addressArea);
         employee.setEmail(email);
-        employee.setSkillSet(skillSet);
-        employee.setRole(role);
-        employee.setShift(shift);
         employee.setType(type);
 
+        if (type.equals("Refuel Cashier")){
+            employee.setShift(shift);
+        }
+        else if (type.equals("Admin")){
+            employee.setRole(role);
+        }
+        else if (type.equals("Service Center Staff")){
+            employee.setSkillSet(skillSet);
+        }
+
         employeeService.updateEmployee(employee);
-        response.sendRedirect(request.getContextPath() + "/admin/employee/list");
+        response.sendRedirect("/admin/employee/edit-form?employee-ID=" + employeeID);
     }
 }

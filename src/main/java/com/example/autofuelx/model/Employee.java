@@ -123,6 +123,10 @@ public class Employee {
         return addressArea;
     }
 
+    public String getFullyAddress(){
+        return addressNo + " " +  addressLane + " " + addressArea;
+    }
+
     public void setAddressArea(String addressArea) {
         this.addressArea = addressArea;
     }

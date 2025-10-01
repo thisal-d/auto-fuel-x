@@ -2,6 +2,7 @@ package com.example.autofuelx.dao;
 
 import com.example.autofuelx.dto.ComplaintReplyDTO;
 import com.example.autofuelx.model.Complaint;
+import com.example.autofuelx.model.ReplyComplaint;
 import com.example.autofuelx.util.DatabaseConnection;
 
 import java.sql.*;
@@ -34,6 +35,20 @@ public class ComplaintDAO {
         }
     }
 
+    public boolean updateComplaintStatus(int ComplaintID, String status) {
+        String sql = "UPDATE Complaint SET Status = ? WHERE ComplaintID = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, status);
+            stmt.setInt(2, ComplaintID);
+
+            return stmt.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     // Get complaint by ID
     public Complaint getComplaintById(int complaintID) {

@@ -46,10 +46,8 @@ public class UpdateReplyComplaint extends HttpServlet {
 
         replyComplaintService.updateReplyComplaint(replyComplaint);
 
-        // set user complaint as viewed
-        Complaint complaint = complaintService.getComplaintByComplaintID(complaintID);
-        complaint.setStatus("Closed");
-        complaintService.updateComplaint(complaint);
+        // set user complaint as viewed by customer care
+        complaintService.updateComplaintStatus(complaintID, "Closed");
 
         response.sendRedirect(request.getContextPath() + "/customer-care/complaint/view?complaintID=" + complaintID);
     }

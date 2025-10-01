@@ -1,0 +1,58 @@
+/* ===== Card-Based Navigation ===== */
+.nav-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.nav-card {
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-tertiary));
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border-color);
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-red), var(--accent-red-light));
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+.nav-card:hover::after {
+    transform: translateX(0);
+}
+
+.nav-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+.nav-card a {
+    display: block;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 600;
+    padding: var(--spacing-sm) 0;
+}
+
+.nav-card-icon {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--accent-red);
+}
+
+.nav-divider {
+    display: none;
+}

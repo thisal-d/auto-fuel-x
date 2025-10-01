@@ -2,8 +2,6 @@ package com.example.autofuelx.controller.customerCare;
 
 import com.example.autofuelx.dto.ComplaintReplyDTO;
 import com.example.autofuelx.service.ComplaintService;
-import com.example.autofuelx.service.EmployeeService;
-import com.example.autofuelx.service.ReplyComplaintService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

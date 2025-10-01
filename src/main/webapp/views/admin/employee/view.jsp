@@ -15,15 +15,12 @@
 </head>
 <body>
 
+<jsp:include page="header.jsp"/>
 <%
 
 %>
 
 <h1>Employee Details</h1>
-
-<p>
-    <a href="<%= request.getContextPath() %>/employees/list">Back to List</a>
-</p>
 
 <table border="1">
     <%
@@ -96,7 +93,7 @@
 </table>
 
 <p>
-    <a href="<%= request.getContextPath() %>/admin/employee/edit-form?id=<%= employee.getEmployeeID() %>">Edit</a>
+    <a href="<%= request.getContextPath() %>/admin/employee/edit-form?employee-ID=<%= employee.getEmployeeID() %>">Edit</a>
     <form action="<%= request.getContextPath() %>/admin/employee/delete" method="post">
         input type="hidden" name="id" value="<%=employee.getEmployeeID()%>">
        <input type="submit" onclick="return confirm('Are you sure you want to delete this employee?')" value="Delete">

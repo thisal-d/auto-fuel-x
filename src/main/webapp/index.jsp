@@ -20,7 +20,7 @@
         <a href="views/customer/register.jsp">
             <img class="home-nav-icon" src="./assets/imgs/user.png" alt="user-icon"> Customer Register
         </a>
-        <a href="views/admin/login.jsp">
+        <a href="views/employee/login.jsp">
             <img class="home-nav-icon" src="./assets/imgs/admin.png" alt="admin-icon"> Admin Login
         </a>
     </nav>

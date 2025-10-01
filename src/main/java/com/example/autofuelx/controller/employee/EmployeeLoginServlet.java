@@ -38,7 +38,11 @@ public class EmployeeLoginServlet extends HttpServlet {
 
         Employee employee = employeeService.validateEmployee(email, password, type);
 
-        String redirectUrl = "/views/employee/profile.jsp";
+        String redirectUrl = "";
+        if ("Customer Care Officer".equals(type)) redirectUrl = "/views/customer-care/dashboard.jsp";
+        else if ("Admin".equals(type)) redirectUrl = "/views/admin/dashboard.jsp";
+        else if ("Refuel Cashier".equals(type)) redirectUrl = "/views/refuel-cashier/dashboard.jsp";
+        else if ("Service Center Staff".equals(type)) redirectUrl = "/views/service-center/dashboard.jsp";
 
         if (employee != null) {
             System.out.println("Logged : " + employee.getRole());

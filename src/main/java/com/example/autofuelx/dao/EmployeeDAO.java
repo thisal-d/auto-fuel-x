@@ -47,6 +47,22 @@ public class EmployeeDAO {
         return null;
     }
 
+    public boolean updateEmployeeStatus(int employeeID, String status) {
+        String query = "UPDATE Employee SET Status = ? WHERE EmployeeID = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, status);
+            stmt.setInt(2, employeeID);
+
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public boolean addEmployee(Employee employee) {
         String query = "INSERT INTO Employee (FirstName, LastName, DateOfBirth, Salary, Status, " +
                 "HireDate, AddressNo, AddressLane, AddressArea, Email, SkillSet, " +

@@ -28,6 +28,10 @@ public class ComplaintService {
         complaintDAO.deleteComplaint(complaintID);
     }
 
+    public boolean updateComplaintStatus(int complaintID, String status) {
+        return complaintDAO.updateComplaintStatus(complaintID, status);
+    }
+
     public List<Complaint> getComplaintsByCustomerID(int customerID) {
         return complaintDAO.getComplaintsByCustomerId(customerID);
     }
