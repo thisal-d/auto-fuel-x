@@ -15,7 +15,7 @@
 
 <nav class="nav-horizontal">
     <a href="<%= request.getContextPath() %>/admin/service-booking/dashboard">Service Booking Dashboard</a> |
-    <a href="<%= request.getContextPath() %>/admin/service-booking/view?status=all">All Bookings</a> |
+<%--<a href="<%= request.getContextPath() %>/admin/service-booking/view?status=all">All Bookings</a> |--%>
     <a href="<%= request.getContextPath() %>/admin/service-booking/view?status=awaiting-confirmation">Pending Approval</a> |
     <a href="<%= request.getContextPath() %>/admin/service-booking/view?status=confirmed">Confirmed</a> |
     <a href="<%= request.getContextPath() %>/admin/service-booking/view?status=reschedule-required">Reschedule Required</a> |
