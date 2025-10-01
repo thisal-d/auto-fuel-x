@@ -10,84 +10,99 @@
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="com.example.autofuelx.model.Employee" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    List<ServiceBookingDTO> bookings = (List<ServiceBookingDTO>) request.getAttribute("bookings");
+    List<Employee> employees = (List<Employee>) request.getAttribute("employees");
+    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+%>
 <html>
 <head>
     <title>Pending Approval Bookings</title>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/base.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/admin/service-booking/list.css">
 </head>
 <body>
 
 <jsp:include page="header.jsp"/>
 
-<h1>Pending Approval</h1>
+<div class="booking-container">
+    <div class="booking-header">
+        <h1 class="booking-title">Pending Approval</h1>
+    </div>
 
-<p>Bookings waiting for admin/staff approval of requested time.</p>
+    <div class="description-section">
+        <p>Bookings waiting for admin/staff approval of requested time.</p>
+        <div class="back-link">
+            <a href="<%= request.getContextPath() %>/admin/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+        </div>
+    </div>
 
-<p><a href="<%= request.getContextPath() %>/admin/dashboard">Back to Dashboard</a></p>
+    <div class="table-section">
+        <h2 class="table-title">Booking List</h2>
+        <div class="table-container">
+            <table class="booking-table">
+                <thead>
+                <tr>
+                    <th>Customer</th>
+                    <th>Vehicle</th>
+                    <th>Service</th>
+                    <th>Date & Time</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% if (bookings != null && !bookings.isEmpty()) {
+                    for (ServiceBookingDTO booking : bookings) {
+                        String customerName = booking.getCustomerFirstName() + " " + booking.getCustomerLastName();
+                        String vehicleInfo = booking.getVehiclePlate() + " - " + booking.getVehicleModel();
+                        String formattedDate = booking.getBookingDate().format(dateFormatter);
+                        String formattedTime = booking.getBookingTime().format(timeFormatter);
+                %>
+                <tr>
+                    <td><%= customerName %></td>
+                    <td><%= vehicleInfo %></td>
+                    <td><%= booking.getServiceType() %></td>
+                    <td><%= formattedDate %> - <%= formattedTime %></td>
+                    <td>
+                        <div class="action-buttons">
+                            <!-- Approve Form -->
+                            <form action="<%= request.getContextPath() %>/admin/service-booking/update-status" method="post" class="action-form">
+                                <input type="hidden" name="bookingId" value="<%= booking.getBookingID() %>">
+                                <input type="hidden" name="status" value="Confirmed">
+                                <div class="form-group">
+                                    <select name="employeeId" class="form-control">
+                                        <%for (Employee e: employees) {
+                                            String employeeDetails = e.getFirstName() + " " + e.getLastName() + " - " + e.getSkillSet();
+                                        %>
+                                        <option value="<%=e.getEmployeeID()%>"><%=employeeDetails%></option>
+                                        <%}%>
+                                    </select>
+                                </div>
+                                <input type="hidden" name="redirect-url" value="/admin/service-booking/view?status=awaiting-confirmation">
+                                <button type="submit" class="btn btn-success">Approve</button>
+                            </form>
 
-<table border="1">
-    <tr>
-        <th>Customer</th>
-        <th>Vehicle</th>
-        <th>Service</th>
-        <th>Date & Time</th>
-        <th>Action</th>
-    </tr>
-
-    <%
-        List<ServiceBookingDTO> bookings = (List<ServiceBookingDTO>) request.getAttribute("bookings");
-        List<Employee> employees = (List<Employee>) request.getAttribute("employees");
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-
-        if (bookings != null && !bookings.isEmpty()) {
-            for (ServiceBookingDTO booking : bookings) {
-                String customerName = booking.getCustomerFirstName() + " " + booking.getCustomerLastName();
-                String vehicleInfo = booking.getVehiclePlate() + " - " + booking.getVehicleModel();
-                String formattedDate = booking.getBookingDate().format(dateFormatter);
-                String formattedTime = booking.getBookingTime().format(timeFormatter);
-    %>
-    <tr>
-        <td><%= customerName %></td>
-        <td><%= vehicleInfo %></td>
-        <td><%= booking.getServiceType() %></td>
-        <td><%= formattedDate %> - <%= formattedTime %></td>
-        <td>
-            <!-- Approve Form -->
-            <form action="<%= request.getContextPath() %>/admin/service-booking/update-status" method="post" style="display:inline;">
-                <input type="hidden" name="bookingId" value="<%= booking.getBookingID() %>">
-                <input type="hidden" name="status" value="Confirmed">
-                <label>
-                    <select name="employeeId">
-                        <%for (Employee e: employees) {
-                            String employeeDetails = e.getFirstName() + " " + e.getLastName() + " - " + e.getSkillSet();
-                        %>
-                            <option value="<%=e.getEmployeeID()%>"><%=employeeDetails%></option>
-                        <%}%>
-                    </select>
-                </label>
-                <input type="hidden" name="redirect-url" value="/admin/service-booking/view?status=awaiting-pickup">
-                <button type="submit">Approve</button>
-            </form>
-
-            <!-- Approve Form -->
-            <form action="<%= request.getContextPath() %>/admin/service-booking/update-status" method="post" style="display:inline;">
-                <input type="hidden" name="bookingId" value="<%= booking.getBookingID() %>">
-                <input type="hidden" name="status" value="Reschedule Required">
-                <input type="hidden" name="redirect-url" value="/admin/service-booking/view?status=awaiting-pickup">
-                <button type="submit">Request Reschedule</button>
-            </form>
-        </td>
-    </tr>
-    <%
-        }
-    } else {
-    %>
-    <tr>
-        <td colspan="7">No pending approval bookings found.</td>
-    </tr>
-    <%
-        }
-    %>
-</table>
+                            <!-- Reschedule Form -->
+                            <form action="<%= request.getContextPath() %>/admin/service-booking/update-status" method="post" class="action-form">
+                                <input type="hidden" name="bookingId" value="<%= booking.getBookingID() %>">
+                                <input type="hidden" name="status" value="Reschedule Required">
+                                <input type="hidden" name="redirect-url" value="/admin/service-booking/view?status=awaiting-confirmation">
+                                <button type="submit" class="btn btn-warning">Request Reschedule</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                <%   }
+                } else { %>
+                <tr>
+                    <td colspan="5" class="no-results">No pending approval bookings found.</td>
+                </tr>
+                <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 </body>
 </html>

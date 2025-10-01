@@ -95,7 +95,7 @@ public class ServiceBooking {
         this.status = status;
     }
 
-    public double getTotalCost() {
+    public Double getTotalCost() {
         return totalCost;
     }
 

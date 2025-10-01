@@ -169,8 +169,12 @@ public class ServiceBookingDAO {
             stmt.setDate(3, Date.valueOf(booking.getBookingDate()));
             stmt.setTime(4, Time.valueOf(booking.getBookingTime()));
             stmt.setString(5, booking.getStatus());
-            stmt.setInt(6, booking.getStaffID());
-            stmt.setDouble(7, booking.getTotalCost());
+
+            if (booking.getStaffID() != null) {stmt.setInt(6, booking.getStaffID());}
+            else  {stmt.setNull(6, Types.INTEGER);}
+            if (booking.getTotalCost() != null) stmt.setDouble(7, booking.getTotalCost());
+            else  {stmt.setNull(7, Types.DOUBLE);}
+
             stmt.setInt(8, booking.getBookingID());
 
             return stmt.executeUpdate() > 0;
@@ -533,19 +537,21 @@ public class ServiceBookingDAO {
             booking.setCustomerID(rs.getInt("CustomerID"));
             booking.setVehicleID(rs.getInt("VehicleID"));
             booking.setServiceID(rs.getInt("ServiceID"));
-            booking.setServiceID(rs.getInt("StaffID"));
             booking.setStatus(rs.getString("Status"));
             booking.setTotalCost(rs.getDouble("TotalCost"));
+
+            // Fix: set StaffID properly
+            int staffID = rs.getInt("StaffID");
+            if (!rs.wasNull()) {
+                booking.setStaffID(staffID);
+            }
 
             // Handle booking date and time
             java.sql.Date bookingDate = rs.getDate("BookingDate");
             java.sql.Time bookingTime = rs.getTime("BookingTime");
-            if (bookingDate != null) {
-                booking.setBookingDate(bookingDate.toLocalDate());
-            }
-            if (bookingTime != null) {
-                booking.setBookingTime(bookingTime.toLocalTime());
-            }
+
+            if (bookingDate != null) booking.setBookingDate(bookingDate.toLocalDate());
+            if (bookingTime != null) booking.setBookingTime(bookingTime.toLocalTime());
 
             return booking;
         } catch (Exception e) {
@@ -553,6 +559,7 @@ public class ServiceBookingDAO {
             return null;
         }
     }
+
 
     public List<ServiceBookingDTO> getBookingsByCustomerWithFilters(
             int customerID,

@@ -30,6 +30,7 @@ public class BookingStatusUpdateCustomerServlet extends HttpServlet {
         String redirectUrl = request.getParameter("redirect-url");
 
         ServiceBooking booking = serviceBookingService.getBookingByID(bookingId);
+        System.out.println(booking.getStaffID());
         booking.setStatus(status);
         serviceBookingService.updateBooking(booking);
 
