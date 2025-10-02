@@ -36,30 +36,30 @@
             <div class="nav-section">
                 <div class="nav-section-title">Fuel ⛽</div>
                 <div class="nav-links">
-                    <a href="<%= request.getContextPath() %>/admin/fuel/levels">View Fuel Levels</a>
-                    <a href="<%= request.getContextPath() %>/admin/fuel/add-type">Add New Fuel Type</a>
+                    <a href="<%= request.getContextPath() %>/admin/fuel/insert-form">Update Fuel Levels</a>
+                    <a href="<%= request.getContextPath() %>/views/admin/fuel/add.jsp">Add New Fuel Type</a>
                 </div>
             </div>
 
-            <!-- Customers Section -->
+            <!-- Customers Section
             <div class="nav-section">
                 <div class="nav-section-title">Customers 🧑‍💻</div>
                 <div class="nav-links">
                     <a href="<%= request.getContextPath() %>/admin/customers/view">View Customers</a>
                 </div>
             </div>
+            -->
 
-            <!-- Fuel Update Section -->
+            <!-- Fuel Update Section
             <div class="nav-section">
                 <div class="nav-section-title">Fuel Update 📊</div>
                 <div class="nav-links">
-                    <a href="<%= request.getContextPath() %>/admin/fuel/update">Update Fuel Levels</a>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Logout Section -->
             <div class="nav-section nav-section-logout">
-                <a href="<%= request.getContextPath() %>/logout" class="logout-link">Logout</a>
+                <a href="<%= request.getContextPath() %>/user/logout" class="logout-link">Logout</a>
             </div>
         </nav>
     </div>

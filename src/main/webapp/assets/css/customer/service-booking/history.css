@@ -199,6 +199,12 @@
     color: white;
 }
 
+
+.status-awaiting-pickup {
+    background: var(--pending);
+    color: white;
+}
+
 .status-cancelled {
     background: var(--danger);
     color: white;

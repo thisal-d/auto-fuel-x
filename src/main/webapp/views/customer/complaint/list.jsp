@@ -15,7 +15,7 @@
     <div class="page-header">
         <h1>My Complaints</h1>
         <div class="actions">
-            <a href="<%=request.getContextPath()%>/customer/complaint/add-form" class="btn btn-primary">New Complaint</a>
+            <a href="<%=request.getContextPath()%>/views/customer/complaint/form.jsp" class="btn btn-primary">New Complaint</a>
         </div>
     </div>
 

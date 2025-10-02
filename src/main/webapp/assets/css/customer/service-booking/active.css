@@ -113,6 +113,11 @@
     color: white;
 }
 
+.status-awaiting-pickup {
+    background: var(--pending);
+    color: white;
+}
+
 .status-cancelled,
 .status-missed-appointment {
     background: var(--danger);

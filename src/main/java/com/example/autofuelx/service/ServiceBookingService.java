@@ -48,6 +48,10 @@ public class ServiceBookingService {
         return serviceBookingDAO.getBookingsByCustomerIDAndStatus(customerID, status);
     }
 
+    public List<ServiceBookingDTO> getActiveBookingByEmployee(int employeeID) {
+        return serviceBookingDAO.getActiveBookingByEmployee(employeeID);
+    }
+
     public List<ServiceBookingDTO> getBookingsByCustomerWithFilters(
             int customerID,
             String startDate,

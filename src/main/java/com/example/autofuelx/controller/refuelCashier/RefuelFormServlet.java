@@ -1,7 +1,9 @@
 package com.example.autofuelx.controller.refuelCashier;
 
+import com.example.autofuelx.model.Employee;
 import com.example.autofuelx.model.Fuel;
 import com.example.autofuelx.service.FuelService;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -18,6 +20,8 @@ public class RefuelFormServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        Employee employee = AuthUtil.checkEmployeeLogin(request, response, "Refuel Cashier");
+        if (employee == null) return;
 
         List<Fuel> fuelTypes = fuelService.getAllFuels();
         request.setAttribute("fuel-types", fuelTypes);

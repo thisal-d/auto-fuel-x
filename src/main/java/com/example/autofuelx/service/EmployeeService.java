@@ -52,7 +52,7 @@ public class EmployeeService {
     }
 
     public List<Employee> getEmployeesByTypeStatus(String type, String status) {
-        return employeeDAO.getEmployeesByType(type);
+        return employeeDAO.getEmployeesByType(type, status);
     }
 
     public Employee validateEmployee(String email, String password, String role) {

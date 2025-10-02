@@ -36,4 +36,5 @@ public class FuelService {
     public void deleteFuel(int fuelID) {
         fuelDAO.deleteFuel(fuelID);
     }
+
 }

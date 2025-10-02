@@ -1,9 +1,11 @@
 package com.example.autofuelx.controller.refuelCashier;
 
+import com.example.autofuelx.model.Employee;
 import com.example.autofuelx.model.FuelPurchase;
 import com.example.autofuelx.model.Vehicle;
 import com.example.autofuelx.service.FuelPurchaseService;
 import com.example.autofuelx.service.VehicleService;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -21,6 +23,9 @@ public class FuelPurchaseServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        Employee employee = AuthUtil.checkEmployeeLogin(request, response, "Refuel Cashier");
+        if (employee == null) return;
+
         String plateNumber = request.getParameter("plateNumber");
         int fuelID= Integer.parseInt(request.getParameter("fuelID"));
         double quantity = Double.parseDouble(request.getParameter("quantity"));

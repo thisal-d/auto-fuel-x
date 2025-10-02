@@ -1,0 +1,142 @@
+/* ===== fuelDetails-style2.css ===== */
+/* Table Layout for Fuel Details */
+
+.page-header {
+    margin-bottom: var(--spacing-xl);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--spacing-lg);
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    color: var(--accent-red);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.page-header h1::before {
+    content: "⛽";
+    font-size: 2rem;
+}
+
+.page-header p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+}
+
+.fuel-table-container {
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-tertiary));
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--border-color);
+}
+
+.fuel-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.fuel-table th {
+    background: linear-gradient(135deg, var(--accent-red), var(--accent-red-hover));
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: var(--spacing-md);
+    text-align: left;
+    font-weight: 600;
+}
+
+.fuel-table td {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.fuel-table tr:last-child td {
+    border-bottom: none;
+}
+
+.fuel-table tr:hover {
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
+.fuel-type-cell {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.fuel-type-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--accent-red), var(--accent-red-hover));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fuel-type-icon img {
+    width: 20px;
+    height: 20px;
+}
+
+.fuel-type-name {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.quantity-cell {
+    font-weight: 600;
+    color: var(--accent-blue);
+}
+
+.price-cell {
+    font-weight: 700;
+    color: var(--accent-red);
+    font-size: 1.1rem;
+}
+
+.actions-cell {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.no-data {
+    text-align: center;
+    padding: var(--spacing-xl);
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-tertiary));
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--border-color);
+}
+
+.no-data h3 {
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+    font-size: 1.5rem;
+}
+
+.no-data p {
+    margin-bottom: var(--spacing-lg);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .fuel-table-container {
+        overflow-x: auto;
+    }
+
+    .fuel-table {
+        min-width: 600px;
+    }
+
+    .actions-cell {
+        flex-direction: column;
+    }
+}

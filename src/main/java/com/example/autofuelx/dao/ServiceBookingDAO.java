@@ -530,6 +530,56 @@ public class ServiceBookingDAO {
         return bookings;
     }
 
+    public List<ServiceBookingDTO> getActiveBookingByEmployee(int employeeID) {
+        List<ServiceBookingDTO> bookingDTOList = new ArrayList<>();
+        String sql = """
+        SELECT sb.BookingID,
+               sb.BookingDate,
+               sb.BookingTime,
+               sb.Status,
+               sb.TotalCost,
+               c.FirstName AS CustomerFirstName,
+               c.LastName AS CustomerLastName,
+               c.Email AS CustomerEmail,
+               v.VehicleID,
+               v.PlateNumber,
+               v.Model AS VehicleModel,
+               v.Type AS VehicleType,
+               s.ServiceID,
+               s.Type AS ServiceType,
+               s.Description AS ServiceDescription,
+               s.Cost AS ServiceCost,
+               e.EmployeeID AS StaffID,
+               e.FirstName AS StaffFirstName,
+               e.LastName AS StaffLastName,
+               e.Role AS StaffRole
+        FROM ServiceBooking sb
+        JOIN Customer c ON sb.CustomerID = c.CustomerID
+        JOIN Vehicle v ON sb.VehicleID = v.VehicleID
+        JOIN Service s ON sb.ServiceID = s.ServiceID
+        LEFT JOIN Employee e ON sb.StaffID = e.EmployeeID
+        WHERE (sb.Status = ? OR sb.Status = ?) AND sb.StaffID = ?
+        ORDER BY sb.BookingDate DESC, sb.BookingTime DESC
+        """;
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, "Confirmed");
+            stmt.setString(2, "In Progress");
+            stmt.setInt(3, employeeID);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                bookingDTOList.add(extractBookingDetailFromResultSet(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return bookingDTOList;
+    }
+
     private ServiceBooking extractBookingFromResultSet(ResultSet rs) {
         try {
             ServiceBooking booking = new ServiceBooking();
@@ -604,7 +654,7 @@ public class ServiceBookingDAO {
             """;
         parameters.add(customerID);
 
-        // Date range filter
+        // date range filter
         if (startDateStr != null && !startDateStr.isEmpty()) {
             sql += " AND sb.BookingDate >= ?";
             parameters.add(LocalDate.parse(startDateStr));
@@ -614,25 +664,25 @@ public class ServiceBookingDAO {
             parameters.add(LocalDate.parse(endDateStr));
         }
 
-        // Vehicle type filter
+        // vehicle type filter
         if (vehicleTypeFilter != null && !vehicleTypeFilter.isEmpty() && !vehicleTypeFilter.equals("All")) {
             sql += " AND v.Type = ?";
             parameters.add(vehicleTypeFilter);
         }
 
-        // Vehicle filter
+        // vehicle filter
         if (vehicleFilter != null && !vehicleFilter.isEmpty() && !vehicleFilter.equals("All")) {
             sql += " AND v.VehicleID = ?";
             parameters.add(Integer.parseInt(vehicleFilter));
         }
 
-        // Status filter
+        // status filter
         if (statusFilter != null && !statusFilter.isEmpty() && !statusFilter.equals("All")) {
             sql += " AND sb.Status = ?";
             parameters.add(statusFilter);
         }
 
-        // Cost range filter
+        // cost range filter
         if (minCostStr != null && !minCostStr.isEmpty()) {
             sql += " AND sb.TotalCost >= ?";
             parameters.add(Double.parseDouble(minCostStr));
@@ -642,7 +692,7 @@ public class ServiceBookingDAO {
             parameters.add(Double.parseDouble(maxCostStr));
         }
 
-        // Keyword search in service type and description
+        // keywo
         if (keyword != null && !keyword.isEmpty()) {
             sql += " AND (s.Type LIKE ? OR s.Description LIKE ?)";
             String keywordPattern = "%" + keyword + "%";

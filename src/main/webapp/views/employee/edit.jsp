@@ -30,7 +30,10 @@
 <jsp:include page="/views/refuel-cashier/header.jsp"/>
 <%} else if (empType.equals("Customer Care Officer")) {%>
 <jsp:include page="/views/customer-care/header.jsp"/>
-<%}%>
+<%} else if (empType.equals("Admin")) {%>
+<jsp:include page="/views/admin/header.jsp"/>
+<%} else if (empType.equals("Service Center Staff")) {%>
+<jsp:include page="/views/service-center/header.jsp"/>
 
 <div class="profile-container">
     <h1>Edit Profile</h1>
@@ -67,7 +70,7 @@
             <input type="text" name="type" value="<%= employee.getType() %>" readonly />
 
             <label>Status:</label>
-            <select name="status">
+            <select name="status" required>
                 <option value="Active" <%= "Active".equals(employee.getStatus()) ? "selected" : "" %>>Active</option>
                 <option value="Inactive" <%= "Inactive".equals(employee.getStatus()) ? "selected" : "" %>>Inactive</option>
             </select>
@@ -78,7 +81,7 @@
             <label>Salary (Rs):</label>
             <input type="number" step="0.01" name="salary" value="<%= employee.getSalary() %>" required />
 
-            <%-- Role-specific attributes --%>
+            <%-- admin/ sevice center staff and erfuel cashier --%>
             <% if ("Service Center Staff".equals(empType)) { %>
             <label>Skill Set:</label>
             <input type="text" name="skillSet" value="<%= employee.getSkillSet() %>" />
@@ -93,7 +96,7 @@
             <% } %>
         </div>
 
-        <!-- Address -->
+        <!-- address -->
         <div class="profile-card">
             <h2>Address</h2>
             <label>Address No:</label>
@@ -106,7 +109,7 @@
             <input type="text" name="addressArea" value="<%= employee.getAddressArea() %>" />
         </div>
 
-        <!-- Actions -->
+        <!-- save -->
         <div class="profile-actions">
             <button type="submit" class="btn">Save Changes</button>
             <a href="<%=request.getContextPath()%>/views/employee/profile.jsp" class="btn cancel">Cancel</a>

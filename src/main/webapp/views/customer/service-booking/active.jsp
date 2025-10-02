@@ -40,7 +40,6 @@
         %>
         <div class="booking-card">
             <div class="booking-card-header">
-                <div class="booking-id">#<%= booking.getBookingID() %></div>
                 <span class="status-badge status-<%= booking.getStatus().toLowerCase().replace(" ", "-") %>">
                     <%= booking.getStatus() %>
                 </span>

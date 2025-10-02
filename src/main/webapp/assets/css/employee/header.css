@@ -1,66 +1,111 @@
-/* ===== header-style2.css ===== */
+/* ===== Employee Header Style 1: Modern Enhanced Navigation ===== */
 
 /* Subheader Container */
 .subheader-container {
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
 }
 
+/* Subheader Navigation */
 .subheader-nav {
     display: flex;
-    border-bottom: 2px solid var(--border-color);
+    justify-content: space-between;
+    align-items: center;
     position: relative;
 }
 
+/* Navigation Links */
 .subheader-link {
+    display: flex;
+    align-items: center;
     padding: var(--spacing-md) var(--spacing-lg);
     color: var(--text-secondary);
-    text-decoration: none;
     font-weight: 500;
+    text-decoration: none;
+    border-radius: var(--radius-md);
     transition: all 0.3s ease;
     position: relative;
-    margin-right: var(--spacing-md);
-    border-bottom: 3px solid transparent;
+    z-index: 2;
 }
 
 .subheader-link:hover {
-    color: var(--text-primary);
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--accent-red);
 }
 
 .subheader-link.active {
     color: var(--accent-red);
     font-weight: 600;
-    border-bottom: 3px solid var(--accent-red);
 }
 
-.subheader-link .nav-icon {
+/* Navigation Icon */
+.nav-icon {
     margin-right: var(--spacing-sm);
     font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
 }
 
-/* Active Tab Indicator */
+/* Logout Section */
+.nav-section-logout {
+    display: flex;
+    align-items: center;
+}
+
+.logout-link {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: var(--text-secondary);
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.logout-link:hover {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--accent-red);
+    border-color: var(--accent-red);
+}
+
+.logout-link::before {
+    margin-right: var(--spacing-sm);
+}
+
+/* Active Indicator */
 .active-indicator {
     position: absolute;
-    bottom: -2px;
+    bottom: 0;
     height: 3px;
     background: linear-gradient(90deg, var(--accent-red), var(--accent-red-light));
-    border-radius: 2px;
+    border-radius: 3px 3px 0 0;
     transition: all 0.3s ease;
+    z-index: 1;
 }
 
-/* Responsive Design */
+/* Responsive */
 @media (max-width: 768px) {
     .subheader-nav {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none; /* Firefox */
+        flex-direction: column;
+        gap: var(--spacing-md);
     }
 
-    .subheader-nav::-webkit-scrollbar {
-        display: none; /* Chrome, Safari, Edge */
+    .nav-section-logout {
+        align-self: flex-end;
     }
 
-    .subheader-link {
-        white-space: nowrap;
-        margin-right: var(--spacing-md);
+    .active-indicator {
+        display: none;
     }
 }

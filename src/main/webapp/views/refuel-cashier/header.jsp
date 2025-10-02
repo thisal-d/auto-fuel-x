@@ -18,6 +18,11 @@
         <a href="<%= request.getContextPath() %>/views/employee/profile.jsp" class="subheader-link">
             <span class="nav-icon">👤</span> Profile
         </a>
+
+        <!-- Logout Section -->
+        <div class="nav-section nav-section-logout">
+            <a href="<%= request.getContextPath() %>/user/logout" class="logout-link">Logout</a>
+        </div>
         <div class="active-indicator" style="width: 120px; left: 0;"></div>
     </div>
 </div>

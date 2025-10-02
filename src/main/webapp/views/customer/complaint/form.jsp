@@ -53,7 +53,7 @@
             </div>
 
             <div class="complaint-form-actions">
-                <a href="<%=request.getContextPath()%>/views/customer/dashboard.jsp" class="complaint-cancel-link">Cancel</a>
+                <a href="<%=request.getContextPath()%>/customer/complaint/list" class="complaint-cancel-link">Cancel</a>
                 <div class="complaint-action-buttons">
                     <button type="submit" class="btn btn-primary">Submit Complaint</button>
                 </div>

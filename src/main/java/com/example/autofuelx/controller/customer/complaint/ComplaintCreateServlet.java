@@ -19,15 +19,36 @@ public class ComplaintCreateServlet extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Get logged user
+        HttpSession session = request.getSession();
+        Customer customer = (Customer) session.getAttribute("customer");
+
+        // check user logged in ot not
+        if (customer==null) {
+            response.sendRedirect(request.getContextPath() + "/views/customer/login.jsp");
+        }
+        else {
+            response.sendRedirect(request.getContextPath() + "/customer/complaint/list");
+        }
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        // Get logged user
+        HttpSession session = request.getSession();
+        Customer customer = (Customer) session.getAttribute("customer");
+
+        if (customer==null) {
+            response.sendRedirect("/views/customer/login.jsp");
+        }
 
         // Catch data
         String title = request.getParameter("title");
         String description = request.getParameter("description");
-        // Get logged user
-        HttpSession session = request.getSession();
-        Customer customer = (Customer) session.getAttribute("customer");
 
         // Create complaint Object
         Complaint complaint = new Complaint();

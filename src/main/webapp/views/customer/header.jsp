@@ -24,7 +24,7 @@
             <div class="nav-section">
                 <div class="nav-section-title">Account</div>
                 <div class="nav-links">
-                    <a href="<%=request.getContextPath()%>/views/customer/dashboard.jsp">Dashboard</a>
+                    <!-- <a href="<%=request.getContextPath()%>/views/customer/dashboard.jsp">Dashboard</a> -->
                     <a href="<%=request.getContextPath()%>/views/customer/profile.jsp">Profile</a>
                 </div>
             </div>
@@ -61,18 +61,18 @@
                 </div>
             </div>
 
-            <div class="nav-section">
+            <!-- <div class="nav-section">
                 <div class="nav-section-title">Feedbacks</div>
                 <div class="nav-links">
                     <a href="<%=request.getContextPath()%>/views/customer/complaint/form.jsp">Give Feedbacks</a>
                     <a href="<%=request.getContextPath()%>/customer/complaint/list">My Feedbacks</a>
                 </div>
-            </div>
+            </div> -->
 
             <div class="nav-section nav-section-logout">
                 <div class="nav-section-title">Account</div>
                 <div class="nav-links">
-                    <a href="<%=request.getContextPath()%>/customer/logout" class="logout-link">Logout</a>
+                    <a href="<%=request.getContextPath()%>/user/logout" class="logout-link">Logout</a>
                 </div>
             </div>
         </nav>

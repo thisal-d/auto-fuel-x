@@ -39,7 +39,7 @@ public class ComplaintViewServlet extends HttpServlet {
         ReplyComplaint replyComplaint = replyComplaintService.getReplyComplaintByReplyComplaintID(complaintID);
         if (replyComplaint != null) {
             // User saw the customer care reply
-            replyComplaintService.updateReplyComplaintStatus(replyComplaint.getComplaintID(), "Closed");
+            replyComplaintService.updateReplyComplaintStatus(replyComplaint.getReplyComplaintID(), "Closed");
         }
 
         request.setAttribute("complaintReplyDTO", complaintDTO);

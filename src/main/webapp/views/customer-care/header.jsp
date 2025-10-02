@@ -11,13 +11,23 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/employee/header.css">
 </head>
 <div class="subheader-container">
+
     <div class="subheader-nav">
+
         <a href="<%= request.getContextPath() %>/customer-care/complaint/list" class="subheader-link active">
-            <span class="nav-icon">⛽</span> Refuel Form
+            <span class="nav-icon"> 📄 </span> Complaint Management
         </a>
+
         <a href="<%= request.getContextPath() %>/views/employee/profile.jsp" class="subheader-link">
-            <span class="nav-icon">👤</span> Profile
+            <span class="nav-icon"> 👤 </span> Profile
         </a>
+
+        <!-- Logout Section -->
+        <div class="nav-section nav-section-logout">
+            <a href="<%= request.getContextPath() %>/user/logout" class="logout-link">Logout</a>
+        </div>
+
         <div class="active-indicator" style="width: 120px; left: 0;"></div>
+
     </div>
 </div>

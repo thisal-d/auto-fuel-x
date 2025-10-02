@@ -13,6 +13,7 @@
     response.sendRedirect(request.getContextPath() + "/views/employee/login.jsp");
     return;
   }
+  
   List<String> phoneNumbers = (List<String>) session.getAttribute("phone-numbers");
   String empType = employee.getType();   // empType comes from employee object
   String firstInitial = employee.getFirstName() != null && !employee.getFirstName().isEmpty() ?
@@ -35,7 +36,10 @@
   <jsp:include page="/views/refuel-cashier/header.jsp"/>
 <%} else if (empType.equals("Customer Care Officer")) {%>
   <jsp:include page="/views/customer-care/header.jsp"/>
+<%} else if (empType.equals("Service Center Staff")) {%>
+<jsp:include page="/views/service-center/header.jsp"/>
 <%}%>
+
 
 <div class="profile-container">
   <!-- Profile Header with Avatar -->

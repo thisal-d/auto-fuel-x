@@ -11,6 +11,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     List<Employee> employees = (List<Employee>) request.getAttribute("employees");
+    System.out.println("All employee Count : " + employees.size());
     String type = (String) request.getAttribute("type");
     String status = (String) request.getAttribute("status");
     String hireDateFrom = (String) request.getAttribute("hireDateFrom");
@@ -44,6 +45,7 @@
                 <label class="filter-label">Employee Type:</label>
                 <select name="type" class="form-control">
                     <option value="">All Types</option>
+                    <option value="Customer Care Officer" <% if ("Customer Care Officer".equals(type)) { %>selected<% } %>>Customer Care Officer</option>
                     <option value="Service Center Staff" <% if ("Service Center Staff".equals(type)) { %>selected<% } %>>Service Center Staff</option>
                     <option value="Refuel Cashier" <% if ("Refuel Cashier".equals(type)) { %>selected<% } %>>Refuel Cashier</option>
                     <option value="Admin" <% if ("Admin".equals(type)) { %>selected<% } %>>Admin</option>

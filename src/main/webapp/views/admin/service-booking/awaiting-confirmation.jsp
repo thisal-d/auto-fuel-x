@@ -71,13 +71,15 @@
                                 <input type="hidden" name="bookingId" value="<%= booking.getBookingID() %>">
                                 <input type="hidden" name="status" value="Confirmed">
                                 <div class="form-group">
-                                    <select name="employeeId" class="form-control">
-                                        <%for (Employee e: employees) {
-                                            String employeeDetails = e.getFirstName() + " " + e.getLastName() + " - " + e.getSkillSet();
-                                        %>
-                                        <option value="<%=e.getEmployeeID()%>"><%=employeeDetails%></option>
-                                        <%}%>
-                                    </select>
+                                    <label>
+                                        <select name="employeeId" class="form-control" required>
+                                            <%for (Employee e: employees) {
+                                                String employeeDetails = e.getFirstName() + " " + e.getLastName() + " - " + e.getSkillSet();
+                                            %>
+                                            <option value="<%=e.getEmployeeID()%>"><%=employeeDetails%></option>
+                                            <%}%>
+                                        </select>
+                                    </label>
                                 </div>
                                 <input type="hidden" name="redirect-url" value="/admin/service-booking/view?status=awaiting-confirmation">
                                 <button type="submit" class="btn btn-success">Approve</button>

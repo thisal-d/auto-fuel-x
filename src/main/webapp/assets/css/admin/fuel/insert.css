@@ -1,0 +1,147 @@
+/* ===== add-fuel-quantity-style1.css ===== */
+/* Container Styles */
+.fuel-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+.fuel-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.fuel-title {
+    font-size: 2rem;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+}
+
+.fuel-title::before {
+    content: "⛽";
+    font-size: 2.2rem;
+}
+
+/* Form Styles */
+.fuel-form {
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-tertiary));
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-xl);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border-color);
+}
+
+.form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-label {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: var(--spacing-md);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--accent-red);
+    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.3);
+    background-color: var(--bg-tertiary);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+}
+
+/* Fuel Inventory Styles */
+.fuel-inventory {
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-tertiary));
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border-color);
+}
+
+.inventory-title {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-lg);
+    color: var(--text-primary);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+}
+
+.inventory-title::before {
+    content: "📊";
+    font-size: 1.7rem;
+}
+
+.fuel-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.fuel-item {
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.fuel-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+.fuel-type {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.fuel-type::before {
+    content: "⛽";
+    font-size: 1rem;
+}
+
+.fuel-quantity {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-red);
+    text-align: center;
+}
+
+.fuel-unit {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+}

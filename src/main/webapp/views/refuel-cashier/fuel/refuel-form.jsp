@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/refuel-cashier/fuel/refuel-form.css">
 </head>
 <body>
+
+<jsp:include page="/views/refuel-cashier/header.jsp"/>
+
 <div class="container refuel-container">
     <%
         String fuelPurchaseStatus = (String) request.getParameter("purchase-status");

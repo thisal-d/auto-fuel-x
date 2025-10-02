@@ -1,0 +1,129 @@
+/* ===== add-fuel-type-style1.css ===== */
+/* Container Styles */
+.fuel-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+.fuel-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.fuel-title {
+    font-size: 2rem;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+}
+
+.fuel-title::before {
+    content: "⛽";
+    font-size: 2.2rem;
+}
+
+/* Form Styles */
+.fuel-form {
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-tertiary));
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-xl);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border-color);
+}
+
+.form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-label {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: var(--spacing-md);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--accent-red);
+    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.3);
+    background-color: var(--bg-tertiary);
+}
+
+.form-help {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    margin-top: var(--spacing-xs);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+}
+
+/* Fuel Info Card */
+.fuel-info-card {
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-tertiary));
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border-color);
+    margin-top: var(--spacing-xl);
+}
+
+.info-card-title {
+    font-size: 1.3rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.info-card-title::before {
+    content: "ℹ️";
+    font-size: 1.5rem;
+}
+
+.info-card-content {
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+.info-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.info-list li {
+    margin-bottom: var(--spacing-sm);
+    padding-left: var(--spacing-lg);
+    position: relative;
+}
+
+.info-list li::before {
+    content: "•";
+    color: var(--accent-red);
+    font-weight: bold;
+    position: absolute;
+    left: var(--spacing-sm);
+}

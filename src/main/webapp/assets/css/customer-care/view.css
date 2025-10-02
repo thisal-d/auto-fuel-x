@@ -1,0 +1,157 @@
+/* ===== complaint-view.css - Extends base.css for Complaint View Page ===== */
+
+/* ===== Layout Structure ===== */
+.complaint-container {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: var(--spacing-md);
+}
+
+.complaint-header {
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+    padding: var(--spacing-lg) 0;
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border-color);
+}
+
+.complaint-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent-red);
+    text-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
+    margin: 0;
+    padding: 0 var(--spacing-lg);
+}
+
+/* ===== Back Link ===== */
+.back-link {
+    margin-bottom: var(--spacing-lg);
+}
+
+/* ===== Section Styles ===== */
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* ===== Complaint Details Section ===== */
+.complaint-details-section,
+.reply-section,
+.reply-form-section {
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-tertiary));
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--border-color);
+}
+
+.complaint-details-card,
+.reply-card,
+.reply-form-card {
+    background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-card));
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+}
+
+/* ===== Detail Rows ===== */
+.detail-row {
+    display: flex;
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.detail-row:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.detail-label {
+    flex: 0 0 150px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.detail-value {
+    flex: 1;
+    color: var(--text-secondary);
+}
+
+/* ===== Form Styles ===== */
+.reply-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.form-control {
+    width: 100%;
+    padding: var(--spacing-sm);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--accent-red);
+    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.3);
+    background-color: var(--bg-tertiary);
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+    .detail-row {
+        flex-direction: column;
+    }
+
+    .detail-label {
+        flex: 0 0 auto;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .form-actions {
+        justify-content: stretch;
+    }
+
+    .form-actions .btn {
+        flex: 1;
+    }
+}

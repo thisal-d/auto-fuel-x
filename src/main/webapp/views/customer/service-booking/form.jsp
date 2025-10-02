@@ -77,7 +77,7 @@
 
             <div class="service-feature">
                 <div class="feature-icon">
-                    <img src="#" alt="expert icon" width="20" height="20">
+                    <img src="<%=request.getContextPath()%>/assets/imgs/service-medal.png" alt="expert icon" width="20" height="20">
                 </div>
                 <div class="feature-text">
                     <h3>Expert Technicians</h3>
@@ -87,7 +87,7 @@
 
             <div class="service-feature">
                 <div class="feature-icon">
-                    <img src="#" alt="time icon" width="20" height="20">
+                    <img src="<%=request.getContextPath()%>/assets/imgs/service-time.png" alt="time icon" width="20" height="20">
                 </div>
                 <div class="feature-text">
                     <h3>Quick Service</h3>
@@ -97,7 +97,7 @@
 
             <div class="service-feature">
                 <div class="feature-icon">
-                    <img src="#" alt="quality icon" width="20" height="20">
+                    <img src="<%=request.getContextPath()%>/assets/imgs/service-quality.png" alt="quality icon" width="20" height="20">
                 </div>
                 <div class="feature-text">
                     <h3>Quality Parts</h3>
@@ -107,7 +107,7 @@
 
             <div class="service-feature">
                 <div class="feature-icon">
-                    <img src="#" alt="warranty icon" width="20" height="20">
+                    <img src="<%=request.getContextPath()%>/assets/imgs/service-shield.png" alt="warranty icon" width="20" height="20">
                 </div>
                 <div class="feature-text">
                     <h3>Service Warranty</h3>
@@ -117,5 +117,26 @@
         </div>
     </div>
 </div>
+
+<script>
+    const now = new Date();
+
+    // --- Min date = tomorrow ---
+    const tomorrow = new Date(now);
+    tomorrow.setDate(now.getDate() + 1);
+    const minDate = tomorrow.toISOString().split("T")[0];
+
+    const dateInput = document.getElementById("booking-date");
+    dateInput.setAttribute("min", minDate);
+
+    // --- Max date = 1 year from today ---
+    const oneYearLater = new Date(now);
+    oneYearLater.setDate(now.getDate() + 365);
+    const maxDate = oneYearLater.toISOString().split("T")[0];
+
+    dateInput.setAttribute("max", maxDate);
+</script>
+
+
 </body>
 </html>

@@ -11,8 +11,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Add New Employee</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/addEmployee-style1.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/base.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/admin/employee/add.css">
 </head>
 <body>
 
@@ -59,15 +59,15 @@
                 </tr>
                 <tr>
                     <td>Address No</td>
-                    <td><input type="text" name="addressNo"></td>
+                    <td><input type="text" name="addressNo" required></td>
                 </tr>
                 <tr>
                     <td>Address Lane</td>
-                    <td><input type="text" name="addressLane"></td>
+                    <td><input type="text" name="addressLane" required></td>
                 </tr>
                 <tr>
                     <td>Address Area</td>
-                    <td><input type="text" name="addressArea"></td>
+                    <td><input type="text" name="addressArea" required></td>
                 </tr>
                 <tr>
                     <td>Email</td>

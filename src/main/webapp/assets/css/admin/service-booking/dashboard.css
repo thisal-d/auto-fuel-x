@@ -1,0 +1,289 @@
+/* ===== Dashboard Style 1: Card-Based with Icons ===== */
+
+/* Dashboard Header */
+.dashboard-header {
+    margin-bottom: var(--spacing-xl);
+    position: relative;
+}
+
+.dashboard-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-sm);
+    position: relative;
+    display: inline-block;
+}
+
+.dashboard-header h1:after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: var(--accent-red);
+}
+
+.dashboard-header p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: 600px;
+}
+
+/* Status Cards Container */
+.status-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Status Card */
+.status-card {
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-tertiary));
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.status-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+}
+
+.status-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: var(--accent-red);
+}
+
+.status-card.total::before {
+    background: var(--accent-red);
+}
+
+.status-card.pending::before {
+    background: var(--pending);
+}
+
+.status-card.confirmed::before {
+    background: var(--success);
+}
+
+.status-card.reschedule::before {
+    background: var(--warning);
+}
+
+.status-card.progress::before {
+    background: var(--accent-red);
+}
+
+.status-card.pickup::before {
+    background: var(--accent-blue);
+}
+
+.status-card.completed::before {
+    background: var(--success);
+}
+
+.status-card.cancelled::before {
+    background: var(--danger);
+}
+
+.status-card.missed::before {
+    background: var(--danger);
+}
+
+.status-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.status-card-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.status-card.total .status-card-icon {
+    background: rgba(231, 76, 60, 0.1);
+    color: var(--accent-red);
+}
+
+.status-card.pending .status-card-icon {
+    background: rgba(155, 89, 182, 0.1);
+    color: var(--pending);
+}
+
+.status-card.confirmed .status-card-icon {
+    background: rgba(38, 162, 105, 0.1);
+    color: var(--success);
+}
+
+.status-card.reschedule .status-card-icon {
+    background: rgba(205, 147, 9, 0.1);
+    color: var(--warning);
+}
+
+.status-card.progress .status-card-icon {
+    background: rgba(231, 76, 60, 0.1);
+    color: var(--accent-red);
+}
+
+.status-card.pickup .status-card-icon {
+    background: rgba(26, 95, 180, 0.1);
+    color: var(--accent-blue);
+}
+
+.status-card.completed .status-card-icon {
+    background: rgba(38, 162, 105, 0.1);
+    color: var(--success);
+}
+
+.status-card.cancelled .status-card-icon {
+    background: rgba(231, 76, 60, 0.1);
+    color: var(--danger);
+}
+
+.status-card.missed .status-card-icon {
+    background: rgba(231, 76, 60, 0.1);
+    color: var(--danger);
+}
+
+.status-card-title {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.status-card-count {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-md);
+}
+
+.status-card-action {
+    display: inline-block;
+    color: var(--accent-red);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.status-card-action:hover {
+    color: var(--accent-red-light);
+    text-decoration: underline;
+}
+
+/* Quick Actions Section */
+.quick-actions {
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-tertiary));
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--border-color);
+    margin-bottom: var(--spacing-xl);
+}
+
+.quick-actions h2 {
+    font-size: 1.75rem;
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+    display: inline-block;
+}
+
+.quick-actions h2:after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--accent-red);
+}
+
+.quick-actions-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.quick-actions-list li {
+    list-style: none;
+}
+
+.quick-actions-list li a {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-md);
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.quick-actions-list li a:hover {
+    background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-card));
+    border-color: var(--accent-red);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+.quick-actions-list li a:before {
+    content: '→';
+    margin-right: var(--spacing-sm);
+    color: var(--accent-red);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Back Link */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-top: var(--spacing-lg);
+    transition: all 0.3s ease;
+}
+
+.back-link:hover {
+    color: var(--accent-red);
+}
+
+.back-link:before {
+    content: '←';
+    margin-right: var(--spacing-sm);
+    font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .status-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-actions-list {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-header h1 {
+        font-size: 2rem;
+    }
+}

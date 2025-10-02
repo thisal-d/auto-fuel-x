@@ -8,6 +8,7 @@ import java.util.List;
 import com.example.autofuelx.model.Employee;
 import com.example.autofuelx.service.EmployeePhoneNumberService;
 import com.example.autofuelx.service.EmployeeService;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -30,13 +31,8 @@ public class EmployeeUpdateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
-        Employee employee = (Employee) session.getAttribute("employee");
-
-        if (employee == null) {
-            response.sendRedirect(request.getContextPath() + "/views/employee/login.jsp");
-            return;
-        }
+        Employee employee = AuthUtil.checkEmployeeLogin(request, response);
+        if (employee == null) return;
 
         try {
             // --- Common Fields ---
@@ -63,12 +59,12 @@ public class EmployeeUpdateServlet extends HttpServlet {
             }
             // Customer Care Officer → no extra fields
 
-            // Update Employee in DB
+            // update Employee in DB
             employeeService.updateEmployee(employee);
 
-            // Update phone numbers in DB
 
-            // Update session
+            // update session
+            HttpSession session = request.getSession();
             session.setAttribute("employee", employee);
 
             // Redirect back to profile page

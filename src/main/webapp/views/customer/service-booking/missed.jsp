@@ -71,9 +71,9 @@
             <div class="booking-card-actions">
                 <form class="action-form" action="<%=request.getContextPath()%>/user/service-booking/update-status" method="post">
                     <input type="hidden" value="<%=booking.getBookingID()%>" name="booking-ID">
-                    <input type="hidden" value="Canceled" name="status">
+                    <input type="hidden" value="Cancelled" name="status">
                     <input type="hidden" value="/customer/service-booking/list?status=missed" name="redirect-url">
-                    <input type="submit" value="Set as canceled">
+                    <input type="submit" value="Set as cancelled">
                 </form>
             </div>
         </div>

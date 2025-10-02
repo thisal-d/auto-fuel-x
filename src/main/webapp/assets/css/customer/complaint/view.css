@@ -69,10 +69,18 @@
     letter-spacing: 0.5px;
 }
 
+/* Detail Value Improvements for Long Text */
 .detail-value {
     color: var(--text-primary);
-    font-size: 1.1rem;
-    line-height: 1.5;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0.5rem 0;
+    white-space: pre-wrap;   /* preserve newlines and wrap text */
+    word-break: break-word;  /* break long words if needed */
+    background: rgba(0, 0, 0, 0.05);
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    max-width: 100%;         /* prevent overflow */
 }
 
 .detail-row {
@@ -177,11 +185,15 @@
 .status-open {
     background: linear-gradient(135deg, var(--accent-red), var(--accent-red-hover));
     color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
 }
 
 .status-closed {
     background: linear-gradient(135deg, var(--success), #1e7e34);
     color: white;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
 }
 
 
