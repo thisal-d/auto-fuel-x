@@ -72,7 +72,7 @@
         <img src="<%=request.getContextPath()%>/assets/imgs/no-complaint.png" alt="empty complaint list icon">
         <h2>No complaints available</h2>
         <p>You haven't submitted any complaints yet.</p>
-        <a href="<%=request.getContextPath()%>/customer/complaint/add-form" class="btn btn-primary">Submit a Complaint</a>
+        <a href="<%=request.getContextPath()%>/customer/complaint/form.jsp" class="btn btn-primary">Submit a Complaint</a>
     </div>
     <%
         }
