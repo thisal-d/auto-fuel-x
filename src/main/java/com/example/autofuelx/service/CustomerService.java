@@ -40,4 +40,8 @@ public class CustomerService {
         return customerDAO.updateCustomer(customer);
     }
 
+    public Customer getCustomerByEmail(String email) {
+        return customerDAO.getCustomerByEmail(email);
+    }
+
 }

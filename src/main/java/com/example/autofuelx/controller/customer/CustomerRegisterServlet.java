@@ -26,6 +26,7 @@ public class CustomerRegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+
         // Get form data
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
@@ -34,6 +35,12 @@ public class CustomerRegisterServlet extends HttpServlet {
         String addressNo = request.getParameter("addressNo");
         String addressLane = request.getParameter("addressLane");
         String addressArea = request.getParameter("addressArea");
+
+        Customer c = customerService.getCustomerByEmail(email);
+        if (c != null){
+            request.setAttribute("register-error-message", "Email Already in use..!");
+            response.sendRedirect(request.getContextPath() + "/views/customer/registration-success.jsp");
+        }
 
         // Create Customer object
         Customer customer = new Customer();

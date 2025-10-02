@@ -35,8 +35,17 @@ public class VehicleAddServlet extends HttpServlet {
             return;
         }
 
+
+        String plateNumber = request.getParameter("plateNumber");
+        // Check vehicle already exist or not
+
+        Vehicle v = vehicleService.getVehicleByPlateNo(plateNumber);
+        if (v != null) {
+            request.setAttribute("errorMessage", "Vehicle already exists..!");
+            response.sendRedirect(request.getContextPath() + "/views/customer/vehicle/add.jsp"); // Redirect to vehicle add page
+        }
+
         try {
-            String plateNumber = request.getParameter("plateNumber");
             String type = request.getParameter("type");
             String model = request.getParameter("model");
             String color = request.getParameter("color");
@@ -50,12 +59,14 @@ public class VehicleAddServlet extends HttpServlet {
             vehicle.setColor(color);
             vehicle.setCustomerID(customer.getCustomerID());
             vehicle.setRegistrationDate(registrationDate);
-
             vehicleService.addVehicle(vehicle);
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        }catch (Exception e){
+            request.setAttribute("errorMessage", "Something Went Wrong..!");
+            response.sendRedirect(request.getContextPath() + "/views/customer/vehicle/add.jsp"); // Redirect to vehicle add page
         }
+
+
 
         response.sendRedirect(request.getContextPath() + "/customer/vehicle/list");
     }

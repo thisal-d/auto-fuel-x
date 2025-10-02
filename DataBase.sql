@@ -248,9 +248,9 @@ VALUES
 -- Insert Fuel
 INSERT INTO Fuel (Type, Quantity, CostPerLiter)
 VALUES
-    ('Regular', 1000.00, 1.25),
-    ('Mid-Grade', 800.00, 1.35),
-    ('Premium', 600.00, 1.45),
+    ('Petrol 95', 1000.00, 1.25),
+    ('Petrol 92', 800.00, 1.35),
+    ('Super Diesel', 600.00, 1.45),
     ('Diesel', 500.00, 1.30);
 
 -- Insert Fuel Suppliers

@@ -105,6 +105,24 @@ public class CustomerDAO {
         return null;
     }
 
+    public Customer getCustomerByEmail(String email) {
+        String query = "SELECT * FROM Customer WHERE Email = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, email);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return extractCustomerFromResultSet(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public boolean deleteCustomer(int id) {
         String query = "DELETE FROM Customer WHERE CustomerID = ?";
 

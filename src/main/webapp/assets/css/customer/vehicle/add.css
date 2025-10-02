@@ -95,6 +95,15 @@
     background-color: rgba(231, 76, 60, 0.1);
 }
 
+.error-message {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--danger);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    text-align: center;
+    border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
 .action-buttons {
     display: flex;
     gap: 1rem;

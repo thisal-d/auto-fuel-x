@@ -64,6 +64,16 @@
                     <button type="submit" class="btn btn-primary">Add Vehicle</button>
                 </div>
             </div>
+
+            <%
+                String error = (String) request.getAttribute("errorMessage");
+                if (error != null) {
+            %>
+            <div class="error-message">
+                <%= error %>
+            </div>
+            <% } %>
+
         </form>
     </div>
 </div>
