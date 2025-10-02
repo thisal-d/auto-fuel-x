@@ -37,9 +37,11 @@ public class CustomerRegisterServlet extends HttpServlet {
         String addressArea = request.getParameter("addressArea");
 
         Customer c = customerService.getCustomerByEmail(email);
+        System.out.println("Regiter User : " + c );
         if (c != null){
             request.setAttribute("register-error-message", "Email Already in use..!");
-            response.sendRedirect(request.getContextPath() + "/views/customer/registration-success.jsp");
+            request.getRequestDispatcher("/views/customer/register.jsp").forward(request, response);
+            return;
         }
 
         // Create Customer object

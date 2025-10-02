@@ -78,17 +78,18 @@
                     </div>
                 </div>
 
+                <p><%
+                       String error = (String) request.getAttribute("register-error-message");
+                       if (error != null) {
+                    %>
+                    <div class="error-message">
+                        <%= error %>
+                    </div>
+                    <% } %>
+                </p>
                 <button type="submit" class="register-button">Register</button>
             </form>
 
-            <%
-                String error = (String) request.getAttribute("register-error-message");
-                if (error != null) {
-            %>
-            <div class="error-message">
-                <%= error %>
-            </div>
-            <% } %>
 
             <div class="login-link">
                 Already have an account? <a href="<%=request.getContextPath()%>/views/customer/login.jsp">Login Here</a>

@@ -176,7 +176,7 @@ public class EmployeeDAO {
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, type);
-            stmt.setString(1, status);
+            stmt.setString(2, status);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {

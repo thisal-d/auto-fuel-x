@@ -68,6 +68,8 @@ public class ServiceBookingListAdminServlet extends HttpServlet {
         else bookings = serviceBookingService.getAllBookings();
 
         List<Employee> employees = employeeService.getEmployeesByTypeStatus("Service Center Staff", "Active");
+
+        System.out.println(employees.size());
         request.setAttribute("bookings", bookings);
         request.setAttribute("employees", employees);
 
