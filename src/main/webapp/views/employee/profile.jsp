@@ -13,7 +13,7 @@
     response.sendRedirect(request.getContextPath() + "/views/employee/login.jsp");
     return;
   }
-  
+
   List<String> phoneNumbers = (List<String>) session.getAttribute("phone-numbers");
   String empType = employee.getType();   // empType comes from employee object
   String firstInitial = employee.getFirstName() != null && !employee.getFirstName().isEmpty() ?

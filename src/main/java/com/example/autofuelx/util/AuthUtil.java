@@ -12,7 +12,9 @@ public class AuthUtil {
 
     // returns logged in customer or redirects if not logged in
     public static Customer checkCustomerLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
         HttpSession session = request.getSession();
+
         Customer customer = (session != null) ? (Customer) session.getAttribute("customer") : null;
 
         if (customer == null) {
@@ -20,6 +22,7 @@ public class AuthUtil {
             return null;
         }
         return customer;
+
     }
 
     // returns logged in employee or redirects if not logged in
