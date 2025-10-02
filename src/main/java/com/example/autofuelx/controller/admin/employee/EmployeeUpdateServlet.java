@@ -23,6 +23,8 @@ public class EmployeeUpdateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int employeeID = Integer.parseInt(request.getParameter("employeeID"));
+        Employee employee = employeeService.getEmployeeById(employeeID);
+
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         Date dateOfBirth = Date.valueOf(request.getParameter("dateOfBirth"));
@@ -38,7 +40,6 @@ public class EmployeeUpdateServlet extends HttpServlet {
         String shift = request.getParameter("shift");
         String type = request.getParameter("type");
 
-        Employee employee = new Employee();
         employee.setEmployeeID(employeeID);
         employee.setFirstName(firstName);
         employee.setLastName(lastName);

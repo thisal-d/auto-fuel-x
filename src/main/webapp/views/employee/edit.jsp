@@ -34,6 +34,7 @@
 <jsp:include page="/views/admin/header.jsp"/>
 <%} else if (empType.equals("Service Center Staff")) {%>
 <jsp:include page="/views/service-center/header.jsp"/>
+<%}%>
 
 <div class="profile-container">
     <h1>Edit Profile</h1>
@@ -54,7 +55,7 @@
             <input type="date" name="dateOfBirth" value="<%= employee.getDateOfBirth() %>" required />
 
             <label>Email:</label>
-            <input type="email" name="email" value="<%= employee.getEmail() %>" required />
+            <input type="email" name="email" value="<%= employee.getEmail() %>" required readonly/>
 
             <label>Password:</label>
             <input type="password" name="password" value="<%= employee.getPassword() %>" required />

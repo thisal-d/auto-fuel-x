@@ -1,0 +1,135 @@
+/* ===== updateEmployee-style1.css ===== */
+/* Two-Column Layout for Employee Update */
+
+.page-header {
+    margin-bottom: var(--spacing-xl);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--spacing-lg);
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    color: var(--accent-red);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.page-header h1::before {
+    content: "👤";
+    font-size: 2rem;
+}
+
+.page-header p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+}
+
+.employee-update-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+}
+
+.employee-form-section .card,
+.phone-numbers-section .card {
+    height: 100%;
+}
+
+.employee-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+}
+
+.address-fields {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    gap: var(--spacing-sm);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+}
+
+.phone-list {
+    margin-bottom: var(--spacing-lg);
+}
+
+.phone-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-sm);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.phone-item:hover {
+    background-color: rgba(231, 76, 60, 0.1);
+    transform: translateX(5px);
+}
+
+.phone-number {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.phone-number img {
+    width: 24px;
+    height: 24px;
+}
+
+.add-phone-form {
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.add-phone-form h3 {
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--accent-blue);
+}
+
+.no-phone-numbers {
+    text-align: center;
+    padding: var(--spacing-lg);
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    color: var(--text-dim);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .employee-update-container {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .address-fields {
+        grid-template-columns: 1fr;
+    }
+}

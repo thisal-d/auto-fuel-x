@@ -4,6 +4,7 @@ import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.model.Vehicle;
 import com.example.autofuelx.service.VehicleService;
 
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,8 +25,7 @@ public class VehicleAddServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
         HttpSession session = request.getSession();
         Customer customer = (Customer) session.getAttribute("customer");
@@ -42,7 +42,8 @@ public class VehicleAddServlet extends HttpServlet {
         Vehicle v = vehicleService.getVehicleByPlateNo(plateNumber);
         if (v != null) {
             request.setAttribute("errorMessage", "Vehicle already exists..!");
-            response.sendRedirect(request.getContextPath() + "/views/customer/vehicle/add.jsp"); // Redirect to vehicle add page
+            request.getRequestDispatcher("/views/customer/vehicle/add.jsp").forward(request, response); // Redirect to vehicle add page
+            return;
         }
 
         try {
