@@ -64,6 +64,6 @@ public class EmployeeUpdateServlet extends HttpServlet {
         }
 
         employeeService.updateEmployee(employee);
-        response.sendRedirect("/admin/employee/edit-form?employee-ID=" + employeeID);
+        response.sendRedirect(request.getContextPath() + "/admin/employee/edit-form?employee-ID=" + employeeID);
     }
 }
