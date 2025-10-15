@@ -84,7 +84,7 @@ public class ReplyComplaintDAO {
     // Update reply complaint
     public boolean updateReplyComplaint(ReplyComplaint replyComplaint) {
         String sql = "UPDATE ReplyComplaint SET staffID = ?, complaintID = ?, title = ?, description = ?, " +
-                "updatedDate = ?, updateTime = ? WHERE replyComplaintID = ?";
+                "updatedDate = ?, updateTime = ?, Status = ? WHERE replyComplaintID = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -99,8 +99,9 @@ public class ReplyComplaintDAO {
 
             stmt.setDate(5, currentDate);
             stmt.setTime(6, currentTime);
+            stmt.setString(7, "Sent");
 
-            stmt.setInt(7, replyComplaint.getReplyComplaintID());
+            stmt.setInt(8, replyComplaint.getReplyComplaintID());
 
             return stmt.executeUpdate() > 0;
         } catch (Exception e) {

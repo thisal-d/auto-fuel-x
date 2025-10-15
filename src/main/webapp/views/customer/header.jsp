@@ -24,7 +24,7 @@
             <div class="nav-section">
                 <div class="nav-section-title">Account</div>
                 <div class="nav-links">
-                    <!-- <a href="<%=request.getContextPath()%>/views/customer/dashboard.jsp">Dashboard</a> -->
+                    <a href="<%=request.getContextPath()%>/customer/dashboard">Dashboard</a>
                     <a href="<%=request.getContextPath()%>/views/customer/profile.jsp">Profile</a>
                 </div>
             </div>

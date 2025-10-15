@@ -103,10 +103,10 @@
           </td>
           <td><%= complaint.getDescription() %></td>
           <td>
-            <% if ("Open".equals(status)) { %>
-            <span class="status status-pending">Open</span>
-            <% } else if ("Closed".equals(status)) { %>
-            <span class="status status-completed">Closed</span>
+            <% if ("Sent".equals(status)) { %>
+            <span class="status status-pending">Unread</span>
+            <% } else if ("Seen".equals(status)) { %>
+            <span class="status status-completed">Read</span>
             <% } %>
           </td>
           <td><%= complaint.getCreatedDate() %></td>
@@ -114,14 +114,13 @@
           <td><%= complaint.getUpdatedDate() %></td>
           <td><%= complaint.getUpdateTime() %></td>
           <td>
-            <% if ("Replied".equals(complaint.getReplyStatus())) { %>
+            <% if ("Sent".equals(complaint.getReplyStatus()) || "Seen".equals(complaint.getReplyStatus())) { %>
             <span class="status status-confirmed">Replied</span>
             <% } else { %>
             <span class="status status-awaiting">Pending</span>
             <% } %>
           </td>
-          <td><%= complaint.getRepliedEmployeeName() %> (<%= complaint.getRepliedEmployeeType() %>)</td>
-          <td><%= complaint.getReplyTitle() %></td>
+          <td><%= (complaint.getRepliedEmployeeName()!=null ?complaint.getRepliedEmployeeName() : "N/A")  %></td>
         </tr>
         <%   }
         } %>

@@ -29,7 +29,7 @@
         <a href="<%=request.getContextPath()%>/customer/complaint/view?complaintID=<%=complaint.getComplaintID()%>" class="complaint-link">
             <div class="complaint-header">
                 <h3><%= complaint.getTitle() %></h3>
-                <span class="status-<%= complaint.getStatus().toLowerCase().replace(' ','-') %>"><%= complaint.getStatus() %></span>
+                <span class="status-<%= complaint.getStatus().toLowerCase() %>"><%= complaint.getStatus() %></span>
             </div>
             <div class="complaint-body">
                 <p><%= complaint.getDescription() %></p>
@@ -51,7 +51,7 @@
                 <img src="<%=request.getContextPath()%>/assets/imgs/no-reply.png" alt="no reply icon">
                 <p>No reply available</p>
             </div>
-            <% } else if (complaint.getReplyStatus().equals("Open")) { %>
+            <% } else if (complaint.getReplyStatus().equals("Sent")) { %>
             <div class="reply-available">
                 <img src="<%=request.getContextPath()%>/assets/imgs/msg-available.png" alt="new message icon">
                 <a href="<%=request.getContextPath()%>/customer/complaint/view?complaintID=<%=complaint.getComplaintID()%>">New reply available</a>
@@ -72,7 +72,7 @@
         <img src="<%=request.getContextPath()%>/assets/imgs/no-complaint.png" alt="empty complaint list icon">
         <h2>No complaints available</h2>
         <p>You haven't submitted any complaints yet.</p>
-        <a href="<%=request.getContextPath()%>/customer/complaint/form.jsp" class="btn btn-primary">Submit a Complaint</a>
+        <a href="<%=request.getContextPath()%>/views/customer/complaint/form.jsp" class="btn btn-primary">Submit a Complaint</a>
     </div>
     <%
         }

@@ -1,6 +1,7 @@
 package com.example.autofuelx.dao;
 
 import com.example.autofuelx.dto.ServiceBookingDTO;
+import com.example.autofuelx.dto.ServiceBookingSummaryDTO;
 import com.example.autofuelx.model.ServiceBooking;
 import com.example.autofuelx.util.DatabaseConnection;
 
@@ -729,6 +730,60 @@ public class ServiceBookingDAO {
         }
 
         return bookings;
+    }
+
+    public ServiceBookingSummaryDTO getCustomerServiceBookingSummary(int customerID) {
+        ServiceBookingSummaryDTO summary = new ServiceBookingSummaryDTO();
+
+        String sql = """
+        SELECT
+            -- Total bookings for this customer
+            COUNT(*) AS TotalBookings,
+
+            -- Active bookings are those that are not completed, missed, or cancelled
+            SUM(CASE WHEN Status NOT IN ('Completed', 'Missed Appointment', 'Cancelled') THEN 1 ELSE 0 END) AS TotalActiveBookings,
+
+            -- Count of completed bookings
+            SUM(CASE WHEN Status = 'Completed' THEN 1 ELSE 0 END) AS TotalCompletedBookings,
+
+            -- Detailed breakdown of each status
+            SUM(CASE WHEN Status = 'Awaiting Confirmation' THEN 1 ELSE 0 END) AS TotalAwaitingConfirmation,
+            SUM(CASE WHEN Status = 'Confirmed' THEN 1 ELSE 0 END) AS TotalConfirmed,
+            SUM(CASE WHEN Status = 'In Progress' THEN 1 ELSE 0 END) AS TotalInProgress,
+            SUM(CASE WHEN Status = 'Missed Appointment' THEN 1 ELSE 0 END) AS TotalMissedAppointment,
+            SUM(CASE WHEN Status = 'Awaiting Pickup' THEN 1 ELSE 0 END) AS TotalAwaitingPickup,
+            SUM(CASE WHEN Status = 'Reschedule Required' THEN 1 ELSE 0 END) AS TotalRescheduleRequired,
+            SUM(CASE WHEN Status = 'Cancelled' THEN 1 ELSE 0 END) AS TotalCancelled
+        FROM ServiceBooking
+        WHERE CustomerID = ?
+    """;
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, customerID);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                // Populate the summary DTO with the results from the query
+                summary.setTotalBookings(rs.getInt("TotalBookings"));
+                summary.setTotalActiveBookings(rs.getInt("TotalActiveBookings"));
+                summary.setTotalCompletedBookings(rs.getInt("TotalCompletedBookings"));
+                summary.setTotalAwaitingConfirmation(rs.getInt("TotalAwaitingConfirmation"));
+                summary.setTotalConfirmed(rs.getInt("TotalConfirmed"));
+                summary.setTotalInProgress(rs.getInt("TotalInProgress"));
+                summary.setTotalMissedAppointment(rs.getInt("TotalMissedAppointment"));
+                summary.setTotalAwaitingPickup(rs.getInt("TotalAwaitingPickup"));
+                summary.setTotalRescheduleRequired(rs.getInt("TotalRescheduleRequired"));
+                summary.setTotalCancelled(rs.getInt("TotalCancelled"));
+            }
+
+            return summary;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null; // Return null to indicate an error
+        }
     }
 
 

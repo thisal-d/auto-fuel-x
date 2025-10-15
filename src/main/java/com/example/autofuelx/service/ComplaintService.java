@@ -4,6 +4,7 @@ package com.example.autofuelx.service;
 
 import com.example.autofuelx.dao.ComplaintDAO;
 import com.example.autofuelx.dto.ComplaintReplyDTO;
+import com.example.autofuelx.dto.ComplaintSummaryDTO;
 import com.example.autofuelx.model.Complaint;
 
 import java.util.List;
@@ -58,4 +59,10 @@ public class ComplaintService {
                                                                 String status) {
         return complaintDAO.getComplaintReplyDTOsFiltered(keyword, lastUpdateDate, customerEmail, status);
     }
+
+
+    public ComplaintSummaryDTO getComplaintSummaryByCustomerID(int customerID) {
+        return  complaintDAO.getComplaintSummaryByCustomerId(customerID);
+    }
+
 }

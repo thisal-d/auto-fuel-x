@@ -33,7 +33,7 @@
         <div class="complaint-details card">
             <div class="card-header">
                 <h2>Your Complaint</h2>
-                <span class="status-<%=(complaintReplyDTO.getStatus().toLowerCase().replace(' ', '-')) %>"><%= complaintReplyDTO.getStatus() %></span>
+                <span class="status-<%=(complaintReplyDTO.getStatus().toLowerCase()) %>"><%= complaintReplyDTO.getStatus() %></span>
             </div>
             <div class="card-body">
                 <div class="detail-item">
@@ -86,7 +86,7 @@
         <div class="reply-details card">
             <div class="card-header">
                 <h2>Reply Information</h2>
-                <span class="status-<%= complaintReplyDTO.getReplyStatus().toLowerCase().replace(' ','-') %>"><%= complaintReplyDTO.getReplyStatus() %></span>
+                <span class="status-<%= complaintReplyDTO.getReplyStatus().toLowerCase() %>"><%= complaintReplyDTO.getReplyStatus() %></span>
             </div>
             <div class="card-body">
                 <div class="detail-item">

@@ -1,6 +1,7 @@
 package com.example.autofuelx.dao;
 
 import com.example.autofuelx.dto.ComplaintReplyDTO;
+import com.example.autofuelx.dto.ComplaintSummaryDTO;
 import com.example.autofuelx.model.Complaint;
 import com.example.autofuelx.model.ReplyComplaint;
 import com.example.autofuelx.util.DatabaseConnection;
@@ -180,7 +181,8 @@ public class ComplaintDAO {
         // --- Complaint Status filter ---
         if (status != null && !status.trim().isEmpty() && !"all".equalsIgnoreCase(status)) {
             sql += " AND c.Status = ?";
-            parameters.add(status.trim());
+            if (status.equalsIgnoreCase("Open")) parameters.add("Sent");
+            else parameters.add("Seen");
         }
 
         sql += " ORDER BY c.updatedDate DESC, c.updateTime DESC";
@@ -348,6 +350,83 @@ public class ComplaintDAO {
         }
         return null;
     }
+
+    public ComplaintSummaryDTO getComplaintSummaryByCustomerId(int customerId) {
+        ComplaintSummaryDTO summary = new ComplaintSummaryDTO();
+
+        try (Connection conn = DatabaseConnection.getConnection()) {
+
+            // 1️ Total complaints
+            String totalQuery = "SELECT COUNT(*) FROM Complaint WHERE CustomerID = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(totalQuery)) {
+                stmt.setInt(1, customerId);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        summary.setTotalComplaints(rs.getInt(1));
+                    }
+                }
+            }
+
+            // 2 Active complaints
+            String activeQuery = """
+                SELECT COUNT(*) 
+                FROM Complaint c
+                LEFT JOIN ReplyComplaint rc ON c.ComplaintID = rc.ComplaintID
+                WHERE c.CustomerID = ?
+                  AND (rc.ReplyComplaintID IS NULL)
+                """;
+
+            try (PreparedStatement stmt = conn.prepareStatement(activeQuery)) {
+                stmt.setInt(1, customerId);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        summary.setActiveComplaints(rs.getInt(1));
+                    }
+                }
+            }
+
+            // Inactive complaints
+            String inactiveQuery = """
+            SELECT COUNT(*) 
+            FROM Complaint c
+            INNER JOIN ReplyComplaint rc ON c.ComplaintID = rc.ComplaintID
+            WHERE c.CustomerID = ?
+              AND c.Status = 'seen'
+              AND rc.Status = 'seen'
+        """;
+            try (PreparedStatement stmt = conn.prepareStatement(inactiveQuery)) {
+                stmt.setInt(1, customerId);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        summary.setInactiveComplaints(rs.getInt(1));
+                    }
+                }
+            }
+
+            // New received complaints
+            String newReceivedQuery = """
+            SELECT COUNT(*) 
+            FROM Complaint c
+            INNER JOIN ReplyComplaint rc ON c.ComplaintID = rc.ComplaintID
+            WHERE c.CustomerID = ?
+              AND rc.Status = 'sent'
+        """;
+            try (PreparedStatement stmt = conn.prepareStatement(newReceivedQuery)) {
+                stmt.setInt(1, customerId);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        summary.setUnreadComplaints(rs.getInt(1));
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return summary;
+    }
+
 
     private ComplaintReplyDTO extractComplaintDetailsFromResultSet(ResultSet rs){
         ComplaintReplyDTO complaintReplyDTO;

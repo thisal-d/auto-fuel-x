@@ -1,6 +1,7 @@
 package com.example.autofuelx.service;
 
 import com.example.autofuelx.dao.ServiceDAO;
+import com.example.autofuelx.dto.ServiceBookingSummaryDTO;
 import com.example.autofuelx.model.Service;
 
 import java.util.List;
@@ -35,4 +36,5 @@ public class ServiceManager {
     public List<Service> getFilteredServices(Double minCost, Double maxCost, String keyword) {
         return serviceDAO.getFilteredServices(minCost, maxCost, keyword);
     }
+
 }

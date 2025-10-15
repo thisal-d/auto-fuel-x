@@ -35,6 +35,9 @@ public class ComplaintViewEmployeeServlet extends HttpServlet {
 
         request.setAttribute("complaintReplyDTO", complaintDTO);
 
+        // set user complaint as viewed by customer care
+        complaintService.updateComplaintStatus(complaintID, "Seen");
+
         request.getRequestDispatcher( "/views/customer-care/complaint/view.jsp").forward(request, response);
     }
 }

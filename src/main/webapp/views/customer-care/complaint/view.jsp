@@ -43,16 +43,6 @@
                 <div class="detail-value"><%= complaintDTO.getDescription() %></div>
             </div>
             <div class="detail-row">
-                <div class="detail-label">Status:</div>
-                <div class="detail-value">
-                    <% if ("Open".equals(complaintDTO.getStatus())) { %>
-                    <span class="status status-pending">Open</span>
-                    <% } else if ("Closed".equals(complaintDTO.getStatus())) { %>
-                    <span class="status status-completed">Closed</span>
-                    <% } %>
-                </div>
-            </div>
-            <div class="detail-row">
                 <div class="detail-label">Created Date:</div>
                 <div class="detail-value"><%= complaintDTO.getCreatedDate() %> <%= complaintDTO.getCreatedTime() %></div>
             </div>
@@ -83,10 +73,10 @@
             <div class="detail-row">
                 <div class="detail-label">Reply Status:</div>
                 <div class="detail-value">
-                    <% if ("Closed".equals(complaintDTO.getReplyStatus())) { %>
-                    <span class="status status-confirmed">Closed</span>
+                    <% if ("Seen".equals(complaintDTO.getReplyStatus())) { %>
+                    <span class="status status-confirmed">Seen</span>
                     <% } else { %>
-                    <span class="status status-awaiting">Open</span>
+                    <span class="status status-awaiting">Sent</span>
                     <% } %>
                 </div>
             </div>

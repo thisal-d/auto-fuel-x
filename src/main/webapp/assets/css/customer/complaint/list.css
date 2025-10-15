@@ -144,14 +144,14 @@
 }
 
 /* Status Helper Classes */
-.status-open {
+.status-sent {
     background: linear-gradient(135deg, var(--accent-red), var(--accent-red-hover));
     color: white;
     border-radius: 1rem;
     padding: 0.2rem 1rem;
 }
 
-.status-closed {
+.status-seen {
     background: linear-gradient(135deg, var(--success), #1e7e34);
     color: white;
     border-radius: 1rem;

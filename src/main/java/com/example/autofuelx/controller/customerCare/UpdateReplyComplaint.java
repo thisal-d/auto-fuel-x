@@ -42,12 +42,16 @@ public class UpdateReplyComplaint extends HttpServlet {
         replyComplaint.setTitle(replyTitle);
         replyComplaint.setDescription(replyDescription);
         replyComplaint.setStaffID(employee.getEmployeeID());
-        replyComplaint.setStatus("Open");
 
         replyComplaintService.updateReplyComplaint(replyComplaint);
 
-        // set user complaint as viewed by customer care
-        complaintService.updateComplaintStatus(complaintID, "Closed");
+        replyComplaintService.updateReplyComplaintStatus(complaintID, "Sent");
+        replyComplaint = replyComplaintService.getReplyComplaintByComplaintID(complaintID);
+        System.out.println("Status : " + replyComplaint.getStatus());
+        /*
+        // update complaint
+        complaintService.updateComplaintStatus(complaintID, "Seen");
+        */
 
         response.sendRedirect(request.getContextPath() + "/customer-care/complaint/view?complaintID=" + complaintID);
     }

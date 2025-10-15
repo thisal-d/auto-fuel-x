@@ -1,6 +1,7 @@
 package com.example.autofuelx.dao;
 
 
+import com.example.autofuelx.dto.VehicleSummaryDTO;
 import com.example.autofuelx.model.Vehicle;
 import com.example.autofuelx.util.DatabaseConnection;
 import java.sql.*;
@@ -183,6 +184,46 @@ public class VehicleDAO {
         return vehicleNames;
     }
 
+    public List<VehicleSummaryDTO> getVehicleSummaryByCustomerID(int customerID) {
+        List<VehicleSummaryDTO> summaryList = new ArrayList<>();
+
+        // Query to get the count of vehicles for each type for a specific customer
+        String sql = """
+        SELECT 
+            Type,
+            COUNT(*) AS VehicleCount
+        FROM Vehicle
+        WHERE CustomerID = ?
+        GROUP BY Type
+        ORDER BY VehicleCount DESC
+        """;
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, customerID);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    // Create a new DTO for each vehicle type found
+                    VehicleSummaryDTO summary = new VehicleSummaryDTO();
+
+                    // Set the vehicle type and its count from the result set
+                    summary.setVehicleType(rs.getString("Type"));
+                    summary.setVehicleCount(rs.getInt("VehicleCount"));
+
+                    // Add the populated DTO to our list
+                    summaryList.add(summary);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // In case of an error, you might want to return an empty list or null
+            // Returning an empty list is often safer to prevent NullPointerExceptions
+        }
+
+        return summaryList;
+    }
 
     private Vehicle extractVehicleFromResultSet(ResultSet rs) {
 

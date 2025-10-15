@@ -33,16 +33,17 @@ public class ComplaintViewServlet extends HttpServlet {
         // Catch data
         int complaintID = Integer.parseInt(request.getParameter("complaintID"));
 
-        ComplaintReplyDTO complaintDTO = complaintService.getComplaintReplyDTOByComplaintID(complaintID);
+        ComplaintReplyDTO complaintREplyDTO = complaintService.getComplaintReplyDTOByComplaintID(complaintID);
 
-        // Get reply complaint
+
         ReplyComplaint replyComplaint = replyComplaintService.getReplyComplaintByReplyComplaintID(complaintID);
         if (replyComplaint != null) {
             // User saw the customer care reply
-            replyComplaintService.updateReplyComplaintStatus(replyComplaint.getReplyComplaintID(), "Closed");
+            replyComplaintService.updateReplyComplaintStatus(replyComplaint.getReplyComplaintID(), "Seen");
         }
 
-        request.setAttribute("complaintReplyDTO", complaintDTO);
+
+        request.setAttribute("complaintReplyDTO", complaintREplyDTO);
 
         request.getRequestDispatcher( "/views/customer/complaint/view.jsp").forward(request, response);
     }

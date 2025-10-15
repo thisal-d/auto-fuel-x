@@ -1,6 +1,7 @@
 package com.example.autofuelx.service;
 
 import com.example.autofuelx.dao.VehicleDAO;
+import com.example.autofuelx.dto.VehicleSummaryDTO;
 import com.example.autofuelx.model.Vehicle;
 
 import java.util.List;
@@ -43,6 +44,10 @@ public class VehicleService {
 
     public List<String> getVehicleTypesByCustomerID(int customerID) {
         return vehicleDAO.getVehicleTypesByCustomerID(customerID);
+    }
+
+    public List<VehicleSummaryDTO> getVehicleSummaryByCustomerID(int customerID) {
+        return vehicleDAO.getVehicleSummaryByCustomerID(customerID);
     }
 
 }

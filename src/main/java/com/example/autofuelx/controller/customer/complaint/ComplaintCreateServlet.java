@@ -55,7 +55,7 @@ public class ComplaintCreateServlet extends HttpServlet {
 
         complaint.setTitle(title);
         complaint.setDescription(description);
-        complaint.setStatus("Open");
+        complaint.setStatus("Sent");
         complaint.setCustomerID(customer.getCustomerID());
 
         complaintService.submitComplaint(complaint);

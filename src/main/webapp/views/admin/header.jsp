@@ -41,6 +41,14 @@
                 </div>
             </div>
 
+            <div class="nav-section">
+                <div class="nav-section-title">Fuel Supplier 🚗</div>
+                <div class="nav-links">
+                    <a href="<%= request.getContextPath() %>/admin/fuel-supplier/list">View Fuel Suppliers</a>
+                    <a href="<%= request.getContextPath() %>/views/admin/fuel-supplier/add.jsp">Add Fuel Supplier</a>
+                </div>
+            </div>
+
             <!-- Customers Section
             <div class="nav-section">
                 <div class="nav-section-title">Customers 🧑‍💻</div>

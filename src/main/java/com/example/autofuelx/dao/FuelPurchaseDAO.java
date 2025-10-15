@@ -1,6 +1,7 @@
 package com.example.autofuelx.dao;
 
 import com.example.autofuelx.dto.FuelPurchaseDetailDTO;
+import com.example.autofuelx.dto.FuelUsageByTypeDTO;
 import com.example.autofuelx.model.FuelPurchase;
 import com.example.autofuelx.util.DatabaseConnection;
 
@@ -76,6 +77,51 @@ public class FuelPurchaseDAO {
         }
 
         return purchases;
+    }
+
+    public List<FuelUsageByTypeDTO> getFuelUsageByTypeForCustomer(int customerID) {
+        List<FuelUsageByTypeDTO> fuelUsageList = new ArrayList<>();
+
+        String sql = """
+        SELECT 
+            f.Type AS FuelType,
+            f.FuelID,
+            -- Overall statistics
+            SUM(fp.Quantity) AS TotalQuantity,
+            SUM(fp.TotalCost) AS TotalCost,
+            COUNT(fp.FuelPurchaseID) AS NumberOfPurchases,
+            AVG(fp.TotalCost) AS AverageCostPerPurchase,
+            -- Last 7 days statistics
+        FROM FuelPurchase fp
+        JOIN Fuel f ON fp.FuelID = f.FuelID
+        WHERE fp.CustomerID = ?
+        GROUP BY f.FuelID, f.Type
+        ORDER BY TotalQuantity DESC
+        """;
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, customerID);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                FuelUsageByTypeDTO fuelUsage = new FuelUsageByTypeDTO();
+
+                // Set overall stats
+                fuelUsage.setFuelID(rs.getInt("FuelID"));
+                fuelUsage.setFuelType(rs.getString("FuelType"));
+                fuelUsage.setTotalQuantity(rs.getDouble("TotalQuantity"));
+                fuelUsage.setTotalCost(rs.getDouble("TotalCost"));
+                fuelUsage.setNumberOfPurchases(rs.getInt("NumberOfPurchases"));
+                fuelUsage.setAverageCostPerPurchase(rs.getDouble("AverageCostPerPurchase"));
+                fuelUsageList.add(fuelUsage);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return fuelUsageList;
     }
 
     public List<FuelPurchaseDetailDTO> getFuelPurchaseDetailByCustomer(int customerID,

@@ -42,12 +42,11 @@ public class CreateReplyComplaint extends HttpServlet {
         replyComplaint.setTitle(replyTitle);
         replyComplaint.setDescription(replyDescription);
         replyComplaint.setStaffID(employee.getEmployeeID());
-        replyComplaint.setStatus("Open");
+        replyComplaint.setStatus("Sent");
 
         replyComplaintService.submitReplyComplaint(replyComplaint);
 
-        // set user complaint as viewed by customer care
-        complaintService.updateComplaintStatus(complaintID, "Closed");
+
 
         response.sendRedirect(request.getContextPath() + "/customer-care/complaint/view?complaintID=" + complaintID);
     }

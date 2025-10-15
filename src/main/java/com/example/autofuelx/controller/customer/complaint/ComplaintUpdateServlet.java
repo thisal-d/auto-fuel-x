@@ -38,7 +38,7 @@ public class ComplaintUpdateServlet extends HttpServlet {
         complaint.setComplaintID(complaintID);
         complaint.setTitle(title);
         complaint.setDescription(description);
-        complaint.setStatus("Open");
+        complaint.setStatus("Sent");
 
         complaintService.updateComplaint(complaint);
 

@@ -1,5 +1,6 @@
 <%@ page import="com.example.autofuelx.model.Fuel" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.autofuelx.model.FuelSupplier" %><%--
   Created by IntelliJ IDEA.
   User: KHThi
   Date: 10/2/2025
@@ -9,6 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
   List<Fuel> fuelTypes = (List<Fuel>) request.getAttribute("fuel-types");
+  List<FuelSupplier> fuelSuppliers = (List<FuelSupplier>) request.getAttribute("fuel-suppliers");
 %>
 <!DOCTYPE html>
 <html>
@@ -26,6 +28,17 @@
   </div>
 
   <form action="<%= request.getContextPath() %>/admin/fuel/insert/form" method="post" class="fuel-form">
+
+    <div class="form-group">
+      <label for="fuelSupplierID" class="form-label">Fuel Supplier:</label>
+      <select name="fuelSupplierID" id="fuelSupplierID" class="form-control" required>
+        <option value="">Select Fuel Supplier</option>
+        <% for(FuelSupplier fuelSupplier : fuelSuppliers) { %>
+        <option value="<%= fuelSupplier.getSupplierID() %>"><%= fuelSupplier.getName() %></option>
+        <% } %>
+      </select>
+    </div>
+
     <div class="form-group">
       <label for="fuelID" class="form-label">Fuel Type:</label>
       <select name="fuelID" id="fuelID" class="form-control" required>

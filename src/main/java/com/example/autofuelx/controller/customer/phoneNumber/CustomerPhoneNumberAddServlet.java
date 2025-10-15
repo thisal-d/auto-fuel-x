@@ -1,4 +1,4 @@
-package com.example.autofuelx.controller.customer;
+package com.example.autofuelx.controller.customer.phoneNumber;
 
 import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.service.CustomerPhoneNumberService;
