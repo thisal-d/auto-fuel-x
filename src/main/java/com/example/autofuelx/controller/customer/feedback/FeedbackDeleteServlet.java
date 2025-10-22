@@ -2,7 +2,9 @@ package com.example.autofuelx.controller.customer.feedback;
 
 import java.io.*;
 
+import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.service.FeedbackService;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -17,13 +19,23 @@ public class FeedbackDeleteServlet extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Customer customer = AuthUtil.checkCustomerLogin(req, resp);
+        if (customer == null) return;
+        resp.sendRedirect("customer/feedback/list");
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        Customer customer = AuthUtil.checkCustomerLogin(request, response);
+        if (customer == null) return;
 
-        // Catch data
+        // catch data
         int feedbackID = Integer.parseInt(request.getParameter("id"));
 
-        // Delete feedback
+        // delete feedback
         feedbackService.deleteComplaint(feedbackID);
 
         response.sendRedirect("customer/feedback/list");

@@ -2,11 +2,13 @@ package com.example.autofuelx.controller.customer.complaint;
 
 import com.example.autofuelx.dto.ComplaintReplyDTO;
 import com.example.autofuelx.model.Complaint;
+import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.model.Employee;
 import com.example.autofuelx.model.ReplyComplaint;
 import com.example.autofuelx.service.ComplaintService;
 import com.example.autofuelx.service.EmployeeService;
 import com.example.autofuelx.service.ReplyComplaintService;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -30,18 +32,19 @@ public class ComplaintViewServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Catch data
+        Customer customer = AuthUtil.checkCustomerLogin(request, response);
+        if (customer == null) return;
+
+        // catch data
         int complaintID = Integer.parseInt(request.getParameter("complaintID"));
 
         ComplaintReplyDTO complaintREplyDTO = complaintService.getComplaintReplyDTOByComplaintID(complaintID);
 
-
         ReplyComplaint replyComplaint = replyComplaintService.getReplyComplaintByReplyComplaintID(complaintID);
         if (replyComplaint != null) {
-            // User saw the customer care reply
+            // User view customer care reply
             replyComplaintService.updateReplyComplaintStatus(replyComplaint.getReplyComplaintID(), "Seen");
         }
-
 
         request.setAttribute("complaintReplyDTO", complaintREplyDTO);
 

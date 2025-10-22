@@ -4,6 +4,7 @@ import com.example.autofuelx.dto.ServiceBookingDTO;
 import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.model.ServiceBooking;
 import com.example.autofuelx.service.ServiceBookingService;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,18 +26,24 @@ public class ServiceBookingServlet extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Customer customer = AuthUtil.checkCustomerLogin(req, resp);
+        if (customer == null) return;
+
+        resp.sendRedirect(req.getContextPath() + "/views/customer/service-booking/form.jsp");
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Customer customer = AuthUtil.checkCustomerLogin(request, response);
+        if (customer == null) return;
 
-        // Get form parameters
+        // get form parameters
         int vehicleId = Integer.parseInt(request.getParameter("vehicle-id"));
         int serviceId = Integer.parseInt(request.getParameter("service-id"));
         String date = request.getParameter("booking-date");
         String time = request.getParameter("booking-time");
-
-        // Get logged-in customer from session
-        HttpSession session = request.getSession();
-        Customer customer = (Customer) session.getAttribute("customer");
 
         // Create new service bookings
         ServiceBooking booking = new ServiceBooking();

@@ -5,6 +5,7 @@ import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.model.Vehicle;
 import com.example.autofuelx.service.ServiceBookingService;
 import com.example.autofuelx.service.VehicleService;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -28,15 +29,10 @@ public class HistoryBookingHistoryServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Customer loggedCustomer = (Customer) session.getAttribute("customer");
+        Customer customer = AuthUtil.checkCustomerLogin(request, response);
+        if (customer == null) return;
 
-        if (loggedCustomer == null) {
-            response.sendRedirect(request.getContextPath() + "/views/customer/login.jsp");
-            return;
-        }
-
-        // Get filter parameters
+        // get filter parameters
         String startDate = request.getParameter("start-date");
         String endDate = request.getParameter("end-date");
         String vehicleType = request.getParameter("vehicle-type");
@@ -46,7 +42,7 @@ public class HistoryBookingHistoryServlet extends HttpServlet {
         String maxCost = request.getParameter("max-cost");
         String keyword = request.getParameter("keyword");
 
-        // Set attributes for the form to remember selections
+        // set attributes for the form to store selected
         request.setAttribute("start-date", startDate);
         request.setAttribute("end-date", endDate);
         request.setAttribute("vehicle-type", vehicleType);
@@ -56,15 +52,15 @@ public class HistoryBookingHistoryServlet extends HttpServlet {
         request.setAttribute("max-cost", maxCost);
         request.setAttribute("keyword", keyword);
 
-        // Get data for dropdowns
-        List<String> vehicleTypes = vehicleService.getVehicleTypesByCustomerID(loggedCustomer.getCustomerID());
-        List<Vehicle> vehicles = vehicleService.getVehiclesByCustomerID(loggedCustomer.getCustomerID());
+        // get data for dropdowns
+        List<String> vehicleTypes = vehicleService.getVehicleTypesByCustomerID(customer.getCustomerID());
+        List<Vehicle> vehicles = vehicleService.getVehiclesByCustomerID(customer.getCustomerID());
         List<String> statuses = Arrays.asList("All", "Awaiting Confirmation", "Confirmed", "In Progress",
                 "Completed", "Missed Appointment", "Awaiting Pickup", "Cancelled", "Reschedule Required");
 
         // Get filtered bookings
         List<ServiceBookingDTO> bookings = serviceBookingService.getBookingsByCustomerWithFilters(
-                loggedCustomer.getCustomerID(),
+                customer.getCustomerID(),
                 startDate,
                 endDate,
                 vehicleType,

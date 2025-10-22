@@ -1,8 +1,10 @@
 package com.example.autofuelx.controller.customer.vehicle;
 
+import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.model.Vehicle;
 import com.example.autofuelx.service.VehicleService;
 
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,8 +23,24 @@ public class VehicleUpdateFormServlet extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        
+        Customer customer = AuthUtil.checkCustomerLogin(req, resp);
+        if (customer == null) return;
+
+        int vehicleID = Integer.parseInt(req.getParameter("vehicleID"));
+        Vehicle vehicle = vehicleService.getVehicleByID(vehicleID);
+
+        req.setAttribute("vehicle-update", vehicle);
+        req.getRequestDispatcher("/views/customer/vehicle/update.jsp").forward(req, resp);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
+
+        Customer customer = AuthUtil.checkCustomerLogin(request, response);
+        if (customer == null) return;
 
         int vehicleID = Integer.parseInt(request.getParameter("vehicleID"));
         Vehicle vehicle = vehicleService.getVehicleByID(vehicleID);

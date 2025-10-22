@@ -3,6 +3,7 @@ package com.example.autofuelx.controller.customer.serviceBooking;
 import com.example.autofuelx.dto.ServiceBookingDTO;
 import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.service.ServiceBookingService;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -23,23 +24,19 @@ public class ServiceBookingListCustomerServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String status = request.getParameter("status");
-        HttpSession session = request.getSession();
-        Customer loggedCustomer = (Customer) session.getAttribute("customer");
+        Customer customer = AuthUtil.checkCustomerLogin(request, response);
+        if (customer == null) return;
 
-        if (loggedCustomer == null) {
-            response.sendRedirect(request.getContextPath() + "/views/customer/login.jsp");
-            return;
-        }
+        String status = request.getParameter("status");
 
         List<ServiceBookingDTO> serviceBookings = null;
         String redirectUrl = null;
         if ("active".equals(status)) {
-            serviceBookings = serviceBookingService.getActiveBookingsByCustomerID(loggedCustomer.getCustomerID());
+            serviceBookings = serviceBookingService.getActiveBookingsByCustomerID(customer.getCustomerID());
             redirectUrl = "/views/customer/service-booking/active.jsp";
 
         } else if ("missed".equals(status)) {
-            serviceBookings = serviceBookingService.getBookingsByCustomerIDAndStatus(loggedCustomer.getCustomerID(), "Missed Appointment");
+            serviceBookings = serviceBookingService.getBookingsByCustomerIDAndStatus(customer.getCustomerID(), "Missed Appointment");
             redirectUrl = "/views/customer/service-booking/missed.jsp";
         }
 

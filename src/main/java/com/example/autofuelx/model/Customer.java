@@ -4,13 +4,13 @@ public class Customer {
     private int customerID;
     private String firstName;
     private String lastName;
-    private String email;       // NEW FIELD
+    private String email;
     private String password;
     private String addressNo;
     private String addressLane;
     private String addressArea;
 
-    // Getters and Setters
+    // getters and setters
     public int getCustomerID() { return customerID; }
     public void setCustomerID(int customerID) { this.customerID = customerID; }
 

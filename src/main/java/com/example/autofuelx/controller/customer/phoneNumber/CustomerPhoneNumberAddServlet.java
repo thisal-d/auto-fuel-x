@@ -2,6 +2,7 @@ package com.example.autofuelx.controller.customer.phoneNumber;
 
 import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.service.CustomerPhoneNumberService;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,8 +23,18 @@ public class CustomerPhoneNumberAddServlet extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Customer customer = AuthUtil.checkCustomerLogin(req, resp);
+        if (customer == null) return;
+
+        resp.sendRedirect(req.getContextPath() + "/customer/views/profile.jsp");
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Customer customer = AuthUtil.checkCustomerLogin(request, response);
+        if (customer == null) return;
 
         int customerID = Integer.parseInt(request.getParameter("customerID"));
         String phoneNumber = request.getParameter("phoneNumber");
@@ -35,9 +46,8 @@ public class CustomerPhoneNumberAddServlet extends HttpServlet {
         } else {
             request.getSession().setAttribute("error", "Failed to add phone number.");
         }
-        HttpSession session = request.getSession();
-        Customer customer = (Customer) session.getAttribute("customer");
 
+        HttpSession session = request.getSession();
         List<String> phoneNumbers = customerPhoneNumberService.getPhoneNumbersByCustomer(customer.getCustomerID());
         session.setAttribute("phone-numbers", phoneNumbers);
 

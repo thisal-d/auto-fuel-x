@@ -2,6 +2,7 @@ package com.example.autofuelx.controller.customer.customer;
 
 import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.service.CustomerService;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,10 +26,10 @@ public class CustomerDeleteServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
-        Customer customer = (Customer) session.getAttribute("customer");
+        Customer customer = AuthUtil.checkCustomerLogin(request, response);
+        if (customer == null) return;
 
         customerService.deleteCustomer(customer.getCustomerID());
-        response.sendRedirect(request.getContextPath() + "/views/customer/profile.jsp");
+        response.sendRedirect(request.getContextPath() + "/views/customer/login.jsp");
     }
 }

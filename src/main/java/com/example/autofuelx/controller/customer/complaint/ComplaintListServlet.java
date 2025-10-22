@@ -4,6 +4,7 @@ import com.example.autofuelx.dto.ComplaintReplyDTO;
 import com.example.autofuelx.model.Complaint;
 import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.service.ComplaintService;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -26,10 +27,10 @@ public class ComplaintListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Get logged-in user
-        HttpSession session = request.getSession();
-        Customer customer = (Customer) session.getAttribute("customer");
 
+        Customer customer = AuthUtil.checkCustomerLogin(request, response);
+        if (customer == null) return;
+        
         // read filter parameters from request
         String status = request.getParameter("status");
         request.setAttribute("status", status);

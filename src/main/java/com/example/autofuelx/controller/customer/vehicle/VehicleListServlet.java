@@ -4,6 +4,7 @@ import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.model.Vehicle;
 import com.example.autofuelx.service.VehicleService;
 
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -27,13 +28,8 @@ public class VehicleListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
 
-        HttpSession session = request.getSession();
-        Customer customer = (Customer) session.getAttribute("customer");
-
-        if (customer == null) {
-            response.sendRedirect(request.getContextPath() + "/views/customer/login.jsp");
-            return;
-        }
+        Customer customer = AuthUtil.checkCustomerLogin(request, response);
+        if (customer == null) return;
 
         List<Vehicle> vehicles = vehicleService.getVehiclesByCustomerID(customer.getCustomerID());
         request.setAttribute("vehicles", vehicles);

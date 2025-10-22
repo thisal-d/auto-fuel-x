@@ -4,6 +4,8 @@ import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.model.Vehicle;
 import com.example.autofuelx.service.VehicleService;
 
+import com.example.autofuelx.util.AuthUtil;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,16 +26,19 @@ public class VehicleUpdateServlet extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Customer customer = AuthUtil.checkCustomerLogin(req, resp);
+        if (customer == null) return;
+        
+        resp.sendRedirect(req.getContextPath() + "/customer/vehicle/list");
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
 
-        HttpSession session = request.getSession();
-        Customer customer = (Customer) session.getAttribute("customer");
-
-        if (customer == null) {
-            response.sendRedirect(request.getContextPath() + "/views/customer/login.jsp");
-            return;
-        }
+        Customer customer = AuthUtil.checkCustomerLogin(request, response);
+        if (customer == null) return;
 
         try {
             int vehicleID = Integer.parseInt(request.getParameter("vehicleID"));

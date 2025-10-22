@@ -4,6 +4,7 @@ import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.model.Vehicle;
 import com.example.autofuelx.service.VehicleService;
 
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,22 +26,24 @@ public class VehicleAddServlet extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Customer customer = AuthUtil.checkCustomerLogin(req, resp);
+        if (customer == null) return;
+
+        resp.sendRedirect(req.getContextPath() + "/views/customer/vehicle/add.jsp");
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
-        HttpSession session = request.getSession();
-        Customer customer = (Customer) session.getAttribute("customer");
-
-        if (customer == null) {
-            response.sendRedirect(request.getContextPath() + "/views/customer/login.jsp");
-            return;
-        }
-
+        Customer customer = AuthUtil.checkCustomerLogin(request, response);
+        if (customer == null) return;
 
         String plateNumber = request.getParameter("plateNumber");
-        // Check vehicle already exist or not
+        // check vehicle already exist or not
 
-        Vehicle v = vehicleService.getVehicleByPlateNo(plateNumber);
-        if (v != null) {
+        Vehicle findVehicle = vehicleService.getVehicleByPlateNo(plateNumber);
+        if (findVehicle != null) {
             request.setAttribute("errorMessage", "Vehicle already exists..!");
             request.getRequestDispatcher("/views/customer/vehicle/add.jsp").forward(request, response); // Redirect to vehicle add page
             return;
@@ -50,8 +53,7 @@ public class VehicleAddServlet extends HttpServlet {
             String type = request.getParameter("type");
             String model = request.getParameter("model");
             String color = request.getParameter("color");
-            Date registrationDate = new SimpleDateFormat("yyyy-MM-dd")
-                    .parse(request.getParameter("registrationDate"));
+            Date registrationDate = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("registrationDate"));
 
             Vehicle vehicle = new Vehicle();
             vehicle.setPlateNumber(plateNumber);
@@ -66,9 +68,6 @@ public class VehicleAddServlet extends HttpServlet {
             request.setAttribute("errorMessage", "Something Went Wrong..!");
             response.sendRedirect(request.getContextPath() + "/views/customer/vehicle/add.jsp"); // Redirect to vehicle add page
         }
-
-
-
         response.sendRedirect(request.getContextPath() + "/customer/vehicle/list");
     }
 }

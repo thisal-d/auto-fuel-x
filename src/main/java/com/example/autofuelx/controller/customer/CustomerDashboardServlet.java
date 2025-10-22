@@ -6,6 +6,7 @@ import com.example.autofuelx.dto.FuelUsageByTypeDTO;
 import com.example.autofuelx.dto.ServiceBookingSummaryDTO;
 import com.example.autofuelx.dto.VehicleSummaryDTO;
 import com.example.autofuelx.model.Customer;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -38,31 +39,25 @@ public class CustomerDashboardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Check if customer is logged in
-        HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("customer") == null) {
-            // Redirect to login page if not logged in
-            response.sendRedirect(request.getContextPath() + "/login");
-            return;
-        }
+        Customer customer = AuthUtil.checkCustomerLogin(request, response);
+        if (customer == null) return;
 
-        Customer customer = (Customer) session.getAttribute("customer");
         int customerID = customer.getCustomerID();
 
         try {
-            // Get all summary data
+            // get data from dao
             List<FuelUsageByTypeDTO> fuelUsageSummary = fuelPurchaseService.getFuelUsageSummary(customerID);
             List<VehicleSummaryDTO> vehicleSummary = vehicleService.getVehicleSummaryByCustomerID(customerID);
             ComplaintSummaryDTO complaintSummary = complaintService.getComplaintSummaryByCustomerID(customerID);
             ServiceBookingSummaryDTO serviceBookingSummary = serviceBookingService.getServiceBookingSummary(customerID);
 
-            // Set attributes for JSP
+            // set attributes for JSP
             request.setAttribute("fuelUsageSummary", fuelUsageSummary);
             request.setAttribute("vehicleSummary", vehicleSummary);
             request.setAttribute("complaintSummary", complaintSummary);
             request.setAttribute("serviceBookingSummary", serviceBookingSummary);
 
-            // Forward to dashboard JSP
+            // forward to dashboard JSP
             request.getRequestDispatcher("/views/customer/dashboard.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();

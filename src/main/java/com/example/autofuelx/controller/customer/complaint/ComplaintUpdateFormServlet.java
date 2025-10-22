@@ -1,7 +1,9 @@
 package com.example.autofuelx.controller.customer.complaint;
 
 import com.example.autofuelx.model.Complaint;
+import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.service.ComplaintService;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,6 +24,9 @@ public class ComplaintUpdateFormServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        Customer customer = AuthUtil.checkCustomerLogin(request, response);
+        if (customer == null) return;
 
         int complaintID = Integer.parseInt(request.getParameter("complaintID"));
         Complaint complaint = complaintService.getComplaintByComplaintID(complaintID);

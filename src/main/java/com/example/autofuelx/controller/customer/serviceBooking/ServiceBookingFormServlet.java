@@ -5,6 +5,7 @@ import com.example.autofuelx.model.Service;
 import com.example.autofuelx.model.Vehicle;
 import com.example.autofuelx.service.ServiceManager;
 import com.example.autofuelx.service.VehicleService;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 
@@ -28,15 +29,10 @@ public class ServiceBookingFormServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        HttpSession session = request.getSession();
-        Customer loggedCustomer = (Customer) session.getAttribute("customer");
+        Customer customer = AuthUtil.checkCustomerLogin(request, response);
+        if (customer == null) return;
 
-        if (loggedCustomer == null) {
-            response.sendRedirect(request.getContextPath() + "/views/customer/login.jsp");
-            return;
-        }
-
-        List<Vehicle> vehicles = vehicleService.getVehiclesByCustomerID(loggedCustomer.getCustomerID());
+        List<Vehicle> vehicles = vehicleService.getVehiclesByCustomerID(customer.getCustomerID());
         List<Service> services = serviceManager.getAllServices();
 
         request.setAttribute("vehicles", vehicles);

@@ -5,6 +5,7 @@ import java.io.*;
 import com.example.autofuelx.model.Complaint;
 import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.service.ComplaintService;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -21,36 +22,25 @@ public class ComplaintCreateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Get logged user
-        HttpSession session = request.getSession();
-        Customer customer = (Customer) session.getAttribute("customer");
+        // get logged user
+        Customer customer = AuthUtil.checkCustomerLogin(request, response);
+        if (customer == null) return;
 
-        // check user logged in ot not
-        if (customer==null) {
-            response.sendRedirect(request.getContextPath() + "/views/customer/login.jsp");
-        }
-        else {
-            response.sendRedirect(request.getContextPath() + "/customer/complaint/list");
-        }
+        response.sendRedirect(request.getContextPath() + "/customer/complaint/list");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Get logged user
-        HttpSession session = request.getSession();
-        Customer customer = (Customer) session.getAttribute("customer");
+        Customer customer = AuthUtil.checkCustomerLogin(request, response);
+        if (customer == null) return;
 
-        if (customer==null) {
-            response.sendRedirect("/views/customer/login.jsp");
-        }
-
-        // Catch data
+        // catch data
         String title = request.getParameter("title");
         String description = request.getParameter("description");
 
-        // Create complaint Object
+        // create complaint Object
         Complaint complaint = new Complaint();
 
         complaint.setTitle(title);

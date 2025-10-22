@@ -2,6 +2,7 @@ package com.example.autofuelx.controller.customer.customer;
 
 import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.service.CustomerService;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -20,15 +21,22 @@ public class CustomerUpdateServlet extends HttpServlet {
         CustomerService = new CustomerService();
     }
 
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Customer customer = AuthUtil.checkCustomerLogin(req, resp);
+        if (customer == null) return;
+        resp.sendRedirect(req.getContextPath() + "/views/customer/update.jsp");
+    }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
+        Customer customer = AuthUtil.checkCustomerLogin(request, response);
+        if (customer == null) return;
 
-        // gET LOGGED IN Customer
-        Customer customer = (Customer) session.getAttribute("customer");
-
+        // catch data
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String email = request.getParameter("email");
@@ -37,7 +45,7 @@ public class CustomerUpdateServlet extends HttpServlet {
         String addressLane = request.getParameter("addressLane");
         String addressArea = request.getParameter("addressArea");
 
-        // Create Customer object
+        // create Customer object
         customer.setCustomerID(customer.getCustomerID());
         customer.setFirstName(firstName);
         customer.setLastName(lastName);
@@ -47,9 +55,10 @@ public class CustomerUpdateServlet extends HttpServlet {
         customer.setAddressLane(addressLane);
         customer.setAddressArea(addressArea);
 
-        // Update customer details in DB
+        // update customer details in DB
         CustomerService.updateCustomer(customer);
 
+        HttpSession session = request.getSession();
         session.setAttribute("customer", customer);
         response.sendRedirect(request.getContextPath() + "/views/customer/profile.jsp");
     }

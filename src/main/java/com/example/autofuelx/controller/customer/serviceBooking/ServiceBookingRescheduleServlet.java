@@ -1,7 +1,9 @@
 package com.example.autofuelx.controller.customer.serviceBooking;
 
+import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.model.ServiceBooking;
 import com.example.autofuelx.service.ServiceBookingService;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,8 +27,10 @@ public class ServiceBookingRescheduleServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Customer customer = AuthUtil.checkCustomerLogin(request, response);
+        if (customer == null) return;
 
-        // Get parameters
+        // get parameters
         int bookingId = Integer.parseInt(request.getParameter("booking-ID"));
         String newDateStr = request.getParameter("new-date");
         String newTimeStr = request.getParameter("new-time");
@@ -40,8 +44,7 @@ public class ServiceBookingRescheduleServlet extends HttpServlet {
 
         booking.setBookingDate(newDate);
         booking.setBookingTime(newTime);
-
-
+        
         serviceBookingService.updateBooking(booking);
 
         // Redirect back to bookings page
