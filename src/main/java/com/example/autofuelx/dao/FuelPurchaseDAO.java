@@ -86,7 +86,6 @@ public class FuelPurchaseDAO {
         SELECT 
             f.Type AS FuelType,
             f.FuelID,
-            -- Overall statistics
             SUM(fp.Quantity) AS TotalQuantity,
             SUM(fp.TotalCost) AS TotalCost,
             COUNT(fp.FuelPurchaseID) AS NumberOfPurchases,

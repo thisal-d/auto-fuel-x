@@ -5,6 +5,7 @@ import com.example.autofuelx.model.Employee;
 import com.example.autofuelx.model.ReplyComplaint;
 import com.example.autofuelx.service.ComplaintService;
 import com.example.autofuelx.service.ReplyComplaintService;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,20 +18,25 @@ import java.io.IOException;
 @WebServlet("/customer-care/complaint/create")
 public class CreateReplyComplaint extends HttpServlet {
     private ReplyComplaintService replyComplaintService;
-    private ComplaintService complaintService;
 
     @Override
     public void init() throws ServletException {
         replyComplaintService = new ReplyComplaintService();
-        complaintService = new ComplaintService();
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Employee employee = AuthUtil.checkEmployeeLogin(req, resp, "Customer Care Officer");
+        if (employee == null) return;
+        else resp.sendRedirect(req.getContextPath() + "/customer-care/complaint/list");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
-        Employee employee = (Employee) session.getAttribute("employee");
+        Employee employee = AuthUtil.checkEmployeeLogin(request, response, "Customer Care Officer");
+        if (employee == null) return;
 
         // Catch data
         int complaintID = Integer.parseInt(request.getParameter("complaintID"));
@@ -45,8 +51,6 @@ public class CreateReplyComplaint extends HttpServlet {
         replyComplaint.setStatus("Sent");
 
         replyComplaintService.submitReplyComplaint(replyComplaint);
-
-
 
         response.sendRedirect(request.getContextPath() + "/customer-care/complaint/view?complaintID=" + complaintID);
     }

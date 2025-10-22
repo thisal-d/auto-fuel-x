@@ -28,4 +28,5 @@ public class RefuelFormServlet extends HttpServlet {
 
         request.getRequestDispatcher("/views/refuel-cashier/fuel/refuel-form.jsp?refuel-form?purchase-status=" + request.getParameter("purchase-status")).forward(request, response);
     }
+
 }

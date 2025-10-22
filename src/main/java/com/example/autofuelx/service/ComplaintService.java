@@ -45,6 +45,10 @@ public class ComplaintService {
         return complaintDAO.getComplaintReplyDTOsByCustomerID(customerID);
     }
 
+    public List<ComplaintReplyDTO> getComplaintsWithReplyByCustomerId(int customerID, String status) {
+        return complaintDAO.getComplaintReplyDTOsByCustomerID(customerID, status);
+    }
+
     public List<ComplaintReplyDTO> getComplaintsWithReplyByStatus(String status) {
         return complaintDAO.getComplaintReplyDTOsByStatus(status);
     }

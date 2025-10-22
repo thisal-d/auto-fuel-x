@@ -23,6 +23,11 @@ public class EmployeeLoginServlet extends HttpServlet {
         employeeService = new EmployeeService();
     }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect(req.getContextPath() + "/views/employee/login.jsp");
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 

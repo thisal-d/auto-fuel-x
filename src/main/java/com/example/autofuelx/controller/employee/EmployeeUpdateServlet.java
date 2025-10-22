@@ -19,12 +19,17 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet("/employee/update")
 public class EmployeeUpdateServlet extends HttpServlet {
     private EmployeeService employeeService;
-    private EmployeePhoneNumberService phoneNumberService;
 
     @Override
     public void init() {
         employeeService = new EmployeeService();
-        phoneNumberService = new EmployeePhoneNumberService();
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Employee employee = AuthUtil.checkEmployeeLogin(req, resp);
+        if (employee == null) return;
+        resp.sendRedirect(req.getContextPath() + "/views/employee/edit.jsp");
     }
 
     @Override
@@ -35,7 +40,7 @@ public class EmployeeUpdateServlet extends HttpServlet {
         if (employee == null) return;
 
         try {
-            // --- Common Fields ---
+            // get data from request
             employee.setFirstName(request.getParameter("firstName"));
             employee.setLastName(request.getParameter("lastName"));
             employee.setDateOfBirth(Date.valueOf(request.getParameter("dateOfBirth")));
@@ -48,7 +53,7 @@ public class EmployeeUpdateServlet extends HttpServlet {
             employee.setAddressArea(request.getParameter("addressArea"));
             employee.setPassword(request.getParameter("password"));
 
-            // --- Role-Specific ---
+            // check employee type and get type specific attributes
             String role = employee.getRole();
             if ("Service Center Staff".equals(role)) {
                 employee.setSkillSet(request.getParameter("skillSet"));
@@ -57,11 +62,9 @@ public class EmployeeUpdateServlet extends HttpServlet {
             } else if ("Admin".equals(role)) {
                 employee.setRole(request.getParameter("adminRole"));
             }
-            // Customer Care Officer → no extra fields
 
-            // update Employee in DB
+            // update Employee in Database
             employeeService.updateEmployee(employee);
-
 
             // update session
             HttpSession session = request.getSession();

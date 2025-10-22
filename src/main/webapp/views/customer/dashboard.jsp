@@ -201,6 +201,10 @@
                     <th>Count</th>
                 </tr>
                 <tr>
+                    <td>Unread Complaints</td>
+                    <td><%= complaintSummary.getUnreadComplaints() %></td>
+                </tr>
+                <tr>
                     <td>Total Complaints</td>
                     <td><%= complaintSummary.getTotalComplaints() %></td>
                 </tr>
@@ -208,14 +212,7 @@
                     <td>Active Complaints</td>
                     <td><%= complaintSummary.getActiveComplaints() %></td>
                 </tr>
-                <tr>
-                    <td>Unread Complaints</td>
-                    <td><%= complaintSummary.getUnreadComplaints() %></td>
-                </tr>
-                <tr>
-                    <td>Inactive Complaints</td>
-                    <td><%= complaintSummary.getInactiveComplaints() %></td>
-                </tr>
+
             </table>
         </div>
 

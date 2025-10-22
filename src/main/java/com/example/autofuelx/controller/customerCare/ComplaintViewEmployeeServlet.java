@@ -20,7 +20,7 @@ public class ComplaintViewEmployeeServlet extends HttpServlet {
     public void init() throws ServletException {
         complaintService = new ComplaintService();
     }
-
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

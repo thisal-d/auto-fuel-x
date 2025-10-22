@@ -31,4 +31,5 @@ public class AssignJobListServlet extends HttpServlet {
         request.getRequestDispatcher("/views/service-center/service-booking/list.jsp").forward(request, response);
 
     }
+
 }

@@ -2,6 +2,7 @@ package com.example.autofuelx.controller.customer;
 
 import java.io.IOException;
 
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -23,39 +24,43 @@ public class CustomerRegisterServlet extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect(req.getContextPath() + "/views/customer/register.jsp");
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
-        // Get form data
+        // get form data
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
-        String email = request.getParameter("email");       // NEW
+        String email = request.getParameter("email");
         String password = request.getParameter("password");
         String addressNo = request.getParameter("addressNo");
         String addressLane = request.getParameter("addressLane");
         String addressArea = request.getParameter("addressArea");
 
-        Customer c = customerService.getCustomerByEmail(email);
-        System.out.println("Regiter User : " + c );
-        if (c != null){
+        Customer customer = customerService.getCustomerByEmail(email);
+
+        if (customer != null){
             request.setAttribute("register-error-message", "Email Already in use..!");
             request.getRequestDispatcher("/views/customer/register.jsp").forward(request, response);
             return;
         }
 
-        // Create Customer object
-        Customer customer = new Customer();
-        customer.setFirstName(firstName);
-        customer.setLastName(lastName);
-        customer.setEmail(email);       // NEW
-        customer.setPassword(password);
-        customer.setAddressNo(addressNo);
-        customer.setAddressLane(addressLane);
-        customer.setAddressArea(addressArea);
+        // create Customer object
+        Customer newCustomer = new Customer();
+        newCustomer.setFirstName(firstName);
+        newCustomer.setLastName(lastName);
+        newCustomer.setEmail(email);
+        newCustomer.setPassword(password);
+        newCustomer.setAddressNo(addressNo);
+        newCustomer.setAddressLane(addressLane);
+        newCustomer.setAddressArea(addressArea);
 
-        // Call service to save
-        boolean isRegistered = customerService.registerCustomer(customer);
+        // register customer
+        boolean isRegistered = customerService.registerCustomer(newCustomer);
 
         if (isRegistered) {
             response.sendRedirect(request.getContextPath() + "/views/customer/registration-success.jsp");

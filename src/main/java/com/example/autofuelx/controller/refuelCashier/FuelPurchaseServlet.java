@@ -22,6 +22,12 @@ public class FuelPurchaseServlet extends HttpServlet {
         vehicleService = new VehicleService();
     }
 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Employee employee = AuthUtil.checkEmployeeLogin(request, response, "Refuel Cashier");
+        if (employee == null) return;
+        else response.sendRedirect(request.getContextPath() + "/views/refuel-cashier/fuel/refuel-form.jsp");
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Employee employee = AuthUtil.checkEmployeeLogin(request, response, "Refuel Cashier");
         if (employee == null) return;
@@ -30,7 +36,7 @@ public class FuelPurchaseServlet extends HttpServlet {
         int fuelID= Integer.parseInt(request.getParameter("fuelID"));
         double quantity = Double.parseDouble(request.getParameter("quantity"));
 
-        // Get vehicle
+        // get vehicle using plate no
         Vehicle vehicle = vehicleService.getVehicleByPlateNo(plateNumber);
         double purchaseCost = fuelPurchaseService.getPurchaseCost(fuelID, quantity);
 
@@ -41,10 +47,8 @@ public class FuelPurchaseServlet extends HttpServlet {
         fuelPurchase.setCustomerID(vehicle.getCustomerID());
         fuelPurchase.setTotalCost(purchaseCost);
 
-        // FuelPurchaseServlet after saving purchase
         try {
             fuelPurchaseService.makePurchase(fuelPurchase);
-            // use query param to pass status
             response.sendRedirect(request.getContextPath() + "/refuel-cashier/fuel/refuel-form?purchase-status=success");
         } catch (Exception e) {
             response.sendRedirect(request.getContextPath() + "/refuel-cashier/fuel/refuel-form?purchase-status=failed");

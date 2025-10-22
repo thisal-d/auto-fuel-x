@@ -39,9 +39,7 @@ public class ComplaintListServlet extends HttpServlet {
 
         List<ComplaintReplyDTO> complaints = complaintService.getComplaintReplyDTOsFiltered(keyword, lastUpdateDate, customerEmail, status);
 
-
         request.setAttribute("complaints", complaints);
-
         request.setAttribute("status", status);
         request.setAttribute("last-update-date", lastUpdateDate);
         request.setAttribute("customer-email", customerEmail);

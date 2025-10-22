@@ -287,6 +287,51 @@ public class ComplaintDAO {
         return null; // Return empty list instead of null
     }
 
+    public List<ComplaintReplyDTO> getComplaintReplyDTOsByCustomerID(int customerId, String status) {
+        String sql = "SELECT c.title AS complaintTitle, c.description AS complaintDescription, c.status, " +
+                "c.createdDate, c.createdTime, c.updatedDate, c.updateTime, c.ComplaintID, " +
+                "e.FirstName + ' ' + e.LastName AS repliedEmployeeName, e.Type AS repliedEmployeeType, " +
+                "rc.ReplyComplaintID , rc.Status AS replyStatus ,rc.title AS replyTitle,  rc.description AS replyDescription, " +
+                "rc.createdDate AS replyCreatedDate, rc.createdTime AS replyCreatedTime, " +
+                "rc.updatedDate AS replyUpdatedDate, rc.updateTime AS replyUpdateTime " +
+                "FROM Complaint c " +
+                "LEFT JOIN ReplyComplaint rc ON c.complaintID = rc.complaintID " +
+                "LEFT JOIN Employee e ON rc.staffID = e.EmployeeID " +
+                "WHERE c.customerID = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             ) {
+
+            if (status!=null || !status.equalsIgnoreCase("all")){
+                if (status.equalsIgnoreCase("Open")){
+                    sql += " AND NOT(rc.status = 'Seen') OR NOT(c.Status = 'Seen')";
+                }
+                else {
+                    sql += " AND (rc.status = 'Seen') AND (c.Status = 'Seen')";
+                }
+            }
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, customerId);
+
+            List<ComplaintReplyDTO> complaintReplyDTOs = new ArrayList<>();
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    ComplaintReplyDTO complaintReplyDTO = new ComplaintReplyDTO();
+
+                    complaintReplyDTO = extractComplaintDetailsFromResultSet(rs);
+
+
+                    complaintReplyDTOs.add(complaintReplyDTO);
+                }
+                return complaintReplyDTOs;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null; // Return empty list instead of null
+    }
+
     // Update complaint
     public boolean updateComplaint(Complaint complaint) {
         String sql = "UPDATE Complaint SET customerID = ?, title = ?, description = ?, status = ?, " +
@@ -385,31 +430,13 @@ public class ComplaintDAO {
                 }
             }
 
-            // Inactive complaints
-            String inactiveQuery = """
-            SELECT COUNT(*) 
-            FROM Complaint c
-            INNER JOIN ReplyComplaint rc ON c.ComplaintID = rc.ComplaintID
-            WHERE c.CustomerID = ?
-              AND c.Status = 'seen'
-              AND rc.Status = 'seen'
-        """;
-            try (PreparedStatement stmt = conn.prepareStatement(inactiveQuery)) {
-                stmt.setInt(1, customerId);
-                try (ResultSet rs = stmt.executeQuery()) {
-                    if (rs.next()) {
-                        summary.setInactiveComplaints(rs.getInt(1));
-                    }
-                }
-            }
-
             // New received complaints
             String newReceivedQuery = """
             SELECT COUNT(*) 
             FROM Complaint c
             INNER JOIN ReplyComplaint rc ON c.ComplaintID = rc.ComplaintID
             WHERE c.CustomerID = ?
-              AND rc.Status = 'sent'
+              AND rc.Status = 'Sent'
         """;
             try (PreparedStatement stmt = conn.prepareStatement(newReceivedQuery)) {
                 stmt.setInt(1, customerId);

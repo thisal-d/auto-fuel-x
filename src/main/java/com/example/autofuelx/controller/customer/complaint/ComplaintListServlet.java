@@ -30,7 +30,14 @@ public class ComplaintListServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Customer customer = (Customer) session.getAttribute("customer");
 
-        List<ComplaintReplyDTO> complaints = complaintService.getComplaintsWithReplyByCustomerId(customer.getCustomerID());
+        // read filter parameters from request
+        String status = request.getParameter("status");
+        request.setAttribute("status", status);
+
+
+        List<ComplaintReplyDTO> complaints;
+        if (status == null) complaints = complaintService.getComplaintsWithReplyByCustomerId(customer.getCustomerID());
+        else complaints = complaintService.getComplaintsWithReplyByCustomerId(customer.getCustomerID(), status);
 
         request.setAttribute("complaints", complaints);
         request.getRequestDispatcher("/views/customer/complaint/list.jsp").forward(request, response);

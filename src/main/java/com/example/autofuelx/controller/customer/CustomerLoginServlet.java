@@ -27,6 +27,11 @@ public class CustomerLoginServlet extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect(req.getContextPath() + "/views/customer/login.jsp");
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -36,15 +41,13 @@ public class CustomerLoginServlet extends HttpServlet {
         Customer customer = customerService.loginCustomer(email, password);
 
         if (customer != null) {
-            // Login success
-            // Create session
             HttpSession session = request.getSession();
             session.setAttribute("customer", customer);
 
             List<String> phoneNumbers = customerPhoneNumberService.getPhoneNumbersByCustomer(customer.getCustomerID());
             session.setAttribute("phone-numbers", phoneNumbers);
 
-            response.sendRedirect(request.getContextPath() + "/views/customer/dashboard.jsp"); // Redirect to welcome page
+            response.sendRedirect(request.getContextPath() + "/views/customer/dashboard.jsp"); // got to dashboard
         } else {
             // Login failed
             request.setAttribute("login-error-message", "Invalid email or password");
