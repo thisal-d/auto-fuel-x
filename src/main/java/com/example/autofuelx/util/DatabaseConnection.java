@@ -13,21 +13,26 @@ public class DatabaseConnection {
 
     // method to return instance
     public static Connection getConnection() {
-        if (conn == null) {
-            createConnection();
+        try {
+            if (conn == null || conn.isClosed()) { // check if connection is closed
+                createConnection();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            createConnection(); //  recreate connection if check failed
         }
         return conn;
     }
 
     // method to create instance
-    private static void createConnection(){
+    private static void createConnection() {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            // connect to DB
-            // create object and assign to conn variable
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            System.out.println("Database connected successfully!");
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println( "Database connection failed!");
         }
     }
 }
