@@ -2,6 +2,7 @@ package com.example.autofuelx.controller.admin.employee;
 
 import com.example.autofuelx.model.Employee;
 import com.example.autofuelx.service.EmployeeService;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,6 +22,9 @@ public class EmployeeListServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        Employee employee = AuthUtil.checkEmployeeLogin(request, response, "Admin");
+        if (employee == null) return;
 
         // Get filter parameters from request
         String type = request.getParameter("type");

@@ -1,7 +1,9 @@
 package com.example.autofuelx.controller.admin.serviceBooking;
 
 import com.example.autofuelx.dto.ServiceBookingDTO;
+import com.example.autofuelx.model.Employee;
 import com.example.autofuelx.service.ServiceBookingService;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -26,14 +28,17 @@ public class ServiceBookingAdminDashboardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Get all bookings for statistics
+        Employee employee = AuthUtil.checkEmployeeLogin(request, response, "Admin");
+        if (employee == null) return;
+
+        // get all bookings for statistics
         List<ServiceBookingDTO> allBookings = serviceBookingService.getAllBookings();
 
-        // Count bookings by status
+        // count bookings by status
         Map<String, Integer> statusCounts = new HashMap<>();
         statusCounts.put("totalBookings", allBookings.size());
 
-        // Initialize all possible statuses with 0 count
+        // initialize all possible statuses with 0 count
         statusCounts.put("awaitingConfirmationCount", 0);
         statusCounts.put("confirmedCount", 0);
         statusCounts.put("rescheduleRequiredCount", 0);
@@ -43,7 +48,7 @@ public class ServiceBookingAdminDashboardServlet extends HttpServlet {
         statusCounts.put("cancelledCount", 0);
         statusCounts.put("missedAppointmentCount", 0);
 
-        // Count actual statuses
+        // count actual statuses
         for (ServiceBookingDTO booking : allBookings) {
             String status = booking.getStatus();
             switch (status) {
@@ -74,10 +79,10 @@ public class ServiceBookingAdminDashboardServlet extends HttpServlet {
             }
         }
 
-        // Set attributes
+        // set attributes
         request.setAttribute("statusCounts", statusCounts);
 
-        // Forward to JSP
+        // forward to JSP
         request.getRequestDispatcher("/views/admin/service-booking/dashboard.jsp").forward(request, response);
     }
 }

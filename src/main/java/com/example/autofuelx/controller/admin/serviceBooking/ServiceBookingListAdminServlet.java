@@ -5,6 +5,7 @@ import com.example.autofuelx.dto.ServiceBookingDTO;
 import com.example.autofuelx.model.Employee;
 import com.example.autofuelx.service.EmployeeService;
 import com.example.autofuelx.service.ServiceBookingService;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -28,6 +29,9 @@ public class ServiceBookingListAdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        Employee employee = AuthUtil.checkEmployeeLogin(request, response, "Admin");
+        if (employee == null) return;
 
         String viewStatus = request.getParameter("status");
 

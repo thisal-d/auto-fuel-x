@@ -1,8 +1,10 @@
 package com.example.autofuelx.controller.admin.fuelSupplier;
 
 
+import com.example.autofuelx.model.Employee;
 import com.example.autofuelx.model.FuelSupplier;
 import com.example.autofuelx.service.FuelSupplierService;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,6 +20,14 @@ public class FuelSupplierDeleteServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         fuelSupplierService = new FuelSupplierService();
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Employee employee = AuthUtil.checkEmployeeLogin(req, resp, "Admin");
+        if (employee == null) return;
+
+        resp.sendRedirect(req.getContextPath() + "/admin/fuel-supplier/list");
     }
 
     @Override

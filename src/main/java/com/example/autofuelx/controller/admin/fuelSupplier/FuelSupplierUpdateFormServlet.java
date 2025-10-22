@@ -1,8 +1,10 @@
 package com.example.autofuelx.controller.admin.fuelSupplier;
 
 
+import com.example.autofuelx.model.Employee;
 import com.example.autofuelx.model.FuelSupplier;
 import com.example.autofuelx.service.FuelSupplierService;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -23,7 +25,9 @@ public class FuelSupplierUpdateFormServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        Employee employee = AuthUtil.checkEmployeeLogin(request, response, "Admin");
+        if (employee == null) return;
+        
         // Get form parameters
         String supplierIDStr = request.getParameter("fuel-supplier-id");
         int supplierID = Integer.parseInt(supplierIDStr);

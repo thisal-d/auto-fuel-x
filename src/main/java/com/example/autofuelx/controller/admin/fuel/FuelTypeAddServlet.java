@@ -1,8 +1,10 @@
 package com.example.autofuelx.controller.admin.fuel;
 
 
+import com.example.autofuelx.model.Employee;
 import com.example.autofuelx.model.Fuel;
 import com.example.autofuelx.service.FuelService;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -19,8 +21,17 @@ public class FuelTypeAddServlet extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Employee employee = AuthUtil.checkEmployeeLogin(req, resp, "Admin");
+        if (employee == null) return;
+        resp.sendRedirect(req.getContextPath() + "/admin/fuel/level");
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Employee employee = AuthUtil.checkEmployeeLogin(request, response, "Admin");
+        if (employee == null) return;
 
         // Get form parameters
         String type = request.getParameter("type");

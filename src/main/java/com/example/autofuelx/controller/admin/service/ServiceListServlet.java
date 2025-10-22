@@ -1,8 +1,10 @@
 package com.example.autofuelx.controller.admin.service;
 
 import com.example.autofuelx.dao.ServiceDAO;
+import com.example.autofuelx.model.Employee;
 import com.example.autofuelx.model.Service;
 import com.example.autofuelx.service.ServiceManager;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,6 +24,9 @@ public class ServiceListServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        Employee employee = AuthUtil.checkEmployeeLogin(request, response, "Admin");
+        if (employee == null) return;
+
         // Get filter parameters
         String minCostParam = request.getParameter("minCost");
         String maxCostParam = request.getParameter("maxCost");

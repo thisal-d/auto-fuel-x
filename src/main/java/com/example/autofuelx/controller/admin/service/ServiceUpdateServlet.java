@@ -1,8 +1,10 @@
 package com.example.autofuelx.controller.admin.service;
 
+import com.example.autofuelx.model.Employee;
 import com.example.autofuelx.model.Service;
 import com.example.autofuelx.service.EmployeeService;
 import com.example.autofuelx.service.ServiceManager;
+import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,14 +24,23 @@ public class ServiceUpdateServlet extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Employee employee = AuthUtil.checkEmployeeLogin(req, resp, "Admin");
+        if (employee == null) return;
+
+        resp.sendRedirect(req.getContextPath() + "/admin/service/list");
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Employee employee = AuthUtil.checkEmployeeLogin(request, response, "Admin");
+        if (employee == null) return;
 
         int serviceID = Integer.parseInt(request.getParameter("id"));
         String type = request.getParameter("type");
         String description = request.getParameter("description");
         double cost = Double.parseDouble(request.getParameter("cost"));
-
 
         Service service = new Service();
         service.setServiceID(serviceID);
