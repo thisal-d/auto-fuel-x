@@ -469,10 +469,11 @@ SELECT * FROM ServiceBooking;
 -----------------------------------------------------
 -- Fuel Purchase Trigger
 -----------------------------------------------------
+GO
 CREATE TRIGGER AfterFuelPurchaseUpdateStock
-ON FuelPurchase
-AFTER INSERT
-AS
+    ON FuelPurchase
+    AFTER INSERT
+    AS
 BEGIN
     SET NOCOUNT ON;
 
@@ -480,34 +481,37 @@ BEGIN
     UPDATE f
     SET f.Quantity = f.Quantity - i.Quantity
     FROM Fuel AS f
-    INNER JOIN inserted AS i ON f.FuelID = i.FuelID;
+             INNER JOIN inserted AS i ON f.FuelID = i.FuelID;
 
     PRINT 'Fuel Level Updated...!';
 
     -- Show updated fuel details
     SELECT f.*
     FROM Fuel AS f
-    INNER JOIN inserted AS i ON f.FuelID = i.FuelID;
+             INNER JOIN inserted AS i ON f.FuelID = i.FuelID;
 END;
-
+GO
 
 -----------------------------------------------------
 -- Fuel Supply Trigger
 -----------------------------------------------------
+GO
 CREATE TRIGGER update_fuel_after_supply
-ON FuelSupply
-AFTER INSERT
-AS
+    ON FuelSupply
+    AFTER INSERT
+    AS
 BEGIN
     UPDATE Fuel
     SET Quantity = Fuel.Quantity + inserted.Quantity
     FROM Fuel
-    JOIN inserted ON Fuel.FuelID = inserted.FuelID;
+             JOIN inserted ON Fuel.FuelID = inserted.FuelID;
 END;
+GO
 
 -----------------------------------------------------
 -- Customer Delete Trigger
 -----------------------------------------------------
+GO
 CREATE OR ALTER TRIGGER delete_customer_details
     ON Customer
     INSTEAD OF DELETE
@@ -545,10 +549,12 @@ BEGIN
     DELETE FROM Customer
     WHERE CustomerID IN (SELECT CustomerID FROM DELETED);
 END;
+GO
 
 -----------------------------------------------------
 -- Employee Delete Trigger
 -----------------------------------------------------
+GO
 CREATE OR ALTER TRIGGER delete_employee_details
     ON Employee
     INSTEAD OF DELETE
@@ -572,10 +578,12 @@ BEGIN
     DELETE FROM Employee
     WHERE EmployeeID IN (SELECT EmployeeID FROM DELETED);
 END;
+GO
 
 -----------------------------------------------------
 -- Fuel Supplier Delete Trigger
 -----------------------------------------------------
+GO
 CREATE OR ALTER TRIGGER delete_fuel_supply_details
     ON FuelSupplier
     INSTEAD OF DELETE
@@ -590,10 +598,11 @@ BEGIN
     DELETE FROM FuelSupplier
     WHERE SupplierID IN (SELECT SupplierID FROM DELETED);
 END;
-
+GO
 -----------------------------------------------------
 -- Vehicle Delete Trigger
 -----------------------------------------------------
+GO
 CREATE OR ALTER TRIGGER delete_vehicle_details
     ON Vehicle
     INSTEAD OF DELETE
@@ -613,10 +622,12 @@ BEGIN
     DELETE FROM Vehicle
     WHERE VehicleID IN (SELECT VehicleID FROM DELETED);
 END;
+GO
 
 -----------------------------------------------------
 -- Service Delete Trigger
 -----------------------------------------------------
+GO
 CREATE OR ALTER TRIGGER delete_service_details
     ON Service
     INSTEAD OF DELETE
@@ -631,10 +642,12 @@ BEGIN
     DELETE FROM Service
     WHERE ServiceID IN (SELECT ServiceID FROM DELETED);
 END;
+GO
 
 -----------------------------------------------------
 -- Fuel Delete Trigger
 -----------------------------------------------------
+GO
 CREATE OR ALTER TRIGGER delete_fuel_details
     ON Fuel
     INSTEAD OF DELETE
@@ -654,10 +667,12 @@ BEGIN
     DELETE FROM Fuel
     WHERE FuelID IN (SELECT FuelID FROM DELETED);
 END;
+GO
 
 -----------------------------------------------------
 -- Complaint Delete Trigger
 -----------------------------------------------------
+GO
 CREATE OR ALTER TRIGGER delete_complaint_details
     ON Complaint
     INSTEAD OF DELETE
@@ -671,3 +686,4 @@ BEGIN
     DELETE FROM Complaint
     WHERE ComplaintID IN (SELECT ComplaintID FROM DELETED);
 END;
+GO
