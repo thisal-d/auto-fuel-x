@@ -13,12 +13,14 @@ public class ServiceBookingService {
         serviceBookingDAO = new ServiceBookingDAO();
     }
 
-    public boolean bookService(ServiceBooking serviceBooking) {
-        return serviceBookingDAO.insertBooking(serviceBooking);
+    public void bookService(ServiceBooking serviceBooking) {
+        boolean success = serviceBookingDAO.insertBooking(serviceBooking);
+        System.out.println("Booking Status " + serviceBooking.getBookingID() + " Inserted: " + success);
     }
 
-    public boolean updateBooking(ServiceBooking serviceBooking) {
-        return serviceBookingDAO.updateBooking(serviceBooking);
+    public void updateBooking(ServiceBooking serviceBooking) {
+        boolean success = serviceBookingDAO.updateBooking(serviceBooking);
+        System.out.println("Booking Status " + serviceBooking.getStatus() + " Updating : " + success);
     }
 
     public List<ServiceBookingDTO> getAllBookings() {
@@ -29,9 +31,9 @@ public class ServiceBookingService {
         return serviceBookingDAO.getAllBookings(status);
     }
 
-    public List<ServiceBookingDTO> getBookingsByCustomerID(int customerID) {
-        return serviceBookingDAO.getBookingsByCustomer(customerID);
-    }
+    //    public List<ServiceBookingDTO> getBookingsByCustomerID(int customerID) {
+    //        return serviceBookingDAO.getBookingsByCustomer(customerID);
+    //    }
 
     public List<ServiceBookingDTO> getActiveBookingsByCustomerID(int customerID) {
         return serviceBookingDAO.getActiveBookingsByCustomerID(customerID);
@@ -41,9 +43,9 @@ public class ServiceBookingService {
         return serviceBookingDAO.getBookingByID(bookingID);
     }
 
-    public ServiceBookingDTO getBookingDTOByID(int bookingID) {
-        return serviceBookingDAO.getBookingDTOByID(bookingID);
-    }
+    //    public ServiceBookingDTO getBookingDTOByID(int bookingID) {
+    //        return serviceBookingDAO.getBookingDTOByID(bookingID);
+    //    }
 
     public List<ServiceBookingDTO> getBookingsByCustomerIDAndStatus(int customerID, String status) {
         return serviceBookingDAO.getBookingsByCustomerIDAndStatus(customerID, status);

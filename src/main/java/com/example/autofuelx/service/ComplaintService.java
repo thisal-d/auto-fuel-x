@@ -29,8 +29,13 @@ public class ComplaintService {
         complaintDAO.deleteComplaint(complaintID);
     }
 
-    public boolean updateComplaintStatus(int complaintID, String status) {
-        return complaintDAO.updateComplaintStatus(complaintID, status);
+    public void updateComplaintStatus(int complaintID, String status) {
+        boolean success = complaintDAO.updateComplaintStatus(complaintID, status);
+        if (success) {
+            System.out.println("Complaint ID " + complaintID + " updated to status: " + status);
+        } else {
+            System.err.println("Failed to update complaint ID " + complaintID);
+        }
     }
 
     public List<Complaint> getComplaintsByCustomerID(int customerID) {

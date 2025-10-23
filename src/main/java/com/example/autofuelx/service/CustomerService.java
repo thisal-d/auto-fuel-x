@@ -3,14 +3,12 @@ package com.example.autofuelx.service;
 
 import com.example.autofuelx.dao.CustomerDAO;
 import com.example.autofuelx.model.Customer;
-import com.example.autofuelx.model.Customer;
-import com.example.autofuelx.model.Customer;
 
 import java.util.List;
 
 public class CustomerService {
 
-    private CustomerDAO customerDAO;
+    private final CustomerDAO customerDAO;
 
     public CustomerService() {
         customerDAO = new CustomerDAO();
@@ -32,12 +30,22 @@ public class CustomerService {
         return customerDAO.getCustomerById(id);
     }
 
-    public boolean deleteCustomer(int id) {
-        return customerDAO.deleteCustomer(id);
+    public void deleteCustomer(int customerID) {
+        boolean success = customerDAO.deleteCustomer(customerID);
+        if (success) {
+            System.out.println("Customer ID " + customerID + " Delete status: " + success);
+        } else {
+            System.err.println("Failed to Delete Customer ID " + customerID);
+        }
     }
 
-    public boolean updateCustomer(Customer customer) {
-        return customerDAO.updateCustomer(customer);
+    public void updateCustomer(Customer customer) {
+        boolean success =  customerDAO.updateCustomer(customer);
+        if (success) {
+            System.out.println("Customer ID " + customer.getCustomerID() + " Delete status: " + success);
+        } else {
+            System.err.println("Failed to Delete Customer ID " + customer.getCustomerID());
+        }
     }
 
     public Customer getCustomerByEmail(String email) {

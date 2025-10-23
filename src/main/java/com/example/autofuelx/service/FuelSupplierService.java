@@ -14,11 +14,10 @@ public class FuelSupplierService {
         this.fuelSupplierDAO = new FuelSupplierDAO();
     }
 
-
-    public boolean addSupplier(FuelSupplier supplier) {
-        return fuelSupplierDAO.addSupplier(supplier);
+    public void addSupplier(FuelSupplier supplier) {
+        boolean success = fuelSupplierDAO.addSupplier(supplier);
+        System.out.println("Fuel Supplier Added : " + success);
     }
-
 
     public List<FuelSupplier> getAllSuppliers() {
         return fuelSupplierDAO.getAllSuppliers();
@@ -28,13 +27,13 @@ public class FuelSupplierService {
         return fuelSupplierDAO.getSupplierById(supplierId);
     }
 
-
-    public boolean updateSupplier(FuelSupplier supplier) {
-        return fuelSupplierDAO.updateSupplier(supplier);
+    public void updateSupplier(FuelSupplier supplier) {
+        boolean success = fuelSupplierDAO.updateSupplier(supplier);
+        System.out.println("Fuel Supplier Updated : " + success);
     }
 
-
-    public boolean deleteSupplier(int supplierId) {
-        return fuelSupplierDAO.deleteSupplier(supplierId);
+    public void deleteSupplier(int supplierId) {
+        boolean success = fuelSupplierDAO.deleteSupplier(supplierId);
+        System.out.println("Fuel Supplier Deleted : " + success);
     }
 }

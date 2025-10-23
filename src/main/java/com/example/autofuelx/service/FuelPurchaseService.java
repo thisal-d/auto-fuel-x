@@ -10,8 +10,8 @@ import com.example.autofuelx.dto.FuelPurchaseDetailDTO;
 import java.util.List;
 
 public class FuelPurchaseService {
-    private FuelPurchaseDAO fuelPurchaseDAO;
-    private FuelDAO fuelDAO;
+    private final FuelPurchaseDAO fuelPurchaseDAO;
+    private final FuelDAO fuelDAO;
 
     public FuelPurchaseService() {
         fuelPurchaseDAO = new FuelPurchaseDAO();

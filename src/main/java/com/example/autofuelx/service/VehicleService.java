@@ -8,26 +8,29 @@ import java.util.List;
 
 public class VehicleService {
 
-    private VehicleDAO vehicleDAO;
+    private final VehicleDAO vehicleDAO;
 
     public VehicleService() {
         vehicleDAO = new VehicleDAO();
     }
 
-    public boolean addVehicle(Vehicle vehicle) {
-        return vehicleDAO.addVehicle(vehicle);
+    public void addVehicle(Vehicle vehicle) {
+        boolean success = vehicleDAO.addVehicle(vehicle);
+        System.out.println("Vehicle added: " + vehicle.getVehicleID() + " : " + success);
     }
 
     public List<Vehicle> getVehiclesByCustomerID(int customerID) {
         return vehicleDAO.getVehiclesByCustomerID(customerID);
     }
 
-    public boolean updateVehicle(Vehicle vehicle) {
-        return vehicleDAO.updateVehicle(vehicle);
+    public void updateVehicle(Vehicle vehicle) {
+        boolean success = vehicleDAO.updateVehicle(vehicle);
+        System.out.println();
     }
 
-    public boolean deleteVehicle(int vehicleID, int customerID) {
-        return vehicleDAO.deleteVehicle(vehicleID, customerID);
+    public void deleteVehicle(int vehicleID, int customerID) {
+        boolean success = vehicleDAO.deleteVehicle(vehicleID, customerID);
+        System.out.println("Vehicle deleted: " + vehicleID + " : " + success);
     }
 
     public Vehicle getVehicleByID(int vehicleID) {

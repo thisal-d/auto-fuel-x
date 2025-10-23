@@ -6,7 +6,7 @@ import com.example.autofuelx.model.Fuel;
 import java.util.List;
 
 public class FuelService {
-    private FuelDAO fuelDAO;
+    private final FuelDAO fuelDAO;
 
     public FuelService() {
         fuelDAO = new FuelDAO();
@@ -17,24 +17,24 @@ public class FuelService {
         fuelDAO.addFuel(fuel);
     }
 
-    // Get fuel by ID
-    public Fuel getFuelById(int fuelID) {
-        return fuelDAO.getFuelById(fuelID);
-    }
+    //    // Get fuel by ID
+    //    public Fuel getFuelById(int fuelID) {
+    //        return fuelDAO.getFuelById(fuelID);
+    //    }
 
     // Get all fuels
     public List<Fuel> getAllFuels() {
         return fuelDAO.getAllFuels();
     }
 
-    // Update fuel
-    public void updateFuel(Fuel fuel) {
-        fuelDAO.updateFuel(fuel);
-    }
+    //    // Update fuel
+    //    public void updateFuel(Fuel fuel) {
+    //        fuelDAO.updateFuel(fuel);
+    //    }
 
-    // Delete fuel
-    public void deleteFuel(int fuelID) {
-        fuelDAO.deleteFuel(fuelID);
-    }
+    //    // Delete fuel
+    //    public void deleteFuel(int fuelID) {
+    //        fuelDAO.deleteFuel(fuelID);
+    //    }
 
 }

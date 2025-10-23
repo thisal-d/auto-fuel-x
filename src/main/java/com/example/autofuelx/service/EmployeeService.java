@@ -2,14 +2,12 @@ package com.example.autofuelx.service;
 
 import com.example.autofuelx.dao.EmployeeDAO;
 import com.example.autofuelx.model.Employee;
-import com.example.autofuelx.util.DatabaseConnection;
 
-import java.sql.Connection;
 import java.sql.Date;
 import java.util.List;
 
 public class EmployeeService {
-    private EmployeeDAO employeeDAO;
+    private final EmployeeDAO employeeDAO;
 
     public EmployeeService() {
         this.employeeDAO = new EmployeeDAO();
@@ -31,24 +29,28 @@ public class EmployeeService {
                 minSalary, maxSalary, name, ageGroup);
     }
 
-    public boolean addEmployee(Employee employee) {
-        return employeeDAO.addEmployee(employee);
+    public void addEmployee(Employee employee) {
+        boolean success =  employeeDAO.addEmployee(employee);
+        System.out.println("Employee " + employee.getEmployeeID() + " Adding : " + success);
     }
 
-    public boolean updateEmployee(Employee employee) {
-        return employeeDAO.updateEmployee(employee);
+    public void updateEmployee(Employee employee) {
+        boolean success = employeeDAO.updateEmployee(employee);
+        System.out.println("Employee " + employee.getEmployeeID() + " Updating : " + success);
     }
 
-    public boolean deleteEmployee(int id) {
-        return employeeDAO.deleteEmployee(id);
+    public void deleteEmployee(int employeeID) {
+        boolean success = employeeDAO.deleteEmployee(employeeID);
+        System.out.println("Employee " + employeeID + " Deleting Status : " + success);
     }
 
     public List<Employee> getEmployeesByType(String type) {
         return employeeDAO.getEmployeesByType(type);
     }
 
-    public boolean updateEmployeeStatus(int employeeID, String status) {
-        return employeeDAO.updateEmployeeStatus(employeeID, status);
+    public void updateEmployeeStatus(int employeeID, String status) {
+        boolean success = employeeDAO.updateEmployeeStatus(employeeID, status);
+        System.out.println("Employee " + employeeID + " Updating Status : " + success);
     }
 
     public List<Employee> getEmployeesByTypeStatus(String type, String status) {

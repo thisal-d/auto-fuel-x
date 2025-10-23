@@ -14,21 +14,21 @@ public class EmployeePhoneNumberService {
         this.phoneDAO = new EmployeePhoneNumberDAO();
     }
 
-    // Add a phone number
+    // add a phone number
     public boolean addPhoneNumber(int employeeID, String phoneNumber) {
         if (phoneNumber == null || phoneNumber.trim().isEmpty()) {
-            return false; // validation: don't allow empty numbers
+            return false;
         }
         EmployeePhoneNumber phone = new EmployeePhoneNumber(employeeID, phoneNumber.trim());
         return phoneDAO.addPhoneNumber(phone);
     }
 
-    // Delete a phone number
+    // del a phone number
     public boolean deletePhoneNumber(int employeeID, String phoneNumber) {
         return phoneDAO.deletePhoneNumber(employeeID, phoneNumber);
     }
 
-    // Get all phone numbers for a employee
+    // get all phone numbers for a employee
     public List<String> getPhoneNumbersByEmployee(int employeeID) {
         return phoneDAO.getPhoneNumbersByEmployee(employeeID);
     }

@@ -23,8 +23,8 @@ public class FeedbackService {
         feedbackDAO.deleteFeedback(feedbackID);
     }
 
-    public List<Feedback> getComplaintsByUserID(int userID) {
-        return feedbackDAO.getFeedbacksByCustomerID(userID);
-    }
+    //    public List<Feedback> getComplaintsByUserID(int userID) {
+    //        return feedbackDAO.getFeedbacksByCustomerID(userID);
+    //    }
 
 }
