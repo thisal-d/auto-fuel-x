@@ -12,7 +12,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import java.io.*;
 
-@WebServlet("/admin/fuel/insert/form")
+@WebServlet("/admin/fuel/insert")
 public class FuelInsertServlet extends HttpServlet {
     private FuelSupplyService fuelSupplyService;
 
@@ -44,6 +44,6 @@ public class FuelInsertServlet extends HttpServlet {
 
         fuelSupplyService.addFuelSupply(fuelSupply);
 
-        response.sendRedirect(request.getContextPath() + "/refuel-cashier/fuel/refuel-form");
+        response.sendRedirect(request.getContextPath() + "/admin/fuel/insert-form");
     }
 }

@@ -72,7 +72,7 @@
             <div class="nav-section nav-section-logout">
                 <div class="nav-section-title">Account</div>
                 <div class="nav-links">
-                    <a href="<%=request.getContextPath()%>/user/logout" class="logout-link">Logout</a>
+                    <a href="<%=request.getContextPath()%>/user/logout" onClick="return confirm('Are you sure You Want to Logout ?')" class="logout-link">Logout</a>
                 </div>
             </div>
         </nav>

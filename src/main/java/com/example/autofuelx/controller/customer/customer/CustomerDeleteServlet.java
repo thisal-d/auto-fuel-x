@@ -29,7 +29,17 @@ public class CustomerDeleteServlet extends HttpServlet {
         Customer customer = AuthUtil.checkCustomerLogin(request, response);
         if (customer == null) return;
 
+        response.sendRedirect(request.getContextPath() + "/views/customer/profile.jsp");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        Customer customer = AuthUtil.checkCustomerLogin(request, response);
+        if (customer == null) return;
+
         customerService.deleteCustomer(customer.getCustomerID());
-        response.sendRedirect(request.getContextPath() + "/views/customer/login.jsp");
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
     }
 }

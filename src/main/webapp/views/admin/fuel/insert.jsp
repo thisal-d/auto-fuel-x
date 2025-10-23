@@ -27,7 +27,7 @@
     <h1 class="fuel-title">Add Fuel Quantity</h1>
   </div>
 
-  <form action="<%= request.getContextPath() %>/admin/fuel/insert/form" method="post" class="fuel-form">
+  <form action="<%= request.getContextPath() %>/admin/fuel/insert" method="post" class="fuel-form">
 
     <div class="form-group">
       <label for="fuelSupplierID" class="form-label">Fuel Supplier:</label>

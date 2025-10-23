@@ -1,6 +1,5 @@
 package com.example.autofuelx.controller.admin.fuel;
 
-
 import com.example.autofuelx.model.Employee;
 import com.example.autofuelx.model.Fuel;
 import com.example.autofuelx.service.FuelService;
@@ -8,7 +7,6 @@ import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-
 import java.io.IOException;
 
 @WebServlet("/admin/fuel/add")

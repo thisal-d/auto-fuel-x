@@ -91,7 +91,13 @@
 
             <div class="profile-actions">
                 <div class="action-buttons">
-                    <a href="<%=request.getContextPath()%>/views/customer/update.jsp" class="btn btn-primary">Edit Profile</a>
+                    <form method="get" action="<%=request.getContextPath()%>/views/customer/update.jsp" >
+                        <input type="submit" value="Edit Profile" class="btn btn-primary">
+                    </form>
+
+                    <form method="post" action="<%=request.getContextPath()%>/customer/customer/delete" onClick="return confirm('Are you sure You Want delete your profile ?')">
+                        <input type="submit" value="Delete Profile" class="btn btn-primary">
+                    </form>
                 </div>
 
                 <a href="<%=request.getContextPath()%>/logout" class="logout-link">Logout</a>

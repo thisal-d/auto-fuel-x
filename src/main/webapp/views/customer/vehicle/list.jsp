@@ -65,7 +65,7 @@
                         <input type="hidden" name="vehicleID" value="<%=v.getVehicleID()%>">
                         <button type="submit" class="action-btn edit-btn">Edit</button>
                     </form>
-                    <form action="<%=request.getContextPath()%>/customer/vehicle/delete" method="post" class="action-form">
+                    <form action="<%=request.getContextPath()%>/customer/vehicle/delete" method="post" class="action-form" onClick="return confirm('Are you sure You Want delete your Vehicle ?')">
                         <input type="hidden" name="vehicleID" value="<%=v.getVehicleID()%>">
                         <button type="submit" class="action-btn delete-btn">Remove</button>
                     </form>

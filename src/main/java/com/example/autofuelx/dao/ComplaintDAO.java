@@ -302,13 +302,10 @@ public class ComplaintDAO {
         try (Connection conn = DatabaseConnection.getConnection();
              ) {
 
-            if (status!=null || !status.equalsIgnoreCase("all")){
-                if (status.equalsIgnoreCase("Open")){
-                    sql += " AND NOT(rc.status = 'Seen') OR NOT(c.Status = 'Seen')";
-                }
-                else {
-                    sql += " AND (rc.status = 'Seen') AND (c.Status = 'Seen')";
-                }
+            if (status.equalsIgnoreCase("Open")) {
+                sql += " AND NOT(rc.status = 'Seen') OR NOT(c.Status = 'Seen')";
+            } else {
+                sql += " AND (rc.status = 'Seen') AND (c.Status = 'Seen')";
             }
 
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -329,7 +326,7 @@ public class ComplaintDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null; // Return empty list instead of null
+        return null;
     }
 
     // Update complaint

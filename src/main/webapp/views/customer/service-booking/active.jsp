@@ -74,8 +74,12 @@
                     <input type="hidden" name="redirect-url" value="/customer/service-booking/list?status=active">
 
                     <div class="action-form-row">
-                        <input type="date" name="new-date" placeholder="New Date" required>
-                        <input type="time" name="new-time" placeholder="New Time" required>
+                        <label>
+                            <input type="date" name="new-date" placeholder="New Date" required>
+                        </label>
+                        <label>
+                            <input type="time" name="new-time" placeholder="New Time" required>
+                        </label>
                     </div>
                     <input type="submit" value="Reschedule">
                 </form>
@@ -85,7 +89,8 @@
                     String s = booking.getStatus();
                     if (s.equals("Awaiting Confirmation") || s.equals("Confirmed") || s.equals("Reschedule Required")) {
                 %>
-                <form class="action-form" action="<%=request.getContextPath()%>/user/service-booking/update-status" method="post">
+                <form class="action-form" action="<%=request.getContextPath()%>/user/service-booking/update-status" method="post"
+                      onClick="return confirm('Are you sure You Want Cancel your Booking ?')">
                     <input type="hidden" name="booking-ID" value="<%= booking.getBookingID() %>">
                     <input type="hidden" name="status" value="Cancelled">
                     <input type="hidden" name="redirect-url" value="/customer/service-booking/list?status=active">
