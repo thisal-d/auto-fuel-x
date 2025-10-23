@@ -30,7 +30,7 @@ Auto Fuel X is a comprehensive web-based fuel station and vehicle service manage
 - Apache Maven 3.6 or higher
 - Microsoft SQL Server 2019 or higher
 - IntelliJ IDEA (Ultimate Edition recommended)
-- Apache Tomcat 9.x
+- Apache Tomcat 10.1.x
 
 ## Setup Instructions
 
