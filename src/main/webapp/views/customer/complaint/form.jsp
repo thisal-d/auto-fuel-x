@@ -21,6 +21,8 @@
 <jsp:include page="/views/customer/header.jsp" />
 
 <div class="submit-complaint-container">
+
+
     <div class="complaint-header">
         <h2>Submit a Complaint</h2>
         <p>We value your feedback and are committed to resolving any issues you may have encountered.</p>
@@ -42,13 +44,13 @@
 
             <div class="complaint-form-group">
                 <label for="title" class="complaint-label">Title:</label>
-                <input type="text" id="title" name="title" class="complaint-input" required placeholder="Brief description of your complaint">
+                <input type="text" id="title" name="title" class="complaint-input"  placeholder="Brief description of your complaint">
                 <div class="complaint-help-text">Provide a concise title for your complaint</div>
             </div>
 
             <div class="complaint-form-group">
                 <label for="description" class="complaint-label">Description:</label>
-                <textarea id="description" name="description" class="complaint-textarea" required placeholder="Please provide detailed information about your complaint..."></textarea>
+                <textarea id="description" name="description" class="complaint-textarea"  placeholder="Please provide detailed information about your complaint..."></textarea>
                 <div class="complaint-help-text">Include all relevant details to help us understand and address your concern</div>
             </div>
 
@@ -58,7 +60,6 @@
                     <button type="submit" class="btn btn-primary">Submit Complaint</button>
                 </div>
             </div>
-
             <%
                 String error = (String) request.getAttribute("error-message");
                 if (error != null) {
@@ -67,7 +68,6 @@
                 <%= error %>
             </div>
             <% } %>
-
         </form>
     </div>
 </div>

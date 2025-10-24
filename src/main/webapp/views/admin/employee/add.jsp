@@ -109,6 +109,15 @@
                 </tr>
             </table>
 
+            <%
+                String error = (String) request.getAttribute("error-message");
+                if (error != null) {
+            %>
+            <div class="error-message">
+                <%= error %>
+            </div>
+            <% } %>
+
             <button type="submit" class="submit-btn">Add Employee</button>
         </form>
     </div>

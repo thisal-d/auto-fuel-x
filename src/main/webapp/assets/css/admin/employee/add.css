@@ -18,6 +18,30 @@
     border-bottom: 1px solid var(--border-color);
 }
 
+.error-message {
+    color: var(--accent-red);
+    background-color: rgba(231, 76, 60, 0.1);
+    border-left: 4px solid var(--accent-red);
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    margin-top: 1.5rem;
+    font-weight: 500;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .error-message {
+        margin-top: 1rem;
+        font-size: 0.9rem;
+    }
+}
+
 .form-header h1 {
     color: var(--accent-red);
     font-size: 2.2rem;

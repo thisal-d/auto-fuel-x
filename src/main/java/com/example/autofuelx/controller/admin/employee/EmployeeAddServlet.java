@@ -1,4 +1,4 @@
-package com.example.autofuelx.controller.admin.employeeNew;
+package com.example.autofuelx.controller.admin.employee;
 
 import com.example.autofuelx.model.Employee;
 import com.example.autofuelx.service.EmployeeService;
@@ -11,8 +11,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.List;
 
-@WebServlet("/admin/employeeNew/add")
+@WebServlet("/admin/employee/add")
 public class EmployeeAddServlet extends HttpServlet {
     private EmployeeService employeeService;
 
@@ -63,6 +64,21 @@ public class EmployeeAddServlet extends HttpServlet {
         employeeNew.setType(type);
         employeeNew.setEmail(email);
         employeeNew.setPassword(password);
+
+        List<Employee> emps = employeeService.getAllEmployees();
+        boolean found = false;
+        for (Employee emp: emps){
+            if (emp.getEmail().equalsIgnoreCase(email)){
+                found = true;
+            }
+        }
+
+        if (found){
+            request.setAttribute("error-message", "The email address already exists...!");
+            request.getRequestDispatcher("/views/admin/employee/add.jsp").forward(request, response);
+            return;
+        }
+
 
         if (type.equals("Refuel Cashier")){
             employeeNew.setShift(shift);
