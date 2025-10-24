@@ -36,6 +36,7 @@
             <div class="nav-section">
                 <div class="nav-section-title">Fuel ⛽</div>
                 <div class="nav-links">
+                    <a href="<%= request.getContextPath() %>/admin/fuel/level">View Fuel Details</a>
                     <a href="<%= request.getContextPath() %>/admin/fuel/insert-form">Update Fuel Levels</a>
                     <a href="<%= request.getContextPath() %>/views/admin/fuel/add.jsp">Add New Fuel Type</a>
                 </div>
@@ -67,7 +68,7 @@
 
             <!-- Logout Section -->
             <div class="nav-section nav-section-logout">
-                <a href="<%= request.getContextPath() %>/user/logout" class="logout-link">Logout</a>
+                <a href="<%= request.getContextPath() %>/user/logout" class="logout-link" onClick="return confirm('Are you sure You Want to Logout ?')" >Logout</a>
             </div>
         </nav>
     </div>

@@ -104,8 +104,8 @@
                         <div class="form-group">
                             <label for="role">Role</label>
                             <select id="role" name="role">
-                                <option value="Super Admin" <%= "Super Admin".equals(employee.getRole()) ? "selected" : "" %>>Super Admin</option>
-                                <option value="HR Manager" <%= "HR Manager".equals(employee.getRole()) ? "selected" : "" %>>HR Manager</option>
+                                <option value="Super Admin" <%= "Super".equals(employee.getRole()) ? "selected" : "" %>>Super Admin</option>
+                                <option value="HR Manager" <%= "Normal".equals(employee.getRole()) ? "selected" : "" %>>HR Manager</option>
                                 <option value="Finance Manager" <%= "Finance Manager".equals(employee.getRole()) ? "selected" : "" %>>Finance Manager</option>
                             </select>
                         </div>
@@ -146,7 +146,7 @@
                             <div class="phone-actions">
                                 <form action="<%=request.getContextPath()%>/admin/employee/phone-number/delete" method="post">
                                     <input type="hidden" name="employee-ID" value="<%= employee.getEmployeeID() %>">
-                                    <input type="hidden" name="phone-number" value="<%= phone %>">
+                                    <input type="hidden" name="phone-number" value="<%= phone %>" >
                                     <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                 </form>
                             </div>
@@ -164,7 +164,7 @@
                         <form action="<%=request.getContextPath()%>/admin/employee/phone-number/add" method="post">
                             <input type="hidden" name="employee-ID" value="<%= employee.getEmployeeID() %>">
                             <div class="form-group">
-                                <input type="tel" name="phone-number" placeholder="Enter phone number" required>
+                                <input type="tel" name="phone-number" placeholder="Enter phone number" class="phone-number-input" required>
                             </div>
                             <button type="submit" class="btn btn-success">Add Phone Number</button>
                         </form>

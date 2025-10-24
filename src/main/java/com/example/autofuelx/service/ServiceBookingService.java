@@ -43,9 +43,9 @@ public class ServiceBookingService {
         return serviceBookingDAO.getBookingByID(bookingID);
     }
 
-    //    public ServiceBookingDTO getBookingDTOByID(int bookingID) {
-    //        return serviceBookingDAO.getBookingDTOByID(bookingID);
-    //    }
+    public ServiceBookingDTO getBookingDTOByID(int bookingID) {
+        return serviceBookingDAO.getBookingDTOByID(bookingID);
+    }
 
     public List<ServiceBookingDTO> getBookingsByCustomerIDAndStatus(int customerID, String status) {
         return serviceBookingDAO.getBookingsByCustomerIDAndStatus(customerID, status);

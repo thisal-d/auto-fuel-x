@@ -58,6 +58,16 @@
                     <button type="submit" class="btn btn-primary">Submit Complaint</button>
                 </div>
             </div>
+
+            <%
+                String error = (String) request.getAttribute("error-message");
+                if (error != null) {
+            %>
+            <div class="error-message">
+                <%= error %>
+            </div>
+            <% } %>
+
         </form>
     </div>
 </div>

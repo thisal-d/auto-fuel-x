@@ -40,6 +40,12 @@ public class ComplaintCreateServlet extends HttpServlet {
         String title = request.getParameter("title");
         String description = request.getParameter("description");
 
+        if (title.trim().length() == 0 || description.trim().length() == 0){
+            request.setAttribute("message", "Please Fill the complaint form before submitting.");
+            request.getRequestDispatcher("/views/customer/complaint/form.jsp").forward(request, response);
+            return;
+        }
+
         // create complaint Object
         Complaint complaint = new Complaint();
 

@@ -17,20 +17,20 @@ public class FuelService {
         fuelDAO.addFuel(fuel);
     }
 
-    //    // Get fuel by ID
-    //    public Fuel getFuelById(int fuelID) {
-    //        return fuelDAO.getFuelById(fuelID);
-    //    }
+    // Get fuel by ID
+    public Fuel getFuelById(int fuelID) {
+        return fuelDAO.getFuelById(fuelID);
+    }
 
     // Get all fuels
     public List<Fuel> getAllFuels() {
         return fuelDAO.getAllFuels();
     }
 
-    //    // Update fuel
-    //    public void updateFuel(Fuel fuel) {
-    //        fuelDAO.updateFuel(fuel);
-    //    }
+
+    public void updateFuel(Fuel fuel) {
+        fuelDAO.updateFuel(fuel);
+    }
 
     //    // Delete fuel
     //    public void deleteFuel(int fuelID) {

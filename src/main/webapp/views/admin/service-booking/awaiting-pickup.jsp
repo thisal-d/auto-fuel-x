@@ -69,11 +69,9 @@
           <td>
             <div class="action-buttons">
               <!-- Approve Form -->
-              <form action="<%= request.getContextPath() %>/admin/service-booking/update-status" method="post" class="action-form">
+              <form action="<%= request.getContextPath() %>/admin/service-booking/payment-form" method="post" class="action-form">
                 <input type="hidden" name="bookingId" value="<%= booking.getBookingID() %>">
-                <input type="hidden" name="status" value="Completed">
-                <input type="hidden" name="redirect-url" value="/admin/service-booking/view?status=awaiting-pickup">
-                <button type="submit" class="btn btn-success">Set as Picked</button>
+                <button type="submit" class="btn btn-success">Set as Picked (With Payment)</button>
               </form>
             </div>
           </td>

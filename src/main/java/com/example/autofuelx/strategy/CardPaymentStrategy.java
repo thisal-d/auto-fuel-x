@@ -10,7 +10,6 @@ public class CardPaymentStrategy implements PaymentStrategy {
 
     @Override
     public String processPayment(double amount) {
-        // In a real app you'd call a payment gateway. Here we return a demo message.
         String masked = cardNumber == null ? "****"
                 : "****-****-****-"
                         + (cardNumber.length() > 4 ? cardNumber.substring(cardNumber.length() - 4) : cardNumber);

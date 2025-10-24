@@ -1,104 +1,88 @@
-<%@ page import="com.example.autofuelx.model.Fuel" %>
-<%@ page import="java.util.List" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: KHThi
-  Date: 10/2/2025
-  Time: 7:21 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.autofuelx.model.Fuel" %>
+
+<%
+    List<Fuel> fuels = (List<Fuel>) request.getAttribute("fuel-types");
+%>
+
 <html>
 <head>
-    <title>Fuel Details</title>
+    <title>Fuel Levels & Costs</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/base.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/admin/fuel/view.css">
 </head>
 <body>
-<div class="container">
-    <div class="navbar">
+
+<jsp:include page="/views/admin/header.jsp"/>
+
+<div class="page-container">
+    <!-- Navigation -->
+    <nav class="navbar">
         <div class="navbar-brand">AutoFuelX</div>
         <ul class="navbar-nav">
             <li><a href="#" class="nav-link">Dashboard</a></li>
-            <li><a href="#" class="nav-link active">Fuel Details</a></li>
-            <li><a href="#" class="nav-link">Service Booking</a></li>
-            <li><a href="#" class="nav-link">Reports</a></li>
+            <li><a href="#" class="nav-link active">Fuel Management</a></li>
+            <li><a href="#" class="nav-link">Suppliers</a></li>
+            <li><a href="#" class="nav-link">Vehicles</a></li>
+            <li><a href="#" class="nav-link">Service Bookings</a></li>
+            <li><a href="#" class="nav-link">Profile</a></li>
+            <li><a href="#" class="nav-link">Logout</a></li>
         </ul>
-    </div>
+    </nav>
 
     <div class="page-header">
-        <h1>Fuel Details</h1>
-        <p>View and manage fuel types, quantities, and pricing</p>
+        <h2>Fuel Management</h2>
     </div>
 
-    <div class="filter-section">
-        <div class="search-box">
-            <span class="search-icon">🔍</span>
-            <input type="text" placeholder="Search fuel types...">
-        </div>
-        <div class="filter-group">
-            <label>Sort By</label>
-            <select>
-                <option>Name (A-Z)</option>
-                <option>Name (Z-A)</option>
-                <option>Price (Low-High)</option>
-                <option>Price (High-Low)</option>
-                <option>Quantity (High-Low)</option>
-            </select>
-        </div>
-        <div class="filter-group">
-            <label>Filter</label>
-            <select>
-                <option>All Fuel Types</option>
-                <option>Gasoline</option>
-                <option>Diesel</option>
-                <option>Electric</option>
-            </select>
-        </div>
-        <button class="btn btn-primary">Add New Fuel Type</button>
+    <div class="action-bar">
+        <a href="<%= request.getContextPath() %>/views/admin/fuel/add.jsp" class="add-button">Add New Fuel Type</a>
     </div>
 
-    <div class="fuel-container">
+    <table class="fuel-table">
+        <tr>
+            <th>ID</th>
+            <th>Fuel Type</th>
+            <th>Quantity (L)</th>
+            <th>Cost per Liter</th>
+        </tr>
+
         <%
-            List<Fuel> fuelTypes = (List<Fuel>) request.getAttribute("fuel-types");
-            if (fuelTypes != null && !fuelTypes.isEmpty()) {
-                for(Fuel fuel : fuelTypes) {
+            if (fuels != null && !fuels.isEmpty()) {
+                for (Fuel f : fuels) {
+                    // Determine quantity level class
+                    String quantityClass = "quantity-high";
+                    if (f.getQuantity() < 1000) {
+                        quantityClass = "quantity-low";
+                    } else if (f.getQuantity() < 5000) {
+                        quantityClass = "quantity-medium";
+                    }
         %>
-        <div class="fuel-card">
-            <div class="fuel-icon">
-                <img src="<%=request.getContextPath()%>/assets/imgs/fuel.png" alt="icon of a fuel pump with black background and red highlight">
-            </div>
-            <div class="fuel-info">
-                <h3><%= fuel.getType() %></h3>
-                <div class="fuel-details">
-                    <div class="detail-item">
-                        <span class="detail-label">Available Quantity:</span>
-                        <span class="detail-value"><%= fuel.getQuantity() %> liters</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Cost Per Liter:</span>
-                        <span class="detail-value price">$<%= fuel.getCostPerLiter() %></span>
-                    </div>
-                </div>
-            </div>
-            <div class="fuel-actions">
-                <button class="btn btn-info btn-sm">Edit</button>
-                <button class="btn btn-danger btn-sm">Delete</button>
-            </div>
-        </div>
+        <tr>
+            <td><%= f.getFuelID() %></td>
+            <td><%= f.getType() %></td>
+            <td><span class="quantity-indicator <%= quantityClass %>"><%= f.getQuantity() %></span></td>
+            <td>
+                <form action="<%=request.getContextPath()%>/admin/fuel/update" method="post" class="update-form">
+                    <input type="hidden" name="fuelID" value="<%= f.getFuelID() %>">
+                    <label>
+                        <input type="number" name="costPerLiter" value="<%= f.getCostPerLiter() %>">
+                    </label>
+                    <input type="submit" value="Update" class="update-button">
+                </form>
+            </td>
+        </tr>
         <%
             }
         } else {
         %>
-        <div class="no-data">
-            <h3>No fuel data available</h3>
-            <p>Please add fuel types to get started</p>
-            <button class="btn btn-primary">Add First Fuel Type</button>
-        </div>
+        <tr>
+            <td colspan="5" class="no-data">No fuel data available.</td>
+        </tr>
         <%
             }
         %>
-    </div>
+    </table>
 </div>
 </body>
 </html>

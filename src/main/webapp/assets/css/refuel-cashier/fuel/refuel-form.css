@@ -14,6 +14,15 @@
     gap: var(--spacing-xl);
 }
 
+.error-message {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--danger);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    text-align: center;
+    border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
 /* Form Styling */
 .refuel-form {
     background: linear-gradient(135deg, var(--bg-card), var(--bg-tertiary));

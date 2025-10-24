@@ -24,7 +24,7 @@
 
         <!-- Logout Section -->
         <div class="nav-section nav-section-logout">
-            <a href="<%= request.getContextPath() %>/user/logout" class="logout-link">Logout</a>
+            <a href="<%= request.getContextPath() %>/user/logout" onClick="return confirm('Are you sure You Want to Logout ?')" class="logout-link">Logout</a>
         </div>
 
         <div class="active-indicator" style="width: 120px; left: 0;"></div>

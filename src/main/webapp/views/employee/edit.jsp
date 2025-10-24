@@ -37,85 +37,159 @@
 <%}%>
 
 <div class="profile-container">
-    <h1>Edit Profile</h1>
+    <div class="profile-header">
+        <h1>Edit Profile</h1>
+        <p>Update your personal information and preferences</p>
+    </div>
 
-    <form action="<%=request.getContextPath()%>/employee/update" method="post">
-        <input type="hidden" name="employeeID" value="<%= employee.getEmployeeID() %>"/>
-
-        <!-- Personal Info -->
-        <div class="profile-card">
-            <h2>Personal Information</h2>
-            <label>First Name:</label>
-            <input type="text" name="firstName" value="<%= employee.getFirstName() %>" required />
-
-            <label>Last Name:</label>
-            <input type="text" name="lastName" value="<%= employee.getLastName() %>" required />
-
-            <label>Date of Birth:</label>
-            <input type="date" name="dateOfBirth" value="<%= employee.getDateOfBirth() %>" required />
-
-            <label>Email:</label>
-            <input type="email" name="email" value="<%= employee.getEmail() %>" required readonly/>
-
-            <label>Password:</label>
-            <input type="password" name="password" value="<%= employee.getPassword() %>" required />
+    <div class="profile-content">
+        <div class="profile-sidebar">
+            <div class="profile-actions-sidebar">
+                <a href="<%=request.getContextPath()%>/views/employee/profile.jsp" class="btn btn-secondary">Back to Profile</a>
+            </div>
         </div>
 
-        <!-- Employment Details -->
-        <div class="profile-card">
-            <h2>Employment Details</h2>
-            <label>Role:</label>
-            <input type="text" value="<%= empType %>" readonly />
+        <div class="profile-main">
+            <form action="<%=request.getContextPath()%>/employee/update" method="post" class="profile-form">
+                <input type="hidden" name="employeeID" value="<%= employee.getEmployeeID() %>"/>
 
-            <label>Type:</label>
-            <input type="text" name="type" value="<%= employee.getType() %>" readonly />
+                <!-- Personal Info -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h2>Personal Information</h2>
+                        <span class="card-icon">👤</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" value="<%= employee.getFirstName() %>" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" value="<%= employee.getLastName() %>" required />
+                            </div>
+                        </div>
 
-            <label>Status:</label>
-            <select name="status" required>
-                <option value="Active" <%= "Active".equals(employee.getStatus()) ? "selected" : "" %>>Active</option>
-                <option value="Inactive" <%= "Inactive".equals(employee.getStatus()) ? "selected" : "" %>>Inactive</option>
-            </select>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="dateOfBirth">Date of Birth</label>
+                                <input type="date" id="dateOfBirth" name="dateOfBirth" value="<%= employee.getDateOfBirth() %>" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" value="<%= employee.getEmail() %>" required readonly/>
+                            </div>
+                        </div>
 
-            <label>Hire Date:</label>
-            <input type="date" name="hireDate" value="<%= employee.getHireDate() %>" required />
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" id="password" name="password" value="<%= employee.getPassword() %>" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            <label>Salary (Rs):</label>
-            <input type="number" step="0.01" name="salary" value="<%= employee.getSalary() %>" required />
+                <!-- Employment Details -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h2>Employment Details</h2>
+                        <span class="card-icon">💼</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="role">Role</label>
+                                <input type="text" id="role" value="<%= empType %>" readonly />
+                            </div>
+                            <div class="form-group">
+                                <label for="type">Type</label>
+                                <input type="text" id="type" name="type" value="<%= employee.getType() %>" readonly />
+                            </div>
+                        </div>
 
-            <%-- admin/ sevice center staff and erfuel cashier --%>
-            <% if ("Service Center Staff".equals(empType)) { %>
-            <label>Skill Set:</label>
-            <input type="text" name="skillSet" value="<%= employee.getSkillSet() %>" />
-            <% } else if ("Refuel Cashier".equals(empType)) { %>
-            <label>Shift:</label>
-            <input type="text" name="shift" value="<%= employee.getShift() %>" />
-            <% } else if ("Admin".equals(empType)) { %>
-            <label>System Role:</label>
-            <input type="text" name="adminRole" value="<%= employee.getRole() %>" />
-            <% } else if ("Customer Care Officer".equals(empType)) { %>
-            <p>No extra fields to edit.</p>
-            <% } %>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <select id="status" name="status" required>
+                                    <option value="Active" <%= "Active".equals(employee.getStatus()) ? "selected" : "" %>>Active</option>
+                                    <option value="Inactive" <%= "Inactive".equals(employee.getStatus()) ? "selected" : "" %>>Inactive</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="hireDate">Hire Date</label>
+                                <input type="date" id="hireDate" name="hireDate" value="<%= employee.getHireDate() %>" required />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="salary">Salary (Rs)</label>
+                                <input type="number" step="0.01" id="salary" name="salary" value="<%= employee.getSalary() %>" required />
+                            </div>
+                            <%-- admin/ sevice center staff and refuel cashier --%>
+                            <% if ("Service Center Staff".equals(empType)) { %>
+                            <div class="form-group">
+                                <label for="skillSet">Skill Set</label>
+                                <input type="text" id="skillSet" name="skillSet" value="<%= employee.getSkillSet() %>" />
+                            </div>
+                            <% } else if ("Refuel Cashier".equals(empType)) { %>
+                            <div class="form-group">
+                                <label for="shift">Shift</label>
+                                <select id="shift" name="shift">
+                                    <option value="Morning" <%= "Day".equals(employee.getShift()) ? "selected" : "" %>>Day</option>
+                                    <option value="Night" <%= "Night".equals(employee.getShift()) ? "selected" : "" %>>Night</option>
+                                </select>
+                            </div>
+                            <% } else if ("Admin".equals(empType)) { %>
+                            <div class="form-group">
+                                <label for="adminRole">System Role</label>
+                                <input type="text" id="adminRole" name="adminRole" value="<%= employee.getRole() %>" />
+                            </div>
+                            <% } else if ("Customer Care Officer".equals(empType)) { %>
+                            <div class="form-group">
+                                <label>Specialization</label>
+                                <input type="text" value="Customer Relations" readonly />
+                            </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- address -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h2>Address</h2>
+                        <span class="card-icon">🏠</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="addressNo">Address No</label>
+                                <input type="text" id="addressNo" name="addressNo" value="<%= employee.getAddressNo() %>" />
+                            </div>
+                            <div class="form-group">
+                                <label for="addressLane">Lane</label>
+                                <input type="text" id="addressLane" name="addressLane" value="<%= employee.getAddressLane() %>" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="addressArea">Area</label>
+                            <input type="text" id="addressArea" name="addressArea" value="<%= employee.getAddressArea() %>" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- save -->
+                <div class="profile-actions">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <a href="<%=request.getContextPath()%>/views/employee/profile.jsp" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
         </div>
-
-        <!-- address -->
-        <div class="profile-card">
-            <h2>Address</h2>
-            <label>Address No:</label>
-            <input type="text" name="addressNo" value="<%= employee.getAddressNo() %>" />
-
-            <label>Lane:</label>
-            <input type="text" name="addressLane" value="<%= employee.getAddressLane() %>" />
-
-            <label>Area:</label>
-            <input type="text" name="addressArea" value="<%= employee.getAddressArea() %>" />
-        </div>
-
-        <!-- save -->
-        <div class="profile-actions">
-            <button type="submit" class="btn">Save Changes</button>
-            <a href="<%=request.getContextPath()%>/views/employee/profile.jsp" class="btn cancel">Cancel</a>
-        </div>
-    </form>
+    </div>
 </div>
 
 </body>

@@ -3,6 +3,14 @@
     margin: 2rem auto;
     padding: 0 1rem;
 }
+.error-message {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--danger);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    text-align: center;
+    border: 1px solid rgba(231, 76, 60, 0.3);
+}
 
 .complaint-header {
     text-align: center;

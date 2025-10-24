@@ -47,7 +47,7 @@ public class CustomerLoginServlet extends HttpServlet {
             List<String> phoneNumbers = customerPhoneNumberService.getPhoneNumbersByCustomer(customer.getCustomerID());
             session.setAttribute("phone-numbers", phoneNumbers);
 
-            response.sendRedirect(request.getContextPath() + "/views/customer/dashboard.jsp"); // got to dashboard
+            response.sendRedirect(request.getContextPath() + "/customer/dashboard"); // got to dashboard
         } else {
             // Login failed
             request.setAttribute("login-error-message", "Invalid email or password");

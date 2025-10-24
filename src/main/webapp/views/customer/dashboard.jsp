@@ -30,7 +30,7 @@
         }
     %>
 
-    <!-- Fuel Usage Summary Section -->
+    <!-- Fuel Usage Summary Section
     <div class="dashboard-section">
         <h3 class="section-title fuel">Fuel Usage Summary</h3>
 
@@ -72,6 +72,7 @@
             </form>
         </div>
     </div>
+    -->
 
     <!-- Vehicle Summary Section -->
     <div class="dashboard-section">

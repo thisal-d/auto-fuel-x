@@ -97,6 +97,15 @@
                     <input type="submit" class="cancel-btn" value="Cancel">
                 </form>
                 <% } %>
+
+                <%
+                    if (s.equals("Awaiting Pickup")) {
+                %>
+                <div class="booking-detail">
+                    <div class="booking-detail-label">Total Cost</div>
+                    <div class="booking-detail-value"><%= booking.getTotalCost() %></div>
+                </div>
+                <% } %>
             </div>
         </div>
         <%

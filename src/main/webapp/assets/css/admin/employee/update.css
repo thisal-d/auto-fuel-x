@@ -119,6 +119,14 @@
     color: var(--text-dim);
 }
 
+.phone-number-input{
+    width: 250px;
+    height: 40px;
+    border: 2px solid var(--accent-red-light);
+    border-radius: var(--radius-sm);
+    padding: 3px;
+}
+
 /* Responsive adjustments */
 @media (max-width: 992px) {
     .employee-update-container {

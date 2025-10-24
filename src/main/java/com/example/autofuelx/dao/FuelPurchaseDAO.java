@@ -8,21 +8,25 @@ import com.example.autofuelx.util.DatabaseConnection;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FuelPurchaseDAO {
 
-    public boolean insertFuelPurchase(FuelPurchase purchase) {
+    public void insertFuelPurchase(FuelPurchase purchase) {
         // Insert purchase record
         String sql = "INSERT INTO FuelPurchase (CustomerID, FuelID, VehicleID, Quantity, TotalCost, PurchaseDate, PurchaseTime) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try(Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement(sql)){
-            ps.setInt(1, purchase.getCustomerID());
+            if (purchase.getCustomerID() != 0)  ps.setInt(1, purchase.getCustomerID());
+            else  ps.setNull(1, Types.INTEGER);
+
             ps.setInt(2, purchase.getFuelID());
-            ps.setInt(3, purchase.getVehicleID());
+
+            if (purchase.getVehicleID() != 0)  ps.setInt(3, purchase.getVehicleID());
+            else   ps.setNull(3, Types.INTEGER);
+
             ps.setDouble(4, purchase.getQuantity());
             ps.setDouble(5, purchase.getTotalCost());
 
@@ -32,13 +36,14 @@ public class FuelPurchaseDAO {
             ps.setDate(6, Date.valueOf(currentDate));
             ps.setTime(7, Time.valueOf(currentTime));
 
-            return ps.executeUpdate() > 0;
+            ps.executeUpdate();
         }
         catch (Exception e){
             e.printStackTrace();
-            return false;
         }
     }
+
+
 
     public List<FuelPurchaseDetailDTO> getFuelPurchaseDetailByCustomer(int customerID) {
         List<FuelPurchaseDetailDTO> purchases = new ArrayList<>();

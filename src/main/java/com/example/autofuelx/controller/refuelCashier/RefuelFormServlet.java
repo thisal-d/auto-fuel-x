@@ -19,12 +19,26 @@ public class RefuelFormServlet extends HttpServlet {
         fuelService = new FuelService();
     }
 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        Employee employee = AuthUtil.checkEmployeeLogin(request, response, "Refuel Cashier");
+        if (employee == null) return;
+
+        List<Fuel> fuelTypes = fuelService.getAllFuels();
+        request.setAttribute("fuel-types", fuelTypes);
+
+        request.setAttribute("error-message",  request.getAttribute("error-message"));
+
+        request.getRequestDispatcher("/views/refuel-cashier/fuel/refuel-form.jsp?refuel-form?purchase-status=" + request.getParameter("purchase-status")).forward(request, response);
+    }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Employee employee = AuthUtil.checkEmployeeLogin(request, response, "Refuel Cashier");
         if (employee == null) return;
 
         List<Fuel> fuelTypes = fuelService.getAllFuels();
         request.setAttribute("fuel-types", fuelTypes);
+
+        request.setAttribute("error-message",  request.getAttribute("error-message"));
 
         request.getRequestDispatcher("/views/refuel-cashier/fuel/refuel-form.jsp?refuel-form?purchase-status=" + request.getParameter("purchase-status")).forward(request, response);
     }

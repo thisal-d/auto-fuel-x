@@ -1,4 +1,4 @@
-package com.example.autofuelx.controller.admin.employeeUpdate;
+package com.example.autofuelx.controller.admin.employee;
 
 import com.example.autofuelx.model.Employee;
 import com.example.autofuelx.service.EmployeeService;
@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 
-@WebServlet("/admin/employeeUpdate/update")
+@WebServlet("/admin/employee/update")
 public class EmployeeUpdateServlet extends HttpServlet {
     private EmployeeService employeeService;
 
@@ -34,8 +34,6 @@ public class EmployeeUpdateServlet extends HttpServlet {
         Employee employee = AuthUtil.checkEmployeeLogin(request, response, "Admin");
         if (employee == null) return;
 
-        response.sendRedirect(request.getContextPath() + "/admin/employeeUpdate/list");
-        
         int employeeID = Integer.parseInt(request.getParameter("employeeID"));
         Employee employeeUpdate = employeeService.getEmployeeById(employeeID);
 
@@ -78,6 +76,6 @@ public class EmployeeUpdateServlet extends HttpServlet {
         }
 
         employeeService.updateEmployee(employeeUpdate);
-        response.sendRedirect(request.getContextPath() + "/admin/employeeUpdate/edit-form?employeeUpdate-ID=" + employeeID);
+        response.sendRedirect(request.getContextPath() + "/admin/employee/edit-form?employee-ID=" + employeeID);
     }
 }
