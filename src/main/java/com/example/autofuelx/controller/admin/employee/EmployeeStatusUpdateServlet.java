@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.sql.Date;
 
 @WebServlet("/admin/employee/status/update")
 public class EmployeeStatusUpdateServlet extends HttpServlet {
@@ -40,7 +39,7 @@ public class EmployeeStatusUpdateServlet extends HttpServlet {
         String status = request.getParameter("status");
         String redirectUrl = request.getParameter("redirect-url");
 
-        employeeService.updateEmployeeStatus(employeeID,status);
+        employeeService.updateEmployeeStatus(employeeID, status);
 
         response.sendRedirect(request.getContextPath() + redirectUrl);
     }

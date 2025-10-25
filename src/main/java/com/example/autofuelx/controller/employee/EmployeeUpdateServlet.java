@@ -1,12 +1,6 @@
 package com.example.autofuelx.controller.employee;
 
-import java.io.IOException;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.example.autofuelx.model.Employee;
-import com.example.autofuelx.service.EmployeePhoneNumberService;
 import com.example.autofuelx.service.EmployeeService;
 import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
@@ -15,6 +9,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
+import java.io.IOException;
+import java.sql.Date;
 
 @WebServlet("/employee/update")
 public class EmployeeUpdateServlet extends HttpServlet {

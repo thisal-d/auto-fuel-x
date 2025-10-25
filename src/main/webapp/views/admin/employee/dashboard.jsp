@@ -24,7 +24,8 @@
     </div>
     <div class="nav-card">
         <div class="nav-card-icon">🔧</div>
-        <a href="<%= request.getContextPath() %>/admin/employee/list-by-type?type=service-center-staff">Service Center Staff</a>
+        <a href="<%= request.getContextPath() %>/admin/employee/list-by-type?type=service-center-staff">Service Center
+            Staff</a>
     </div>
     <div class="nav-card">
         <div class="nav-card-icon">👔</div>
@@ -32,7 +33,8 @@
     </div>
     <div class="nav-card">
         <div class="nav-card-icon">📞</div>
-        <a href="<%= request.getContextPath() %>/admin/employee/list-by-type?type=customer-care-officer">Customer Care Officer</a>
+        <a href="<%= request.getContextPath() %>/admin/employee/list-by-type?type=customer-care-officer">Customer Care
+            Officer</a>
     </div>
     <div class="nav-card">
         <div class="nav-card-icon">⛽</div>

@@ -18,7 +18,7 @@ public class ReplyComplaintService {
 
     // Update reply
     public void updateReplyComplaint(ReplyComplaint replyComplaint) {
-        boolean success =  replyComplaintDAO.updateReplyComplaint(replyComplaint);
+        boolean success = replyComplaintDAO.updateReplyComplaint(replyComplaint);
         System.out.println("Reply Complaint " + replyComplaint.getReplyComplaintID() + " Updating : " + success);
     }
 

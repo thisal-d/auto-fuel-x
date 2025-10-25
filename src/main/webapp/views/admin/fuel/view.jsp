@@ -59,8 +59,10 @@
                     }
         %>
         <tr>
-            <td><%= f.getFuelID() %></td>
-            <td><%= f.getType() %></td>
+            <td><%= f.getFuelID() %>
+            </td>
+            <td><%= f.getType() %>
+            </td>
             <td><span class="quantity-indicator <%= quantityClass %>"><%= f.getQuantity() %></span></td>
             <td>
                 <form action="<%=request.getContextPath()%>/admin/fuel/update" method="post" class="update-form">

@@ -5,7 +5,7 @@
   Time: 5:36 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="com.example.autofuelx.model.FuelSupplier" %>
 <!DOCTYPE html>
 <html>
@@ -35,13 +35,15 @@
             <div class="form-group">
                 <label for="name">Supplier Name:</label>
                 <%-- The 'name' attribute must match the parameter name in your servlet --%>
-                <input type="text" id="name" name="name" required placeholder="Enter supplier name" value="<%= fuelSupplier.getName() %>">
+                <input type="text" id="name" name="name" required placeholder="Enter supplier name"
+                       value="<%= fuelSupplier.getName() %>">
             </div>
 
             <div class="form-group">
                 <label for="phone-no">Phone Number:</label>
                 <%-- The 'name' attribute must match the parameter name in your servlet --%>
-                <input type="text" id="phone-no" name="phone-no" required placeholder="Enter phone number"  value="<%= fuelSupplier.getPhoneNumber() %>">
+                <input type="text" id="phone-no" name="phone-no" required placeholder="Enter phone number"
+                       value="<%= fuelSupplier.getPhoneNumber() %>">
             </div>
 
             <input type="hidden" name="fuel-supplier-id" value="<%= fuelSupplier.getSupplierID() %>">

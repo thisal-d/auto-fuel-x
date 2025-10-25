@@ -3,7 +3,6 @@ package com.example.autofuelx.dao;
 import com.example.autofuelx.dto.ComplaintReplyDTO;
 import com.example.autofuelx.dto.ComplaintSummaryDTO;
 import com.example.autofuelx.model.Complaint;
-import com.example.autofuelx.model.ReplyComplaint;
 import com.example.autofuelx.util.DatabaseConnection;
 
 import java.sql.*;
@@ -31,7 +30,7 @@ public class ComplaintDAO {
             stmt.setTime(6, currentTime);
 
             stmt.executeUpdate();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -63,7 +62,7 @@ public class ComplaintDAO {
             ResultSet rs = stmt.executeQuery();
             if (rs.next())
                 return extractComplaintFromResultSet(rs);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -83,7 +82,7 @@ public class ComplaintDAO {
             }
 
             return Complaint;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -132,31 +131,31 @@ public class ComplaintDAO {
         List<Object> parameters = new ArrayList<>();
 
         String sql = """
-            SELECT c.title AS complaintTitle, 
-                   c.description AS complaintDescription, 
-                   c.status, 
-                   c.createdDate, 
-                   c.createdTime, 
-                   c.updatedDate, 
-                   c.updateTime, 
-                   c.ComplaintID, 
-                   cust.Email AS customerEmail,
-                   e.FirstName + ' ' + e.LastName AS repliedEmployeeName, 
-                   e.Type AS repliedEmployeeType, 
-                   rc.ReplyComplaintID, 
-                   rc.Status AS replyStatus, 
-                   rc.title AS replyTitle,  
-                   rc.description AS replyDescription, 
-                   rc.createdDate AS replyCreatedDate, 
-                   rc.createdTime AS replyCreatedTime, 
-                   rc.updatedDate AS replyUpdatedDate, 
-                   rc.updateTime AS replyUpdateTime 
-            FROM Complaint c
-            JOIN Customer cust ON c.CustomerID = cust.CustomerID
-            LEFT JOIN ReplyComplaint rc ON c.complaintID = rc.complaintID 
-            LEFT JOIN Employee e ON rc.staffID = e.EmployeeID 
-            WHERE 1=1
-            """;
+                SELECT c.title AS complaintTitle, 
+                       c.description AS complaintDescription, 
+                       c.status, 
+                       c.createdDate, 
+                       c.createdTime, 
+                       c.updatedDate, 
+                       c.updateTime, 
+                       c.ComplaintID, 
+                       cust.Email AS customerEmail,
+                       e.FirstName + ' ' + e.LastName AS repliedEmployeeName, 
+                       e.Type AS repliedEmployeeType, 
+                       rc.ReplyComplaintID, 
+                       rc.Status AS replyStatus, 
+                       rc.title AS replyTitle,  
+                       rc.description AS replyDescription, 
+                       rc.createdDate AS replyCreatedDate, 
+                       rc.createdTime AS replyCreatedTime, 
+                       rc.updatedDate AS replyUpdatedDate, 
+                       rc.updateTime AS replyUpdateTime 
+                FROM Complaint c
+                JOIN Customer cust ON c.CustomerID = cust.CustomerID
+                LEFT JOIN ReplyComplaint rc ON c.complaintID = rc.complaintID 
+                LEFT JOIN Employee e ON rc.staffID = e.EmployeeID 
+                WHERE 1=1
+                """;
 
         // --- Keyword search in Complaint Title + Description ---
         if (keyword != null && !keyword.trim().isEmpty()) {
@@ -299,8 +298,8 @@ public class ComplaintDAO {
                 "LEFT JOIN Employee e ON rc.staffID = e.EmployeeID " +
                 "WHERE c.customerID = ?";
 
-        try (Connection conn = DatabaseConnection.getConnection();
-             ) {
+        try (Connection conn = DatabaseConnection.getConnection()
+        ) {
 
             if (status.equalsIgnoreCase("Open")) {
                 sql += " AND NOT(rc.status = 'Seen') OR NOT(c.Status = 'Seen')";
@@ -347,11 +346,11 @@ public class ComplaintDAO {
 
             stmt.setDate(5, currentDate);
             stmt.setTime(6, currentTime);
-            
+
             stmt.setInt(7, complaint.getComplaintID());
 
             return stmt.executeUpdate() > 0;
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
@@ -366,7 +365,7 @@ public class ComplaintDAO {
 
             stmt.setInt(1, complaintID);
             return stmt.executeUpdate() > 0;
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
@@ -387,7 +386,7 @@ public class ComplaintDAO {
                 Complaint.add(extractComplaintFromResultSet(rs));
             }
             return Complaint;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -411,12 +410,12 @@ public class ComplaintDAO {
 
             // 2 Active complaints
             String activeQuery = """
-                SELECT COUNT(*) 
-                FROM Complaint c
-                LEFT JOIN ReplyComplaint rc ON c.ComplaintID = rc.ComplaintID
-                WHERE c.CustomerID = ?
-                  AND (rc.ReplyComplaintID IS NULL)
-                """;
+                    SELECT COUNT(*) 
+                    FROM Complaint c
+                    LEFT JOIN ReplyComplaint rc ON c.ComplaintID = rc.ComplaintID
+                    WHERE c.CustomerID = ?
+                      AND (rc.ReplyComplaintID IS NULL)
+                    """;
 
             try (PreparedStatement stmt = conn.prepareStatement(activeQuery)) {
                 stmt.setInt(1, customerId);
@@ -429,12 +428,12 @@ public class ComplaintDAO {
 
             // New received complaints
             String newReceivedQuery = """
-            SELECT COUNT(*) 
-            FROM Complaint c
-            INNER JOIN ReplyComplaint rc ON c.ComplaintID = rc.ComplaintID
-            WHERE c.CustomerID = ?
-              AND rc.Status = 'Sent'
-        """;
+                        SELECT COUNT(*) 
+                        FROM Complaint c
+                        INNER JOIN ReplyComplaint rc ON c.ComplaintID = rc.ComplaintID
+                        WHERE c.CustomerID = ?
+                          AND rc.Status = 'Sent'
+                    """;
             try (PreparedStatement stmt = conn.prepareStatement(newReceivedQuery)) {
                 stmt.setInt(1, customerId);
                 try (ResultSet rs = stmt.executeQuery()) {
@@ -452,9 +451,9 @@ public class ComplaintDAO {
     }
 
 
-    private ComplaintReplyDTO extractComplaintDetailsFromResultSet(ResultSet rs){
+    private ComplaintReplyDTO extractComplaintDetailsFromResultSet(ResultSet rs) {
         ComplaintReplyDTO complaintReplyDTO;
-        try{
+        try {
             complaintReplyDTO = new ComplaintReplyDTO();
 
             // Complaint details
@@ -479,7 +478,7 @@ public class ComplaintDAO {
             complaintReplyDTO.setReplyUpdatedDate(rs.getDate("replyUpdatedDate"));
             complaintReplyDTO.setReplyUpdateTime(rs.getTime("replyUpdateTime"));
             return complaintReplyDTO;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -487,7 +486,7 @@ public class ComplaintDAO {
 
     // Helper method to extract complaint from ResultSet
     private Complaint extractComplaintFromResultSet(ResultSet rs) {
-        try{
+        try {
             Complaint complaint = new Complaint();
             complaint.setComplaintID(rs.getInt("complaintID"));
             complaint.setCustomerID(rs.getInt("customerID"));
@@ -499,8 +498,7 @@ public class ComplaintDAO {
             complaint.setUpdatedDate(rs.getDate("updatedDate"));
             complaint.setUpdateTime(rs.getTime("updateTime"));
             return complaint;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

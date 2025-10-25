@@ -30,7 +30,8 @@
         </div>
 
         <div class="confirmation-actions">
-            <a href="<%= request.getContextPath() %>/customer/service-booking/list?status=active" class="btn-confirmation">Manage Active Bookings</a>
+            <a href="<%= request.getContextPath() %>/customer/service-booking/list?status=active"
+               class="btn-confirmation">Manage Active Bookings</a>
         </div>
     </div>
 </div>

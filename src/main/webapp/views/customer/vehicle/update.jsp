@@ -34,7 +34,7 @@
 </head>
 <body>
 
-<jsp:include page="/views/customer/header.jsp" />
+<jsp:include page="/views/customer/header.jsp"/>
 
 <div class="edit-vehicle-container">
     <div class="edit-vehicle-content">
@@ -54,32 +54,39 @@
                 <div class="form-grid">
                     <div class="form-group">
                         <label for="plateNumber" class="form-label">Plate Number:</label>
-                        <input type="text" id="plateNumber" name="plateNumber" class="form-input" value="<%= vehicle.getPlateNumber() %>" required>
+                        <input type="text" id="plateNumber" name="plateNumber" class="form-input"
+                               value="<%= vehicle.getPlateNumber() %>" required>
                     </div>
 
                     <div class="form-group">
                         <label for="type" class="form-label">Type:</label>
-                        <input type="text" id="type" name="type" class="form-input" value="<%= vehicle.getType() %>" required>
+                        <input type="text" id="type" name="type" class="form-input" value="<%= vehicle.getType() %>"
+                               required>
                     </div>
 
                     <div class="form-group">
                         <label for="model" class="form-label">Model:</label>
-                        <input type="text" id="model" name="model" class="form-input" value="<%= vehicle.getModel() %>" required>
+                        <input type="text" id="model" name="model" class="form-input" value="<%= vehicle.getModel() %>"
+                               required>
                     </div>
 
                     <div class="form-group">
                         <label for="color" class="form-label">Color:</label>
-                        <input type="text" id="color" name="color" class="form-input" value="<%= vehicle.getColor() %>" required>
+                        <input type="text" id="color" name="color" class="form-input" value="<%= vehicle.getColor() %>"
+                               required>
                     </div>
 
                     <div class="form-group">
                         <label for="registrationDate" class="form-label">Registration Date:</label>
-                        <input type="date" id="registrationDate" name="registrationDate" class="form-input" value="<%= new java.text.SimpleDateFormat("yyyy-MM-dd").format(vehicle.getRegistrationDate()) %>" required>
+                        <input type="date" id="registrationDate" name="registrationDate" class="form-input"
+                               value="<%= new java.text.SimpleDateFormat("yyyy-MM-dd").format(vehicle.getRegistrationDate()) %>"
+                               required>
                     </div>
                 </div>
 
                 <div class="form-actions">
-                    <a href="<%=request.getContextPath()%>/views/customer/vehicle/list.jsp" class="cancel-link">Cancel</a>
+                    <a href="<%=request.getContextPath()%>/views/customer/vehicle/list.jsp"
+                       class="cancel-link">Cancel</a>
 
                     <div class="action-buttons">
                         <button type="submit" class="btn btn-primary">Update Vehicle</button>

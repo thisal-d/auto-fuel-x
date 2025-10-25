@@ -60,42 +60,52 @@
                         String formattedTime = booking.getBookingTime().format(timeFormatter);
                 %>
                 <tr>
-                    <td><%= customerName %></td>
-                    <td><%= vehicleInfo %></td>
-                    <td><%= booking.getServiceType() %></td>
-                    <td><%= formattedDate %> - <%= formattedTime %></td>
+                    <td><%= customerName %>
+                    </td>
+                    <td><%= vehicleInfo %>
+                    </td>
+                    <td><%= booking.getServiceType() %>
+                    </td>
+                    <td><%= formattedDate %> - <%= formattedTime %>
+                    </td>
                     <td>
                         <div class="action-buttons">
                             <!-- Approve Form -->
-                            <form action="<%= request.getContextPath() %>/admin/service-booking/update-status" method="post" class="action-form">
+                            <form action="<%= request.getContextPath() %>/admin/service-booking/update-status"
+                                  method="post" class="action-form">
                                 <input type="hidden" name="bookingId" value="<%= booking.getBookingID() %>">
                                 <input type="hidden" name="status" value="Confirmed">
                                 <div class="form-group">
                                     <label>
                                         <select name="employeeId" class="form-control" required>
-                                            <%for (Employee e: employees) {
-                                                String employeeDetails = e.getFirstName() + " " + e.getLastName() + " - " + e.getSkillSet();
+                                            <%
+                                                for (Employee e : employees) {
+                                                    String employeeDetails = e.getFirstName() + " " + e.getLastName() + " - " + e.getSkillSet();
                                             %>
-                                            <option value="<%=e.getEmployeeID()%>"><%=employeeDetails%></option>
+                                            <option value="<%=e.getEmployeeID()%>"><%=employeeDetails%>
+                                            </option>
                                             <%}%>
                                         </select>
                                     </label>
                                 </div>
-                                <input type="hidden" name="redirect-url" value="/admin/service-booking/view?status=awaiting-confirmation">
+                                <input type="hidden" name="redirect-url"
+                                       value="/admin/service-booking/view?status=awaiting-confirmation">
                                 <button type="submit" class="btn btn-success">Approve</button>
                             </form>
 
                             <!-- Reschedule Form -->
-                            <form action="<%= request.getContextPath() %>/admin/service-booking/update-status" method="post" class="action-form">
+                            <form action="<%= request.getContextPath() %>/admin/service-booking/update-status"
+                                  method="post" class="action-form">
                                 <input type="hidden" name="bookingId" value="<%= booking.getBookingID() %>">
                                 <input type="hidden" name="status" value="Reschedule Required">
-                                <input type="hidden" name="redirect-url" value="/admin/service-booking/view?status=awaiting-confirmation">
+                                <input type="hidden" name="redirect-url"
+                                       value="/admin/service-booking/view?status=awaiting-confirmation">
                                 <button type="submit" class="btn btn-warning">Request Reschedule</button>
                             </form>
                         </div>
                     </td>
                 </tr>
-                <%   }
+                <% }
                 } else { %>
                 <tr>
                     <td colspan="5" class="no-results">No pending approval bookings found.</td>

@@ -1,4 +1,3 @@
-
 package com.example.autofuelx.controller.admin.serviceBooking;
 
 import com.example.autofuelx.dto.ServiceBookingDTO;
@@ -55,20 +54,20 @@ public class ServiceBookingListAdminServlet extends HttpServlet {
             status = "Awaiting Pickup";
         } else if (viewStatus.equals("completed")) {
             redirectUrl = "/views/admin/service-booking/completed.jsp";
-            status = "Completed"; }
-        else if (viewStatus.equals("reschedule-required")) {
+            status = "Completed";
+        } else if (viewStatus.equals("reschedule-required")) {
             redirectUrl = "/views/admin/service-booking/reschedule-required.jsp";
             status = "Reschedule Required";
-        }else if (viewStatus.equals("cancelled")) {
-                redirectUrl = "/views/admin/service-booking/cancelled.jsp";
-                status = "Cancelled";
+        } else if (viewStatus.equals("cancelled")) {
+            redirectUrl = "/views/admin/service-booking/cancelled.jsp";
+            status = "Cancelled";
         } else {
             redirectUrl = "/views/admin/service-booking/all.jsp";
             status = "All";
         }
 
         List<ServiceBookingDTO> bookings;
-        if(!status.equals("All")) bookings = serviceBookingService.getAllBookings(status);
+        if (!status.equals("All")) bookings = serviceBookingService.getAllBookings(status);
         else bookings = serviceBookingService.getAllBookings();
 
         List<Employee> employees = employeeService.getEmployeesByTypeStatus("Service Center Staff", "Active");

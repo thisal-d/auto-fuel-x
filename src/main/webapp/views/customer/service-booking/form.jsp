@@ -77,7 +77,8 @@
 
             <div class="service-feature">
                 <div class="feature-icon">
-                    <img src="<%=request.getContextPath()%>/assets/imgs/service-medal.png" alt="expert icon" width="20" height="20">
+                    <img src="<%=request.getContextPath()%>/assets/imgs/service-medal.png" alt="expert icon" width="20"
+                         height="20">
                 </div>
                 <div class="feature-text">
                     <h3>Expert Technicians</h3>
@@ -87,7 +88,8 @@
 
             <div class="service-feature">
                 <div class="feature-icon">
-                    <img src="<%=request.getContextPath()%>/assets/imgs/service-time.png" alt="time icon" width="20" height="20">
+                    <img src="<%=request.getContextPath()%>/assets/imgs/service-time.png" alt="time icon" width="20"
+                         height="20">
                 </div>
                 <div class="feature-text">
                     <h3>Quick Service</h3>
@@ -97,7 +99,8 @@
 
             <div class="service-feature">
                 <div class="feature-icon">
-                    <img src="<%=request.getContextPath()%>/assets/imgs/service-quality.png" alt="quality icon" width="20" height="20">
+                    <img src="<%=request.getContextPath()%>/assets/imgs/service-quality.png" alt="quality icon"
+                         width="20" height="20">
                 </div>
                 <div class="feature-text">
                     <h3>Quality Parts</h3>
@@ -107,7 +110,8 @@
 
             <div class="service-feature">
                 <div class="feature-icon">
-                    <img src="<%=request.getContextPath()%>/assets/imgs/service-shield.png" alt="warranty icon" width="20" height="20">
+                    <img src="<%=request.getContextPath()%>/assets/imgs/service-shield.png" alt="warranty icon"
+                         width="20" height="20">
                 </div>
                 <div class="feature-text">
                     <h3>Service Warranty</h3>

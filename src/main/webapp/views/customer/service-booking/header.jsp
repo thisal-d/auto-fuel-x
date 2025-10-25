@@ -12,7 +12,8 @@
 </head>
 <div class="subheader-container">
     <div class="subheader-nav">
-        <a href="<%= request.getContextPath() %>/customer/service-booking/list?status=active" class="subheader-link active">Active</a>
+        <a href="<%= request.getContextPath() %>/customer/service-booking/list?status=active"
+           class="subheader-link active">Active</a>
         <a href="<%= request.getContextPath() %>/customer/service-booking/list?status=missed" class="subheader-link">Missed</a>
     </div>
 </div>

@@ -8,6 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.sql.Date;
 
@@ -65,13 +66,11 @@ public class EmployeeUpdateServlet extends HttpServlet {
         employeeUpdate.setEmail(email);
         employeeUpdate.setType(type);
 
-        if (type.equals("Refuel Cashier")){
+        if (type.equals("Refuel Cashier")) {
             employeeUpdate.setShift(shift);
-        }
-        else if (type.equals("Admin")){
+        } else if (type.equals("Admin")) {
             employeeUpdate.setRole(role);
-        }
-        else if (type.equals("Service Center Staff")){
+        } else if (type.equals("Service Center Staff")) {
             employeeUpdate.setSkillSet(skillSet);
         }
 

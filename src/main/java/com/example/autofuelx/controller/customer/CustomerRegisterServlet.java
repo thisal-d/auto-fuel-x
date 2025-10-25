@@ -1,16 +1,14 @@
 package com.example.autofuelx.controller.customer;
 
-import java.io.IOException;
-
-import com.example.autofuelx.util.AuthUtil;
+import com.example.autofuelx.model.Customer;
+import com.example.autofuelx.service.CustomerService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import com.example.autofuelx.model.Customer;
-import com.example.autofuelx.service.CustomerService;
+import java.io.IOException;
 
 
 @WebServlet("/customer/register")
@@ -43,7 +41,7 @@ public class CustomerRegisterServlet extends HttpServlet {
 
         Customer customer = customerService.getCustomerByEmail(email);
 
-        if (customer != null){
+        if (customer != null) {
             request.setAttribute("register-error-message", "Email Already in use..!");
             request.getRequestDispatcher("/views/customer/register.jsp").forward(request, response);
             return;

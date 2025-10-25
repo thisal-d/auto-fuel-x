@@ -1,28 +1,29 @@
 # Auto Fuel X
 
-Auto Fuel X is a comprehensive web-based fuel station and vehicle service management system that helps manage fuel dispensing, vehicle services, customer complaints, and employee operations.
+Auto Fuel X is a comprehensive web-based fuel station and vehicle service management system that helps manage fuel
+dispensing, vehicle services, customer complaints, and employee operations.
 
 ## Features
 
 - Customer Management
-  - Registration and profile management
-  - Vehicle registration
-  - Service booking
-  - Complaint management
-  
+    - Registration and profile management
+    - Vehicle registration
+    - Service booking
+    - Complaint management
+
 - Fuel Management
-  - Fuel stock tracking
-  - Fuel dispensing records
-  - Real-time fuel availability
-  
+    - Fuel stock tracking
+    - Fuel dispensing records
+    - Real-time fuel availability
+
 - Service Center Management
-  - Service appointments
-  - Service tracking
-  
+    - Service appointments
+    - Service tracking
+
 - Employee Management
-  - Multiple role support (Admin, Customer Care, Refuel Cashier, Service Center Staff)
-  - Employee profiles
-  - Task assignment
+    - Multiple role support (Admin, Customer Care, Refuel Cashier, Service Center Staff)
+    - Employee profiles
+    - Task assignment
 
 ## Prerequisites
 
@@ -56,9 +57,9 @@ Auto Fuel X is a comprehensive web-based fuel station and vehicle service manage
 3. Go to `File` → `Open` and select the project folder
 4. Wait for IntelliJ to import the Maven project and download dependencies
 5. Configure Tomcat Server:
-   - Go to `File` → `Project Structure` → `Artifacts`
-   - Create new artifact: `Web Application: Exploded` from modules
-   - Select `auto-fuel-x` module
+    - Go to `File` → `Project Structure` → `Artifacts`
+    - Create new artifact: `Web Application: Exploded` from modules
+    - Select `auto-fuel-x` module
 
 ### 3. Database Connection Configuration
 
@@ -73,15 +74,15 @@ Auto Fuel X is a comprehensive web-based fuel station and vehicle service manage
 ### 4. Running the Application
 
 1. Configure Tomcat Run Configuration:
-   - Click `Edit Configurations` in the toolbar
-   - Add New Configuration (`+`) → `Tomcat Server` → `Local`
-   - Set `Name` to "Auto Fuel X"
-   - Under `Deployment` tab, add the artifact created earlier
-   - Set `Application context` to `/auto-fuel-x`
+    - Click `Edit Configurations` in the toolbar
+    - Add New Configuration (`+`) → `Tomcat Server` → `Local`
+    - Set `Name` to "Auto Fuel X"
+    - Under `Deployment` tab, add the artifact created earlier
+    - Set `Application context` to `/auto-fuel-x`
 
 2. Build and Run:
-   - Click the Run button (green play button)
-   - The application will be deployed to Tomcat
+    - Click the Run button (green play button)
+    - The application will be deployed to Tomcat
 
 ### 5. Default Users
 
@@ -131,12 +132,11 @@ auto-fuel-x/
 
 - All database operations should use the ConnectionManager utility
 - Follow MVC pattern:
-  - Models: Data structures in `model` package
-  - Views: JSP files in `webapp/views`
-  - Controllers: Servlets in `controller` package
+    - Models: Data structures in `model` package
+    - Views: JSP files in `webapp/views`
+    - Controllers: Servlets in `controller` package
 - Use DTO objects for data transfer between layers
 - Implement proper error handling and logging
-
 
 ## License
 

@@ -61,12 +61,14 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="addressNo">Address No:</label>
-                            <input type="text" id="addressNo" name="addressNo" required placeholder="House/Building number">
+                            <input type="text" id="addressNo" name="addressNo" required
+                                   placeholder="House/Building number">
                         </div>
 
                         <div class="form-group">
                             <label for="addressLane">Address Lane:</label>
-                            <input type="text" id="addressLane" name="addressLane" required placeholder="Street/Lane name">
+                            <input type="text" id="addressLane" name="addressLane" required
+                                   placeholder="Street/Lane name">
                         </div>
                     </div>
 
@@ -82,10 +84,10 @@
                        String error = (String) request.getAttribute("register-error-message");
                        if (error != null) {
                     %>
-                    <div class="error-message">
-                        <%= error %>
-                    </div>
-                    <% } %>
+                <div class="error-message">
+                    <%= error %>
+                </div>
+                <% } %>
                 </p>
                 <button type="submit" class="register-button">Register</button>
             </form>

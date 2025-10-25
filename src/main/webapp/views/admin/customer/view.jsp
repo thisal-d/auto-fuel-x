@@ -5,7 +5,7 @@
   Time: 9:59 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="com.example.autofuelx.model.Customer" %>
 <!DOCTYPE html>
 <html>
@@ -23,39 +23,47 @@
 <table border="1">
     <%
         Customer customer = (Customer) request.getAttribute("customer-view");
-        if(customer != null) {
+        if (customer != null) {
     %>
     <tr>
         <td>Customer ID</td>
-        <td><%= customer.getCustomerID() %></td>
+        <td><%= customer.getCustomerID() %>
+        </td>
     </tr>
     <tr>
         <td>First Name</td>
-        <td><%= customer.getFirstName() %></td>
+        <td><%= customer.getFirstName() %>
+        </td>
     </tr>
     <tr>
         <td>Last Name</td>
-        <td><%= customer.getLastName() %></td>
+        <td><%= customer.getLastName() %>
+        </td>
     </tr>
     <tr>
         <td>Email</td>
-        <td><%= customer.getEmail() %></td>
+        <td><%= customer.getEmail() %>
+        </td>
     </tr>
     <tr>
         <td>Password</td>
-        <td><%= customer.getPassword() %></td>
+        <td><%= customer.getPassword() %>
+        </td>
     </tr>
     <tr>
         <td>Address No</td>
-        <td><%= customer.getAddressNo() %></td>
+        <td><%= customer.getAddressNo() %>
+        </td>
     </tr>
     <tr>
         <td>Address Lane</td>
-        <td><%= customer.getAddressLane() %></td>
+        <td><%= customer.getAddressLane() %>
+        </td>
     </tr>
     <tr>
         <td>Address Area</td>
-        <td><%= customer.getAddressArea() %></td>
+        <td><%= customer.getAddressArea() %>
+        </td>
     </tr>
     <% } %>
 </table>

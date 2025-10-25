@@ -30,7 +30,7 @@ public class EmployeeService {
     }
 
     public void addEmployee(Employee employee) {
-        boolean success =  employeeDAO.addEmployee(employee);
+        boolean success = employeeDAO.addEmployee(employee);
         System.out.println("Employee " + employee.getEmployeeID() + " Adding : " + success);
     }
 

@@ -45,20 +45,17 @@ public class ServiceBookingCompleteServlet extends HttpServlet {
         ServiceBooking booking = serviceBookingService.getBookingByID(bookingId);
 
 
-
         // Create payment context and select strategy based on payment method
         PaymentContext paymentContext = new PaymentContext();
 
         if (paymentMethod.equalsIgnoreCase("CASH")) {
             paymentContext.setPaymentStrategy(new CashPaymentStrategy());
-        }
-        else if (paymentMethod.equalsIgnoreCase("CARD")) {
+        } else if (paymentMethod.equalsIgnoreCase("CARD")) {
             String cardNumber = request.getParameter("cardNumber");
             paymentContext.setPaymentStrategy(new CardPaymentStrategy(cardNumber));
         }
         // Process payment using the selected strategy
         String paymentResult = paymentContext.processPayment(booking.getTotalCost());
-
 
 
         booking.setStatus("Completed");

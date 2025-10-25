@@ -3,7 +3,6 @@ package com.example.autofuelx.controller.admin.serviceBooking;
 
 import com.example.autofuelx.dto.ServiceBookingDTO;
 import com.example.autofuelx.model.Employee;
-import com.example.autofuelx.model.ServiceBooking;
 import com.example.autofuelx.service.ServiceBookingService;
 import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;

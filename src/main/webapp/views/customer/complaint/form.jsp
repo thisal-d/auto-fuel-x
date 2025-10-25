@@ -18,7 +18,7 @@
 </head>
 <body>
 
-<jsp:include page="/views/customer/header.jsp" />
+<jsp:include page="/views/customer/header.jsp"/>
 
 <div class="submit-complaint-container">
 
@@ -33,25 +33,31 @@
             <h3>Complaint Details</h3>
         </div>
 
-        <form action="<%=request.getContextPath()%>/customer/complaint/create" method="post" class="complaint-form-body">
+        <form action="<%=request.getContextPath()%>/customer/complaint/create" method="post"
+              class="complaint-form-body">
             <%
                 Customer customer = (Customer) session.getAttribute("customer");
             %>
 
             <div class="complaint-info-box">
-                <p>Your complaint will be reviewed by our customer service team within 24-48 hours. Please provide as much detail as possible to help us resolve your issue quickly.</p>
+                <p>Your complaint will be reviewed by our customer service team within 24-48 hours. Please provide as
+                    much detail as possible to help us resolve your issue quickly.</p>
             </div>
 
             <div class="complaint-form-group">
                 <label for="title" class="complaint-label">Title:</label>
-                <input type="text" id="title" name="title" class="complaint-input"  placeholder="Brief description of your complaint">
+                <input type="text" id="title" name="title" class="complaint-input"
+                       placeholder="Brief description of your complaint">
                 <div class="complaint-help-text">Provide a concise title for your complaint</div>
             </div>
 
             <div class="complaint-form-group">
                 <label for="description" class="complaint-label">Description:</label>
-                <textarea id="description" name="description" class="complaint-textarea"  placeholder="Please provide detailed information about your complaint..."></textarea>
-                <div class="complaint-help-text">Include all relevant details to help us understand and address your concern</div>
+                <textarea id="description" name="description" class="complaint-textarea"
+                          placeholder="Please provide detailed information about your complaint..."></textarea>
+                <div class="complaint-help-text">Include all relevant details to help us understand and address your
+                    concern
+                </div>
             </div>
 
             <div class="complaint-form-actions">

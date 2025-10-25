@@ -12,24 +12,59 @@ public class Vehicle {
     private Date registrationDate;
 
     // Getters and Setters
-    public int getVehicleID() { return vehicleID; }
-    public void setVehicleID(int vehicleID) { this.vehicleID = vehicleID; }
+    public int getVehicleID() {
+        return vehicleID;
+    }
 
-    public String getPlateNumber() { return plateNumber; }
-    public void setPlateNumber(String plateNumber) { this.plateNumber = plateNumber; }
+    public void setVehicleID(int vehicleID) {
+        this.vehicleID = vehicleID;
+    }
 
-    public String getType() { return type; }
-    public void setType(String type) { this.type = type; }
+    public String getPlateNumber() {
+        return plateNumber;
+    }
 
-    public String getModel() { return model; }
-    public void setModel(String model) { this.model = model; }
+    public void setPlateNumber(String plateNumber) {
+        this.plateNumber = plateNumber;
+    }
 
-    public String getColor() { return color; }
-    public void setColor(String color) { this.color = color; }
+    public String getType() {
+        return type;
+    }
 
-    public int getCustomerID() { return customerID; }
-    public void setCustomerID(int customerID) { this.customerID = customerID; }
+    public void setType(String type) {
+        this.type = type;
+    }
 
-    public Date getRegistrationDate() { return registrationDate; }
-    public void setRegistrationDate(Date registrationDate) { this.registrationDate = registrationDate; }
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public int getCustomerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
+    }
+
+    public Date getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(Date registrationDate) {
+        this.registrationDate = registrationDate;
+    }
 }

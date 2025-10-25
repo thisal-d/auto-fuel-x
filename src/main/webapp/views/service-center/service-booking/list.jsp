@@ -54,12 +54,15 @@
                 %>
                 <tr>
                     <td><span class="booking-id">#<%= booking.getBookingID() %></span></td>
-                    <td><%= booking.getBookingDate() %></td>
-                    <td><%= booking.getBookingTime() %></td>
+                    <td><%= booking.getBookingDate() %>
+                    </td>
+                    <td><%= booking.getBookingTime() %>
+                    </td>
                     <td><span class="status-badge <%= statusClass %>"><%= booking.getStatus() %></span></td>
                     <td>
                         <div class="customer-info">
-                            <div class="customer-avatar"><%= booking.getCustomerFirstName().charAt(0) %><%= booking.getCustomerLastName().charAt(0) %></div>
+                            <div class="customer-avatar"><%= booking.getCustomerFirstName().charAt(0) %><%= booking.getCustomerLastName().charAt(0) %>
+                            </div>
                             <span><%= booking.getCustomerFirstName() %> <%= booking.getCustomerLastName() %></span>
                         </div>
                     </td>
@@ -69,7 +72,8 @@
                             <span class="vehicle-model"><%= booking.getVehicleModel() %></span>
                         </div>
                     </td>
-                    <td><%= booking.getServiceType() %></td>
+                    <td><%= booking.getServiceType() %>
+                    </td>
                     <td><span class="cost">$<%= booking.getTotalCost() %></span></td>
                     <td>
                         <div class="action-buttons">

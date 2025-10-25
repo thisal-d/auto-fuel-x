@@ -43,8 +43,8 @@ public class FuelSupplyDAO {
         String sql = "SELECT * FROM FuelSupply ORDER BY SupplyDate DESC, SupplyTime DESC";
 
         try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement st = con.prepareStatement(sql)){
-             ResultSet rs = st.executeQuery(sql);
+             PreparedStatement st = con.prepareStatement(sql)) {
+            ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
                 FuelSupply fs = new FuelSupply();

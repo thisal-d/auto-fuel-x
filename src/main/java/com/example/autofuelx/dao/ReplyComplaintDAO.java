@@ -5,8 +5,6 @@ import com.example.autofuelx.util.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.sql.Date;
-import java.sql.Time;
 import java.util.List;
 
 public class ReplyComplaintDAO {

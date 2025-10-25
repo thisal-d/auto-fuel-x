@@ -2,8 +2,6 @@ package com.example.autofuelx.dao;
 
 
 import com.example.autofuelx.model.Customer;
-import com.example.autofuelx.model.Customer;
-import com.example.autofuelx.model.Employee;
 import com.example.autofuelx.util.DatabaseConnection;
 
 import java.sql.*;
@@ -167,7 +165,7 @@ public class CustomerDAO {
     }
 
     private Customer extractCustomerFromResultSet(ResultSet rs) {
-        try{
+        try {
             Customer customer = new Customer();
             customer.setCustomerID(rs.getInt("CustomerID"));
             customer.setFirstName(rs.getString("FirstName"));
@@ -178,8 +176,7 @@ public class CustomerDAO {
             customer.setAddressLane(rs.getString("AddressLane"));
             customer.setAddressArea(rs.getString("AddressArea"));
             return customer;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

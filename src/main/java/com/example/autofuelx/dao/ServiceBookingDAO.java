@@ -5,29 +5,25 @@ import com.example.autofuelx.dto.ServiceBookingSummaryDTO;
 import com.example.autofuelx.model.ServiceBooking;
 import com.example.autofuelx.util.DatabaseConnection;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ServiceBookingDAO {
     public ServiceBooking getBookingByID(int bookingID) {
         String sql = "SELECT * FROM ServiceBooking WHERE BookingID = ?";
         ServiceBooking booking = null;
-        try(Connection conn = DatabaseConnection.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)){
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, bookingID);
             ResultSet rs = stmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 booking = extractBookingFromResultSet(rs);
             }
             return booking;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -59,34 +55,34 @@ public class ServiceBookingDAO {
     public List<ServiceBookingDTO> getActiveBookingsByCustomerID(int customerID) {
         List<ServiceBookingDTO> bookingDTOList = new ArrayList<>();
         String sql = """
-        SELECT sb.BookingID,
-               sb.BookingDate,
-               sb.BookingTime,
-               sb.Status,
-               sb.TotalCost,
-               c.FirstName AS CustomerFirstName,
-               c.LastName AS CustomerLastName,
-               c.Email AS CustomerEmail,
-               v.VehicleID,
-               v.PlateNumber,
-               v.Model AS VehicleModel,
-               v.Type AS VehicleType,
-               s.ServiceID,
-               s.Type AS ServiceType,
-               s.Description AS ServiceDescription,
-               s.Cost AS ServiceCost,
-               e.EmployeeID AS StaffID,
-               e.FirstName AS StaffFirstName,
-               e.LastName AS StaffLastName,
-               e.Role AS StaffRole
-        FROM ServiceBooking sb
-        JOIN Customer c ON sb.CustomerID = c.CustomerID
-        JOIN Vehicle v ON sb.VehicleID = v.VehicleID
-        JOIN Service s ON sb.ServiceID = s.ServiceID
-        LEFT JOIN Employee e ON sb.StaffID = e.EmployeeID
-        WHERE (sb.Status = ? OR sb.Status = ? OR sb.Status = ? OR sb.Status = ? OR sb.Status = ? ) AND c.CustomerID = ?
-        ORDER BY sb.BookingDate DESC, sb.BookingTime DESC
-        """;
+                SELECT sb.BookingID,
+                       sb.BookingDate,
+                       sb.BookingTime,
+                       sb.Status,
+                       sb.TotalCost,
+                       c.FirstName AS CustomerFirstName,
+                       c.LastName AS CustomerLastName,
+                       c.Email AS CustomerEmail,
+                       v.VehicleID,
+                       v.PlateNumber,
+                       v.Model AS VehicleModel,
+                       v.Type AS VehicleType,
+                       s.ServiceID,
+                       s.Type AS ServiceType,
+                       s.Description AS ServiceDescription,
+                       s.Cost AS ServiceCost,
+                       e.EmployeeID AS StaffID,
+                       e.FirstName AS StaffFirstName,
+                       e.LastName AS StaffLastName,
+                       e.Role AS StaffRole
+                FROM ServiceBooking sb
+                JOIN Customer c ON sb.CustomerID = c.CustomerID
+                JOIN Vehicle v ON sb.VehicleID = v.VehicleID
+                JOIN Service s ON sb.ServiceID = s.ServiceID
+                LEFT JOIN Employee e ON sb.StaffID = e.EmployeeID
+                WHERE (sb.Status = ? OR sb.Status = ? OR sb.Status = ? OR sb.Status = ? OR sb.Status = ? ) AND c.CustomerID = ?
+                ORDER BY sb.BookingDate DESC, sb.BookingTime DESC
+                """;
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -112,34 +108,34 @@ public class ServiceBookingDAO {
     public List<ServiceBookingDTO> getBookingsByCustomerIDAndStatus(int customerID, String status) {
         List<ServiceBookingDTO> bookings = new ArrayList<>();
         String sql = """
-            SELECT sb.BookingID,
-                   sb.BookingDate,
-                   sb.BookingTime,
-                   sb.Status,
-                   sb.TotalCost,
-                   c.FirstName AS CustomerFirstName,
-                   c.LastName AS CustomerLastName,
-                   c.Email AS CustomerEmail,
-                   v.VehicleID,
-                   v.PlateNumber,
-                   v.Model AS VehicleModel,
-                   v.Type AS VehicleType,
-                   s.ServiceID,
-                   s.Type AS ServiceType,
-                   s.Description AS ServiceDescription,
-                   s.Cost AS ServiceCost,
-                   e.EmployeeID AS StaffID,
-                   e.FirstName AS StaffFirstName,
-                   e.LastName AS StaffLastName,
-                   e.Role AS StaffRole
-            FROM ServiceBooking sb
-            JOIN Customer c ON sb.CustomerID = c.CustomerID
-            JOIN Vehicle v ON sb.VehicleID = v.VehicleID
-            JOIN Service s ON sb.ServiceID = s.ServiceID
-            LEFT JOIN Employee e ON sb.StaffID = e.EmployeeID
-            WHERE sb.Status = ? AND sb.CustomerID = ?
-            ORDER BY sb.BookingDate DESC, sb.BookingTime DESC
-            """;
+                SELECT sb.BookingID,
+                       sb.BookingDate,
+                       sb.BookingTime,
+                       sb.Status,
+                       sb.TotalCost,
+                       c.FirstName AS CustomerFirstName,
+                       c.LastName AS CustomerLastName,
+                       c.Email AS CustomerEmail,
+                       v.VehicleID,
+                       v.PlateNumber,
+                       v.Model AS VehicleModel,
+                       v.Type AS VehicleType,
+                       s.ServiceID,
+                       s.Type AS ServiceType,
+                       s.Description AS ServiceDescription,
+                       s.Cost AS ServiceCost,
+                       e.EmployeeID AS StaffID,
+                       e.FirstName AS StaffFirstName,
+                       e.LastName AS StaffLastName,
+                       e.Role AS StaffRole
+                FROM ServiceBooking sb
+                JOIN Customer c ON sb.CustomerID = c.CustomerID
+                JOIN Vehicle v ON sb.VehicleID = v.VehicleID
+                JOIN Service s ON sb.ServiceID = s.ServiceID
+                LEFT JOIN Employee e ON sb.StaffID = e.EmployeeID
+                WHERE sb.Status = ? AND sb.CustomerID = ?
+                ORDER BY sb.BookingDate DESC, sb.BookingTime DESC
+                """;
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -171,10 +167,15 @@ public class ServiceBookingDAO {
             stmt.setTime(4, Time.valueOf(booking.getBookingTime()));
             stmt.setString(5, booking.getStatus());
 
-            if (booking.getStaffID() != null) {stmt.setInt(6, booking.getStaffID());}
-            else  {stmt.setNull(6, Types.INTEGER);}
+            if (booking.getStaffID() != null) {
+                stmt.setInt(6, booking.getStaffID());
+            } else {
+                stmt.setNull(6, Types.INTEGER);
+            }
             if (booking.getTotalCost() != null) stmt.setDouble(7, booking.getTotalCost());
-            else  {stmt.setNull(7, Types.DOUBLE);}
+            else {
+                stmt.setNull(7, Types.DOUBLE);
+            }
 
             stmt.setInt(8, booking.getBookingID());
 
@@ -189,33 +190,33 @@ public class ServiceBookingDAO {
     public List<ServiceBookingDTO> getAllBookings() {
         List<ServiceBookingDTO> bookings = new ArrayList<>();
         String sql = """
-            SELECT sb.BookingID,
-                   sb.BookingDate,
-                   sb.BookingTime,
-                   sb.Status,
-                   sb.TotalCost,
-                   c.FirstName AS CustomerFirstName,
-                   c.LastName AS CustomerLastName,
-                   c.Email AS CustomerEmail,
-                   v.VehicleID,
-                   v.PlateNumber,
-                   v.Model AS VehicleModel,
-                   v.Type AS VehicleType,
-                   s.ServiceID,
-                   s.Type AS ServiceType,
-                   s.Description AS ServiceDescription,
-                   s.Cost AS ServiceCost,
-                   e.EmployeeID AS StaffID,
-                   e.FirstName AS StaffFirstName,
-                   e.LastName AS StaffLastName,
-                   e.Role AS StaffRole
-            FROM ServiceBooking sb
-            JOIN Customer c ON sb.CustomerID = c.CustomerID
-            JOIN Vehicle v ON sb.VehicleID = v.VehicleID
-            JOIN Service s ON sb.ServiceID = s.ServiceID
-            LEFT JOIN Employee e ON sb.StaffID = e.EmployeeID
-            ORDER BY sb.BookingDate DESC, sb.BookingTime DESC
-            """;
+                SELECT sb.BookingID,
+                       sb.BookingDate,
+                       sb.BookingTime,
+                       sb.Status,
+                       sb.TotalCost,
+                       c.FirstName AS CustomerFirstName,
+                       c.LastName AS CustomerLastName,
+                       c.Email AS CustomerEmail,
+                       v.VehicleID,
+                       v.PlateNumber,
+                       v.Model AS VehicleModel,
+                       v.Type AS VehicleType,
+                       s.ServiceID,
+                       s.Type AS ServiceType,
+                       s.Description AS ServiceDescription,
+                       s.Cost AS ServiceCost,
+                       e.EmployeeID AS StaffID,
+                       e.FirstName AS StaffFirstName,
+                       e.LastName AS StaffLastName,
+                       e.Role AS StaffRole
+                FROM ServiceBooking sb
+                JOIN Customer c ON sb.CustomerID = c.CustomerID
+                JOIN Vehicle v ON sb.VehicleID = v.VehicleID
+                JOIN Service s ON sb.ServiceID = s.ServiceID
+                LEFT JOIN Employee e ON sb.StaffID = e.EmployeeID
+                ORDER BY sb.BookingDate DESC, sb.BookingTime DESC
+                """;
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -235,33 +236,33 @@ public class ServiceBookingDAO {
 
     public ServiceBookingDTO getBookingDTOByID(int bookingID) {
         String sql = """
-        SELECT sb.BookingID,
-               sb.BookingDate,
-               sb.BookingTime,
-               sb.Status,
-               sb.TotalCost,
-               c.FirstName AS CustomerFirstName,
-               c.LastName AS CustomerLastName,
-               c.Email AS CustomerEmail,
-               v.VehicleID,
-               v.PlateNumber,
-               v.Model AS VehicleModel,
-               v.Type AS VehicleType,
-               s.ServiceID,
-               s.Type AS ServiceType,
-               s.Cost AS ServiceCost,
-                s.Description AS ServiceDescription,
-               e.EmployeeID AS StaffID,
-               e.FirstName AS StaffFirstName,
-               e.LastName AS StaffLastName,
-               e.Role AS StaffRole
-        FROM ServiceBooking sb
-        JOIN Customer c ON sb.CustomerID = c.CustomerID
-        JOIN Vehicle v ON sb.VehicleID = v.VehicleID
-        JOIN Service s ON sb.ServiceID = s.ServiceID
-        LEFT JOIN Employee e ON sb.StaffID = e.EmployeeID
-        WHERE sb.BookingID = ?
-        """;
+                SELECT sb.BookingID,
+                       sb.BookingDate,
+                       sb.BookingTime,
+                       sb.Status,
+                       sb.TotalCost,
+                       c.FirstName AS CustomerFirstName,
+                       c.LastName AS CustomerLastName,
+                       c.Email AS CustomerEmail,
+                       v.VehicleID,
+                       v.PlateNumber,
+                       v.Model AS VehicleModel,
+                       v.Type AS VehicleType,
+                       s.ServiceID,
+                       s.Type AS ServiceType,
+                       s.Cost AS ServiceCost,
+                        s.Description AS ServiceDescription,
+                       e.EmployeeID AS StaffID,
+                       e.FirstName AS StaffFirstName,
+                       e.LastName AS StaffLastName,
+                       e.Role AS StaffRole
+                FROM ServiceBooking sb
+                JOIN Customer c ON sb.CustomerID = c.CustomerID
+                JOIN Vehicle v ON sb.VehicleID = v.VehicleID
+                JOIN Service s ON sb.ServiceID = s.ServiceID
+                LEFT JOIN Employee e ON sb.StaffID = e.EmployeeID
+                WHERE sb.BookingID = ?
+                """;
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -283,34 +284,34 @@ public class ServiceBookingDAO {
     public List<ServiceBookingDTO> getAllBookings(String status) {
         List<ServiceBookingDTO> bookings = new ArrayList<>();
         String sql = """
-            SELECT sb.BookingID,
-                   sb.BookingDate,
-                   sb.BookingTime,
-                   sb.Status,
-                   sb.TotalCost,
-                   c.FirstName AS CustomerFirstName,
-                   c.LastName AS CustomerLastName,
-                   c.Email AS CustomerEmail,
-                   v.VehicleID,
-                   v.PlateNumber,
-                   v.Model AS VehicleModel,
-                   v.Type AS VehicleType,
-                   s.ServiceID,
-                   s.Type AS ServiceType,
-                   s.Description AS ServiceDescription,
-                   s.Cost AS ServiceCost,
-                   e.EmployeeID AS StaffID,
-                   e.FirstName AS StaffFirstName,
-                   e.LastName AS StaffLastName,
-                   e.Role AS StaffRole
-            FROM ServiceBooking sb
-            JOIN Customer c ON sb.CustomerID = c.CustomerID
-            JOIN Vehicle v ON sb.VehicleID = v.VehicleID
-            JOIN Service s ON sb.ServiceID = s.ServiceID
-            LEFT JOIN Employee e ON sb.StaffID = e.EmployeeID
-            WHERE sb.Status = ?
-            ORDER BY sb.BookingDate DESC, sb.BookingTime DESC
-            """;
+                SELECT sb.BookingID,
+                       sb.BookingDate,
+                       sb.BookingTime,
+                       sb.Status,
+                       sb.TotalCost,
+                       c.FirstName AS CustomerFirstName,
+                       c.LastName AS CustomerLastName,
+                       c.Email AS CustomerEmail,
+                       v.VehicleID,
+                       v.PlateNumber,
+                       v.Model AS VehicleModel,
+                       v.Type AS VehicleType,
+                       s.ServiceID,
+                       s.Type AS ServiceType,
+                       s.Description AS ServiceDescription,
+                       s.Cost AS ServiceCost,
+                       e.EmployeeID AS StaffID,
+                       e.FirstName AS StaffFirstName,
+                       e.LastName AS StaffLastName,
+                       e.Role AS StaffRole
+                FROM ServiceBooking sb
+                JOIN Customer c ON sb.CustomerID = c.CustomerID
+                JOIN Vehicle v ON sb.VehicleID = v.VehicleID
+                JOIN Service s ON sb.ServiceID = s.ServiceID
+                LEFT JOIN Employee e ON sb.StaffID = e.EmployeeID
+                WHERE sb.Status = ?
+                ORDER BY sb.BookingDate DESC, sb.BookingTime DESC
+                """;
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -332,34 +333,34 @@ public class ServiceBookingDAO {
     public List<ServiceBookingDTO> getBookingsByCustomer(int customerID) {
         List<ServiceBookingDTO> bookings = new ArrayList<>();
         String sql = """
-            SELECT sb.BookingID,
-                   sb.BookingDate,
-                   sb.BookingTime,
-                   sb.Status,
-                   sb.TotalCost,
-                   c.FirstName AS CustomerFirstName,
-                   c.LastName AS CustomerLastName,
-                   c.Email AS CustomerEmail,
-                   v.VehicleID,
-                   v.PlateNumber,
-                   v.Model AS VehicleModel,
-                   v.Type AS VehicleType,
-                   s.ServiceID,
-                   s.Type AS ServiceType,
-                   s.Description AS ServiceDescription,
-                   s.Cost AS ServiceCost,
-                   e.EmployeeID AS StaffID,
-                   e.FirstName AS StaffFirstName,
-                   e.LastName AS StaffLastName,
-                   e.Role AS StaffRole
-            FROM ServiceBooking sb
-            JOIN Customer c ON sb.CustomerID = c.CustomerID
-            JOIN Vehicle v ON sb.VehicleID = v.VehicleID
-            JOIN Service s ON sb.ServiceID = s.ServiceID
-            LEFT JOIN Employee e ON sb.StaffID = e.EmployeeID
-            WHERE sb.CustomerID = ?
-            ORDER BY sb.BookingDate DESC, sb.BookingTime DESC
-            """;
+                SELECT sb.BookingID,
+                       sb.BookingDate,
+                       sb.BookingTime,
+                       sb.Status,
+                       sb.TotalCost,
+                       c.FirstName AS CustomerFirstName,
+                       c.LastName AS CustomerLastName,
+                       c.Email AS CustomerEmail,
+                       v.VehicleID,
+                       v.PlateNumber,
+                       v.Model AS VehicleModel,
+                       v.Type AS VehicleType,
+                       s.ServiceID,
+                       s.Type AS ServiceType,
+                       s.Description AS ServiceDescription,
+                       s.Cost AS ServiceCost,
+                       e.EmployeeID AS StaffID,
+                       e.FirstName AS StaffFirstName,
+                       e.LastName AS StaffLastName,
+                       e.Role AS StaffRole
+                FROM ServiceBooking sb
+                JOIN Customer c ON sb.CustomerID = c.CustomerID
+                JOIN Vehicle v ON sb.VehicleID = v.VehicleID
+                JOIN Service s ON sb.ServiceID = s.ServiceID
+                LEFT JOIN Employee e ON sb.StaffID = e.EmployeeID
+                WHERE sb.CustomerID = ?
+                ORDER BY sb.BookingDate DESC, sb.BookingTime DESC
+                """;
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -381,34 +382,34 @@ public class ServiceBookingDAO {
     public List<ServiceBookingDTO> getBookingsByCustomer(int customerID, String status) {
         List<ServiceBookingDTO> bookings = new ArrayList<>();
         String sql = """
-            SELECT sb.BookingID,
-                   sb.BookingDate,
-                   sb.BookingTime,
-                   sb.Status,
-                   sb.TotalCost,
-                   c.FirstName AS CustomerFirstName,
-                   c.LastName AS CustomerLastName,
-                   c.Email AS CustomerEmail,
-                   v.VehicleID,
-                   v.PlateNumber,
-                   v.Model AS VehicleModel,
-                   v.Type AS VehicleType,
-                   s.ServiceID,
-                   s.Type AS ServiceType,
-                   s.Description AS ServiceDescription,
-                   s.Cost AS ServiceCost,
-                   e.EmployeeID AS StaffID,
-                   e.FirstName AS StaffFirstName,
-                   e.LastName AS StaffLastName,
-                   e.Role AS StaffRole
-            FROM ServiceBooking sb
-            JOIN Customer c ON sb.CustomerID = c.CustomerID
-            JOIN Vehicle v ON sb.VehicleID = v.VehicleID
-            JOIN Service s ON sb.ServiceID = s.ServiceID
-            LEFT JOIN Employee e ON sb.StaffID = e.EmployeeID
-            WHERE sb.CustomerID = ? AND sb.status = ?
-            ORDER BY sb.BookingDate DESC, sb.BookingTime DESC
-            """;
+                SELECT sb.BookingID,
+                       sb.BookingDate,
+                       sb.BookingTime,
+                       sb.Status,
+                       sb.TotalCost,
+                       c.FirstName AS CustomerFirstName,
+                       c.LastName AS CustomerLastName,
+                       c.Email AS CustomerEmail,
+                       v.VehicleID,
+                       v.PlateNumber,
+                       v.Model AS VehicleModel,
+                       v.Type AS VehicleType,
+                       s.ServiceID,
+                       s.Type AS ServiceType,
+                       s.Description AS ServiceDescription,
+                       s.Cost AS ServiceCost,
+                       e.EmployeeID AS StaffID,
+                       e.FirstName AS StaffFirstName,
+                       e.LastName AS StaffLastName,
+                       e.Role AS StaffRole
+                FROM ServiceBooking sb
+                JOIN Customer c ON sb.CustomerID = c.CustomerID
+                JOIN Vehicle v ON sb.VehicleID = v.VehicleID
+                JOIN Service s ON sb.ServiceID = s.ServiceID
+                LEFT JOIN Employee e ON sb.StaffID = e.EmployeeID
+                WHERE sb.CustomerID = ? AND sb.status = ?
+                ORDER BY sb.BookingDate DESC, sb.BookingTime DESC
+                """;
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -440,33 +441,33 @@ public class ServiceBookingDAO {
         List<ServiceBookingDTO> bookings = new ArrayList<>();
         List<Object> parameters = new ArrayList<>();
         String sql = """
-            SELECT sb.BookingID,
-                   sb.BookingDate,
-                   sb.BookingTime,
-                   sb.Status,
-                   sb.TotalCost,
-                   c.FirstName AS CustomerFirstName,
-                   c.LastName AS CustomerLastName,
-                   c.Email AS CustomerEmail,
-                   v.VehicleID,
-                   v.PlateNumber,
-                   v.Model AS VehicleModel,
-                   v.Type AS VehicleType,
-                   s.ServiceID,
-                   s.Type AS ServiceType,
-                   s.Description AS ServiceDescription,
-                   s.Cost AS ServiceCost,
-                   e.EmployeeID AS StaffID,
-                   e.FirstName AS StaffFirstName,
-                   e.LastName AS StaffLastName,
-                   e.Role AS StaffRole
-            FROM ServiceBooking sb
-            JOIN Customer c ON sb.CustomerID = c.CustomerID
-            JOIN Vehicle v ON sb.VehicleID = v.VehicleID
-            JOIN Service s ON sb.ServiceID = s.ServiceID
-            LEFT JOIN Employee e ON sb.StaffID = e.EmployeeID
-            WHERE sb.CustomerID = ?
-            """;
+                SELECT sb.BookingID,
+                       sb.BookingDate,
+                       sb.BookingTime,
+                       sb.Status,
+                       sb.TotalCost,
+                       c.FirstName AS CustomerFirstName,
+                       c.LastName AS CustomerLastName,
+                       c.Email AS CustomerEmail,
+                       v.VehicleID,
+                       v.PlateNumber,
+                       v.Model AS VehicleModel,
+                       v.Type AS VehicleType,
+                       s.ServiceID,
+                       s.Type AS ServiceType,
+                       s.Description AS ServiceDescription,
+                       s.Cost AS ServiceCost,
+                       e.EmployeeID AS StaffID,
+                       e.FirstName AS StaffFirstName,
+                       e.LastName AS StaffLastName,
+                       e.Role AS StaffRole
+                FROM ServiceBooking sb
+                JOIN Customer c ON sb.CustomerID = c.CustomerID
+                JOIN Vehicle v ON sb.VehicleID = v.VehicleID
+                JOIN Service s ON sb.ServiceID = s.ServiceID
+                LEFT JOIN Employee e ON sb.StaffID = e.EmployeeID
+                WHERE sb.CustomerID = ?
+                """;
         parameters.add(customerID);
 
         // Date filter
@@ -534,34 +535,34 @@ public class ServiceBookingDAO {
     public List<ServiceBookingDTO> getActiveBookingByEmployee(int employeeID) {
         List<ServiceBookingDTO> bookingDTOList = new ArrayList<>();
         String sql = """
-        SELECT sb.BookingID,
-               sb.BookingDate,
-               sb.BookingTime,
-               sb.Status,
-               sb.TotalCost,
-               c.FirstName AS CustomerFirstName,
-               c.LastName AS CustomerLastName,
-               c.Email AS CustomerEmail,
-               v.VehicleID,
-               v.PlateNumber,
-               v.Model AS VehicleModel,
-               v.Type AS VehicleType,
-               s.ServiceID,
-               s.Type AS ServiceType,
-               s.Description AS ServiceDescription,
-               s.Cost AS ServiceCost,
-               e.EmployeeID AS StaffID,
-               e.FirstName AS StaffFirstName,
-               e.LastName AS StaffLastName,
-               e.Role AS StaffRole
-        FROM ServiceBooking sb
-        JOIN Customer c ON sb.CustomerID = c.CustomerID
-        JOIN Vehicle v ON sb.VehicleID = v.VehicleID
-        JOIN Service s ON sb.ServiceID = s.ServiceID
-        LEFT JOIN Employee e ON sb.StaffID = e.EmployeeID
-        WHERE (sb.Status = ? OR sb.Status = ?) AND sb.StaffID = ?
-        ORDER BY sb.BookingDate DESC, sb.BookingTime DESC
-        """;
+                SELECT sb.BookingID,
+                       sb.BookingDate,
+                       sb.BookingTime,
+                       sb.Status,
+                       sb.TotalCost,
+                       c.FirstName AS CustomerFirstName,
+                       c.LastName AS CustomerLastName,
+                       c.Email AS CustomerEmail,
+                       v.VehicleID,
+                       v.PlateNumber,
+                       v.Model AS VehicleModel,
+                       v.Type AS VehicleType,
+                       s.ServiceID,
+                       s.Type AS ServiceType,
+                       s.Description AS ServiceDescription,
+                       s.Cost AS ServiceCost,
+                       e.EmployeeID AS StaffID,
+                       e.FirstName AS StaffFirstName,
+                       e.LastName AS StaffLastName,
+                       e.Role AS StaffRole
+                FROM ServiceBooking sb
+                JOIN Customer c ON sb.CustomerID = c.CustomerID
+                JOIN Vehicle v ON sb.VehicleID = v.VehicleID
+                JOIN Service s ON sb.ServiceID = s.ServiceID
+                LEFT JOIN Employee e ON sb.StaffID = e.EmployeeID
+                WHERE (sb.Status = ? OR sb.Status = ?) AND sb.StaffID = ?
+                ORDER BY sb.BookingDate DESC, sb.BookingTime DESC
+                """;
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -626,33 +627,33 @@ public class ServiceBookingDAO {
         List<ServiceBookingDTO> bookings = new ArrayList<>();
         List<Object> parameters = new ArrayList<>();
         String sql = """
-            SELECT sb.BookingID,
-                   sb.BookingDate,
-                   sb.BookingTime,
-                   sb.Status,
-                   sb.TotalCost,
-                   c.FirstName AS CustomerFirstName,
-                   c.LastName AS CustomerLastName,
-                   c.Email AS CustomerEmail,
-                   v.VehicleID,
-                   v.PlateNumber,
-                   v.Model AS VehicleModel,
-                   v.Type AS VehicleType,
-                   s.ServiceID,
-                   s.Type AS ServiceType,
-                   s.Description AS ServiceDescription,
-                   s.Cost AS ServiceCost,
-                   e.EmployeeID AS StaffID,
-                   e.FirstName AS StaffFirstName,
-                   e.LastName AS StaffLastName,
-                   e.Role AS StaffRole
-            FROM ServiceBooking sb
-            JOIN Customer c ON sb.CustomerID = c.CustomerID
-            JOIN Vehicle v ON sb.VehicleID = v.VehicleID
-            JOIN Service s ON sb.ServiceID = s.ServiceID
-            LEFT JOIN Employee e ON sb.StaffID = e.EmployeeID
-            WHERE sb.CustomerID = ?
-            """;
+                SELECT sb.BookingID,
+                       sb.BookingDate,
+                       sb.BookingTime,
+                       sb.Status,
+                       sb.TotalCost,
+                       c.FirstName AS CustomerFirstName,
+                       c.LastName AS CustomerLastName,
+                       c.Email AS CustomerEmail,
+                       v.VehicleID,
+                       v.PlateNumber,
+                       v.Model AS VehicleModel,
+                       v.Type AS VehicleType,
+                       s.ServiceID,
+                       s.Type AS ServiceType,
+                       s.Description AS ServiceDescription,
+                       s.Cost AS ServiceCost,
+                       e.EmployeeID AS StaffID,
+                       e.FirstName AS StaffFirstName,
+                       e.LastName AS StaffLastName,
+                       e.Role AS StaffRole
+                FROM ServiceBooking sb
+                JOIN Customer c ON sb.CustomerID = c.CustomerID
+                JOIN Vehicle v ON sb.VehicleID = v.VehicleID
+                JOIN Service s ON sb.ServiceID = s.ServiceID
+                LEFT JOIN Employee e ON sb.StaffID = e.EmployeeID
+                WHERE sb.CustomerID = ?
+                """;
         parameters.add(customerID);
 
         // date range filter
@@ -736,27 +737,27 @@ public class ServiceBookingDAO {
         ServiceBookingSummaryDTO summary = new ServiceBookingSummaryDTO();
 
         String sql = """
-        SELECT
-            -- Total bookings for this customer
-            COUNT(*) AS TotalBookings,
-
-            -- Active bookings are those that are not completed, missed, or cancelled
-            SUM(CASE WHEN Status NOT IN ('Completed', 'Missed Appointment', 'Cancelled') THEN 1 ELSE 0 END) AS TotalActiveBookings,
-
-            -- Count of completed bookings
-            SUM(CASE WHEN Status = 'Completed' THEN 1 ELSE 0 END) AS TotalCompletedBookings,
-
-            -- Detailed breakdown of each status
-            SUM(CASE WHEN Status = 'Awaiting Confirmation' THEN 1 ELSE 0 END) AS TotalAwaitingConfirmation,
-            SUM(CASE WHEN Status = 'Confirmed' THEN 1 ELSE 0 END) AS TotalConfirmed,
-            SUM(CASE WHEN Status = 'In Progress' THEN 1 ELSE 0 END) AS TotalInProgress,
-            SUM(CASE WHEN Status = 'Missed Appointment' THEN 1 ELSE 0 END) AS TotalMissedAppointment,
-            SUM(CASE WHEN Status = 'Awaiting Pickup' THEN 1 ELSE 0 END) AS TotalAwaitingPickup,
-            SUM(CASE WHEN Status = 'Reschedule Required' THEN 1 ELSE 0 END) AS TotalRescheduleRequired,
-            SUM(CASE WHEN Status = 'Cancelled' THEN 1 ELSE 0 END) AS TotalCancelled
-        FROM ServiceBooking
-        WHERE CustomerID = ?
-    """;
+                    SELECT
+                        -- Total bookings for this customer
+                        COUNT(*) AS TotalBookings,
+                
+                        -- Active bookings are those that are not completed, missed, or cancelled
+                        SUM(CASE WHEN Status NOT IN ('Completed', 'Missed Appointment', 'Cancelled') THEN 1 ELSE 0 END) AS TotalActiveBookings,
+                
+                        -- Count of completed bookings
+                        SUM(CASE WHEN Status = 'Completed' THEN 1 ELSE 0 END) AS TotalCompletedBookings,
+                
+                        -- Detailed breakdown of each status
+                        SUM(CASE WHEN Status = 'Awaiting Confirmation' THEN 1 ELSE 0 END) AS TotalAwaitingConfirmation,
+                        SUM(CASE WHEN Status = 'Confirmed' THEN 1 ELSE 0 END) AS TotalConfirmed,
+                        SUM(CASE WHEN Status = 'In Progress' THEN 1 ELSE 0 END) AS TotalInProgress,
+                        SUM(CASE WHEN Status = 'Missed Appointment' THEN 1 ELSE 0 END) AS TotalMissedAppointment,
+                        SUM(CASE WHEN Status = 'Awaiting Pickup' THEN 1 ELSE 0 END) AS TotalAwaitingPickup,
+                        SUM(CASE WHEN Status = 'Reschedule Required' THEN 1 ELSE 0 END) AS TotalRescheduleRequired,
+                        SUM(CASE WHEN Status = 'Cancelled' THEN 1 ELSE 0 END) AS TotalCancelled
+                    FROM ServiceBooking
+                    WHERE CustomerID = ?
+                """;
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {

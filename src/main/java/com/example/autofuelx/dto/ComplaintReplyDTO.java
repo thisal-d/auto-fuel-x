@@ -32,38 +32,93 @@ public class ComplaintReplyDTO {
 
 
     // Getters and Setters
-    public int getComplaintID() { return complaintID; }
-    public void setComplaintID(int complaintID) { this.complaintID = complaintID; }
+    public int getComplaintID() {
+        return complaintID;
+    }
 
-    public int getCustomerID() { return customerID; }
-    public void setCustomerID(int customerID) { this.customerID = customerID; }
+    public void setComplaintID(int complaintID) {
+        this.complaintID = complaintID;
+    }
 
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
+    public int getCustomerID() {
+        return customerID;
+    }
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
+    }
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public String getTitle() {
+        return title;
+    }
 
-    public Date getCreatedDate() { return createdDate; }
-    public void setCreatedDate(Date createdDate) { this.createdDate = createdDate; }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-    public Time getCreatedTime() { return createdTime; }
-    public void setCreatedTime(Time createdTime) { this.createdTime = createdTime; }
+    public String getDescription() {
+        return description;
+    }
 
-    public Date getUpdatedDate() { return updatedDate; }
-    public void setUpdatedDate(Date updatedDate) { this.updatedDate = updatedDate; }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-    public Time getUpdateTime() { return updateTime; }
-    public void setUpdateTime(Time updateTime) { this.updateTime = updateTime; }
+    public String getStatus() {
+        return status;
+    }
 
-    public Integer getReplyComplaintID() { return replyComplaintID; }
-    public void setReplyComplaintID(Integer replyComplaintID) { this.replyComplaintID = replyComplaintID; }
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-    public Integer getStaffID() { return staffID; }
-    public void setStaffID(Integer staffID) { this.staffID = staffID; }
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Time getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(Time createdTime) {
+        this.createdTime = createdTime;
+    }
+
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public Time getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Time updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Integer getReplyComplaintID() {
+        return replyComplaintID;
+    }
+
+    public void setReplyComplaintID(Integer replyComplaintID) {
+        this.replyComplaintID = replyComplaintID;
+    }
+
+    public Integer getStaffID() {
+        return staffID;
+    }
+
+    public void setStaffID(Integer staffID) {
+        this.staffID = staffID;
+    }
 
     public String getReplyStatus() {
         return replyStatus;
@@ -73,29 +128,69 @@ public class ComplaintReplyDTO {
         this.replyStatus = replyStatus;
     }
 
-    public String getReplyTitle() { return replyTitle; }
-    public void setReplyTitle(String replyTitle) { this.replyTitle = replyTitle; }
+    public String getReplyTitle() {
+        return replyTitle;
+    }
 
-    public String getReplyDescription() { return replyDescription; }
-    public void setReplyDescription(String replyDescription) { this.replyDescription = replyDescription; }
+    public void setReplyTitle(String replyTitle) {
+        this.replyTitle = replyTitle;
+    }
 
-    public Date getReplyCreatedDate() { return replyCreatedDate; }
-    public void setReplyCreatedDate(Date replyCreatedDate) { this.replyCreatedDate = replyCreatedDate; }
+    public String getReplyDescription() {
+        return replyDescription;
+    }
 
-    public Time getReplyCreatedTime() { return replyCreatedTime; }
-    public void setReplyCreatedTime(Time replyCreatedTime) { this.replyCreatedTime = replyCreatedTime; }
+    public void setReplyDescription(String replyDescription) {
+        this.replyDescription = replyDescription;
+    }
 
-    public Date getReplyUpdatedDate() { return replyUpdatedDate; }
-    public void setReplyUpdatedDate(Date replyUpdatedDate) { this.replyUpdatedDate = replyUpdatedDate; }
+    public Date getReplyCreatedDate() {
+        return replyCreatedDate;
+    }
 
-    public Time getReplyUpdateTime() { return replyUpdateTime; }
-    public void setReplyUpdateTime(Time replyUpdateTime) { this.replyUpdateTime = replyUpdateTime; }
+    public void setReplyCreatedDate(Date replyCreatedDate) {
+        this.replyCreatedDate = replyCreatedDate;
+    }
 
-    public String getRepliedEmployeeName() { return repliedEmployeeName; }
-    public void setRepliedEmployeeName(String repliedEmployeeName) { this.repliedEmployeeName = repliedEmployeeName; }
+    public Time getReplyCreatedTime() {
+        return replyCreatedTime;
+    }
 
-    public String getRepliedEmployeeType() { return repliedEmployeeType; }
-    public void setRepliedEmployeeType(String repliedEmployeeType) { this.repliedEmployeeType = repliedEmployeeType; }
+    public void setReplyCreatedTime(Time replyCreatedTime) {
+        this.replyCreatedTime = replyCreatedTime;
+    }
+
+    public Date getReplyUpdatedDate() {
+        return replyUpdatedDate;
+    }
+
+    public void setReplyUpdatedDate(Date replyUpdatedDate) {
+        this.replyUpdatedDate = replyUpdatedDate;
+    }
+
+    public Time getReplyUpdateTime() {
+        return replyUpdateTime;
+    }
+
+    public void setReplyUpdateTime(Time replyUpdateTime) {
+        this.replyUpdateTime = replyUpdateTime;
+    }
+
+    public String getRepliedEmployeeName() {
+        return repliedEmployeeName;
+    }
+
+    public void setRepliedEmployeeName(String repliedEmployeeName) {
+        this.repliedEmployeeName = repliedEmployeeName;
+    }
+
+    public String getRepliedEmployeeType() {
+        return repliedEmployeeType;
+    }
+
+    public void setRepliedEmployeeType(String repliedEmployeeType) {
+        this.repliedEmployeeType = repliedEmployeeType;
+    }
 
 
 }

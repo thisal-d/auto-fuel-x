@@ -40,7 +40,8 @@
         %>
         <div class="booking-card">
             <div class="booking-card-header">
-                <div class="booking-id">#<%= booking.getBookingID() %></div>
+                <div class="booking-id">#<%= booking.getBookingID() %>
+                </div>
                 <span class="status-badge status-missed">
                         Missed
                     </span>
@@ -49,27 +50,33 @@
             <div class="booking-card-content">
                 <div class="booking-detail">
                     <div class="booking-detail-label">Vehicle</div>
-                    <div class="booking-detail-value"><%= vehicleInfo %></div>
+                    <div class="booking-detail-value"><%= vehicleInfo %>
+                    </div>
                 </div>
 
                 <div class="booking-detail">
                     <div class="booking-detail-label">Service</div>
-                    <div class="booking-detail-value"><%= booking.getServiceType() %> ($<%= booking.getServiceCost() %>)</div>
+                    <div class="booking-detail-value"><%= booking.getServiceType() %> ($<%= booking.getServiceCost() %>
+                        )
+                    </div>
                 </div>
 
                 <div class="booking-detail">
                     <div class="booking-detail-label">Date & Time</div>
-                    <div class="booking-detail-value"><%= formattedDate %> at <%= formattedTime %></div>
+                    <div class="booking-detail-value"><%= formattedDate %> at <%= formattedTime %>
+                    </div>
                 </div>
 
                 <div class="booking-detail">
                     <div class="booking-detail-label">Status</div>
-                    <div class="booking-detail-value"><%= booking.getStatus() %></div>
+                    <div class="booking-detail-value"><%= booking.getStatus() %>
+                    </div>
                 </div>
             </div>
 
             <div class="booking-card-actions">
-                <form class="action-form" action="<%=request.getContextPath()%>/user/service-booking/update-status" method="post">
+                <form class="action-form" action="<%=request.getContextPath()%>/user/service-booking/update-status"
+                      method="post">
                     <input type="hidden" value="<%=booking.getBookingID()%>" name="booking-ID">
                     <input type="hidden" value="Cancelled" name="status">
                     <input type="hidden" value="/customer/service-booking/list?status=missed" name="redirect-url">

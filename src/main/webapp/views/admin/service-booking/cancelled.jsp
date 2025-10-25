@@ -58,13 +58,18 @@
                         String formattedTime = booking.getBookingTime().format(timeFormatter);
                 %>
                 <tr>
-                    <td><%= customerName %></td>
-                    <td><%= vehicleInfo %></td>
-                    <td><%= booking.getServiceType() %></td>
-                    <td><%= formattedDate %></td>
-                    <td><%= formattedTime %></td>
+                    <td><%= customerName %>
+                    </td>
+                    <td><%= vehicleInfo %>
+                    </td>
+                    <td><%= booking.getServiceType() %>
+                    </td>
+                    <td><%= formattedDate %>
+                    </td>
+                    <td><%= formattedTime %>
+                    </td>
                 </tr>
-                <%   }
+                <% }
                 } else { %>
                 <tr>
                     <td colspan="5" class="no-results">No cancelled bookings found.</td>

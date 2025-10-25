@@ -9,7 +9,7 @@ public class FuelSupplyService {
     private final FuelSupplyDAO fuelSupplyDAO;
 
     public FuelSupplyService() {
-        fuelSupplyDAO  = new FuelSupplyDAO();
+        fuelSupplyDAO = new FuelSupplyDAO();
     }
 
     public void addFuelSupply(FuelSupply fs) {

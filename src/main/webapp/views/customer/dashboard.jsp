@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.autofuelx.dto.FuelUsageByTypeDTO" %>
 <%@ page import="com.example.autofuelx.dto.VehicleSummaryDTO" %>
@@ -89,8 +89,10 @@
                     for (VehicleSummaryDTO vehicle : vehicleSummary) {
             %>
             <tr>
-                <td><%= vehicle.getVehicleType() %></td>
-                <td><%= vehicle.getVehicleCount() %></td>
+                <td><%= vehicle.getVehicleType() %>
+                </td>
+                <td><%= vehicle.getVehicleCount() %>
+                </td>
             </tr>
             <%
                 }
@@ -121,15 +123,18 @@
         %>
         <div class="stats-summary">
             <div class="stat-item">
-                <div class="stat-value"><%= serviceBookingSummary.getTotalBookings() %></div>
+                <div class="stat-value"><%= serviceBookingSummary.getTotalBookings() %>
+                </div>
                 <div class="stat-label">Total Bookings</div>
             </div>
             <div class="stat-item">
-                <div class="stat-value"><%= serviceBookingSummary.getTotalActiveBookings() %></div>
+                <div class="stat-value"><%= serviceBookingSummary.getTotalActiveBookings() %>
+                </div>
                 <div class="stat-label">Active Bookings</div>
             </div>
             <div class="stat-item">
-                <div class="stat-value"><%= serviceBookingSummary.getTotalCompletedBookings() %></div>
+                <div class="stat-value"><%= serviceBookingSummary.getTotalCompletedBookings() %>
+                </div>
                 <div class="stat-label">Completed Bookings</div>
             </div>
         </div>
@@ -143,31 +148,38 @@
                 </tr>
                 <tr>
                     <td>Awaiting Confirmation</td>
-                    <td><%= serviceBookingSummary.getTotalAwaitingConfirmation() %></td>
+                    <td><%= serviceBookingSummary.getTotalAwaitingConfirmation() %>
+                    </td>
                 </tr>
                 <tr>
                     <td>Confirmed</td>
-                    <td><%= serviceBookingSummary.getTotalConfirmed() %></td>
+                    <td><%= serviceBookingSummary.getTotalConfirmed() %>
+                    </td>
                 </tr>
                 <tr>
                     <td>In Progress</td>
-                    <td><%= serviceBookingSummary.getTotalInProgress() %></td>
+                    <td><%= serviceBookingSummary.getTotalInProgress() %>
+                    </td>
                 </tr>
                 <tr>
                     <td>Missed Appointment</td>
-                    <td><%= serviceBookingSummary.getTotalMissedAppointment() %></td>
+                    <td><%= serviceBookingSummary.getTotalMissedAppointment() %>
+                    </td>
                 </tr>
                 <tr>
                     <td>Awaiting Pickup</td>
-                    <td><%= serviceBookingSummary.getTotalAwaitingPickup() %></td>
+                    <td><%= serviceBookingSummary.getTotalAwaitingPickup() %>
+                    </td>
                 </tr>
                 <tr>
                     <td>Reschedule Required</td>
-                    <td><%= serviceBookingSummary.getTotalRescheduleRequired() %></td>
+                    <td><%= serviceBookingSummary.getTotalRescheduleRequired() %>
+                    </td>
                 </tr>
                 <tr>
                     <td>Cancelled</td>
-                    <td><%= serviceBookingSummary.getTotalCancelled() %></td>
+                    <td><%= serviceBookingSummary.getTotalCancelled() %>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -203,15 +215,18 @@
                 </tr>
                 <tr>
                     <td>Unread Complaints</td>
-                    <td><%= complaintSummary.getUnreadComplaints() %></td>
+                    <td><%= complaintSummary.getUnreadComplaints() %>
+                    </td>
                 </tr>
                 <tr>
                     <td>Total Complaints</td>
-                    <td><%= complaintSummary.getTotalComplaints() %></td>
+                    <td><%= complaintSummary.getTotalComplaints() %>
+                    </td>
                 </tr>
                 <tr>
                     <td>Active Complaints</td>
-                    <td><%= complaintSummary.getActiveComplaints() %></td>
+                    <td><%= complaintSummary.getActiveComplaints() %>
+                    </td>
                 </tr>
 
             </table>
@@ -238,17 +253,20 @@
 
         <div class="quick-actions-grid">
             <div class="quick-action-item">
-                <form action="<%= request.getContextPath() %>/customer/fuel/history" method="get" class="quick-action-form">
+                <form action="<%= request.getContextPath() %>/customer/fuel/history" method="get"
+                      class="quick-action-form">
                     <button type="submit" class="quick-action-btn">Record Fuel Purchase</button>
                 </form>
             </div>
             <div class="quick-action-item">
-                <form action="<%= request.getContextPath() %>/customer/service-booking/form" method="get" class="quick-action-form">
+                <form action="<%= request.getContextPath() %>/customer/service-booking/form" method="get"
+                      class="quick-action-form">
                     <button type="submit" class="quick-action-btn">Book Service</button>
                 </form>
             </div>
             <div class="quick-action-item">
-                <form action="<%= request.getContextPath() %>/views/customer/complaint/form.jsp" method="get" class="quick-action-form">
+                <form action="<%= request.getContextPath() %>/views/customer/complaint/form.jsp" method="get"
+                      class="quick-action-form">
                     <button type="submit" class="quick-action-btn">File Complaint</button>
                 </form>
             </div>

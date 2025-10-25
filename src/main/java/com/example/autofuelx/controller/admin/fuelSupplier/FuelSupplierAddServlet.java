@@ -2,9 +2,7 @@ package com.example.autofuelx.controller.admin.fuelSupplier;
 
 
 import com.example.autofuelx.model.Employee;
-import com.example.autofuelx.model.Fuel;
 import com.example.autofuelx.model.FuelSupplier;
-import com.example.autofuelx.service.FuelService;
 import com.example.autofuelx.service.FuelSupplierService;
 import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;

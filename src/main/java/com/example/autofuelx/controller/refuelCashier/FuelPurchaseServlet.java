@@ -8,10 +8,13 @@ import com.example.autofuelx.service.FuelPurchaseService;
 import com.example.autofuelx.service.FuelService;
 import com.example.autofuelx.service.VehicleService;
 import com.example.autofuelx.util.AuthUtil;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
-import java.io.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
 
 @WebServlet("/refuel-cashier/fuel/purchase")
 public class FuelPurchaseServlet extends HttpServlet {
@@ -28,8 +31,8 @@ public class FuelPurchaseServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Employee employee = AuthUtil.checkEmployeeLogin(request, response, "Refuel Cashier");
-        if (employee == null) return;
-        else response.sendRedirect(request.getContextPath() + "/views/refuel-cashier/fuel/refuel-form.jsp");
+        if (employee == null) {
+        } else response.sendRedirect(request.getContextPath() + "/views/refuel-cashier/fuel/refuel-form.jsp");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -37,7 +40,7 @@ public class FuelPurchaseServlet extends HttpServlet {
         if (employee == null) return;
 
         String plateNumber = request.getParameter("plateNumber");
-        int fuelID= Integer.parseInt(request.getParameter("fuelID"));
+        int fuelID = Integer.parseInt(request.getParameter("fuelID"));
         double quantity = Double.parseDouble(request.getParameter("quantity"));
 
 

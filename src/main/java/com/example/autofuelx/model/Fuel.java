@@ -7,7 +7,8 @@ public class Fuel {
     private double costPerLiter;
 
     // Constructors
-    public Fuel() {}
+    public Fuel() {
+    }
 
     public Fuel(int fuelID, String type, double quantity, double costPerLiter) {
         this.fuelID = fuelID;

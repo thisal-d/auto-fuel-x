@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="com.example.autofuelx.model.Service" %>
 <!DOCTYPE html>
 <html>
@@ -16,15 +16,18 @@
 <table border="1">
     <tr>
         <th>Type</th>
-        <td><%= service.getType() %></td>
+        <td><%= service.getType() %>
+        </td>
     </tr>
     <tr>
         <th>Description</th>
-        <td><%= service.getDescription() != null ? service.getDescription() : "" %></td>
+        <td><%= service.getDescription() != null ? service.getDescription() : "" %>
+        </td>
     </tr>
     <tr>
         <th>Cost</th>
-        <td>Rs. <%= service.getCost() %></td>
+        <td>Rs. <%= service.getCost() %>
+        </td>
     </tr>
 </table>
 

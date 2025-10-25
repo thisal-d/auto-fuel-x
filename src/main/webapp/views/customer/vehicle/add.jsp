@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<jsp:include page="/views/customer/header.jsp" />
+<jsp:include page="/views/customer/header.jsp"/>
 
 <div class="add-vehicle-container">
     <div class="form-card">
@@ -28,25 +28,29 @@
             <div class="form-grid">
                 <div class="form-group">
                     <label for="plateNumber" class="form-label">Plate Number:</label>
-                    <input type="text" id="plateNumber" name="plateNumber" class="form-input" required placeholder="e.g., ABC-1234">
+                    <input type="text" id="plateNumber" name="plateNumber" class="form-input" required
+                           placeholder="e.g., ABC-1234">
                     <div class="help-text">Enter your vehicle's license plate number</div>
                 </div>
 
                 <div class="form-group">
                     <label for="type" class="form-label">Type:</label>
-                    <input type="text" id="type" name="type" class="form-input" required placeholder="e.g., Car, Motorcycle, SUV">
+                    <input type="text" id="type" name="type" class="form-input" required
+                           placeholder="e.g., Car, Motorcycle, SUV">
                     <div class="help-text">Enter the type of your vehicle</div>
                 </div>
 
                 <div class="form-group">
                     <label for="model" class="form-label">Model:</label>
-                    <input type="text" id="model" name="model" class="form-input" required placeholder="e.g., Toyota Camry">
+                    <input type="text" id="model" name="model" class="form-input" required
+                           placeholder="e.g., Toyota Camry">
                     <div class="help-text">Enter the make and model of your vehicle</div>
                 </div>
 
                 <div class="form-group">
                     <label for="color" class="form-label">Color:</label>
-                    <input type="text" id="color" name="color" class="form-input" required placeholder="e.g., Black, Silver, Red">
+                    <input type="text" id="color" name="color" class="form-input" required
+                           placeholder="e.g., Black, Silver, Red">
                     <div class="help-text">Enter the color of your vehicle</div>
                 </div>
 

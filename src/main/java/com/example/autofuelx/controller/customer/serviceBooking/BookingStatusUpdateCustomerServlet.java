@@ -1,5 +1,6 @@
 package com.example.autofuelx.controller.customer.serviceBooking;
 
+import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.model.ServiceBooking;
 import com.example.autofuelx.service.ServiceBookingService;
 import com.example.autofuelx.util.AuthUtil;
@@ -8,7 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import com.example.autofuelx.model.Customer;
+
 import java.io.IOException;
 
 @WebServlet("/user/service-booking/update-status")

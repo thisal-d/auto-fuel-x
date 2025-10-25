@@ -45,7 +45,8 @@
     <div class="profile-content">
         <div class="profile-sidebar">
             <div class="profile-actions-sidebar">
-                <a href="<%=request.getContextPath()%>/views/employee/profile.jsp" class="btn btn-secondary">Back to Profile</a>
+                <a href="<%=request.getContextPath()%>/views/employee/profile.jsp" class="btn btn-secondary">Back to
+                    Profile</a>
             </div>
         </div>
 
@@ -63,29 +64,34 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="firstName">First Name</label>
-                                <input type="text" id="firstName" name="firstName" value="<%= employee.getFirstName() %>" required />
+                                <input type="text" id="firstName" name="firstName"
+                                       value="<%= employee.getFirstName() %>" required/>
                             </div>
                             <div class="form-group">
                                 <label for="lastName">Last Name</label>
-                                <input type="text" id="lastName" name="lastName" value="<%= employee.getLastName() %>" required />
+                                <input type="text" id="lastName" name="lastName" value="<%= employee.getLastName() %>"
+                                       required/>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="dateOfBirth">Date of Birth</label>
-                                <input type="date" id="dateOfBirth" name="dateOfBirth" value="<%= employee.getDateOfBirth() %>" required />
+                                <input type="date" id="dateOfBirth" name="dateOfBirth"
+                                       value="<%= employee.getDateOfBirth() %>" required/>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" id="email" name="email" value="<%= employee.getEmail() %>" required readonly/>
+                                <input type="email" id="email" name="email" value="<%= employee.getEmail() %>" required
+                                       readonly/>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" id="password" name="password" value="<%= employee.getPassword() %>" required />
+                                <input type="password" id="password" name="password"
+                                       value="<%= employee.getPassword() %>" required/>
                             </div>
                         </div>
                     </div>
@@ -101,11 +107,11 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="role">Role</label>
-                                <input type="text" id="role" value="<%= empType %>" readonly />
+                                <input type="text" id="role" value="<%= empType %>" readonly/>
                             </div>
                             <div class="form-group">
                                 <label for="type">Type</label>
-                                <input type="text" id="type" name="type" value="<%= employee.getType() %>" readonly />
+                                <input type="text" id="type" name="type" value="<%= employee.getType() %>" readonly/>
                             </div>
                         </div>
 
@@ -113,44 +119,54 @@
                             <div class="form-group">
                                 <label for="status">Status</label>
                                 <select id="status" name="status" required>
-                                    <option value="Active" <%= "Active".equals(employee.getStatus()) ? "selected" : "" %>>Active</option>
-                                    <option value="Inactive" <%= "Inactive".equals(employee.getStatus()) ? "selected" : "" %>>Inactive</option>
+                                    <option value="Active" <%= "Active".equals(employee.getStatus()) ? "selected" : "" %>>
+                                        Active
+                                    </option>
+                                    <option value="Inactive" <%= "Inactive".equals(employee.getStatus()) ? "selected" : "" %>>
+                                        Inactive
+                                    </option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="hireDate">Hire Date</label>
-                                <input type="date" id="hireDate" name="hireDate" value="<%= employee.getHireDate() %>" required />
+                                <input type="date" id="hireDate" name="hireDate" value="<%= employee.getHireDate() %>"
+                                       required/>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="salary">Salary (Rs)</label>
-                                <input type="number" step="0.01" id="salary" name="salary" value="<%= employee.getSalary() %>" required />
+                                <input type="number" step="0.01" id="salary" name="salary"
+                                       value="<%= employee.getSalary() %>" required/>
                             </div>
                             <%-- admin/ sevice center staff and refuel cashier --%>
                             <% if ("Service Center Staff".equals(empType)) { %>
                             <div class="form-group">
                                 <label for="skillSet">Skill Set</label>
-                                <input type="text" id="skillSet" name="skillSet" value="<%= employee.getSkillSet() %>" />
+                                <input type="text" id="skillSet" name="skillSet" value="<%= employee.getSkillSet() %>"/>
                             </div>
                             <% } else if ("Refuel Cashier".equals(empType)) { %>
                             <div class="form-group">
                                 <label for="shift">Shift</label>
                                 <select id="shift" name="shift">
-                                    <option value="Morning" <%= "Day".equals(employee.getShift()) ? "selected" : "" %>>Day</option>
-                                    <option value="Night" <%= "Night".equals(employee.getShift()) ? "selected" : "" %>>Night</option>
+                                    <option value="Morning" <%= "Day".equals(employee.getShift()) ? "selected" : "" %>>
+                                        Day
+                                    </option>
+                                    <option value="Night" <%= "Night".equals(employee.getShift()) ? "selected" : "" %>>
+                                        Night
+                                    </option>
                                 </select>
                             </div>
                             <% } else if ("Admin".equals(empType)) { %>
                             <div class="form-group">
                                 <label for="adminRole">System Role</label>
-                                <input type="text" id="adminRole" name="adminRole" value="<%= employee.getRole() %>" />
+                                <input type="text" id="adminRole" name="adminRole" value="<%= employee.getRole() %>"/>
                             </div>
                             <% } else if ("Customer Care Officer".equals(empType)) { %>
                             <div class="form-group">
                                 <label>Specialization</label>
-                                <input type="text" value="Customer Relations" readonly />
+                                <input type="text" value="Customer Relations" readonly/>
                             </div>
                             <% } %>
                         </div>
@@ -167,17 +183,20 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="addressNo">Address No</label>
-                                <input type="text" id="addressNo" name="addressNo" value="<%= employee.getAddressNo() %>" />
+                                <input type="text" id="addressNo" name="addressNo"
+                                       value="<%= employee.getAddressNo() %>"/>
                             </div>
                             <div class="form-group">
                                 <label for="addressLane">Lane</label>
-                                <input type="text" id="addressLane" name="addressLane" value="<%= employee.getAddressLane() %>" />
+                                <input type="text" id="addressLane" name="addressLane"
+                                       value="<%= employee.getAddressLane() %>"/>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="addressArea">Area</label>
-                            <input type="text" id="addressArea" name="addressArea" value="<%= employee.getAddressArea() %>" />
+                            <input type="text" id="addressArea" name="addressArea"
+                                   value="<%= employee.getAddressArea() %>"/>
                         </div>
                     </div>
                 </div>
@@ -185,7 +204,8 @@
                 <!-- save -->
                 <div class="profile-actions">
                     <button type="submit" class="btn btn-primary">Save Changes</button>
-                    <a href="<%=request.getContextPath()%>/views/employee/profile.jsp" class="btn btn-secondary">Cancel</a>
+                    <a href="<%=request.getContextPath()%>/views/employee/profile.jsp"
+                       class="btn btn-secondary">Cancel</a>
                 </div>
             </form>
         </div>

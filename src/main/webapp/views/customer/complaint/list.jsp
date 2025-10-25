@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<jsp:include page="/views/customer/header.jsp" />
+<jsp:include page="/views/customer/header.jsp"/>
 
 <%
     List<ComplaintReplyDTO> complaints = (List<ComplaintReplyDTO>) request.getAttribute("complaints");
@@ -20,7 +20,7 @@
     <div class="filter-section">
         <div class="filter-header">
             <h2>Filter Complaints</h2>
-            
+
         </div>
         <form method="GET" action="<%= request.getContextPath() %>/customer/complaint/list" class="filter-form">
             <div class="filter-group">
@@ -48,7 +48,8 @@
     <div class="page-header">
         <h1>My Complaints</h1>
         <div class="actions">
-            <a href="<%=request.getContextPath()%>/views/customer/complaint/form.jsp" class="btn btn-primary">New Complaint</a>
+            <a href="<%=request.getContextPath()%>/views/customer/complaint/form.jsp" class="btn btn-primary">New
+                Complaint</a>
         </div>
     </div>
 
@@ -58,22 +59,30 @@
     %>
 
     <div class="complaint-card">
-        <a href="<%=request.getContextPath()%>/customer/complaint/view?complaintID=<%=complaint.getComplaintID()%>" class="complaint-link">
+        <a href="<%=request.getContextPath()%>/customer/complaint/view?complaintID=<%=complaint.getComplaintID()%>"
+           class="complaint-link">
             <div class="complaint-header">
-                <h3><%= complaint.getTitle() %></h3>
+                <h3><%= complaint.getTitle() %>
+                </h3>
                 <span class="status-<%= complaint.getStatus().toLowerCase() %>"><%= complaint.getStatus() %></span>
             </div>
             <div class="complaint-body">
-                <p><%= complaint.getDescription() %></p>
+                <p><%= complaint.getDescription() %>
+                </p>
             </div>
             <div class="complaint-footer">
                 <div class="complaint-meta">
-                    <span class="date"><img src="<%=request.getContextPath()%>/assets/imgs/calendar.png" alt="calendar icon"> <%= complaint.getCreatedDate() %></span>
-                    <span class="time"><img src="<%=request.getContextPath()%>/assets/imgs/clock.png" alt="clock icon"> <%= complaint.getCreatedTime() %></span>
+                    <span class="date"><img src="<%=request.getContextPath()%>/assets/imgs/calendar.png"
+                                            alt="calendar icon"> <%= complaint.getCreatedDate() %></span>
+                    <span class="time"><img src="<%=request.getContextPath()%>/assets/imgs/clock.png"
+                                            alt="clock icon"> <%= complaint.getCreatedTime() %></span>
                 </div>
                 <div class="complaint-actions">
-                    <a href="<%=request.getContextPath()%>/customer/complaint/update-form?complaintID=<%=complaint.getComplaintID()%>" class="btn btn-secondary btn-sm">Edit</a>
-                    <form method="POST" action="<%= request.getContextPath() %>/customer/complaint/delete" class="delete-form" onsubmit="return confirm('Are you sure you want to delete this complaint?');">
+                    <a href="<%=request.getContextPath()%>/customer/complaint/update-form?complaintID=<%=complaint.getComplaintID()%>"
+                       class="btn btn-secondary btn-sm">Edit</a>
+                    <form method="POST" action="<%= request.getContextPath() %>/customer/complaint/delete"
+                          class="delete-form"
+                          onsubmit="return confirm('Are you sure you want to delete this complaint?');">
                         <input type="hidden" name="complaintID" value="<%= complaint.getComplaintID() %>">
                         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                     </form>
@@ -90,7 +99,8 @@
             <% } else if (complaint.getReplyStatus().equals("Sent")) { %>
             <div class="reply-available">
                 <img src="<%=request.getContextPath()%>/assets/imgs/msg-available.png" alt="new message icon">
-                <a href="<%=request.getContextPath()%>/customer/complaint/view?complaintID=<%=complaint.getComplaintID()%>">New reply available</a>
+                <a href="<%=request.getContextPath()%>/customer/complaint/view?complaintID=<%=complaint.getComplaintID()%>">New
+                    reply available</a>
             </div>
             <% } else if (complaint.getReplyStatus().equals("Seen")) {%>
             <div class="reply-viewed">
@@ -108,7 +118,8 @@
         <img src="<%=request.getContextPath()%>/assets/imgs/no-complaint.png" alt="empty complaint list icon">
         <h2>No complaints available</h2>
         <p>You haven't submitted any complaints yet.</p>
-        <a href="<%=request.getContextPath()%>/views/customer/complaint/form.jsp" class="btn btn-primary">Submit a Complaint</a>
+        <a href="<%=request.getContextPath()%>/views/customer/complaint/form.jsp" class="btn btn-primary">Submit a
+            Complaint</a>
     </div>
     <%
         }

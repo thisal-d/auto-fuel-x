@@ -27,7 +27,7 @@ public class FuelSupplierUpdateFormServlet extends HttpServlet {
             throws ServletException, IOException {
         Employee employee = AuthUtil.checkEmployeeLogin(request, response, "Admin");
         if (employee == null) return;
-        
+
         // Get form parameters
         String supplierIDStr = request.getParameter("fuel-supplier-id");
         int supplierID = Integer.parseInt(supplierIDStr);

@@ -8,7 +8,7 @@ import java.util.List;
 public class ServiceManager {
     ServiceDAO serviceDAO;
 
-    public ServiceManager(){
+    public ServiceManager() {
         serviceDAO = new ServiceDAO();
     }
 

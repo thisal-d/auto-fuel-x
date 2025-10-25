@@ -1,16 +1,16 @@
 package com.example.autofuelx.controller.admin.fuel;
 
-import com.example.autofuelx.dao.FuelSupplyDAO;
-import com.example.autofuelx.model.*;
-import com.example.autofuelx.service.FuelPurchaseService;
+import com.example.autofuelx.model.Employee;
+import com.example.autofuelx.model.Fuel;
 import com.example.autofuelx.service.FuelService;
-import com.example.autofuelx.service.FuelSupplyService;
-import com.example.autofuelx.service.VehicleService;
 import com.example.autofuelx.util.AuthUtil;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
-import java.io.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
 
 @WebServlet("/admin/fuel/update")
 public class FuelUpdateServlet extends HttpServlet {

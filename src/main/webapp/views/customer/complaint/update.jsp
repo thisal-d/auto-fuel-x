@@ -17,7 +17,7 @@
 </head>
 <body>
 
-<jsp:include page="/views/customer/header.jsp" />
+<jsp:include page="/views/customer/header.jsp"/>
 
 <%
     Complaint complaint = (Complaint) request.getAttribute("complaint");
@@ -59,16 +59,18 @@
         </div>
 
         <form action="<%=request.getContextPath()%>/customer/complaint/update" method="post">
-            <input type="hidden" name="complaintID" value="<%=complaint.getComplaintID()%>" />
+            <input type="hidden" name="complaintID" value="<%=complaint.getComplaintID()%>"/>
 
             <div class="form-group">
                 <label for="title">Title:</label>
-                <input type="text" id="title" name="title" class="form-control" value="<%=complaint.getTitle()%>" required>
+                <input type="text" id="title" name="title" class="form-control" value="<%=complaint.getTitle()%>"
+                       required>
             </div>
 
             <div class="form-group">
                 <label for="description">Description:</label>
-                <textarea id="description" name="description" class="form-control form-textarea" required><%=complaint.getDescription()%></textarea>
+                <textarea id="description" name="description" class="form-control form-textarea"
+                          required><%=complaint.getDescription()%></textarea>
             </div>
 
             <button type="submit" class="btn-submit">Update Complaint</button>

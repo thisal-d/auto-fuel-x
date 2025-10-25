@@ -40,7 +40,7 @@ public class CustomerService {
     }
 
     public void updateCustomer(Customer customer) {
-        boolean success =  customerDAO.updateCustomer(customer);
+        boolean success = customerDAO.updateCustomer(customer);
         if (success) {
             System.out.println("Customer ID " + customer.getCustomerID() + " Delete status: " + success);
         } else {

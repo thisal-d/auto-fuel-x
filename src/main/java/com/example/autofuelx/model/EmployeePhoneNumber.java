@@ -4,7 +4,8 @@ public class EmployeePhoneNumber {
     private int employeeID;
     private String phoneNumber;
 
-    public EmployeePhoneNumber() {}
+    public EmployeePhoneNumber() {
+    }
 
     public EmployeePhoneNumber(int employeeID, String phoneNumber) {
         this.employeeID = employeeID;

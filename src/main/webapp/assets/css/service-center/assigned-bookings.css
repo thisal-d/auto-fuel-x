@@ -2,250 +2,250 @@
 
 /* Page Header */
 .page-header {
-  margin-bottom: var(--spacing-xl);
-  position: relative;
+    margin-bottom: var(--spacing-xl);
+    position: relative;
 }
 
 .page-header h1 {
-  font-size: 2.5rem;
-  margin-bottom: var(--spacing-sm);
-  position: relative;
-  display: inline-block;
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-sm);
+    position: relative;
+    display: inline-block;
 }
 
 .page-header h1:after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 60px;
-  height: 3px;
-  background: var(--accent-red);
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: var(--accent-red);
 }
 
 /* Empty State */
 .empty-state {
-  text-align: center;
-  padding: var(--spacing-xl);
-  background: linear-gradient(135deg, var(--bg-card), var(--bg-tertiary));
-  border-radius: var(--radius-lg);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
-  border: 1px solid var(--border-color);
-  margin-bottom: var(--spacing-xl);
+    text-align: center;
+    padding: var(--spacing-xl);
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-tertiary));
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--border-color);
+    margin-bottom: var(--spacing-xl);
 }
 
 .empty-state p {
-  font-size: 1.2rem;
-  color: var(--text-secondary);
-  margin-bottom: 0;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 0;
 }
 
 .empty-state-icon {
-  font-size: 4rem;
-  color: var(--text-dim);
-  margin-bottom: var(--spacing-md);
+    font-size: 4rem;
+    color: var(--text-dim);
+    margin-bottom: var(--spacing-md);
 }
 
 /* Bookings Container */
 .bookings-container {
-  margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
 }
 
 /* Bookings Table */
 .bookings-table {
-  background: linear-gradient(135deg, var(--bg-card), var(--bg-tertiary));
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
-  border: 1px solid var(--border-color);
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-tertiary));
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--border-color);
 }
 
 .bookings-table table {
-  width: 100%;
-  border-collapse: collapse;
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .bookings-table th {
-  background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-card));
-  padding: var(--spacing-md);
-  text-align: left;
-  font-weight: 600;
-  color: var(--text-primary);
-  text-transform: uppercase;
-  font-size: 0.85rem;
-  letter-spacing: 0.5px;
-  border-bottom: 2px solid var(--border-color);
+    background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-card));
+    padding: var(--spacing-md);
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--border-color);
 }
 
 .bookings-table td {
-  padding: var(--spacing-md);
-  border-bottom: 1px solid var(--border-color);
-  color: var(--text-secondary);
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-secondary);
 }
 
 .bookings-table tr:last-child td {
-  border-bottom: none;
+    border-bottom: none;
 }
 
 .bookings-table tr:hover {
-  background-color: rgba(231, 76, 60, 0.05);
+    background-color: rgba(231, 76, 60, 0.05);
 }
 
 /* Booking ID */
 .booking-id {
-  font-weight: 700;
-  color: var(--accent-red);
+    font-weight: 700;
+    color: var(--accent-red);
 }
 
 /* Status Badge */
 .status-badge {
-  display: inline-block;
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-align: center;
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
 }
 
 .status-badge.awaiting-confirmation {
-  background: linear-gradient(135deg, var(--pending), #8e44ad);
-  color: white;
+    background: linear-gradient(135deg, var(--pending), #8e44ad);
+    color: white;
 }
 
 .status-badge.confirmed {
-  background: linear-gradient(135deg, var(--success), #1e7e34);
-  color: white;
+    background: linear-gradient(135deg, var(--success), #1e7e34);
+    color: white;
 }
 
 .status-badge.reschedule-required {
-  background: linear-gradient(135deg, var(--warning), #b8860b);
-  color: #000000;
+    background: linear-gradient(135deg, var(--warning), #b8860b);
+    color: #000000;
 }
 
 .status-badge.in-progress {
-  background: linear-gradient(135deg, var(--accent-red), var(--accent-red-hover));
-  color: white;
+    background: linear-gradient(135deg, var(--accent-red), var(--accent-red-hover));
+    color: white;
 }
 
 .status-badge.awaiting-pickup {
-  background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-hover));
-  color: white;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-hover));
+    color: white;
 }
 
 .status-badge.completed {
-  background: linear-gradient(135deg, var(--success), #1e7e34);
-  color: white;
+    background: linear-gradient(135deg, var(--success), #1e7e34);
+    color: white;
 }
 
 .status-badge.cancelled {
-  background: linear-gradient(135deg, var(--danger), #c0392b);
-  color: white;
+    background: linear-gradient(135deg, var(--danger), #c0392b);
+    color: white;
 }
 
 .status-badge.missed-appointment {
-  background: linear-gradient(135deg, var(--danger), #c0392b);
-  color: white;
+    background: linear-gradient(135deg, var(--danger), #c0392b);
+    color: white;
 }
 
 /* Customer Info */
 .customer-info {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .customer-avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: var(--spacing-sm);
-  color: var(--accent-red);
-  font-weight: bold;
-  border: 1px solid var(--border-color);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: var(--spacing-sm);
+    color: var(--accent-red);
+    font-weight: bold;
+    border: 1px solid var(--border-color);
 }
 
 /* Vehicle Info */
 .vehicle-info {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .vehicle-plate {
-  font-weight: 600;
-  color: var(--text-primary);
+    font-weight: 600;
+    color: var(--text-primary);
 }
 
 .vehicle-model {
-  font-size: 0.85rem;
-  color: var(--text-dim);
+    font-size: 0.85rem;
+    color: var(--text-dim);
 }
 
 /* Cost */
 .cost {
-  font-weight: 700;
-  color: var(--success);
-  font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--success);
+    font-size: 1.1rem;
 }
 
 /* Action Buttons */
 .action-buttons {
-  display: flex;
-  gap: var(--spacing-sm);
+    display: flex;
+    gap: var(--spacing-sm);
 }
 
 .action-btn {
-  padding: 0.4rem 0.8rem;
-  border-radius: var(--radius-sm);
-  font-size: 0.85rem;
-  font-weight: 500;
-  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  transition: all 0.3s ease;
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 500;
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
 }
 
 .action-btn:hover {
-  background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-card));
-  border-color: var(--accent-red);
-  color: var(--accent-red);
+    background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-card));
+    border-color: var(--accent-red);
+    color: var(--accent-red);
 }
 
 .view-btn {
-  background: linear-gradient(135deg, rgba(26, 95, 180, 0.1), rgba(53, 132, 228, 0.1));
-  border-color: var(--accent-blue);
-  color: var(--accent-blue);
+    background: linear-gradient(135deg, rgba(26, 95, 180, 0.1), rgba(53, 132, 228, 0.1));
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
 }
 
 .view-btn:hover {
-  background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-hover));
-  color: white;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-hover));
+    color: white;
 }
 
 .edit-btn {
-  background: linear-gradient(135deg, rgba(205, 147, 9, 0.1), rgba(241, 196, 15, 0.1));
-  border-color: var(--warning);
-  color: var(--warning);
+    background: linear-gradient(135deg, rgba(205, 147, 9, 0.1), rgba(241, 196, 15, 0.1));
+    border-color: var(--warning);
+    color: var(--warning);
 }
 
 .edit-btn:hover {
-  background: linear-gradient(135deg, var(--warning), #f1c40f);
-  color: #000000;
+    background: linear-gradient(135deg, var(--warning), #f1c40f);
+    color: #000000;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .bookings-table {
-    overflow-x: auto;
-  }
+    .bookings-table {
+        overflow-x: auto;
+    }
 
-  .bookings-table table {
-    min-width: 600px;
-  }
+    .bookings-table table {
+        min-width: 600px;
+    }
 
-  .page-header h1 {
-    font-size: 2rem;
-  }
+    .page-header h1 {
+        font-size: 2rem;
+    }
 }

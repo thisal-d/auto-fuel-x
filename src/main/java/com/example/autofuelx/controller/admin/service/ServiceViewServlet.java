@@ -1,4 +1,5 @@
 package com.example.autofuelx.controller.admin.service;
+
 import com.example.autofuelx.model.Employee;
 import com.example.autofuelx.model.Service;
 import com.example.autofuelx.service.ServiceManager;
@@ -25,7 +26,7 @@ public class ServiceViewServlet extends HttpServlet {
             throws ServletException, IOException {
         Employee employee = AuthUtil.checkEmployeeLogin(request, response, "Admin");
         if (employee == null) return;
-        
+
         int id = Integer.parseInt(request.getParameter("id"));
         Service service = serviceManager.getServiceByID(id);
         request.setAttribute("service", service);

@@ -2,6 +2,7 @@ package com.example.autofuelx.dao;
 
 import com.example.autofuelx.model.Employee;
 import com.example.autofuelx.util.DatabaseConnection;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -318,7 +319,7 @@ public class EmployeeDAO {
             stmt.setString(3, role);
 
             ResultSet rs = stmt.executeQuery();
-            if (rs.next()){
+            if (rs.next()) {
                 admin = extractEmployeeFromResultSet(rs);
             }
         } catch (SQLException e) {

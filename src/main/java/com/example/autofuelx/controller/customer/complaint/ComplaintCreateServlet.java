@@ -1,14 +1,16 @@
 package com.example.autofuelx.controller.customer.complaint;
 
-import java.io.*;
-
 import com.example.autofuelx.model.Complaint;
 import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.service.ComplaintService;
 import com.example.autofuelx.util.AuthUtil;
-import jakarta.servlet.*;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
 
 @WebServlet("/customer/complaint/create")
 public class ComplaintCreateServlet extends HttpServlet {
@@ -40,7 +42,7 @@ public class ComplaintCreateServlet extends HttpServlet {
         String title = request.getParameter("title");
         String description = request.getParameter("description");
 
-        if (title.trim().length() == 0 || description.trim().length() == 0){
+        if (title.trim().length() == 0 || description.trim().length() == 0) {
             request.setAttribute("error-message", "Please Fill the complaint form before submitting.");
             request.getRequestDispatcher("/views/customer/complaint/form.jsp").forward(request, response);
             return;

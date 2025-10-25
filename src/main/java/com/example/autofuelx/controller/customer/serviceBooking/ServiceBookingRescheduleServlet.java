@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -44,7 +43,7 @@ public class ServiceBookingRescheduleServlet extends HttpServlet {
 
         booking.setBookingDate(newDate);
         booking.setBookingTime(newTime);
-        
+
         serviceBookingService.updateBooking(booking);
 
         // Redirect back to bookings page

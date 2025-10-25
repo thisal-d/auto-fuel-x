@@ -5,7 +5,7 @@
   Time: 8:10 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="com.example.autofuelx.model.Customer" %>
 <!DOCTYPE html>
 <html>
@@ -23,7 +23,7 @@
 <form action="<%= request.getContextPath() %>/customers/update" method="post">
     <%
         Customer customer = (Customer) request.getAttribute("customer-update");
-        if(customer != null) {
+        if (customer != null) {
     %>
     <input type="hidden" name="customerID" value="<%= customer.getCustomerID() %>">
 

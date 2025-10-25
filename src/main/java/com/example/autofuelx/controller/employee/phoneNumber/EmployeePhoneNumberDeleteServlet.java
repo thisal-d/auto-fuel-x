@@ -39,7 +39,7 @@ public class EmployeePhoneNumberDeleteServlet extends HttpServlet {
         } else {
             request.getSession().setAttribute("error", "Failed to delete phone number.");
         }
-        
+
         List<String> phoneNumbers = employeePhoneNumberService.getPhoneNumbersByEmployee(employee.getEmployeeID());
         session.setAttribute("phone-numbers", phoneNumbers);
         response.sendRedirect(request.getContextPath() + "/views/employee/update.jsp");

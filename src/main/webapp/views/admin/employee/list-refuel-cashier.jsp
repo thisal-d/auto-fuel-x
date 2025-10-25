@@ -63,27 +63,32 @@
 
             <div class="filter-group">
                 <label class="filter-label">Hire Date From:</label>
-                <input type="date" name="hireDateFrom" value="<%= hireDateFrom != null ? hireDateFrom : "" %>" class="form-control">
+                <input type="date" name="hireDateFrom" value="<%= hireDateFrom != null ? hireDateFrom : "" %>"
+                       class="form-control">
             </div>
 
             <div class="filter-group">
                 <label class="filter-label">Hire Date To:</label>
-                <input type="date" name="hireDateTo" value="<%= hireDateTo != null ? hireDateTo : "" %>" class="form-control">
+                <input type="date" name="hireDateTo" value="<%= hireDateTo != null ? hireDateTo : "" %>"
+                       class="form-control">
             </div>
 
             <div class="filter-group">
                 <label class="filter-label">Min Salary:</label>
-                <input type="number" name="minSalary" step="0.01" value="<%= minSalary != null ? minSalary : "" %>" class="form-control">
+                <input type="number" name="minSalary" step="0.01" value="<%= minSalary != null ? minSalary : "" %>"
+                       class="form-control">
             </div>
 
             <div class="filter-group">
                 <label class="filter-label">Max Salary:</label>
-                <input type="number" name="maxSalary" step="0.01" value="<%= maxSalary != null ? maxSalary : "" %>" class="form-control">
+                <input type="number" name="maxSalary" step="0.01" value="<%= maxSalary != null ? maxSalary : "" %>"
+                       class="form-control">
             </div>
 
             <div class="filter-group">
                 <label class="filter-label">Name:</label>
-                <input type="text" name="name" placeholder="Search by name" value="<%= name != null ? name : "" %>" class="form-control">
+                <input type="text" name="name" placeholder="Search by name" value="<%= name != null ? name : "" %>"
+                       class="form-control">
             </div>
 
             <div class="filter-actions">
@@ -114,9 +119,12 @@
                 <% if (employees != null && !employees.isEmpty()) {
                     for (Employee emp : employees) { %>
                 <tr>
-                    <td><%= emp.getFirstName() + " " + emp.getLastName() %></td>
-                    <td><%= emp.getEmail() %></td>
-                    <td><%= emp.getType() %></td>
+                    <td><%= emp.getFirstName() + " " + emp.getLastName() %>
+                    </td>
+                    <td><%= emp.getEmail() %>
+                    </td>
+                    <td><%= emp.getType() %>
+                    </td>
                     <td>
                         <% if ("Active".equals(emp.getStatus())) { %>
                         <span class="status-active">Active</span>
@@ -124,37 +132,50 @@
                         <span class="status-inactive">Inactive</span>
                         <% } %>
                     </td>
-                    <td><%= calculateAge(emp.getDateOfBirth()) %></td>
-                    <td><%= emp.getSalary() %></td>
-                    <td><%= dateFormat.format(emp.getHireDate()) %></td>
-                    <td><%= emp.getFullyAddress()%></td>
-                    <td><%= emp.getShift()%></td>
+                    <td><%= calculateAge(emp.getDateOfBirth()) %>
+                    </td>
+                    <td><%= emp.getSalary() %>
+                    </td>
+                    <td><%= dateFormat.format(emp.getHireDate()) %>
+                    </td>
+                    <td><%= emp.getFullyAddress()%>
+                    </td>
+                    <td><%= emp.getShift()%>
+                    </td>
                     <td>
                         <div class="action-buttons">
-                            <form action="<%=request.getContextPath()%>/admin/employee/status/update" method="post" class="action-form">
-                                <input type="hidden" name="redirect-url" value="/admin/employee/list-by-type?type=refuel-cashier">
+                            <form action="<%=request.getContextPath()%>/admin/employee/status/update" method="post"
+                                  class="action-form">
+                                <input type="hidden" name="redirect-url"
+                                       value="/admin/employee/list-by-type?type=refuel-cashier">
                                 <input type="hidden" name="employee-ID" value="<%= emp.getEmployeeID() %>">
-                                <input type="hidden" name="status" value="<%=emp.getStatus().equals("Active")? "Inactive": "Active"%>">
-                                <button type="submit" class="btn <% if ("Active".equals(emp.getStatus())) { %>btn-warning<% } else { %>btn-success<% } %>">
-                                    <%=emp.getStatus().equals("Active")? "Set Inactive": "Set Active"%>
+                                <input type="hidden" name="status"
+                                       value="<%=emp.getStatus().equals("Active")? "Inactive": "Active"%>">
+                                <button type="submit"
+                                        class="btn <% if ("Active".equals(emp.getStatus())) { %>btn-warning<% } else { %>btn-success<% } %>">
+                                    <%=emp.getStatus().equals("Active") ? "Set Inactive" : "Set Active"%>
                                 </button>
                             </form>
 
-                            <form action="<%=request.getContextPath()%>/admin/employee/edit-form" method="get" class="action-form">
-                                <input type="hidden" name="redirect-url" value="/admin/employee/list-by-type?type=refuel-cashier">
+                            <form action="<%=request.getContextPath()%>/admin/employee/edit-form" method="get"
+                                  class="action-form">
+                                <input type="hidden" name="redirect-url"
+                                       value="/admin/employee/list-by-type?type=refuel-cashier">
                                 <input type="hidden" name="employee-ID" value="<%= emp.getEmployeeID() %>">
                                 <button type="submit" class="btn btn-info">Edit</button>
                             </form>
 
-                            <form action="<%=request.getContextPath()%>/admin/employee/delete" method="post" class="action-form">
-                                <input type="hidden" name="redirect-url" value="/admin/employee/list-by-type?type=refuel-cashier">
+                            <form action="<%=request.getContextPath()%>/admin/employee/delete" method="post"
+                                  class="action-form">
+                                <input type="hidden" name="redirect-url"
+                                       value="/admin/employee/list-by-type?type=refuel-cashier">
                                 <input type="hidden" name="employee-ID" value="<%= emp.getEmployeeID() %>">
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
                         </div>
                     </td>
                 </tr>
-                <%   }
+                <% }
                 } else { %>
                 <tr>
                     <td colspan="10" class="no-results">No employees found with the selected filters.</td>

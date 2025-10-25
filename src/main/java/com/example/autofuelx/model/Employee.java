@@ -22,7 +22,8 @@ public class Employee {
     private String type;
 
     // Constructors
-    public Employee() {}
+    public Employee() {
+    }
 
     public Employee(int employeeID, String firstName, String lastName, Date dateOfBirth,
                     double salary, String status, Date hireDate, String addressNo,
@@ -123,12 +124,12 @@ public class Employee {
         return addressArea;
     }
 
-    public String getFullyAddress(){
-        return addressNo + " " +  addressLane + " " + addressArea;
-    }
-
     public void setAddressArea(String addressArea) {
         this.addressArea = addressArea;
+    }
+
+    public String getFullyAddress() {
+        return addressNo + " " + addressLane + " " + addressArea;
     }
 
     public String getEmail() {

@@ -45,16 +45,16 @@ public class EmployeeListByTypeServlet extends HttpServlet {
         String redirectUrl = "";
         String employeeType = "";
 
-        if (type.equals("customer-care-officer")){
+        if (type.equals("customer-care-officer")) {
             redirectUrl = "/views/admin/employee/list-customer-care-officer.jsp";
             employeeType = "Customer Care Officer";
-        } else if(type.equals("refuel-cashier")){
+        } else if (type.equals("refuel-cashier")) {
             redirectUrl = "/views/admin/employee/list-refuel-cashier.jsp";
             employeeType = "Refuel Cashier";
-        } else if (type.equals("admin")){
+        } else if (type.equals("admin")) {
             redirectUrl = "/views/admin/employee/list-admin.jsp";
             employeeType = "Admin";
-        } else if (type.equals("service-center-staff")){
+        } else if (type.equals("service-center-staff")) {
             redirectUrl = "/views/admin/employee/list-service-center-staff.jsp";
             employeeType = "Service Center Staff";
         }

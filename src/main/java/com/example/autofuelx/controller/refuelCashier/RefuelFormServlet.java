@@ -4,10 +4,13 @@ import com.example.autofuelx.model.Employee;
 import com.example.autofuelx.model.Fuel;
 import com.example.autofuelx.service.FuelService;
 import com.example.autofuelx.util.AuthUtil;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
-import java.io.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/refuel-cashier/fuel/refuel-form")
@@ -26,7 +29,7 @@ public class RefuelFormServlet extends HttpServlet {
         List<Fuel> fuelTypes = fuelService.getAllFuels();
         request.setAttribute("fuel-types", fuelTypes);
 
-        request.setAttribute("error-message",  request.getAttribute("error-message"));
+        request.setAttribute("error-message", request.getAttribute("error-message"));
 
         request.getRequestDispatcher("/views/refuel-cashier/fuel/refuel-form.jsp?refuel-form?purchase-status=" + request.getParameter("purchase-status")).forward(request, response);
     }
@@ -38,7 +41,7 @@ public class RefuelFormServlet extends HttpServlet {
         List<Fuel> fuelTypes = fuelService.getAllFuels();
         request.setAttribute("fuel-types", fuelTypes);
 
-        request.setAttribute("error-message",  request.getAttribute("error-message"));
+        request.setAttribute("error-message", request.getAttribute("error-message"));
 
         request.getRequestDispatcher("/views/refuel-cashier/fuel/refuel-form.jsp?refuel-form?purchase-status=" + request.getParameter("purchase-status")).forward(request, response);
     }

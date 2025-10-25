@@ -69,27 +69,26 @@ public class EmployeeAddServlet extends HttpServlet {
         List<Employee> emps = employeeService.getAllEmployees();
         boolean found = false;
         // Iterate list for find email. if email found, email already exist
-        for (Employee emp: emps){
-            if (emp.getEmail().equalsIgnoreCase(email)){
+        for (Employee emp : emps) {
+            if (emp.getEmail().equalsIgnoreCase(email)) {
                 found = true;
+                break;
             }
         }
 
         // Check email exist
-        if (found){
+        if (found) {
             request.setAttribute("error-message", "The email address already exists...!");
             request.getRequestDispatcher("/views/admin/employee/add.jsp").forward(request, response);
             return;
         }
 
 
-        if (type.equals("Refuel Cashier")){
+        if (type.equals("Refuel Cashier")) {
             employeeNew.setShift(shift);
-        }
-        else if (type.equals("Admin")){
+        } else if (type.equals("Admin")) {
             employeeNew.setRole(role);
-        }
-        else if (type.equals("Service Center Staff")){
+        } else if (type.equals("Service Center Staff")) {
             employeeNew.setSkillSet(skillSet);
         }
 

@@ -5,7 +5,7 @@
   Time: 8:10 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="com.example.autofuelx.model.Customer" %>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
@@ -18,13 +18,13 @@
 </head>
 <body>
 
-<jsp:include page="/views/customer/header.jsp" />
+<jsp:include page="/views/customer/header.jsp"/>
 
 <%
     Customer customer = (Customer) session.getAttribute("customer");
     // If customer not logged in return login.jsp
-    if(customer == null){
-        response.sendRedirect(request.getContextPath()+ "/views/customer/login.jsp");
+    if (customer == null) {
+        response.sendRedirect(request.getContextPath() + "/views/customer/login.jsp");
         return;
     }
     List<String> phoneNumbers = (List<String>) session.getAttribute("phone-numbers");
@@ -46,31 +46,38 @@
             <table class="edit-table">
                 <tr>
                     <td>First Name</td>
-                    <td><input type="text" name="firstName" value="<%= customer.getFirstName() %>" class="edit-input" required></td>
+                    <td><input type="text" name="firstName" value="<%= customer.getFirstName() %>" class="edit-input"
+                               required></td>
                 </tr>
                 <tr>
                     <td>Last Name</td>
-                    <td><input type="text" name="lastName" value="<%= customer.getLastName() %>" class="edit-input" required></td>
+                    <td><input type="text" name="lastName" value="<%= customer.getLastName() %>" class="edit-input"
+                               required></td>
                 </tr>
                 <tr>
                     <td>Email</td>
-                    <td><input type="email" name="email" value="<%= customer.getEmail() %>" class="edit-input" required></td>
+                    <td><input type="email" name="email" value="<%= customer.getEmail() %>" class="edit-input" required>
+                    </td>
                 </tr>
                 <tr>
                     <td>Password</td>
-                    <td><input type="password" name="password" value="<%= customer.getPassword() %>" class="edit-input" required></td>
+                    <td><input type="password" name="password" value="<%= customer.getPassword() %>" class="edit-input"
+                               required></td>
                 </tr>
                 <tr>
                     <td>Address No</td>
-                    <td><input type="text" name="addressNo" value="<%= customer.getAddressNo() %>" class="edit-input"></td>
+                    <td><input type="text" name="addressNo" value="<%= customer.getAddressNo() %>" class="edit-input">
+                    </td>
                 </tr>
                 <tr>
                     <td>Address Lane</td>
-                    <td><input type="text" name="addressLane" value="<%= customer.getAddressLane() %>" class="edit-input"></td>
+                    <td><input type="text" name="addressLane" value="<%= customer.getAddressLane() %>"
+                               class="edit-input"></td>
                 </tr>
                 <tr>
                     <td>Address Area</td>
-                    <td><input type="text" name="addressArea" value="<%= customer.getAddressArea() %>" class="edit-input"></td>
+                    <td><input type="text" name="addressArea" value="<%= customer.getAddressArea() %>"
+                               class="edit-input"></td>
                 </tr>
             </table>
 
@@ -85,7 +92,7 @@
         <div class="phone-numbers-section">
             <div class="phone-numbers-title">Phone Numbers</div>
 
-            <%for (String phoneNumber: phoneNumbers) {%>
+            <%for (String phoneNumber : phoneNumbers) {%>
             <form action="<%=request.getContextPath()%>/customer/phone-number/delete" method="post" class="phone-form">
                 <input type="hidden" name="customerID" value="<%= customer.getCustomerID() %>">
                 <input type="text" name="phoneNumber" value="<%=phoneNumber%>" class="phone-input" readonly>

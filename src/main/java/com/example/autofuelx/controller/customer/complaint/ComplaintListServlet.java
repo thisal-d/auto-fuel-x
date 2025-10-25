@@ -1,7 +1,6 @@
 package com.example.autofuelx.controller.customer.complaint;
 
 import com.example.autofuelx.dto.ComplaintReplyDTO;
-import com.example.autofuelx.model.Complaint;
 import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.service.ComplaintService;
 import com.example.autofuelx.util.AuthUtil;
@@ -10,7 +9,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
@@ -30,7 +28,7 @@ public class ComplaintListServlet extends HttpServlet {
 
         Customer customer = AuthUtil.checkCustomerLogin(request, response);
         if (customer == null) return;
-        
+
         // read filter parameters from request
         String status = request.getParameter("status");
         request.setAttribute("status", status);

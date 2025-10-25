@@ -1,6 +1,5 @@
 package com.example.autofuelx.controller.customer.serviceBooking;
 
-import com.example.autofuelx.dto.ServiceBookingDTO;
 import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.model.ServiceBooking;
 import com.example.autofuelx.service.ServiceBookingService;
@@ -10,7 +9,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.time.LocalDate;

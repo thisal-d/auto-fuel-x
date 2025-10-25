@@ -33,7 +33,8 @@
                 <div class="nav-section-title">Vehicle Service</div>
                 <div class="nav-links">
                     <a href="<%=request.getContextPath()%>/customer/service-booking/form">Book Service</a>
-                    <a href="<%=request.getContextPath()%>/customer/service-booking/list?status=active">Active Bookings</a>
+                    <a href="<%=request.getContextPath()%>/customer/service-booking/list?status=active">Active
+                        Bookings</a>
                 </div>
             </div>
 
@@ -72,7 +73,8 @@
             <div class="nav-section nav-section-logout">
                 <div class="nav-section-title">Account</div>
                 <div class="nav-links">
-                    <a href="<%=request.getContextPath()%>/user/logout" onClick="return confirm('Are you sure You Want to Logout ?')" class="logout-link">Logout</a>
+                    <a href="<%=request.getContextPath()%>/user/logout"
+                       onClick="return confirm('Are you sure You Want to Logout ?')" class="logout-link">Logout</a>
                 </div>
             </div>
         </nav>
@@ -81,7 +83,7 @@
 
 <script>
     // Simple script to toggle mobile menu
-    document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+    document.querySelector('.mobile-menu-toggle').addEventListener('click', function () {
         document.querySelector('.header-nav').classList.toggle('active');
     });
 </script>

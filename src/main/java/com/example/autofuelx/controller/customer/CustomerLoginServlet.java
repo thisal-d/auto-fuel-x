@@ -4,7 +4,6 @@ package com.example.autofuelx.controller.customer;
 import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.service.CustomerPhoneNumberService;
 import com.example.autofuelx.service.CustomerService;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

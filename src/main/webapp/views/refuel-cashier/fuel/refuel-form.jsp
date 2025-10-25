@@ -13,7 +13,7 @@
 
 <div class="container refuel-container">
     <%
-        String fuelPurchaseStatus = (String) request.getParameter("purchase-status");
+        String fuelPurchaseStatus = request.getParameter("purchase-status");
         if ("success".equals(fuelPurchaseStatus) || "failed".equals(fuelPurchaseStatus)) {
     %>
     <div class="status-message <%= "success".equals(fuelPurchaseStatus) ? "status-success" : "status-error" %>">
@@ -48,9 +48,11 @@
                                 for (Fuel fuel : fuelTypes) {
                         %>
                         <div class="fuel-option">
-                            <input type="radio" id="fuel<%=fuel.getFuelID()%>" name="fuelID" value="<%=fuel.getFuelID()%>" required>
+                            <input type="radio" id="fuel<%=fuel.getFuelID()%>" name="fuelID"
+                                   value="<%=fuel.getFuelID()%>" required>
                             <div class="fuel-info">
-                                <div class="fuel-name"><%=fuel.getType()%></div>
+                                <div class="fuel-name"><%=fuel.getType()%>
+                                </div>
                                 <div class="fuel-stock"><%=fuel.getQuantity()%> Liters available</div>
                             </div>
                         </div>
@@ -91,7 +93,8 @@
                 <div class="fuel-item">
                     <div class="fuel-icon">F</div>
                     <div class="fuel-info">
-                        <div class="fuel-name"><%=fuel.getType()%></div>
+                        <div class="fuel-name"><%=fuel.getType()%>
+                        </div>
                         <div class="fuel-quantity"><%=fuel.getQuantity()%> Liters</div>
                         <div class="fuel-bar">
                             <div class="fuel-level" style="width: <%=fuelLevel%>%"></div>

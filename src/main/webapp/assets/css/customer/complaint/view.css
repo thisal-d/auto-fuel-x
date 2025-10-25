@@ -75,12 +75,12 @@
     font-size: 1.05rem;
     line-height: 1.6;
     margin: 0.5rem 0;
-    white-space: pre-wrap;   /* preserve newlines and wrap text */
-    word-break: break-word;  /* break long words if needed */
+    white-space: pre-wrap; /* preserve newlines and wrap text */
+    word-break: break-word; /* break long words if needed */
     background: rgba(0, 0, 0, 0.05);
     padding: 0.75rem 1rem;
     border-radius: var(--radius-sm);
-    max-width: 100%;         /* prevent overflow */
+    max-width: 100%; /* prevent overflow */
 }
 
 .detail-row {

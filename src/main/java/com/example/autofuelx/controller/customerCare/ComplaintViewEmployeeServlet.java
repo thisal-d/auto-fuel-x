@@ -20,7 +20,7 @@ public class ComplaintViewEmployeeServlet extends HttpServlet {
     public void init() throws ServletException {
         complaintService = new ComplaintService();
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -30,7 +30,7 @@ public class ComplaintViewEmployeeServlet extends HttpServlet {
 
         // Catch data
         int complaintID = Integer.parseInt(request.getParameter("complaintID"));
-        
+
         ComplaintReplyDTO complaintDTO = complaintService.getComplaintReplyDTOByComplaintID(complaintID);
 
         request.setAttribute("complaintReplyDTO", complaintDTO);
@@ -38,6 +38,6 @@ public class ComplaintViewEmployeeServlet extends HttpServlet {
         // set user complaint as viewed by customer care
         complaintService.updateComplaintStatus(complaintID, "Seen");
 
-        request.getRequestDispatcher( "/views/customer-care/complaint/view.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/customer-care/complaint/view.jsp").forward(request, response);
     }
 }

@@ -1,7 +1,7 @@
 package com.example.autofuelx.model;
 
-import java.sql.Time;
 import java.sql.Date;
+import java.sql.Time;
 
 public class FuelSupply {
     private int supplyID;
@@ -12,7 +12,8 @@ public class FuelSupply {
     private Time supplyTime;
 
     // Constructors
-    public FuelSupply() {}
+    public FuelSupply() {
+    }
 
     public FuelSupply(int supplierID, int fuelID, double quantity, Date supplyDate, Time supplyTime) {
         this.supplierID = supplierID;
@@ -23,21 +24,51 @@ public class FuelSupply {
     }
 
     // Getters and Setters
-    public int getSupplyID() { return supplyID; }
-    public void setSupplyID(int supplyID) { this.supplyID = supplyID; }
+    public int getSupplyID() {
+        return supplyID;
+    }
 
-    public int getSupplierID() { return supplierID; }
-    public void setSupplierID(int supplierID) { this.supplierID = supplierID; }
+    public void setSupplyID(int supplyID) {
+        this.supplyID = supplyID;
+    }
 
-    public int getFuelID() { return fuelID; }
-    public void setFuelID(int fuelID) { this.fuelID = fuelID; }
+    public int getSupplierID() {
+        return supplierID;
+    }
 
-    public double getQuantity() { return quantity; }
-    public void setQuantity(double quantity) { this.quantity = quantity; }
+    public void setSupplierID(int supplierID) {
+        this.supplierID = supplierID;
+    }
 
-    public Date getSupplyDate() { return supplyDate; }
-    public void setSupplyDate(Date supplyDate) { this.supplyDate = supplyDate; }
+    public int getFuelID() {
+        return fuelID;
+    }
 
-    public Time getSupplyTime() { return supplyTime; }
-    public void setSupplyTime(Time supplyTime) { this.supplyTime = supplyTime; }
+    public void setFuelID(int fuelID) {
+        this.fuelID = fuelID;
+    }
+
+    public double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
+    }
+
+    public Date getSupplyDate() {
+        return supplyDate;
+    }
+
+    public void setSupplyDate(Date supplyDate) {
+        this.supplyDate = supplyDate;
+    }
+
+    public Time getSupplyTime() {
+        return supplyTime;
+    }
+
+    public void setSupplyTime(Time supplyTime) {
+        this.supplyTime = supplyTime;
+    }
 }

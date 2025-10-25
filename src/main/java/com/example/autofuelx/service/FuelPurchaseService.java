@@ -1,11 +1,11 @@
- package com.example.autofuelx.service;
+package com.example.autofuelx.service;
 
 import com.example.autofuelx.dao.FuelDAO;
 import com.example.autofuelx.dao.FuelPurchaseDAO;
+import com.example.autofuelx.dto.FuelPurchaseDetailDTO;
 import com.example.autofuelx.dto.FuelUsageByTypeDTO;
 import com.example.autofuelx.model.Fuel;
 import com.example.autofuelx.model.FuelPurchase;
-import com.example.autofuelx.dto.FuelPurchaseDetailDTO;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class FuelPurchaseService {
                                                                           String vehicleTypeFilter,
                                                                           String vehicleFilter,
                                                                           String fuelTypeFilter) {
-        return fuelPurchaseDAO.getFuelPurchaseDetailByCustomer(customerID, durationFilterStart, durationFilterEnd, vehicleTypeFilter, vehicleFilter, fuelTypeFilter );
+        return fuelPurchaseDAO.getFuelPurchaseDetailByCustomer(customerID, durationFilterStart, durationFilterEnd, vehicleTypeFilter, vehicleFilter, fuelTypeFilter);
     }
 
     public double getPurchaseCost(int fuelID, double quantity) {

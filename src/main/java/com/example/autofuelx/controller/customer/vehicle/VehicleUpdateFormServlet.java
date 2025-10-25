@@ -3,7 +3,6 @@ package com.example.autofuelx.controller.customer.vehicle;
 import com.example.autofuelx.model.Customer;
 import com.example.autofuelx.model.Vehicle;
 import com.example.autofuelx.service.VehicleService;
-
 import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,7 +23,7 @@ public class VehicleUpdateFormServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
+
         Customer customer = AuthUtil.checkCustomerLogin(req, resp);
         if (customer == null) return;
 

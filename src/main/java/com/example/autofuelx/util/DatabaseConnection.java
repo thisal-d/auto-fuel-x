@@ -32,7 +32,7 @@ public class DatabaseConnection {
             System.out.println("Database connected successfully!");
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println( "Database connection failed!");
+            System.out.println("Database connection failed!");
         }
     }
 }

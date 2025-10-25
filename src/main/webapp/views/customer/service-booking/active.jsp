@@ -48,28 +48,34 @@
             <div class="booking-card-content">
                 <div class="booking-detail">
                     <div class="booking-detail-label">Vehicle</div>
-                    <div class="booking-detail-value"><%= vehicleInfo %></div>
+                    <div class="booking-detail-value"><%= vehicleInfo %>
+                    </div>
                 </div>
 
                 <div class="booking-detail">
                     <div class="booking-detail-label">Service</div>
-                    <div class="booking-detail-value"><%= booking.getServiceType() %> ($<%= booking.getServiceCost() %>)</div>
+                    <div class="booking-detail-value"><%= booking.getServiceType() %> ($<%= booking.getServiceCost() %>
+                        )
+                    </div>
                 </div>
 
                 <div class="booking-detail">
                     <div class="booking-detail-label">Date & Time</div>
-                    <div class="booking-detail-value"><%= formattedDate %> at <%= formattedTime %></div>
+                    <div class="booking-detail-value"><%= formattedDate %> at <%= formattedTime %>
+                    </div>
                 </div>
 
                 <div class="booking-detail">
                     <div class="booking-detail-label">Status</div>
-                    <div class="booking-detail-value"><%= booking.getStatus() %></div>
+                    <div class="booking-detail-value"><%= booking.getStatus() %>
+                    </div>
                 </div>
             </div>
 
             <div class="booking-card-actions">
                 <% if (booking.getStatus().equals("Reschedule Required")) { %>
-                <form class="action-form" action="<%=request.getContextPath()%>/user/service-booking/reschedule" method="post">
+                <form class="action-form" action="<%=request.getContextPath()%>/user/service-booking/reschedule"
+                      method="post">
                     <input type="hidden" name="booking-ID" value="<%= booking.getBookingID() %>">
                     <input type="hidden" name="redirect-url" value="/customer/service-booking/list?status=active">
 
@@ -89,7 +95,8 @@
                     String s = booking.getStatus();
                     if (s.equals("Awaiting Confirmation") || s.equals("Confirmed") || s.equals("Reschedule Required")) {
                 %>
-                <form class="action-form" action="<%=request.getContextPath()%>/user/service-booking/update-status" method="post"
+                <form class="action-form" action="<%=request.getContextPath()%>/user/service-booking/update-status"
+                      method="post"
                       onClick="return confirm('Are you sure You Want Cancel your Booking ?')">
                     <input type="hidden" name="booking-ID" value="<%= booking.getBookingID() %>">
                     <input type="hidden" name="status" value="Cancelled">
@@ -103,7 +110,8 @@
                 %>
                 <div class="booking-detail">
                     <div class="booking-detail-label">Total Cost</div>
-                    <div class="booking-detail-value"><%= booking.getTotalCost() %></div>
+                    <div class="booking-detail-value"><%= booking.getTotalCost() %>
+                    </div>
                 </div>
                 <% } %>
             </div>

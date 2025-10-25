@@ -27,8 +27,10 @@
             <div class="nav-section">
                 <div class="nav-section-title">Services 🔧</div>
                 <div class="nav-links">
-                    <a href="<%= request.getContextPath() %>/admin/service-booking/dashboard">Service Booking Dashboard</a>
-                    <a href="<%= request.getContextPath() %>/admin/service-booking/view?status=awaiting-confirmation">Manage Requests</a>
+                    <a href="<%= request.getContextPath() %>/admin/service-booking/dashboard">Service Booking
+                        Dashboard</a>
+                    <a href="<%= request.getContextPath() %>/admin/service-booking/view?status=awaiting-confirmation">Manage
+                        Requests</a>
                 </div>
             </div>
 
@@ -68,7 +70,8 @@
 
             <!-- Logout Section -->
             <div class="nav-section nav-section-logout">
-                <a href="<%= request.getContextPath() %>/user/logout" class="logout-link" onClick="return confirm('Are you sure You Want to Logout ?')" >Logout</a>
+                <a href="<%= request.getContextPath() %>/user/logout" class="logout-link"
+                   onClick="return confirm('Are you sure You Want to Logout ?')">Logout</a>
             </div>
         </nav>
     </div>

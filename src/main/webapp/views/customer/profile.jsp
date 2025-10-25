@@ -54,14 +54,16 @@
                     <div class="profile-fields">
                         <div class="profile-field">
                             <div class="profile-field-label">Email Address</div>
-                            <div class="profile-field-value"><%= customer.getEmail() %></div>
+                            <div class="profile-field-value"><%= customer.getEmail() %>
+                            </div>
                         </div>
                     </div>
 
                     <div class="address-section">
                         <div class="address-title">Address</div>
                         <div class="address-value">
-                            <%= customer.getAddressNo() %>, <%= customer.getAddressLane() %>, <%= customer.getAddressArea() %>
+                            <%= customer.getAddressNo() %>, <%= customer.getAddressLane() %>
+                            , <%= customer.getAddressArea() %>
                         </div>
                     </div>
 
@@ -91,11 +93,12 @@
 
             <div class="profile-actions">
                 <div class="action-buttons">
-                    <form method="get" action="<%=request.getContextPath()%>/views/customer/update.jsp" >
+                    <form method="get" action="<%=request.getContextPath()%>/views/customer/update.jsp">
                         <input type="submit" value="Edit Profile" class="btn btn-primary">
                     </form>
 
-                    <form method="post" action="<%=request.getContextPath()%>/customer/customer/delete" onClick="return confirm('Are you sure You Want delete your profile ?')">
+                    <form method="post" action="<%=request.getContextPath()%>/customer/customer/delete"
+                          onClick="return confirm('Are you sure You Want delete your profile ?')">
                         <input type="submit" value="Delete Profile" class="btn btn-primary">
                     </form>
                 </div>

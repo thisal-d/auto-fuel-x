@@ -1,7 +1,6 @@
 package com.example.autofuelx.service;
 
 
-
 import com.example.autofuelx.dao.ComplaintDAO;
 import com.example.autofuelx.dto.ComplaintReplyDTO;
 import com.example.autofuelx.dto.ComplaintSummaryDTO;
@@ -13,7 +12,7 @@ import java.util.List;
 public class ComplaintService {
     ComplaintDAO complaintDAO;
 
-    public ComplaintService(){
+    public ComplaintService() {
         complaintDAO = new ComplaintDAO();
     }
 
@@ -63,15 +62,15 @@ public class ComplaintService {
     }
 
     public List<ComplaintReplyDTO> getComplaintReplyDTOsFiltered(String keyword,
-                                                                String lastUpdateDate,
-                                                                String customerEmail,
-                                                                String status) {
+                                                                 String lastUpdateDate,
+                                                                 String customerEmail,
+                                                                 String status) {
         return complaintDAO.getComplaintReplyDTOsFiltered(keyword, lastUpdateDate, customerEmail, status);
     }
 
 
     public ComplaintSummaryDTO getComplaintSummaryByCustomerID(int customerID) {
-        return  complaintDAO.getComplaintSummaryByCustomerId(customerID);
+        return complaintDAO.getComplaintSummaryByCustomerId(customerID);
     }
 
 }

@@ -24,8 +24,8 @@ public class UpdateReplyComplaint extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Employee employee = AuthUtil.checkEmployeeLogin(req, resp, "Customer Care Officer");
-        if (employee == null) return;
-        else resp.sendRedirect(req.getContextPath() + "/customer-care/complaint/list");
+        if (employee == null) {
+        } else resp.sendRedirect(req.getContextPath() + "/customer-care/complaint/list");
     }
 
     @Override

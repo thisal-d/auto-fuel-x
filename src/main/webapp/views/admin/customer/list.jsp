@@ -5,7 +5,7 @@
   Time: 8:09 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.autofuelx.model.Customer" %>
 <!DOCTYPE html>
@@ -27,14 +27,18 @@
     </tr>
     <%
         List<Customer> customers = (List<Customer>) request.getAttribute("customers");
-        if(customers != null) {
-            for(Customer customer : customers) {
+        if (customers != null) {
+            for (Customer customer : customers) {
     %>
     <tr>
-        <td><%= customer.getCustomerID() %></td>
-        <td><%= customer.getFirstName() %></td>
-        <td><%= customer.getLastName() %></td>
-        <td><%= customer.getEmail() %></td>
+        <td><%= customer.getCustomerID() %>
+        </td>
+        <td><%= customer.getFirstName() %>
+        </td>
+        <td><%= customer.getLastName() %>
+        </td>
+        <td><%= customer.getEmail() %>
+        </td>
         <td>
             <a href="<%= request.getContextPath() %>/customers/view?id=<%= customer.getCustomerID() %>">View</a>
             <a href="<%= request.getContextPath() %>/customers/edit-form?id=<%= customer.getCustomerID() %>">Edit</a>

@@ -27,7 +27,8 @@
     </div>
 
     <div class="back-link">
-        <a href="<%=request.getContextPath()%>/customer-care/complaint/list" class="btn btn-secondary">← Back to Complaint List</a>
+        <a href="<%=request.getContextPath()%>/customer-care/complaint/list" class="btn btn-secondary">← Back to
+            Complaint List</a>
     </div>
 
     <!-- Customer Complaint Details -->
@@ -36,19 +37,23 @@
         <div class="complaint-details-card">
             <div class="detail-row">
                 <div class="detail-label">Title:</div>
-                <div class="detail-value"><%= complaintDTO.getTitle() %></div>
+                <div class="detail-value"><%= complaintDTO.getTitle() %>
+                </div>
             </div>
             <div class="detail-row">
                 <div class="detail-label">Description:</div>
-                <div class="detail-value"><%= complaintDTO.getDescription() %></div>
+                <div class="detail-value"><%= complaintDTO.getDescription() %>
+                </div>
             </div>
             <div class="detail-row">
                 <div class="detail-label">Created Date:</div>
-                <div class="detail-value"><%= complaintDTO.getCreatedDate() %> <%= complaintDTO.getCreatedTime() %></div>
+                <div class="detail-value"><%= complaintDTO.getCreatedDate() %> <%= complaintDTO.getCreatedTime() %>
+                </div>
             </div>
             <div class="detail-row">
                 <div class="detail-label">Updated Date:</div>
-                <div class="detail-value"><%= complaintDTO.getUpdatedDate() %> <%= complaintDTO.getUpdateTime() %></div>
+                <div class="detail-value"><%= complaintDTO.getUpdatedDate() %> <%= complaintDTO.getUpdateTime() %>
+                </div>
             </div>
         </div>
     </div>
@@ -60,15 +65,19 @@
         <div class="reply-card">
             <div class="detail-row">
                 <div class="detail-label">Reply Title:</div>
-                <div class="detail-value"><%= complaintDTO.getReplyTitle() %></div>
+                <div class="detail-value"><%= complaintDTO.getReplyTitle() %>
+                </div>
             </div>
             <div class="detail-row">
                 <div class="detail-label">Reply Description:</div>
-                <div class="detail-value"><%= complaintDTO.getReplyDescription() %></div>
+                <div class="detail-value"><%= complaintDTO.getReplyDescription() %>
+                </div>
             </div>
             <div class="detail-row">
                 <div class="detail-label">Replied By:</div>
-                <div class="detail-value"><%= complaintDTO.getRepliedEmployeeName() %> (<%= complaintDTO.getRepliedEmployeeType() %>)</div>
+                <div class="detail-value"><%= complaintDTO.getRepliedEmployeeName() %>
+                    (<%= complaintDTO.getRepliedEmployeeType() %>)
+                </div>
             </div>
             <div class="detail-row">
                 <div class="detail-label">Reply Status:</div>
@@ -86,9 +95,11 @@
 
     <!-- Reply Form -->
     <div class="reply-form-section">
-        <h2 class="section-title"><%= hasReply ? "Update Reply" : "Reply to Complaint" %></h2>
+        <h2 class="section-title"><%= hasReply ? "Update Reply" : "Reply to Complaint" %>
+        </h2>
         <div class="reply-form-card">
-            <form action="<%=request.getContextPath()%>/customer-care/complaint/<%=hasReply ? "update" : "create"%>" method="post" class="reply-form">
+            <form action="<%=request.getContextPath()%>/customer-care/complaint/<%=hasReply ? "update" : "create"%>"
+                  method="post" class="reply-form">
                 <input type="hidden" name="complaintID" value="<%= complaintDTO.getComplaintID() %>"/>
                 <input type="hidden" name="replyComplaintID" value="<%= complaintDTO.getReplyComplaintID() %>"/>
 
@@ -102,11 +113,13 @@
                 <div class="form-group">
                     <label for="replyDescription" class="form-label">Description:</label>
                     <textarea id="replyDescription" name="replyDescription" rows="5"
-                              class="form-control" required><%= hasReply ? complaintDTO.getReplyDescription() : "" %></textarea>
+                              class="form-control"
+                              required><%= hasReply ? complaintDTO.getReplyDescription() : "" %></textarea>
                 </div>
 
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-primary"><%= hasReply ? "Update Reply" : "Submit Reply" %></button>
+                    <button type="submit" class="btn btn-primary"><%= hasReply ? "Update Reply" : "Submit Reply" %>
+                    </button>
                 </div>
             </form>
         </div>

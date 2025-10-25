@@ -61,12 +61,18 @@
                         String status = booking.getStatus();
                 %>
                 <tr>
-                    <td><%= booking.getBookingID() %></td>
-                    <td><%= customerName %></td>
-                    <td><%= vehicleInfo %></td>
-                    <td><%= booking.getServiceType() %></td>
-                    <td><%= formattedDate %></td>
-                    <td><%= formattedTime %></td>
+                    <td><%= booking.getBookingID() %>
+                    </td>
+                    <td><%= customerName %>
+                    </td>
+                    <td><%= vehicleInfo %>
+                    </td>
+                    <td><%= booking.getServiceType() %>
+                    </td>
+                    <td><%= formattedDate %>
+                    </td>
+                    <td><%= formattedTime %>
+                    </td>
                     <td>
                         <% if ("Awaiting Confirmation".equals(status)) { %>
                         <span class="status status-pending">Pending</span>
@@ -85,7 +91,7 @@
                         <% } %>
                     </td>
                 </tr>
-                <%   }
+                <% }
                 } else { %>
                 <tr>
                     <td colspan="7" class="no-results">No bookings found.</td>

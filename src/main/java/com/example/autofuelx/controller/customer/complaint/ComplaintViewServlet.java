@@ -1,12 +1,9 @@
 package com.example.autofuelx.controller.customer.complaint;
 
 import com.example.autofuelx.dto.ComplaintReplyDTO;
-import com.example.autofuelx.model.Complaint;
 import com.example.autofuelx.model.Customer;
-import com.example.autofuelx.model.Employee;
 import com.example.autofuelx.model.ReplyComplaint;
 import com.example.autofuelx.service.ComplaintService;
-import com.example.autofuelx.service.EmployeeService;
 import com.example.autofuelx.service.ReplyComplaintService;
 import com.example.autofuelx.util.AuthUtil;
 import jakarta.servlet.ServletException;
@@ -48,6 +45,6 @@ public class ComplaintViewServlet extends HttpServlet {
 
         request.setAttribute("complaintReplyDTO", complaintREplyDTO);
 
-        request.getRequestDispatcher( "/views/customer/complaint/view.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/customer/complaint/view.jsp").forward(request, response);
     }
 }

@@ -71,25 +71,28 @@
 
             <div class="form-group">
                 <label for="serviceAmount">Service Amount:</label>
-                <input type="number" id="serviceAmount" name="serviceAmount" value="<%= booking.getServiceCost() %>" readonly>
+                <input type="number" id="serviceAmount" name="serviceAmount" value="<%= booking.getServiceCost() %>"
+                       readonly>
             </div>
 
             <%
                 boolean additionAmountStatus = (booking.getServiceCost() < booking.getTotalCost());
-                double additionAmount =  booking.getTotalCost() - booking.getServiceCost();
+                double additionAmount = booking.getTotalCost() - booking.getServiceCost();
 
                 boolean discountAmountStatus = (booking.getTotalCost() < booking.getServiceCost());
-                double discountAmount =  booking.getServiceCost() - booking.getTotalCost() ;
+                double discountAmount = booking.getServiceCost() - booking.getTotalCost();
             %>
 
             <div class="form-group">
                 <label for="additionalCharges">Additional Charges (if any):</label>
-                <input type="number" id="additionalCharges" name="additionalCharges" value="<%= (additionAmountStatus)? additionAmount : 0.0%>" step="0.01">
+                <input type="number" id="additionalCharges" name="additionalCharges"
+                       value="<%= (additionAmountStatus)? additionAmount : 0.0%>" step="0.01">
             </div>
 
             <div class="form-group">
                 <label for="discount">Discount:</label>
-                <input type="number" id="discount" name="discount" value="<%= (discountAmountStatus)? discountAmount : 0.0%>" step="0.01">
+                <input type="number" id="discount" name="discount"
+                       value="<%= (discountAmountStatus)? discountAmount : 0.0%>" step="0.01">
             </div>
 
             <div class="form-group">
@@ -114,7 +117,8 @@
             <div class="card-details" id="cardDetails" style="display: none;">
                 <div class="form-group">
                     <label for="cardNumber">Card Number:</label>
-                    <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                    <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456"
+                           maxlength="19">
                 </div>
 
                 <div class="card-row">
@@ -158,16 +162,16 @@
     }
 
     // Show/hide card details based on payment method
-    document.getElementById('cashPayment').addEventListener('change', function() {
+    document.getElementById('cashPayment').addEventListener('change', function () {
         document.getElementById('cardDetails').style.display = 'none';
     });
 
-    document.getElementById('cardPayment').addEventListener('change', function() {
+    document.getElementById('cardPayment').addEventListener('change', function () {
         document.getElementById('cardDetails').style.display = 'block';
     });
 
     // Format card number input
-    document.getElementById('cardNumber').addEventListener('input', function(e) {
+    document.getElementById('cardNumber').addEventListener('input', function (e) {
         let value = e.target.value.replace(/\s/g, '');
         let formattedValue = value.replace(/(.{4})/g, '$1 ').trim();
         if (formattedValue.length > 19) {
@@ -177,7 +181,7 @@
     });
 
     // Format expiry date input
-    document.getElementById('expiryDate').addEventListener('input', function(e) {
+    document.getElementById('expiryDate').addEventListener('input', function (e) {
         let value = e.target.value.replace(/\D/g, '');
         if (value.length >= 2) {
             value = value.substring(0, 2) + '/' + value.substring(2, 4);
@@ -186,7 +190,7 @@
     });
 
     // Cancel button handler
-    document.getElementById('cancelBtn').addEventListener('click', function() {
+    document.getElementById('cancelBtn').addEventListener('click', function () {
         if (confirm('Are you sure you want to cancel? Any unsaved changes will be lost.')) {
             window.location.href = '<%= request.getContextPath() %>/admin/service-booking/view?status=awaiting-pickup';
         }

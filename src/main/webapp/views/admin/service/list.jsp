@@ -5,7 +5,7 @@
   Time: 8:07 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.autofuelx.model.Service" %>
 <!DOCTYPE html>
@@ -32,7 +32,8 @@
     <input type="number" id="maxCost" name="maxCost" value="<%= maxCost != null ? maxCost : "" %>" min="0" step="0.01">
 
     <label for="keyword">Keyword:</label>
-    <input type="text" id="keyword" name="keyword" value="<%= keyword != null ? keyword : "" %>" placeholder="Search in type and description">
+    <input type="text" id="keyword" name="keyword" value="<%= keyword != null ? keyword : "" %>"
+           placeholder="Search in type and description">
 
     <button type="submit">Apply Filters</button>
     <a href="<%= request.getContextPath() %>/admin/service/list">Clear Filters</a>
@@ -48,10 +49,14 @@
     </tr>
     <% for (Service service : services) { %>
     <tr>
-        <td><%= service.getServiceID() %></td>
-        <td><%= service.getType() %></td>
-        <td><%= service.getDescription() != null ? service.getDescription() : "" %></td>
-        <td>$<%= String.format("%.2f", service.getCost()) %></td>
+        <td><%= service.getServiceID() %>
+        </td>
+        <td><%= service.getType() %>
+        </td>
+        <td><%= service.getDescription() != null ? service.getDescription() : "" %>
+        </td>
+        <td>$<%= String.format("%.2f", service.getCost()) %>
+        </td>
         <td>
             <form method="get" action="<%= request.getContextPath() %>/admin/service/update-form">
                 <input type="hidden" name="id" value="<%= service.getServiceID() %>">

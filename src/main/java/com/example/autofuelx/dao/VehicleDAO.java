@@ -4,7 +4,11 @@ package com.example.autofuelx.dao;
 import com.example.autofuelx.dto.VehicleSummaryDTO;
 import com.example.autofuelx.model.Vehicle;
 import com.example.autofuelx.util.DatabaseConnection;
-import java.sql.*;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,14 +121,14 @@ public class VehicleDAO {
     public Vehicle getVehicleByPlateNo(String plateNo) {
         Vehicle vehicle = null;
         String sql = "SELECT * FROM Vehicle WHERE PlateNumber=?";
-        try(Connection conn = DatabaseConnection.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)){
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, plateNo);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 vehicle = extractVehicleFromResultSet(rs);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return vehicle;
@@ -134,7 +138,7 @@ public class VehicleDAO {
         Vehicle vehicle = null;
         String sql = "SELECT * FROM Vehicle WHERE PlateNumber = ?";
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)){
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, plateNumber);
             ResultSet rs = stmt.executeQuery();
@@ -142,7 +146,7 @@ public class VehicleDAO {
                 vehicle = extractVehicleFromResultSet(rs);
             }
 
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return vehicle;
@@ -152,7 +156,7 @@ public class VehicleDAO {
         List<String> vehicleTypes = new ArrayList<>();
         String sql = "SELECT DISTINCT  Type FROM Vehicle WHERE CustomerID = ?";
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)){
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, customerID);
             ResultSet rs = stmt.executeQuery();
@@ -160,7 +164,7 @@ public class VehicleDAO {
                 vehicleTypes.add(rs.getString("Type"));
             }
 
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return vehicleTypes;
@@ -170,7 +174,7 @@ public class VehicleDAO {
         List<String> vehicleNames = new ArrayList<>();
         String sql = "SELECT DISTINCT  Model + ' - ' + Vehicle.PlateNumber as Vehicle FROM Vehicle WHERE CustomerID = ?";
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)){
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, customerID);
             ResultSet rs = stmt.executeQuery();
@@ -178,7 +182,7 @@ public class VehicleDAO {
                 vehicleNames.add(rs.getString("Vehicle"));
             }
 
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return vehicleNames;
@@ -189,14 +193,14 @@ public class VehicleDAO {
 
         // Query to get the count of vehicles for each type for a specific customer
         String sql = """
-        SELECT 
-            Type,
-            COUNT(*) AS VehicleCount
-        FROM Vehicle
-        WHERE CustomerID = ?
-        GROUP BY Type
-        ORDER BY VehicleCount DESC
-        """;
+                SELECT 
+                    Type,
+                    COUNT(*) AS VehicleCount
+                FROM Vehicle
+                WHERE CustomerID = ?
+                GROUP BY Type
+                ORDER BY VehicleCount DESC
+                """;
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -227,7 +231,7 @@ public class VehicleDAO {
 
     private Vehicle extractVehicleFromResultSet(ResultSet rs) {
 
-        try{
+        try {
             Vehicle vehicle = new Vehicle();
 
             vehicle.setVehicleID(rs.getInt("VehicleID"));
@@ -238,8 +242,7 @@ public class VehicleDAO {
             vehicle.setCustomerID(rs.getInt("CustomerID"));
             vehicle.setRegistrationDate(rs.getDate("RegistrationDate"));
             return vehicle;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }

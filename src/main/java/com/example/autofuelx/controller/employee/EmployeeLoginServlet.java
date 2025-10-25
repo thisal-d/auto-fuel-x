@@ -1,8 +1,5 @@
 package com.example.autofuelx.controller.employee;
 
-import java.io.IOException;
-import java.util.List;
-
 import com.example.autofuelx.model.Employee;
 import com.example.autofuelx.service.EmployeePhoneNumberService;
 import com.example.autofuelx.service.EmployeeService;
@@ -12,6 +9,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
+import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/employee/login")
 public class EmployeeLoginServlet extends HttpServlet {
@@ -56,11 +56,11 @@ public class EmployeeLoginServlet extends HttpServlet {
             session.setAttribute("phone-numbers", phoneNumbers);
 
             session.setAttribute("employee", employee);
-            response.sendRedirect( request.getContextPath() + redirectUrl);
+            response.sendRedirect(request.getContextPath() + redirectUrl);
         } else {
             // Login failed
             request.setAttribute("error-message", "Invalid email or password");
-            request.getRequestDispatcher( "/views/employee/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/employee/login.jsp").forward(request, response);
         }
     }
 }

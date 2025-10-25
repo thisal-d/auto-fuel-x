@@ -1,17 +1,14 @@
 package com.example.autofuelx.service;
 
 
-
 import com.example.autofuelx.dao.FeedbackDAO;
 import com.example.autofuelx.model.Feedback;
 
-import java.util.List;
-
 
 public class FeedbackService {
-    FeedbackDAO feedbackDAO ;
+    FeedbackDAO feedbackDAO;
 
-    public FeedbackService(){
+    public FeedbackService() {
         feedbackDAO = new FeedbackDAO();
     }
 
