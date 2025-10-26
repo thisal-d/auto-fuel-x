@@ -32,7 +32,7 @@
     <div class="description-section">
         <p>Customer scheduled time needs to be changed. Please review the bookings below:</p>
         <div class="back-link">
-            <a href="<%= request.getContextPath() %>/admin/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+            <a href="<%= request.getContextPath() %>/admin/service-booking/dashboard" class="btn btn-secondary">Back to Dashboard</a>
         </div>
     </div>
 

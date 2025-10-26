@@ -34,7 +34,7 @@
     <div class="description-section">
         <p>Bookings waiting for admin/staff approval of requested time.</p>
         <div class="back-link">
-            <a href="<%= request.getContextPath() %>/admin/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+            <a href="<%= request.getContextPath() %>/admin/service-booking/dashboard" class="btn btn-secondary">Back to Dashboard</a>
         </div>
     </div>
 

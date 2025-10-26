@@ -8,7 +8,7 @@ public class DatabaseConnection {
     // database URL, username and password
     static String URL = "jdbc:sqlserver://localhost:1433;databaseName=AutoFuelX;encrypt=false;";
     static String USER = "sa";
-    static String PASSWORD = "789";
+    static String PASSWORD = "123";
     static Connection conn = null;
 
     // method to return instance

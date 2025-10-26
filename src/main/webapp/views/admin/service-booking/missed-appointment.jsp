@@ -32,7 +32,7 @@
     <div class="description-section">
         <p>Customer did not show up for scheduled service.</p>
         <div class="back-link">
-            <a href="<%= request.getContextPath() %>/admin/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+            <a href="<%= request.getContextPath() %>/admin/service-booking/dashboard"  class="btn btn-secondary">Back to Dashboard</a>
         </div>
     </div>
 
