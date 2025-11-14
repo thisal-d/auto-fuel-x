@@ -144,7 +144,7 @@ The primary configuration file for database connection is:
 - `src/main/java/com/example/autofuelx/util/DatabaseConnection.java`
 
 ### Database Setup Scripts
-All database setup scripts are located in the `database_config/` directory. For a fresh installation, run the `full_database_setup.sql` script to create all tables, triggers, and insert default and sample data.
+All database setup scripts are located in the [`database_config/`](database_config/) directory. For a fresh installation, run the [`full_database_setup.sql`](database_config/full_database_setup.sql) script to create all tables, triggers, and insert default and sample data.
 
 ## Default Credentials
 
